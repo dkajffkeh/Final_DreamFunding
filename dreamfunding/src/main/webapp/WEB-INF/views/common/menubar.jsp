@@ -38,9 +38,9 @@
           <ul class="header__nav">
             <li><a href="#">펀딩하기</a></li>
             <li><a href="#">마이페이지</a></li>
-            <li><a href="#">고객센터</a></li>
+            <li><a href="scenterMain.gn">고객센터</a></li>
           </ul>
-          <button class="btn btn--main"><a href="#">프로젝트 만들기</a></button>
+          <button class="btn btn--main"><a href="projectinsert.pi.hy">프로젝트 만들기</a></button>
         </div>
 
         <!-- 로그인 전 출력 영역 -->
@@ -94,8 +94,8 @@
               </div>
             </div>
           </div>
-          <a href="#" class="sign__group">로그인</a>
-          <a href="#" class="sign__group">회원가입</a>
+          <a href="login.me.jm" class="sign__group">로그인</a>
+          <a href="enrollForm.me.jm" class="sign__group">회원가입</a>
         </div>
         
 

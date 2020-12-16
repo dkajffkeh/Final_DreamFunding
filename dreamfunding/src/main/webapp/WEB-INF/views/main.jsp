@@ -452,6 +452,16 @@
 
         </div>
       </div> <!---->
+      
+      
+      <div>
+      	<a href="orderTest.test">고독한 결제방</a>
+      </div>
+      
+      <div>
+      	<a href="detailStory.de">고독한 디테일방</a>
+      </div>
+      
     </main>
 	
 	
