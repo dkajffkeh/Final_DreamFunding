@@ -1,4 +1,4 @@
-package com.donjomjo.serviceCenter.controller;
+package com.donjomjo.dreamfunding.serviceCenter.controller;
 
 public class ServiceCenterController {
 

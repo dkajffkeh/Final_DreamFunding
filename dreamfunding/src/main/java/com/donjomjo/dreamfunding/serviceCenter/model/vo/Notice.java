@@ -1,4 +1,4 @@
-package com.donjomjo.serviceCenter.model.vo;
+package com.donjomjo.dreamfunding.serviceCenter.model.vo;
 
 public class Notice {
 
