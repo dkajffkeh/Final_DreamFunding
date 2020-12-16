@@ -6,8 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
-	e
+
+	<jsp:forward page="WEB-INF/views/main.jsp"/>
+    
+    
+    
 </body>
 </html>
