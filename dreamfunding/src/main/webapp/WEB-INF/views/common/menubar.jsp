@@ -45,19 +45,19 @@
 
         <!-- 로그인 전 출력 영역 -->
          
-        <!-- <div class="header__right">
+        <div class="header__right">
           <div class="search__box"  >
             <input type="text" class="search-bar" placeholder="프로젝트 검색" id="search" onclick=showHideSearch(); />
-            <span class="material-icons"> search </span> -->
+            <span class="material-icons"> search </span>
         
             <!-- 검색창 클릭 시 나올 창 -->
              
-            <!-- <div class="search-slide" id="showHideSearch" >
+            <div class="search-slide" id="showHideSearch" >
               <div class="search-category">
                 <button class="search-cate-btn">최근</button>
                 <button class="search-cate-btn">카테고리</button>
               </div>
-              <div class="search-text"> -->
+              <div class="search-text">
                 
                 <!-- 카테고리 -->
                 <!-- <div>
@@ -73,7 +73,7 @@
 
                 <!-- 최근검색어 -->
                  
-                <!-- <div class="search-text-content">
+                <div class="search-text-content">
                   <ul>
                     <li>
                       강아지
@@ -97,7 +97,7 @@
           <a href="#" class="sign__group">로그인</a>
           <a href="#" class="sign__group">회원가입</a>
         </div>
-         -->
+        
 
         <!-- 검색어 슬라이드 스크립트 -->
         <script>
@@ -122,20 +122,21 @@
          
 
         <!-- 로그인 시 출력 영역 -->
+        <!--  
         <div class="header__right">
           <div class="search__box">
             <input type="text" class="search-bar" placeholder="프로젝트 검색" onclick=showHideSearch(); />
             <span class="material-icons"> search </span>
-
+		-->
               <!-- 검색창 클릭 시 나올 창 -->
-              
+              <!--  
               <div class="search-slide" id="showHideSearch" >
                 <div class="search-category">
                   <button class="search-cate-btn">최근</button>
                   <button class="search-cate-btn">카테고리</button>
                 </div>
                 <div class="search-text">
-                  
+                 --> 
                   <!-- 카테고리 -->
                   <!-- <div>
                     <ul>
@@ -149,7 +150,7 @@
                   </div> -->
 
                   <!-- 최근검색어 -->
-                  
+                  <!--  
                   <div class="search-text-content">
                     <ul>
                       <li>
@@ -181,7 +182,7 @@
             
           <i class="header__icon"><span class="material-icons"> account_circle </span></i>
         </div>
-
+		-->
           <!-- 실시간 알림 스크립트 -->
           <script>
             $(document).ready(function(){
