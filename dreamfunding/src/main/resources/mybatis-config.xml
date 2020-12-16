@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+	
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+
+	<mappers>
+		<mapper resource="/mappers/projectInsert/proInsert-mapper.xml"/>
+		<mapper resource="/mappers/index/index-mapper.xml"/>
+		<mapper resource="/mappers/member/member-mapper.xml"/>
+		<mapper resource="/mappers/mypage/mypage-mapper.xml"/>
+		<mapper resource="/mappers/order/order-mapper.xml"/>
+		<mapper resource="/mappers/projectDetail/projectDetail-mapper.xml"/>
+		<mapper resource="/mappers/serviceCenter/serviceCenter-mapper.xml"/>
+	</mappers>
+
+</configuration>
