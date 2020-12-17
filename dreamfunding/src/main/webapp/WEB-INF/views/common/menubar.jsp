@@ -23,8 +23,6 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <!-- 부트스트랩 css cdn을 추가하면 메뉴바가 깨집니다.. -->
-    
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/index.css" />
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonUpdate.css" />
 </head>

@@ -159,6 +159,7 @@
 }
 .select-box { border: none; font-size: 16px; }
 /* button */
+/*
 .btn{
     width: 300px;
     background-color: white;
@@ -168,6 +169,8 @@
 .btn:hover{
     background-color: #fff7ed;
 }
+
+*/ 
 /* 검색 슬라이드 */
 .search-slide{
     z-index: 200;
