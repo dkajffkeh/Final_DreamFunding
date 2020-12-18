@@ -27,46 +27,7 @@
 
 <body>
 
-    <header>
-        <div class="inner">
-            <div class="header__left">
-                <a class="logo" href="">
-                    <img src="${pageContext.request.contextPath}/resources/images/mainlogo.png" alt="" />
-                </a>
-                <ul class="header__nav">
-                    <li><a href="#">펀딩하기</a></li>
-                    <li><a href="#">마이페이지</a></li>
-                    <li><a href="#">고객센터</a></li>
-                </ul>
-                <button class="btn btn--main"><a href="#">프로젝트 만들기</a></button>
-            </div>
-
-            <!-- 로그인 전 출력 영역 -->
-            <div class="header__right">
-                <div class="search__box">
-                    <input type="text" class="search-bar" placeholder="프로젝트 검색" />
-                    <span class="material-icons"> search </span>
-                </div>
-                <a href="#" class="sign__group">로그인</a>
-                <a href="#" class="sign__group">회원가입</a>
-            </div>
-
-            <!-- 로그인 시 출력 영역 -->
-            <!-- <div class="header__right">
-            <div class="search__box">
-              <input type="text" class="search-bar" placeholder="프로젝트 검색" />
-              <span class="material-icons"> search </span>
-            </div>
-  
-            <i class="header__icon"
-              ><span class="material-icons"> notifications </span></i
-            >
-            <i class="header__icon"
-              ><span class="material-icons"> account_circle </span></i
-            >
-          </div> -->
-        </div>
-    </header>
+   <jsp:include page="../common/menubar.jsp"/>
 
     <div id="firstlayer_outer">
         <a id="totheTop"></a>
@@ -661,9 +622,10 @@
     <div id="hiddenInputArea" style="display: none;">
         <input tpye="hidden" name="hashtags" id="hashtags">
     </div>
-    
     </form>
+    </div>
     
+   
 
     <!--Modal-->
     

@@ -44,7 +44,7 @@ function scrolltoggleThirdbar() {
 }
 
 function scrolltoggleForthbar() {
-    console.log("실행");
+
     $("#story_wrapper").css('display', 'none');
     $("#reward_wrapper").css('display', 'none');
     $("#notice_wrapper").css('display', 'none');

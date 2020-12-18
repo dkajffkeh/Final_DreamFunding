@@ -124,7 +124,6 @@ $("input").on('focus keyup change', function () {
         if (barColor[i].style.backgroundColor == 'rgb(140, 42, 42)') {
             result++;
         }
-        console.log(result);
 
     }
 

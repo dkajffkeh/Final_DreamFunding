@@ -1,5 +1,14 @@
 package com.donjomjo.dreamfunding.projectInsert.model.service;
 
-public class ProjectInsertService {
+import java.util.ArrayList;
+
+import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectCategory;
+
+public interface ProjectInsertService {
+	
+	public ArrayList<ProjectCategory> selectCategory();
+	
+	
+	
 
 }

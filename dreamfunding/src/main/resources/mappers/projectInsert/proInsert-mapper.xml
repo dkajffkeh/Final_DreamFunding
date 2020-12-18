@@ -2,4 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="proInsertMapper">
   
+  	    <resultMap type="ProjectCategory" id="categoryResultSet">
+  	    	<result column="PRO_CATENO" property="projectCategory"/>
+  	    	<result column="PRO_CATENAME" property="projectCategoryName"/>
+  	    </resultMap>
+  	    
+  	   <select id="selectCategory"
+  	   		   resultMap="categoryResultSet">
+  	   	SELECT
+  	   	      PRO_CATENO
+  	         ,PRO_CATENAME
+  	     FROM
+  	         PRO_CATEGORY    
+  	   </select>
+  
 </mapper>
