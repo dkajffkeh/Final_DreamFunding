@@ -7,31 +7,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Source+Sans+Pro:wght@200&display=swap"
-        rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        rel="stylesheet">   
     <script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script>
   
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
         integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/projectInsertForm/projectInsertFrom.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/projectInsertForm/projectInsertForm.css?ver=1"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
     <title>Document</title>
 </head>
 
 <body>
-
+ 
    <jsp:include page="../common/menubar.jsp"/>
-
+ 
     <div id="firstlayer_outer">
         <a id="totheTop"></a>
-        <form action="#" id="insertConroller">
+        <form action="#" id="insertConroller" enctype="multipart/form-data">
 
             <div id="button_wrapper">
                 <button class="btn btn-primary btn1" type="button"><i class="far fa-eye"></i>&nbsp;&nbsp;미리보기</button>
@@ -66,11 +62,11 @@
 
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             <label class="btn btn-secondary active">
-                                                <input type="radio" name="projectSuccessCondition" value="Y" id="pro_condition1"> 100%
+                                                <input type="radio" name="projectGoal" value="Y" id="pro_condition1"> 100%
                                                 이상
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="projectSuccessCondition" value="N" id="pro_condition2" checked> 조건 없음
+                                                <input type="radio" name="projectGoal" value="N" id="pro_condition2" checked> 조건 없음
                                             </label>
                                         </div>
 
@@ -85,12 +81,10 @@
                                     </td>
                                     <td class="userInputarea">
                                         <div class="form-group">
-                                            <select class="form-control" id="exampleFormControlSelect1">
-                                                <option checked="true">유아 도서</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                            <select class="form-control" name="proCategoryNo" id="exampleFormControlSelect1" name="projectCategoryName">
+                                            <c:forEach var="i" items="${ cList }" varStatus="increase">
+                                                <option value="${ increase.count*10 }">${ i.projectCategoryName }</option>     
+                                            </c:forEach>    
                                             </select>
                                         </div>
                                     </td>
@@ -131,7 +125,7 @@
                                             미달성시 프로젝트가 자동 <br> 취소됩니다.(최소금액 10만원)
                                         </div>
                                     </td>
-                                    <td class="userInputarea"><input type="number" name="projectGoal"
+                                    <td class="userInputarea"><input type="number" name="projectGoalPrice"
                                             class="form-control pri_amount" placeholder="100,000"></td>
                                 </tr>
                                 <tr>
@@ -143,8 +137,8 @@
                                                                  align-items: center;
                                                                  font-size: 1.2rem;
                                                                  ">http://localhost:8888/dreamfunding?proUrl=
-                                        <input type="text" style="width:200px" class="form-control"
-                                            placeholder="dreamfunding" name="projectUrl">
+                                        <input type="text" style="width:200px" class="form-control" 
+                                            placeholder="dreamfunding" name="projectURL">
                                     </td>
                                 </tr>
                                 <tr>
@@ -240,8 +234,8 @@
                                             창작자 명으로 등록됩니다.
                                         </div>
                                     </td>
-                                    <td class="userInputarea"><input type="text" style="width:300px"
-                                            class="form-control" maxlength="10" placeholder="드림펀딩">
+                                    <td class="userInputarea">
+                                    <input type="text" style="width:300px" name="creatorName" class="form-control" maxlength="10" placeholder="드림펀딩">
                                     </td>
                                 </tr>
                                 <tr>
@@ -295,7 +289,7 @@
                                         </div>
                                     </td>
                                     <td class="userInputarea">
-                                        <input type="text" style="width:450px" id="videourlInput" class="form-control"
+                                        <input type="text" style="width:450px" id="videourlInput" class="form-control" name="projectVideoURL"
                                             placeholder="https://www.youtube.com/xVV8Da9d0ig">
                                     </td>
                                 </tr>
@@ -341,8 +335,7 @@
                                         </div>
                                     </td>
                                     <td class="userInputarea">
-                                        <input type="number" class="form-control" style="width: 350px;" id="rewardPrice"
-                                            required>
+                                        <input type="number" class="form-control" style="width: 350px;" id="rewardPrice">
                                     </td>
                                 </tr>
                                 <tr>
@@ -385,7 +378,7 @@
                                             <button class="btn btn-outline reward_btn" type="button"
                                                 id="rewardInputBtn">옵션등록</button>
                                         </div>
-                                        <ul id="reward_list" style="margin-bottom: 20px;">
+                                        <ul id="reward_list" style="margin-bottom: 20px; list-style:disc">
 
                                         </ul>
                                     </td>
@@ -401,11 +394,11 @@
                                     <td class="userInputarea">
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             <label class="btn btn-secondary active">
-                                                <input type="radio" name="addrCheck" value="Y" id="reward_condition1">
+                                                <input type="radio" name="addrCheck" value="Y" id="shipping_condition1">
                                                 배송지 필요
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="addrCheck" value="N" id="reward_condition2">
+                                                <input type="radio" name="addrCheck" value="N" id="shipping_condition2">
                                                 배송지 필요없음
                                             </label>
                                         </div>
@@ -463,7 +456,7 @@
                                     </td>
                                     <td class="userInputarea">
                                         <div style="font-size: 0.1px; height: 0.1px; color:white">　</div>
-                                        <textarea name="" class="form-control" id="editor2.ck"></textarea>
+                                        <textarea name="projectRefundPolicy" class="form-control" id="editor2.ck"></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -478,10 +471,11 @@
                                     <td class="userInputarea" style="display: flex; margin-top: 50px; align-items: center;">
                                         <input type="text" 
                                                class="form-control" 
+                                               name="creatorPhone"
                                                style="width:300px"
                                                placeholder="010-1111-2222"> 
                                         <input type="checkbox" 
-                                               name="revealCheck"
+                                               name="phoneCheck"
                                                id="revealCheck">
                                         <label for="revealCheck" style="font-size: 1.1rem;">번호 공개</label>    
                                     </td>
@@ -497,7 +491,7 @@
                                     </td>
                                     <td class="userInputarea">          
                                         <input type="email" 
-                                        name="email"
+                                        name="creatorEmail"
                                         class="form-control" 
                                         style="width:300px;"
                                         placeholder="yhy1011@naver.com">       
@@ -545,8 +539,10 @@
                                     </div>
                                 </td>
                                 <td class="userInputarea">
-                                    <select name="bank" id="" class="form-control" style="width:200px">
-                                        <option value="신한은행" selected>신한은행</option>
+                                    <select name="bank" class="form-control" style="width:200px">
+                                    <c:forEach var="b" items="${ bList }">
+                                        <option value="${b.bankNo}">${ b.bankName }</option>
+                                        </c:forEach>
                                     </select>
                                 </td>
                             </tr>
@@ -560,7 +556,7 @@
                                     </div>
                                 </td>
                                 <td class="userInputarea">
-                               <input type="text" name="bankAccount" class="form-control" placeholder="110-296-109579" style="width: 250px;">
+                               <input type="text" name="bankAccount" class="form-control" name="creatorAccount" placeholder="110-296-109579" style="width: 250px;">
                                 </td>
                             </tr>
                             <tr>
@@ -586,13 +582,13 @@
                                 <td class="userInputarea">
                                     <div class="snsInput"><i class="fas fa-globe">
 
-                                    </i><input type="text" class="form-control" placeholder="https://www.ups.com/" style="width:450px"></div>
+                                    </i><input type="text" name="webURL" class="form-control" placeholder="https://www.ups.com/" style="width:450px"></div>
                                     <div class="snsInput"><i class="fab fa-instagram">
 
-                                    </i><input type="text" class="form-control" placeholder="https://www.facebook.com/dkajffkeh" style="width:450px"></div>
+                                    </i><input type="text" name="insta" class="form-control" placeholder="https://www.facebook.com/dkajffkeh" style="width:450px"></div>
                                     <div class="snsInput"><i class="fab fa-facebook-square">
 
-                                    </i><input type="text" class="form-control" placeholder="https://www.instagram.com/yoo_patrick/" style="width:450px"></div>
+                                    </i><input type="text" name="facebook" class="form-control" placeholder="https://www.instagram.com/yoo_patrick/" style="width:450px"></div>
                                 </td>
                             </tr>
                             </table>
@@ -607,7 +603,7 @@
                         <div class="remote_icon">
                             <i class="far fa-eye"></i>
                             <i class="far fa-save"></i>
-                            <i class="fas fa-upload"></i>
+                            <i class="fas fa-upload"  data-toggle="modal" data-target=".bd-example-modal-lg"></i>
                             <i class="fas fa-handshake"></i>
                         </div>
                         <div class="remote_btn remobtn1" id="firstbar_remote">스토리</div>
@@ -620,7 +616,7 @@
     </div>
     <!-- inputtype hidden -->
     <div id="hiddenInputArea" style="display: none;">
-        <input tpye="hidden" name="hashtags" id="hashtags">
+        <input tpye="hidden" name="hashtag" id="hashtags">
     </div>
     </form>
     </div>
@@ -656,14 +652,15 @@
         </div>
       </div>
     </div>
-
-    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/completeCheck.js"></script>
-    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/calculatorLettersDate.js"></script>
-    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/handleScroll.js"></script>
-    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/previewImage.js"></script>
-    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/hashTagController.js"></script>
-    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/rewardControll.js"></script>
-    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/CKEDITOR.js"></script>
+    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/requestSubmit.js?ver=1"></script>
+	<script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/loadProject.js?ver=1"></script>
+    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/completeCheck.js?ver=1"></script>
+    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/calculatorLettersDate.js?ver=1"></script>
+    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/handleScroll.js?ver=1"></script>
+    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/previewImage.js?ver=1"></script>
+    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/hashTagController.js?ver=1"></script>
+    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/rewardControll.js?ver=1"></script>
+    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/CKEDITOR.js?ver=1"></script>
 
 </body>
 

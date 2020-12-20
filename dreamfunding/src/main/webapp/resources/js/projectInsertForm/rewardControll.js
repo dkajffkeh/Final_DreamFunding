@@ -18,7 +18,6 @@ $("#rewardInputBtn").click(function () {
     createInput.setAttribute('name', 'tempName');
     createLi.setAttribute('onclick', 'deleteList(this)');
 
-
     if (optionValues.trim().length != 0) { //뭔가가 입력 된 경우
 
         if ($("#reward_list > li").length > 4) {//li 가 5보다 크면 넣을수 없음 0 1 2 3 4 까지 실행.
@@ -54,8 +53,25 @@ $("#insertRewardBtn").click(function () {
     const displayResult = $("#reward_result_display");
     let rewardResult = "";
 
+    let rewardArrCheck = $(".rewardArrCehck");
+
+    if (rewardArrCheck.length == 0) {
+        rewardArrCheck = 0;
+    } else {
+        rewardArrCheck = parseInt($(".rewardArrCehck:last").attr('name').substring($(".rewardArrCehck:last").attr('name').indexOf("[") + 1, $(".rewardArrCehck:last").attr('name').indexOf("[") + 2)) + 1;
+    }
+    let optionArrCheck = $(".optionArrCheck");
+
+    if (optionArrCheck.length == 0) {
+        optionArrCheck = 0;
+    } else {
+        optionArrCheck = parseInt($(".optionArrCheck:last").attr('name').substring($(".optionArrCheck").attr('name').indexOf("[") + 1, $(".optionArrCheck").attr('name').indexOf("[") + 2)) + 1;
+    }
+
+
     // Y 로 넘어오면 제한 없음
     // N 로 넘어오면 input 받아야함.
+    console.log(!rewardPrice_check + " " + rewardCondition + " " + addrCheck)
 
     if (!rewardPrice_check && rewardCondition != null && addrCheck != null) { //전부 입력이 되었을경우
 
@@ -85,13 +101,12 @@ $("#insertRewardBtn").click(function () {
                                 <i class="fas fa-trash-alt deleteReward" onclick=removeReward(this)></i>
                                 <div style="display:none">${$("#rewardPrice").val()}원 리워드</div>
                                 </div>
-                                <input type="hidden" name="rewardTitle" value="${$("#rewardPrice").val()}">
-                                <input type="hidden" name="rewardnumber" value="${rewardList.length}">
-                                <input type="hidden" name="rewardCondition" value="${rewardCondition}">
-                                <input type="hidden" name="rewardPrice" value="${$("#rewardPrice").val()}">
-                                    <input type="hidden" name="rewardAddrCheck" value="${addrCheck}">`
+                                <input type="hidden" class="rewardArrCehck" name="rewardList[${(rewardArrCheck)}].rewardPrice" value="${$("#rewardPrice").val()}">                   
+                                <input type="hidden" name="rewardList[${rewardArrCheck}].rewardAmount" value="${rewardList.length}">
+                                <input type="hidden" name="rewardList[${rewardArrCheck}].rewardStatus" value="${rewardCondition}">        
+                                    <input type="hidden" name="rewardList[${rewardArrCheck}].rewardShCheck" value="${addrCheck}">`
             for (let i = 0; i < rewardList.length; i++) {
-                rewardResult += `<input type="hidden" name="rewardOption" value="${rewardList[j].innerHTML}">`;
+                rewardResult += `<input type="hidden" class="optionArrCheck" name="optionList[${optionArrCheck + i}].rewardContent" value="${rewardList[i].innerHTML}">`
             }
 
 
@@ -135,16 +150,14 @@ $("#insertRewardBtn").click(function () {
                                 <i class="fas fa-trash-alt deleteReward" onclick=removeReward(this)></i>
                                 <div style="display:none">${$("#rewardPrice").val()}원 리워드</div>
                                 </div>
-                                <input type="hidden" name="rewardTitle" value="${$("#rewardPrice").val()}">
-                                <input type="hidden" name="rewardnumber" value="${rewardList.length}">
-                                <input type="hidden" name="rewardCondition" value="${rewardCondition}">
-                                <input type="hidden" name="rewardPrice" value="${$("#rewardPrice").val()}">
-                                <input type="hidden" name="rewardAddrCheck" value="${addrCheck}">
+                                <input type="hidden" class="rewardArrCehck" name="rewardList[${rewardArrCheck}].rewardPrice" value="${$("#rewardPrice").val()}">
+                                <input type="hidden" name="rewardList[${rewardArrCheck}].rewardAmount" value="${rewardList.length}">
+                                <input type="hidden" name="rewardList[${rewardArrCheck}].rewardStatus" value="${rewardCondition}">                
+                                <input type="hidden" name="rewardList[${rewardArrCheck}].rewardShCheck" value="${addrCheck}">
                                 `
                 for (let i = 0; i < rewardList.length; i++) {
-                    rewardResult += `<input type="hidden" name="rewardOption" value="${rewardList[i].innerHTML}">`;
+                    rewardResult += `<input type="hidden" class="optionArrCheck" name="optionList[${optionArrCheck + i}].rewardContent" value="${rewardList[i].innerHTML}">`
                 }
-
 
                 rewardResult += `
                                 </div>
@@ -202,8 +215,6 @@ function completeCheck() {
         $("#second_bar").css('background-color', ' #c6a36e');
         $("#second_bar").css('color', '#ffffffff');
         $("#second_bar").text('리워드  (미완료)');
-
-
 
     }
 

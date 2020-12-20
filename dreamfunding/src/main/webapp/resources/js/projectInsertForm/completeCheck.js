@@ -2,19 +2,18 @@
 
 $(function () {
 
-    $(".btn-primary.btn4").attr('disabled', true);
-
+    // $(".btn-primary.btn4").attr('disabled', true);
 
 })
 
 $("#story_wrapper input").on('focus keyup change', function () {
 
-    const projectCondition = $("input[name='projectSuccessCondition']:checked").val() != "";
+    const projectCondition = $("input[name='projectGoal']:checked").val() != "";
     const categoryCheck = $("#exampleFormControlSelect1").val() != "";
     const titleCheck = $("input[name='projectTitle']").val() != "";
     const subTitleCheck = $("input[name='projectSubTitle']").val() != "";
-    const projectGoalCheck = $("input[name='projectGoal']").val() > 0;
-    const urlCheck = $("input[name='projectUrl']").val() != "";
+    const projectGoalCheck = $("input[name='projectGoalPrice']").val() > 0;
+    const urlCheck = $("input[name='projectURL']").val() != "";
 
     let startArr = $("input[name='projectStartDate']").val().split('-');
     let endArr = $("input[name='projectEndDate']").val().split('-');
@@ -129,10 +128,11 @@ $("input").on('focus keyup change', function () {
 
     if (result == 4) {
 
-        $(".btn-primary.btn4").attr('disabled', false);
+        //   $(".btn-primary.btn4").attr('disabled', false);
     } else {
-        $(".btn-primary.btn4").attr('disabled', true);
+        //   $(".btn-primary.btn4").attr('disabled', true);
     }
 
 })
+
 

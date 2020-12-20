@@ -7,6 +7,12 @@
   	    	<result column="PRO_CATENAME" property="projectCategoryName"/>
   	    </resultMap>
   	    
+  	    <resultMap type="com.donjomjo.dreamfunding.projectInsert.model.vo.Bank" id="bankResultSet">
+  	   	 <result column="BANK_NO" property="bankNo"/>
+  	     <result column="BANK_NAME" property="bankName"/>
+  	   
+  	    </resultMap>
+  	    
   	   <select id="selectCategory"
   	   		   resultMap="categoryResultSet">
   	   	SELECT
@@ -14,6 +20,15 @@
   	         ,PRO_CATENAME
   	     FROM
   	         PRO_CATEGORY    
+  	   </select>
+  	   
+  	   <select id="selectBank"
+  	   		   resultMap="bankResultSet">
+  	   	SELECT
+  	   		  BANK_NO
+  	   		 ,BANK_NAME
+  	   	  FROM
+  	   	      BANK	   
   	   </select>
   
 </mapper>

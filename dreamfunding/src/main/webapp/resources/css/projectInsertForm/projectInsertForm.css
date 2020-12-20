@@ -346,13 +346,14 @@ option {
     margin-top: 10px;
 }
 
-.reward_btn {
+#rewardInputBtn {
     color: var(--wine--color);
     border: 1px solid var(--wine--color);
     margin-left: 5px;
 }
 
 #reward_list {
+    list-style-type: circle;
     margin-left: 22px;
     margin-top: 10px;
 }
@@ -366,7 +367,7 @@ option {
     color: var(--wine--color);
 }
 
-.reward_save_btn {
+#insertRewardBtn {
     border: 1px solid var(--wine--color);
     color: var(--wine--color);
 }
