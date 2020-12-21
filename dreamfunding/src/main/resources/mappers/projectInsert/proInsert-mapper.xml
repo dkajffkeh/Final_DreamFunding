@@ -30,5 +30,148 @@
   	   	  FROM
   	   	      BANK	   
   	   </select>
-  
+  	   <select id="selectProNo"
+  	    	   resultType="_int">
+  	   	SELECT
+		      SEQ_PNO.NEXTVAL
+		  FROM
+		      DUAL 
+  	   </select>
+  	   <insert id="insertProject"
+  	   		   parameterType="ProjectInsert">
+  	   	INSERT
+  	   	      INTO
+  	   	          PROJECT
+  	   	          	(	   
+  	    	  			 PROJECT_NO
+						,MEMBER_NO
+						,PRO_CATENO
+						,BANK_NO
+						,PROJECT_GOAL
+						,PROJECT_TITLE
+						,PROJECT_SUBTITLE
+						,PROJECT_GPRICE
+						,PROJECT_START_DT
+						,PROJECT_CLOSE_DT
+						,PROJECT_URL
+						,PROJECT_THUMPATH
+						,PROJECT_FILENAME
+						,PROJECT_COUNT
+						,PROJECT_CONTENT
+						,PROJECT_VURL
+						,PROJECT_REFCON
+						,CREATOR_THUMPATH
+						,CREATOR_PROFILE
+						,CREATOR_NAME
+						,CREATOR_INTRO
+						,CREATOR_PHONE
+						,PHONE_CHECK
+						,CREATOR_EMAIL
+						,CREATOR_BANK
+						,CREATOR_ACOUNT
+						,CREATOR_ACHOLDER
+						,CREATOR_WEBURL
+						,CREATOR_INSTA
+						,CREATOR_FACEBOOK
+						,CREATOR_STATUS
+						,HASHTAG
+						,PROJECT_CRDATE
+						,PROJECT_TEMPORARY
+	  	   			)
+	  	   			VALUES
+	  	   			(
+	  	   				 #{projectNo}
+						,1
+						,#{proCategoryNo}
+						,#{bankNo}
+						,#{projectGoal}
+						,#{projectTitle}
+						,#{projectSubtitle}
+						,#{projectGoalPrice}
+						,#{projectStartDate}
+						,#{projectEndDate}
+						,#{projectURL}
+						,#{projectThumbnailPath}
+						,#{projectFileName}
+						,0
+						,#{projectContent}
+						,#{projectVideoURL}
+						,#{projectRefundPolicy}
+						,#{creatorThumbnailPath}
+						,#{creatorProfile}
+						,#{creatorName}
+						,#{creatorIntro}
+						,#{creatorPhone}
+						,#{phoneCheck}
+						,#{creatorEmail}
+						,#{creatorBank}
+						,#{creatorAccount}
+						,#{accountHolder}
+						,#{webURL}
+						,#{insta}
+						,#{facebook}
+						,#{status}
+						,#{hashtag}
+						,SYSDATE
+						,'N'
+	  	   			)	
+ 
+  	   </insert>
+  	   
+  	   <insert id="insertReward"
+  	   		   parameterType="Reward">
+  	   		INSERT
+  	   			  INTO
+  	   			      REWARD
+  	   			      (
+  	   			         RE_NO
+						,PROJECT_NO
+						,RE_PRICE
+						,RE_STATUS
+						,RE_NUMBER
+						,RE_SH_STATUS
+						,RE_SALECOUNT
+  	   			      )
+  	   			      VALUES
+  	   			      (
+  	   			         SEQ_RWNO.NEXTVAL
+						,#{projectNo}
+						,#{rewardPrice}
+						,#{rewardStatus}
+						,#{rewardNumber}
+						,#{rewardShCheck}
+						,0
+  	   			      )
+  	   </insert>
+  	   
+  	   <insert id="insertOption"
+  	   		   parameterType="RewardOption">
+  	   		INSERT
+  	   			  INTO
+  	   			  	  RE_OPTION
+  	   			  	  (
+  	   			  	     RE_OPTION_NO
+						,REWARD_NO
+					    ,RE_OPTION_NAME
+  	   			  	  )
+  	   			  	  VALUES
+  	   			  	  (
+  	   			  	     SEQ_OPNO.NEXTVAL
+						,SEQ_RWNO.CURRVAL
+					    ,#{rewardContent}
+  	   			  	  )
+  	   		
+  	   
+  	   </insert>
+  	   <select id="urlconflictCheck"
+  	   	       parameterType="string"
+  	   	       resultType="string">
+  	   	 	SELECT
+			      COUNT(*) COUNT
+			 FROM
+			      PROJECT
+			 WHERE
+			      PROJECT_URL=#{urlInput}
+  	   </select>
+
 </mapper>

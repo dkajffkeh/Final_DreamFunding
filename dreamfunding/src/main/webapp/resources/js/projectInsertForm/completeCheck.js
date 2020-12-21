@@ -126,7 +126,7 @@ $("input").on('focus keyup change', function () {
 
     }
 
-    if (result == 4) {
+    if (result == 4 && $("#urlCheck").css('color') == "green") {
 
         //   $(".btn-primary.btn4").attr('disabled', false);
     } else {
@@ -134,5 +134,44 @@ $("input").on('focus keyup change', function () {
     }
 
 })
+
+$("input[name='projectURL']").keyup(function () {
+
+    if ($(this).val().length > 5) {
+
+        $("#urlCheck").css('display', 'block');
+
+        $.ajax({
+            url: "projectUrlCheck.pi.hy",
+            data: { urlInput: $("input[name='projectURL']").val() },
+            success: function (resultNum) {
+
+                $("#urlCheck").css('display', 'block');
+
+                if (resultNum == 0) {
+
+                    $("#urlCheck").css('color', 'green');
+                    $("#urlCheck").text('사용가능한url입니다.')
+
+
+                } else {
+
+                    $("#urlCheck").css('color', 'red');
+                    $("#urlCheck").text('이미 사용중인 url 입니다.')
+
+                }
+
+            },
+
+        })
+
+    } else {
+
+        $("#urlCheck").css('display', 'none');
+
+    }
+
+})
+
 
 

@@ -133,12 +133,16 @@
                                         <div class="inputList_title">*프로젝트 고유주소</div>
                                         <div class="input_explanation">내 프로젝트 주소를 넣어주세요!</div>
                                     </td>
-                                    <td class="userInputarea" style="display: flex;
+                                    <td class="userInputarea">
+                                    	<div  style="display: flex;
                                                                  align-items: center;
                                                                  font-size: 1.2rem;
-                                                                 ">http://localhost:8888/dreamfunding?proUrl=
+                                                                 ">
+                                          <div>http://localhost:8888/dreamfunding?proUrl=</div>
                                         <input type="text" style="width:200px" class="form-control" 
                                             placeholder="dreamfunding" name="projectURL">
+                                          </div>  
+                                          <div id="urlCheck"></div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -539,10 +543,20 @@
                                     </div>
                                 </td>
                                 <td class="userInputarea">
-                                    <select name="bank" class="form-control" style="width:200px">
-                                    <c:forEach var="b" items="${ bList }">
+                                    <select name="bankNo" class="form-control" style="width:200px">
+                                    <c:forEach var="b" items="${ bList }" varStatus="i">
+                                    <c:choose>
+                                    	 
+                                    	<c:when test="${ i.index == 0 }">               	
+                                        <option value="${b.bankNo}" selected>${ b.bankName }</option>
+                                        </c:when>
+                                        
+                                        <c:otherwise>           
                                         <option value="${b.bankNo}">${ b.bankName }</option>
-                                        </c:forEach>
+                                        </c:otherwise> 
+                                        
+                                     </c:choose>                
+                                    </c:forEach>
                                     </select>
                                 </td>
                             </tr>
@@ -617,6 +631,7 @@
     <!-- inputtype hidden -->
     <div id="hiddenInputArea" style="display: none;">
         <input tpye="hidden" name="hashtag" id="hashtags">
+        <input tpye="hidden" name="projectNo" value="${proSequence}">
     </div>
     </form>
     </div>

@@ -461,3 +461,6 @@ option {
     background-color: var(--lightbeige--color);
     color: var(--wine--color);
 }
+#urlCheck {
+    text-align: center;
+}
