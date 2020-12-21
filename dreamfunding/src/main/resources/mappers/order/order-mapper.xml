@@ -9,7 +9,7 @@
 
 	<select id="selectProject" 
 			parameterType="_int" 
-			resultMap="ProjectInsert">
+			resultMap="projectResultSet">
 		select
 		       project_title
 		  from project

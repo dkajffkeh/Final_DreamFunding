@@ -37,6 +37,7 @@
 	<jsp:include page="../common/menubar.jsp"/>
 
 	<div id="inner">
+		<form action="" name="orderInsertForm">
         <h3 align="center" style="">프로젝트 후원하기</h3>
         <br><br>
         <h3>리워드</h3>
@@ -51,12 +52,39 @@
         <hr>
             <h4> 추가후원금 </h4>
             후원금 : 
-            <input type="number"> 원
+            <input type="number" name="supportPrice" onkeyup="verifySum()"> 원
             <br><br>
             <h4 align="center">총합 :  35,000원</h4>
-			<input type=text name=total readonly>
+            <input type=hidden name=hiddentotal value=0>
+			<input type=hidden name=hiddenpriorradio value=0>
+			<input type="number" name="total" readonly>
         
       <script>
+      		function verifyTotal(){
+      			
+      			
+      		}
+      
+      		function verifySum (){
+      			
+      			
+
+    		}
+      		
+      		function verifyInput(){
+      			
+      			verfiy = new verifyTotal();
+      			verfiy.rePri = ${ rewardPri };
+      			verfiy.subPri = document.orderInsertForm.supportPrice;
+      			verfiy.result_id = "";
+      			verfiy.total_html = "";
+      			
+      		}
+      		
+      		addloadEvent(function(){
+      				verfiyInput();
+      		})
+      		
 			function CheckChoice(whichbox) {
 				with (whichbox.form) {
 					if (whichbox.type == "radio") {
@@ -102,7 +130,6 @@
 			}
 			</script>
         
-        <form action="">
             <h3> 배송지 선택  </h3>
             <hr>
             <div id="delivery">

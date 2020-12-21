@@ -9,7 +9,7 @@ import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectInsert;
 public class OrderDao {
 
 	public ProjectInsert selectProject(SqlSessionTemplate sqlSession, int pno) {
-		return null;
+		return sqlSession.selectOne("orderMapper.selectProject", pno);
 	}
 
 }
