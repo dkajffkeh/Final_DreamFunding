@@ -14,11 +14,23 @@ import com.donjomjo.dreamfunding.member.model.vo.Member;
 @Controller
 public class MemberController {
 
+	@Autowired
+	private MemberService mService;
+	
 	
 
 	@RequestMapping("loginForm.me.jm")
-	public String loginMember() {
+	public String loginForm() {
 		return "member/loginForm";
+	}
+	@RequestMapping("login.me.jm")
+	public String loginMember(Member m, HttpSession session) {
+		
+		
+		
+		
+		
+		return "";
 	}
 	@RequestMapping("enrollForm.me.jm")
 	public String enrollForm() {
@@ -26,6 +38,8 @@ public class MemberController {
 	}
 	@RequestMapping("enrollForm2.me.jm")
 	public String enrollForm2() {
+		
+		
 		return "member/enrollForm2";
 	}
 	@RequestMapping("enrollForm3.me.jm")

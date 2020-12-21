@@ -12,7 +12,6 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.2.js"></script>
 	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/login.css" />
 </head>
