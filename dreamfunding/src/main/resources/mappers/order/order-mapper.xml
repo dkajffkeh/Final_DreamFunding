@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="orderMapper">
+
+	<resultMap id="projectResultSet" type="ProjectInsert">
+		<result column="project_no" property="projectNo"/>
+		<result column="project_title" property="projectTitle"/>	
+	</resultMap>
+
+	<select id="selectProject" 
+			parameterType="_int" 
+			resultMap="ProjectInsert">
+		select
+		       project_title
+		  from project
+		 where project_no = ${pno}
+	</select>
   
 </mapper>

@@ -15,6 +15,7 @@
 		<typeAlias type="com.donjomjo.dreamfunding.projectInsert.model.vo.RewardOption" alias="RewardOption"/>
 		<typeAlias type="com.donjomjo.dreamfunding.projectInsert.model.vo.Reward" alias="Reward"/>
 		<typeAlias type="com.donjomjo.dreamfunding.serviceCenter.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.donjomjo.dreamfunding.projectInsert.model.vo.Bank" alias="Bank"/>		
 	</typeAliases>
 	 
 	<mappers>
