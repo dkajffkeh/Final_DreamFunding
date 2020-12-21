@@ -92,7 +92,7 @@
               </div>
             </div>
           </div>
-          <a href="login.me.jm" class="sign__group">로그인</a>
+          <a href="loginForm.me.jm" class="sign__group">로그인</a>
           <a href="enrollForm.me.jm" class="sign__group">회원가입</a>
         </div>
         

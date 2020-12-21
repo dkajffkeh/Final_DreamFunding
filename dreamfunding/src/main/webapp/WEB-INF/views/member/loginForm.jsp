@@ -12,6 +12,8 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.2.js"></script>
+	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/login.css" />
 </head>
 <body>
@@ -21,7 +23,7 @@
             <div class="card card-signin my-5">
               <div class="card-body">
                 <h5 class="card-title text-center">환영합니다</h5>
-                <form class="form-signin" method="post">
+                <form class="form-signin" action="login.me.jm" method="post">
                   <div class="form-label-group">
                     <input type="email" id="email" class="form-control" name="email" placeholder="Email address" required autofocus>
                     <label for="email">아이디(이메일)</label>

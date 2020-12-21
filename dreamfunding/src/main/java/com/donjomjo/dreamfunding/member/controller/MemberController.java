@@ -16,13 +16,21 @@ public class MemberController {
 
 	
 
-	@RequestMapping("login.me.jm")
+	@RequestMapping("loginForm.me.jm")
 	public String loginMember() {
 		return "member/loginForm";
 	}
 	@RequestMapping("enrollForm.me.jm")
 	public String enrollForm() {
 		return "member/enrollForm";
+	}
+	@RequestMapping("enrollForm2.me.jm")
+	public String enrollForm2() {
+		return "member/enrollForm2";
+	}
+	@RequestMapping("enrollForm3.me.jm")
+	public String enrollForm3() {
+		return "member/enrollForm3";
 	}
 	@RequestMapping("insert.me.jm")
 	public void insertMember() {

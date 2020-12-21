@@ -30,7 +30,7 @@
                   <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> 구글로 회원가입</button>
                   <button class="btn btn-lg btn-naver btn-block text-uppercase" type="submit"><i class="fab fa-naver mr-2"></i>네이버로 회원가입</button>
                   <hr class="my-4">
-                  <a class="btn btn-lg btn-login btn-block text-uppercase" href="enrollForm.me.jm">이메일로 회원가입</a>
+                  <a class="btn btn-lg btn-login btn-block text-uppercase" href="enrollForm2.me.jm">이메일로 회원가입</a>
                 </form>
               </div>
             </div>
