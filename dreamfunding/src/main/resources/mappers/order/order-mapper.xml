@@ -13,7 +13,7 @@
 		select
 		       project_title
 		  from project
-		 where project_no = ${pno}
+		 where project_no = #{pno}
 	</select>
   
 </mapper>
