@@ -49,6 +49,21 @@ public class ProjectInsertDao {
 		return sqlSession.selectOne("proInsertMapper.urlconflictCheck",urlInput);
 	}
 
+	public ArrayList<ProjectInsert> selectProject(SqlSessionTemplate sqlSession, int memNo) {
+		
+		return (ArrayList)sqlSession.selectList("proInsertMapper.selectProjectHY",memNo);
+	}
+
+	public int projectNumberCheck(SqlSessionTemplate sqlSession, int projectNo) {
+		
+		return sqlSession.selectOne("proInsertMapper.projectNumberCheck", projectNo);
+	}
+
+	public int projectUpdateOnly(SqlSessionTemplate sqlSession, ProjectInsert pi) {
+		
+		return sqlSession.update("proInsertMapper.projectUpdateOnly", pi);
+	}
+
 	
 
 	

@@ -11,12 +11,13 @@
         href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Source+Sans+Pro:wght@200&display=swap"
         rel="stylesheet">   
     <script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script>
-  
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
         integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/projectInsertForm/projectInsertForm.css?ver=1"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <title>Document</title>
 </head>
@@ -27,7 +28,7 @@
  
     <div id="firstlayer_outer">
         <a id="totheTop"></a>
-        <form action="#" id="insertConroller" enctype="multipart/form-data">
+        <form id="insertConroller" enctype="multipart/form-data">
 
             <div id="button_wrapper">
                 <button class="btn btn-primary btn1" type="button"><i class="far fa-eye"></i>&nbsp;&nbsp;미리보기</button>
@@ -112,7 +113,7 @@
                                             부제목을 넣어주세요!</div>
                                     </td>
                                     <td class="userInputarea">
-                                        <input type="text" class="form-control pro_title1" placeholder="50자 이내로 작성해 주세요" name="projectSubTitle"
+                                        <input type="text" class="form-control pro_title1" placeholder="50자 이내로 작성해 주세요" name="projectSubtitle"
                                             maxlength="49">
                                         <div class="lettercounter lc1">0/50</div>
                                     </td>
@@ -354,11 +355,11 @@
                                     <td class="userInputarea">
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             <label class="btn btn-secondary active">
-                                                <input type="radio" name="options" value="Y" id="reward_condition1"
+                                                <input type="radio" name="options" value="N" id="reward_condition1"
                                                     checked> 제한 없음
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="options" value="N" id="reward_condition2"> 제한
+                                                <input type="radio" name="options" value="Y" id="reward_condition2"> 제한
                                             </label>
                                         </div>
                                         <div id="rewardAmount" style="display: none;">
@@ -632,6 +633,7 @@
     <div id="hiddenInputArea" style="display: none;">
         <input tpye="hidden" name="hashtag" id="hashtags">
         <input tpye="hidden" name="projectNo" value="${proSequence}">
+        <input tpye="hidden" name="memberNo" value="2">
     </div>
     </form>
     </div>
@@ -655,18 +657,22 @@
                 </tr>
             </thead>
             <tbody>
+            <c:forEach var="p" items="${ pList }">
                 <tr>
-                    <td>12</td>
-                    <td>반려</td>
-                    <td>그건 알아서 뭐하게</td>
-                    <td>2020-12-14</td>
-                </tr> 
+                    <td>${ p.projectNo }</td>
+                	<td>${ p.status}</td>                   
+                    <td>${ p.projectTitle }</td>
+                    <td>${ p.createDate }</td>
+                </tr>
+             </c:forEach>    
             </tbody>
             </table>
             <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 80px; position: relative; left:88%; margin-top: 15px;">Close</button>
         </div>
       </div>
     </div>
+    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/saveProject.js?ver=1"></script>
+    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/projectReload.js?ver=1"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/requestSubmit.js?ver=1"></script>
 	<script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/loadProject.js?ver=1"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/completeCheck.js?ver=1"></script>

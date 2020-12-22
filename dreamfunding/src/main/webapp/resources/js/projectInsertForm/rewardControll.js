@@ -76,7 +76,7 @@ $("#insertRewardBtn").click(function () {
     if (!rewardPrice_check && rewardCondition != null && addrCheck != null) { //전부 입력이 되었을경우
 
         //입력 되었지만 리워드 제공수
-        if (rewardCondition == 'Y') { //무제한 이면서 빈칸이 모두 채워진 케이스
+        if (rewardCondition == 'N') { //무제한 이면서 빈칸이 모두 채워진 케이스
 
             rewardResult += `<div class="rewardContaioner">
                                     <div class="rewardTitleWrapper">
@@ -151,6 +151,7 @@ $("#insertRewardBtn").click(function () {
                                 <div style="display:none">${$("#rewardPrice").val()}원 리워드</div>
                                 </div>
                                 <input type="hidden" class="rewardArrCehck" name="rewardList[${rewardArrCheck}].rewardPrice" value="${$("#rewardPrice").val()}">
+                                <input type="hidden" name="rewardList[${rewardArrCheck}].rewardNumber" value="${$("#rewardCount").val()}">
                                 <input type="hidden" name="rewardList[${rewardArrCheck}].rewardAmount" value="${rewardList.length}">
                                 <input type="hidden" name="rewardList[${rewardArrCheck}].rewardStatus" value="${rewardCondition}">                
                                 <input type="hidden" name="rewardList[${rewardArrCheck}].rewardShCheck" value="${addrCheck}">

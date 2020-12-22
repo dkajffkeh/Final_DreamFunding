@@ -22,30 +22,14 @@ public class ProjectInsertServiceImpl implements ProjectInsertService {
 	@Autowired
 	private ProjectInsertDao pDao;
 
-	
-	/**
-	 * Select Category
-	 */
 	@Override
-	public ArrayList<ProjectCategory> selectCategory() {
-		
-		return pDao.selectCategory(sqlSession);
-		}
-
+	public ArrayList<ProjectCategory> selectCategory() {return pDao.selectCategory(sqlSession);}
 
 	@Override
-	public ArrayList<Bank> selectBank() {
-		
-		return pDao.selectBank(sqlSession);
-	}
-
+	public ArrayList<Bank> selectBank() {return pDao.selectBank(sqlSession);}
 
 	@Override
-	public int selectProNo() {
-		
-		return pDao.selectProNo(sqlSession);
-	}
-
+	public int selectProNo() {return pDao.selectProNo(sqlSession);}
 
 	@Override
 	public int insertProject(ProjectInsert pi, Reward r, RewardOption o) {
@@ -63,22 +47,36 @@ public class ProjectInsertServiceImpl implements ProjectInsertService {
 					for(int j = 0 ; j<r.getRewardList().get(i).getRewardAmount(); j++) {
 							if(pDao.insertOption(sqlSession,o.getOptionList().get(j))==0) {
 								return 0;
-							}
-					}					
+						 }
+				    }					
+				
 				}
-			return 1;
-		} else {
-			return 0;
-		}
-		
+				return 1;
+			} else {
+				return 0;
+		}	
 		
 	}
 
+	@Override
+	public String urlconflictCheck(String urlInput) {return pDao.urlconflictCheck(sqlSession,urlInput);}
 
 	@Override
-	public String urlconflictCheck(String urlInput) {
+	public ArrayList<ProjectInsert> selectProject(int memNo) {return pDao.selectProject(sqlSession,memNo);}
+
+	@Override
+	public int projectNumberCheck(ProjectInsert pi) {return pDao.projectNumberCheck(sqlSession,pi.getProjectNo());}
+
+	@Override
+	public int insertProjectOnly(ProjectInsert pi) {return pDao.insertProject(sqlSession, pi);}
+
+	@Override
+	public int projectUpdateOnly(ProjectInsert pi) {return pDao.projectUpdateOnly(sqlSession,pi);}
+
+	@Override
+	public int projectUpdate(ProjectInsert pi, Reward r, RewardOption o) {
 		
-		return pDao.urlconflictCheck(sqlSession,urlInput);
+		return 0;
 	}
 	
 	

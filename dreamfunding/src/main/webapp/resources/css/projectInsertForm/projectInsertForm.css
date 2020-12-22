@@ -192,7 +192,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 .remoteController {
     width: 180px;
-    height: 300px;
+    height: 320px;
     border: 3px solid var(--beige--color);
     flex-direction: column;
     display: flex;
@@ -463,4 +463,7 @@ option {
 }
 #urlCheck {
     text-align: center;
+}
+.swal2-confirm {
+    margin-left: 20px;
 }

@@ -10,7 +10,44 @@
   	    <resultMap type="com.donjomjo.dreamfunding.projectInsert.model.vo.Bank" id="bankResultSet">
   	   	 <result column="BANK_NO" property="bankNo"/>
   	     <result column="BANK_NAME" property="bankName"/>
-  	   
+  	    </resultMap>
+  	    
+  	    <resultMap type="ProjectInsert" id="ProjectResultSetHY">
+  	    	<result column="PROJECT_NO" property="projectNo"/>
+  	    	<result column="MEMBER_NO" property="memberNo"/>
+  	    	<result column="PRO_CATENO" property="proCategoryNo"/>
+  	    	<result column="BANK_NO" property="bankNo"/>
+  	    	<result column="PROJECT_GOAL" property="projectGoal"/>
+  	    	<result column="PROJECT_TITLE" property="projectTitle"/>
+  	    	<result column="PROJECT_SUBTITLE" property="projectSubtitle"/>
+  	    	<result column="PROJECT_GPRICE" property="projectGoalPrice"/>
+  	    	<result column="PROJECT_START_DT" property="projectStartDate"/>
+  	    	<result column="PROJECT_CLOSE_DT" property="projectEndDate"/>
+  	    	<result column="PROJECT_URL" property="projectURL"/>
+  	    	<result column="PROJECT_THUMPATH" property="projectThumbnailPath"/>
+  	    	<result column="PROJECT_FILENAME" property="projectFileName"/>
+  	    	<result column="PROJECT_REASON" property="projectReason"/>
+  	    	<result column="PROJECT_COUNT" property="projectCount"/>
+  	    	<result column="PROJECT_CONTENT" property="projectContent"/>
+  	    	<result column="PROJECT_VURL" property="projectVideoURL"/>
+  	    	<result column="PROJECT_REFCON" property="projectRefundPolicy"/>
+  	    	<result column="CREATOR_THUMPATH" property="creatorThumbnailPath"/>
+  	    	<result column="CREATOR_PROFILE" property="creatorProfile"/>
+  	    	<result column="CREATOR_NAME" property="creatorName"/>
+  	    	<result column="CREATOR_INTRO" property="creatorIntro"/>
+  	    	<result column="CREATOR_PHONE" property="creatorPhone"/>
+  	    	<result column="PHONE_CHECK" property="phoneCheck"/>
+  	    	<result column="CREATOR_EMAIL" property="creatorEmail"/>
+  	    	<result column="CREATOR_BANK" property="creatorBank"/>
+  	    	<result column="CREATOR_ACOUNT" property="creatorAccount"/>
+  	    	<result column="CREATOR_ACHOLDER" property="accountHolder"/>
+  	    	<result column="CREATOR_WEBURL" property="webURL"/>
+  	    	<result column="CREATOR_INSTA" property="insta"/>
+  	    	<result column="CREATOR_FACEBOOK" property="facebook"/>
+  	    	<result column="CREATOR_STATUS" property="status"/>
+  	    	<result column="HASHTAG" property="hashtag"/>
+  	    	<result column="PROJECT_CRDATE" property="createDate"/>
+  	    	<result column="PROJECT_TEMPORARY" property="projectTemp"/>
   	    </resultMap>
   	    
   	   <select id="selectCategory"
@@ -81,7 +118,7 @@
 	  	   			VALUES
 	  	   			(
 	  	   				 #{projectNo}
-						,1
+						,2
 						,#{proCategoryNo}
 						,#{bankNo}
 						,#{projectGoal}
@@ -173,5 +210,76 @@
 			 WHERE
 			      PROJECT_URL=#{urlInput}
   	   </select>
+  	   <select id="selectProjectHY"
+  	   		   parameterType="_int"
+  	   		   resultMap="ProjectResultSetHY">
+  	   		SELECT
+  	   			  PROJECT_NO	   
+  	   		     ,NVL(PROJECT_TITLE,'제목이 지정되지 않았습니다') PROJECT_TITLE
+  	   		     ,CASE 
+     					 WHEN CREATOR_STATUS= 'R' THEN '수락요청'
+     					 WHEN CREATOR_STATUS= 'D' THEN '반려'
+     					 WHEN CREATOR_STATUS= 'T' THEN '임시저장'
+     					 END AS CREATOR_STATUS 		     
+  	   		     ,PROJECT_CRDATE
+  	   		 FROM
+  	   		 	 PROJECT
+  	   		WHERE
+  	   		     MEMBER_NO=#{memNo} 
+  	   		  AND
+  	   		     CREATOR_STATUS='R'
+  	   		  OR
+  	   		     CREATOR_STATUS='D'
+  	   		  OR
+  	   		     CREATOR_STATUS='T'          	     
+  	   </select>
+  	   <select id="projectNumberCheck"
+  	   	       parameterType="_int"
+  	   	       resultType="_int">
+  	   	    SELECT
+  	   	          COUNT(*)
+  	   	      FROM        
+                  PROJECT
+             WHERE
+                  PROJECT_NO=#{projectNo}    	  
+  	   </select>
+  	   <update id="projectUpdateOnly"
+  	   		   parameterType="ProjectInsert">
+  	   		UPDATE
+  	   		      PROJECT
+  	   		   SET			
+					 PRO_CATENO=#{proCategoryNo}
+					,BANK_NO=#{bankNo}
+					,PROJECT_GOAL=#{projectGoal}
+					,PROJECT_TITLE=#{projectTitle}
+					,PROJECT_SUBTITLE=#{projectSubtitle}
+					,PROJECT_GPRICE=#{projectGoalPrice}
+					,PROJECT_START_DT=#{projectStartDate}
+					,PROJECT_CLOSE_DT=#{projectEndDate}
+					,PROJECT_URL=#{projectURL}
+					,PROJECT_THUMPATH=#{projectThumbnailPath}
+					,PROJECT_FILENAME=#{projectFileName}
+					,PROJECT_CONTENT=#{projectContent}
+					,PROJECT_VURL=#{projectVideoURL}
+					,PROJECT_REFCON=#{projectRefundPolicy}
+					,CREATOR_THUMPATH=#{creatorThumbnailPath}
+					,CREATOR_PROFILE=#{creatorProfile}
+					,CREATOR_NAME=#{creatorName}
+					,CREATOR_INTRO=#{creatorIntro}
+					,CREATOR_PHONE=#{creatorPhone}
+					,PHONE_CHECK=#{phoneCheck}
+					,CREATOR_EMAIL=#{creatorEmail}
+					,CREATOR_BANK=#{creatorBank}
+					,CREATOR_ACOUNT=#{creatorAccount}
+					,CREATOR_ACHOLDER=#{accountHolder}
+					,CREATOR_WEBURL=#{webURL}
+					,CREATOR_INSTA=#{insta}
+					,CREATOR_FACEBOOK=#{facebook}
+					,HASHTAG=#{hashtag}
+					,PROJECT_CRDATE=SYSDATE
+					,PROJECT_TEMPORARY=#{projectTemp}
+  	   			WHERE
+  	   			     PROJECT_NO=#{projectNo}
+  	   </update>
 
 </mapper>

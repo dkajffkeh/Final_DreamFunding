@@ -36,6 +36,7 @@ public class ProjectInsertController {
 		model.addAttribute("bList",pService.selectBank());
 		model.addAttribute("cList",pService.selectCategory());
 		model.addAttribute("proSequence", pService.selectProNo());
+		model.addAttribute("pList", pService.selectProject(2));
 		return "projectInsert/projectInsertForm";
 		
 	}
@@ -47,22 +48,26 @@ public class ProjectInsertController {
 							    Model model, 
 							    HttpSession session) {
 		//파일 업로드 기능 담당메소드 호출.
+		if(mtf.getFile("thumbfile")!=null && mtf.getFile("profile")!=null) {
 		fileUploader(mtf,pi,session);
+		}
 		//reward 와 oprion 에서 지워진 배열을 모두 삭제
 		deleteEmptyArray(r,o);
+		
 		//
 		settingPronoToReward(pi,r);
 			
 		
 		if(pService.insertProject(pi, r, o)>0) {
 			
-			System.out.println("성공");
+			return "redirect:/";
 			
 		} else {
+			
 			System.out.println("실패");
+		
 		}
-		
-		
+
 		
 		return "";
 	}
@@ -75,13 +80,11 @@ public class ProjectInsertController {
 		pi.setProjectFileName(fileRename(mtf.getFile("thumbfile")));
 		pi.setCreatorProfile(fileRename(mtf.getFile("profile")));
 		
-		List<MultipartFile> mlist = new ArrayList<>();
-		mlist.add(mtf.getFile("thumbfile"));
-		mlist.add(mtf.getFile("profile"));
+
 	
 		try {
-			mlist.get(0).transferTo(new File(pi.getProjectThumbnailPath()+pi.getProjectFileName()));
-			mlist.get(1).transferTo(new File(pi.getCreatorThumbnailPath()+pi.getCreatorProfile()));
+			listupFiles(mtf).get(0).transferTo(new File(pi.getProjectThumbnailPath()+pi.getProjectFileName()));
+			listupFiles(mtf).get(1).transferTo(new File(pi.getCreatorThumbnailPath()+pi.getCreatorProfile()));
 		} catch (IllegalStateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -134,6 +137,68 @@ public class ProjectInsertController {
 		return pService.urlconflictCheck(urlInput);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="projectmiddleSave.pi.hy",produces="text/html; charset=utf-8")
+	public String saveMiddleProject(MultipartHttpServletRequest mtf,
+			MultipartFile thumbfile,
+			MultipartFile profile,
+		    ProjectInsert pi ,
+		    Reward r, 
+		    RewardOption o,
+		    Model model, 
+		    HttpSession session) {
 		
+		//존재하는 프로젝트 업데이트 해야함.
+		if(pService.projectNumberCheck(pi)>0) { //업데이트 실행 해야함.
+			
+			//사진이 안올라왔을경우 null 포인터 블로킹.
+			if(!listupFiles(mtf).get(0).isEmpty() && !listupFiles(mtf).get(1).isEmpty()) {
+				fileUploader(mtf,pi,session);
+			}
+			
+			//리워드가 없이 올라왔을경우 null 포인터 제거	
+			if(r.getRewardList()!=null) {
+				deleteEmptyArray(r,o);
+				settingPronoToReward(pi,r);
+				//리워드 인서트까지 진행 해줘야함.		
+			}
+
+			
+			return ""+pService.projectUpdateOnly(pi);
+	
+			
+		} else { //insert 진행해야함.
+		
+			//사진이 안올라왔을경우 null 포인터 제거.
+			if(!listupFiles(mtf).get(0).isEmpty() && !listupFiles(mtf).get(1).isEmpty()) {
+				fileUploader(mtf,pi,session);
+			}
+			//리워드가 없이 올라왔을경우 null 포인터 제거	
+			if(r.getRewardList()!=null) {
+				deleteEmptyArray(r,o);
+				settingPronoToReward(pi,r);
+				//리워드 인서트까지 진행 해줘야함.
+				return ""+pService.insertProject(pi, r, o);
+			}
+				
+			
+				//리워드가 없을경우 프로젝트만 인서트함.
+				return ""+pService.insertProjectOnly(pi);
+		
+		}
+		
+		
+	}
+	
+	private List<MultipartFile> listupFiles(MultipartHttpServletRequest mtf){
+		
+		List<MultipartFile> mlist = new ArrayList();
+		
+		mlist.add(mtf.getFile("thumbfile"));
+		mlist.add(mtf.getFile("profile"));
+		
+		return mlist;
+		}
+			
 	}
 

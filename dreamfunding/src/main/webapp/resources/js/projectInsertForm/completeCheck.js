@@ -2,16 +2,16 @@
 
 $(function () {
 
-    // $(".btn-primary.btn4").attr('disabled', true);
+    $(".btn-primary.btn4").attr('disabled', true);
 
 })
 
-$("#story_wrapper input").on('focus keyup change', function () {
-
+$("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('focus keyup change', function () {
+    console.log("실행")
     const projectCondition = $("input[name='projectGoal']:checked").val() != "";
     const categoryCheck = $("#exampleFormControlSelect1").val() != "";
     const titleCheck = $("input[name='projectTitle']").val() != "";
-    const subTitleCheck = $("input[name='projectSubTitle']").val() != "";
+    const subTitleCheck = $("input[name='projectSubtitle']").val() != "";
     const projectGoalCheck = $("input[name='projectGoalPrice']").val() > 0;
     const urlCheck = $("input[name='projectURL']").val() != "";
 
@@ -48,7 +48,6 @@ $("#story_wrapper input").on('focus keyup change', function () {
         $("#first_bar").text('스토리  (작성완료)');
 
 
-
     } else {
 
         $("#first_bar").css('background-color', ' #c6a36e');
@@ -65,7 +64,7 @@ $("#story_wrapper input").on('focus keyup change', function () {
 $("#notice_wrapper input").on('keyup', function () {
 
     const policyCehck1 = CKEDITOR.instances['editor2.ck'].getData() != "";
-    const phoneCheck = $("input[name='email']").val() != "";
+    const phoneCheck = $("input[name='creatorEmail']").val() != "";
 
 
     if (policyCehck1 && phoneCheck
@@ -75,15 +74,11 @@ $("#notice_wrapper input").on('keyup', function () {
         $("#third_bar").css('color', '#ffffffff');
         $("#third_bar").text('안내사항  (작성완료)');
 
-
-
-
     } else {
 
         $("#third_bar").css('background-color', ' #c6a36e');
         $("#third_bar").css('color', '#ffffffff');
         $("#third_bar").text('안내사항  (미완료)');
-
 
     }
 })
@@ -99,8 +94,6 @@ $("#subinfo_wrapper").on('keyup focus', function () {
         $("#forth_bar").css('background-color', '#8c2a2a');
         $("#forth_bar").css('color', '#ffffffff');
         $("#forth_bar").text('제작자/부가정보  (작성완료)');
-
-
 
     } else {
 
@@ -128,9 +121,9 @@ $("input").on('focus keyup change', function () {
 
     if (result == 4 && $("#urlCheck").css('color') == "green") {
 
-        //   $(".btn-primary.btn4").attr('disabled', false);
+        $(".btn-primary.btn4").attr('disabled', false);
     } else {
-        //   $(".btn-primary.btn4").attr('disabled', true);
+        $(".btn-primary.btn4").attr('disabled', true);
     }
 
 })
