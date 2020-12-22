@@ -34,7 +34,7 @@
             <img src="${pageContext.request.contextPath}/resources/images/mainlogo.png" alt="" />
           </a>
           <ul class="header__nav">
-            <li><a href="#">펀딩하기</a></li>
+            <li><a href="categoryViewAll.in">펀딩하기</a></li>
             <li><a href="#">마이페이지</a></li>
             <li><a href="scenterMain.gn">고객센터</a></li>
           </ul>
