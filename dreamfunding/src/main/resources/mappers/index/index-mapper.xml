@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="indexMapper">
+
+	<resultMap type="Index" id="indexResultSet">
+		<result column="PROJECT_NO" property="projectNo" />
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="PRO_CATENO" property="proCateNo" />
+		<result column="PROJECT_GOAL" property="projectGoal" />
+		<result column="PROJECT_TITLE" property="projectTitle" />
+		<result column="PROJECT_SUBTITLE" property="projectSubTitle" />
+		<result column="PROJECT_GPRICE" property="projectGprice" />
+		<result column="PROJECT_START_DT" property="projectStartDt" />
+		<result column="PROJECT_CLOSE_DT" property="projectCloseDt" />
+		<result column="PROJECT_URL" property="projectUrl" />
+		<result column="PROJECT_THUMPATH" property="projectThumPath" />
+		<result column="PROJECT_FILENAME" property="projectFileName" />
+		<result column="PROJECT_COUNT" property="projectCount" />
+		<result column="CREATOR_NAME" property="creatorName" />
+		<result column="CREATOR_STATUS" property="creatorStatus" />
+		<result column="HASHTAG" property="hashtag" />
+		<result column="PROJECT_CRDATE" property="projectCrDate" />
+	</resultMap>
+
+	<select id="selectProgressFundingList" resultMap="indexResultSet">
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+	</select>
+
+
+
+
+
   
 </mapper>

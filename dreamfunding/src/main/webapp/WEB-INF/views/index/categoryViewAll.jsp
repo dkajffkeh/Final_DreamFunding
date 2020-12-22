@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/category.css" />
 
 

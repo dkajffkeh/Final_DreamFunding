@@ -27,6 +27,7 @@ public class Index {
 	private String projectFileName;		// 프로젝트 썸네일 파일 이름
 	private int projectCount;			// 프로젝트 조회수
 	private String creatorName;			// 크리에이터 이름
+	private String creatorStatus;		// R.수락요청 B.블라인드 U.게시중 D. 반려 T.임시저장
 	private String hashtag;				// 해쉬태그
 	private Date projectCrDate;			// 프로젝트 생성일
 	
