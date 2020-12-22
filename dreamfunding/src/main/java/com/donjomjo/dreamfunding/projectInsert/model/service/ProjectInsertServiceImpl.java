@@ -31,32 +31,6 @@ public class ProjectInsertServiceImpl implements ProjectInsertService {
 	@Override
 	public int selectProNo() {return pDao.selectProNo(sqlSession);}
 
-	@Override
-	public int insertProject(ProjectInsert pi, Reward r, RewardOption o) {
-		
-		//project부터 insert
-		if(pDao.insertProject(sqlSession,pi)>0) {
-			
-				//reward insert
-				for(int i = 0; i<r.getRewardList().size(); i++) {
-					
-					if(pDao.insertReward(sqlSession,r.getRewardList().get(i))==0) {
-						return 0;
-					}
-					//option 인서트.
-					for(int j = 0 ; j<r.getRewardList().get(i).getRewardAmount(); j++) {
-							if(pDao.insertOption(sqlSession,o.getOptionList().get(j))==0) {
-								return 0;
-						 }
-				    }					
-				
-				}
-				return 1;
-			} else {
-				return 0;
-		}	
-		
-	}
 
 	@Override
 	public String urlconflictCheck(String urlInput) {return pDao.urlconflictCheck(sqlSession,urlInput);}
@@ -74,11 +48,68 @@ public class ProjectInsertServiceImpl implements ProjectInsertService {
 	public int projectUpdateOnly(ProjectInsert pi) {return pDao.projectUpdateOnly(sqlSession,pi);}
 
 	@Override
-	public int projectUpdate(ProjectInsert pi, Reward r, RewardOption o) {
-		
-		return 0;
-	}
+	public int projectUpdate(ProjectInsert pi, Reward r, RewardOption o) {return 0;}
+	@Override
+	public int deleteReward(ProjectInsert pi) {return pDao.deleteReward(sqlSession,pi.getProjectNo());}
 	
+	@Override
+	public int insertProject(ProjectInsert pi, Reward r, RewardOption o) {
+		
+		//project부터 insert
+		if(pDao.insertProject(sqlSession,pi)>0) {
+			
+			//reward insert
+			for(int i = 0; i<r.getRewardList().size(); i++) {
+				
+				if(pDao.insertReward(sqlSession,r.getRewardList().get(i))==0) {
+					return 0;
+				}
+				if(o.getOptionList()!=null) {
+				//option 인서트.
+				for(int j = 0 ; j<r.getRewardList().get(i).getRewardAmount(); j++) {
+					if(pDao.insertOption(sqlSession,o.getOptionList().get(0))==0) {
+						return 0;
+					}
+				o.getOptionList().remove(0);
+				}
+				}
+				
+			}
+			return 1;
+		} else {
+			return 0;
+		}	
+		
+	}
+	@Override
+	public int insertRewardOnly(Reward r, RewardOption ro) {
+		
+		for(int i = 0; i < r.getRewardList().size(); i++) {
+			
+			if(pDao.insertRewardOnly(sqlSession,r.getRewardList().get(i))==0) {
+				return 0;
+			}
+			//ro 가 null 이 아닐경우 실행
+			if(ro.getOptionList()!=null) {
+			
+			for(int j = 0 ; j < r.getRewardList().get(i).getRewardAmount() ; j++) {
+				
+				if(pDao.insertRewardOptionOnly(sqlSession,ro.getOptionList().get(0))==0) {
+					
+					return 0;
+				}
+				
+				ro.getOptionList().remove(0);
+				
+			}
+			
+			}
+			
+		}
+		
+		
+		return 1;
+	}
 	
 	
 

@@ -151,7 +151,7 @@
 						,#{hashtag}
 						,SYSDATE
 						,'N'
-	  	   			)	
+	  	   			  )	
  
   	   </insert>
   	   
@@ -281,5 +281,13 @@
   	   			WHERE
   	   			     PROJECT_NO=#{projectNo}
   	   </update>
+  	   <delete id="deleteReward"
+  	   	       parameterType="_int">
+  	   	    DELETE
+  	   	    	  FROM
+  	   	    	      REWARD
+  	   	      WHERE 
+  	   	           PROJECT_NO=#{projectNo}	         
+  	   </delete>
 
 </mapper>

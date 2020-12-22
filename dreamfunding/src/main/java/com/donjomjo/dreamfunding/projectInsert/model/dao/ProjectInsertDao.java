@@ -64,6 +64,21 @@ public class ProjectInsertDao {
 		return sqlSession.update("proInsertMapper.projectUpdateOnly", pi);
 	}
 
+	public int deleteReward(SqlSessionTemplate sqlSession, int projectNo) {
+		
+		return sqlSession.delete("proInsertMapper.deleteReward",projectNo);
+	}
+
+	public int insertRewardOnly(SqlSessionTemplate sqlSession, Reward reward) {
+		
+		return sqlSession.insert("proInsertMapper.insertReward", reward);
+	}
+
+	public int insertRewardOptionOnly(SqlSessionTemplate sqlSession, RewardOption ro) {
+		
+		return sqlSession.insert("proInsertMapper.insertOption", ro);
+	}
+
 	
 
 	

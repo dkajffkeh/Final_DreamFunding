@@ -7,7 +7,7 @@ $(function () {
 })
 
 $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('focus keyup change', function () {
-    console.log("실행")
+
     const projectCondition = $("input[name='projectGoal']:checked").val() != "";
     const categoryCheck = $("#exampleFormControlSelect1").val() != "";
     const titleCheck = $("input[name='projectTitle']").val() != "";
@@ -61,7 +61,7 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('focus keyup
 })
 
 
-$("#notice_wrapper input").on('keyup', function () {
+$("#notice_wrapper input").on('keyup focus', function () {
 
     const policyCehck1 = CKEDITOR.instances['editor2.ck'].getData() != "";
     const phoneCheck = $("input[name='creatorEmail']").val() != "";

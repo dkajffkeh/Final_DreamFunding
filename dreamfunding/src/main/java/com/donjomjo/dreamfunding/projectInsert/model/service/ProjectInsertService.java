@@ -29,4 +29,8 @@ public interface ProjectInsertService {
 	public int projectUpdateOnly(ProjectInsert pi);
 	
 	public int projectUpdate(ProjectInsert pi,Reward r ,RewardOption o);
+	
+	public int deleteReward(ProjectInsert pi);
+	
+	public int insertRewardOnly(Reward r,RewardOption ro);
 }

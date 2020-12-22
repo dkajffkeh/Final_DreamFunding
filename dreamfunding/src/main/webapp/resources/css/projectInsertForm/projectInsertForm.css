@@ -467,3 +467,7 @@ option {
 .swal2-confirm {
     margin-left: 20px;
 }
+
+#modal_table > tbody > tr {
+    cursor: pointer;
+}

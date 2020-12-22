@@ -71,7 +71,7 @@ $("#insertRewardBtn").click(function () {
 
     // Y 로 넘어오면 제한 없음
     // N 로 넘어오면 input 받아야함.
-    console.log(!rewardPrice_check + " " + rewardCondition + " " + addrCheck)
+
 
     if (!rewardPrice_check && rewardCondition != null && addrCheck != null) { //전부 입력이 되었을경우
 
