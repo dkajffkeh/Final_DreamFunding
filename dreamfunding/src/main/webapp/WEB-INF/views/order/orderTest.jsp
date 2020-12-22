@@ -23,7 +23,11 @@
 			<table>
 				<tr>
 					<th>프로젝트 제목 : </th>
-					<td><input type="number" name="projectNo"></td>
+					<td><input type="number" name="pno"></td>
+				</tr>
+				<tr>
+					<th>멤버 번호 : </th>
+					<td><input type="number" name="mno"></td>
 				</tr>
 				<tr>
 					<th>옵션 : </th>

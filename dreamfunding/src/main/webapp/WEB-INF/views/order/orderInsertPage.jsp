@@ -42,9 +42,9 @@
         <br><br>
         <h3>리워드</h3>
         <hr>
-           <h4> 책 책갈피 세트 ${ p.projectTitle } </h4>
+           <h4> ${ p.projectTitle } </h4>
             <ul>
-                <li>책 ${ content } </li>
+                <li>${ content } </li>
                 <li>스페셜 책갈피</li>
             </ul>
             <br> 
@@ -52,91 +52,96 @@
         <hr>
             <h4> 추가후원금 </h4>
             후원금 : 
-            <input type="number" name="supportPrice" onkeyup="verifySum()"> 원
+            <input type="number" id="supportPrice" name="supportPrice" onkeyup="verify.sum()" numberOnly> 원
             <br><br>
-            <h4 align="center">총합 :  35,000원</h4>
-            <input type=hidden name=hiddentotal value=0>
-			<input type=hidden name=hiddenpriorradio value=0>
-			<input type="number" name="total" readonly>
+            <div id="total" style="text-align:center"></div>
+            
+
         
       <script>
-      		function verifyTotal(){
-      			
-      			
-      		}
+	      $("input:text[numberOnly]").on("focus", function() {
+			    var x = $(this).val();
+			    x = removeCommas(x);
+			    $(this).val(x);
+			}).on("focusout", function() {
+			    var x = $(this).val();
+			    if(x && x.length > 0) {
+			        if(!$.isNumeric(x)) {
+			            x = x.replace(/[^0-9]/g,"");
+			        }
+			        x = addCommas(x);
+			        $(this).val(x);
+			    }
+			}).on("keyup", function() {
+			    $(this).val($(this).val().replace(/[^0-9]/g,""));
+			});
       
-      		function verifySum (){
+      
+      		function verifyTotal(subPri, result_id, result, total_html){
+      			this.subPri = subPri;
+      			this.result_id = result_id;
+      			this.result = result;
+      			this.total_html = total_html;
       			
       			
-
-    		}
+      			this.sum = function(){
+      				
+      				var subPrice = document.getElementById('supportPrice').value;
+      				subPrice = Number(subPrice);
+      				
+      				console.log(this.subPri);
+      				var r = document.getElementById(this.result_id);
+      				this.result = subPrice + ${rewardPri};
+      				
+      				this.total_html = "<h4> 총합 : " + this.result + " 원 </h4>";
+      				r.innerHTML = this.total_html;
+      				
+      			}
+      		}
       		
       		function verifyInput(){
       			
-      			verfiy = new verifyTotal();
-      			verfiy.rePri = ${ rewardPri };
-      			verfiy.subPri = document.orderInsertForm.supportPrice;
-      			verfiy.result_id = "";
-      			verfiy.total_html = "";
+      			
+      			verify = new verifyTotal();
+      			verify.subPri = document.getElementById('supportPrice').value;
+      			verify.subPri = 12;
+      			verify.result_id = 'total';
+      			verify.result = 0;
+      			verify.total_html = '';
+      			console.log(verify.subPri);
+      			verify.sum();
       			
       		}
+
       		
-      		addloadEvent(function(){
-      				verfiyInput();
-      		})
+      		function addLoadEvent(func) {
+      		  var oldonload = window.onload;
+      		  if (typeof window.onload != 'function') {
+      		    window.onload = func;
+      		  } else {
+      		    window.onload = function() {
+      		      if (oldonload) {
+      		        oldonload();
+      		      }
+      		      func();
+      		    }
+      		  }
+      		}
+
+      		addLoadEvent(function() {
+      		  verifyInput();
+      		});
       		
-			function CheckChoice(whichbox) {
-				with (whichbox.form) {
-					if (whichbox.type == "radio") {
-						hiddentotal.value = eval(hiddentotal.value) - eval(hiddenpriorradio.value);
-						hiddenpriorradio.value = eval(whichbox.price);
-						hiddentotal.value = eval(hiddentotal.value) + eval(whichbox.price);
-					}
-					else {
-						if (whichbox.checked == false) {
-							hiddentotal.value = eval(hiddentotal.value) - eval(whichbox.value);
-						}
-						else {
-							hiddentotal.value = eval(hiddentotal.value) + eval(whichbox.value);
-						}
-					}
-					if (hiddentotal.value < 0) {
-						InitForm();
-					}
-					return(formatCurrency(hiddentotal.value));
-			   }
-			}
-			function formatCurrency(num) {
-				num = num.toString().replace(/\$|\,/g,'');
-					if(isNaN(num)) num = "0";
-						cents = Math.floor((num*100+0.5)%100);
-						num = Math.floor((num*100+0.5)/100).toString();
-					if(cents < 10) cents = "0" + cents;
-						for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
-							num = num.substring(0,num.length-(4*i+3))+','+num.substring(num.length-(4*i+3));
-						return (num + "원");
-						}
 			
-			function InitForm() {
-				document.myform.total.value='0원';
-				document.myform.hiddentotal.value=0;
-				document.myform.hiddenpriorradio.value=0;
-			
-				for (xx=0; xx < document.myform.elements.length; xx++) {
-					if (document.myform.elements[xx].type == 'checkbox' | document.myform.elements[xx].type == 'radio') {
-						document.myform.elements[xx].checked = false;
-				   }
-				}
-			}
 			</script>
         
             <h3> 배송지 선택  </h3>
             <hr>
             <div id="delivery">
-                <input type="radio" id="basicDev" name="basicDev">
+                <input type="radio" id="basicDev" name="dev" value="B"> 
                 <label for name="basicDev">기본 배송지</label>
                 <br>
-                <input type="radio" id="newDev" name="newDev">
+                <input type="radio" id="newDev" name="dev" value="N" checked>
                 <label for name="newDev">새로운 배송지</label>
                 <br><br>
 
@@ -146,22 +151,22 @@
                         <td colspan="2">전화번호</td>
                     </tr>
                     <tr>
-                        <td colspan="2"><input type="text" style="width:250px"></td>
-                        <td colspan="2"><input type="text" style="width:450px" placeholder="(-)생략 작성"></td>
+                        <td colspan="2"><input type="text" id="devName" name="devName" style="width:250px"></td>
+                        <td colspan="2"><input type="text" id="devPhone" name="devPhone" style="width:450px" placeholder="(-)생략 작성"></td>
                     </tr>
                     <tr>
                         <td colspan="4">주소</td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="width:600px"><input type="text" style="width:550px"></td>
-                        <td align="center"><input type="text"></td>
+                        <td colspan="2" style="width:600px"><input type="text" style="width:550px" id="shippingSAddr" name="shippingSAddr"></td>
+                        <td align="center"><input type="text" id="shippingZipcode" name="shippingZipcode"></td>
                         <td><button class="btn btn-primary">우편번호 찾기</button></td>
                     </tr>
                     <tr>
                         <td colspan="4">상세주소</td>
                     </tr>
                     <tr>
-                        <td colspan="4"><input type="text" style="width:100%"></td>
+                        <td colspan="4"><input type="text" style="width:100%" id="shippingDAddr" name="shippingDAddr"></td>
                     </tr>
                     <tr>
                         <td colspan="4">배송시 전달사항</td>
@@ -174,6 +179,39 @@
                     </tr>
                 </table>
                 <br><br>
+                
+                <script>
+
+				
+
+				$(document).ready(function(){
+					 
+				    // 라디오버튼 클릭시 이벤트 발생
+				    $("input:radio[name=dev]").click(function(){
+				 
+				        if($("input[name=dev]:checked").val() == 'B'){
+				 
+				        	document.getElementById('devName').value = '${s.receieverName}';
+				        	document.getElementById('devPhone').value = '${s.receieverPhone}';
+				        	document.getElementById('shippingSAddr').value = '${s.shippingSAddr}';
+				        	document.getElementById('shippingZipcode').value = '${s.shippingZipcode}';
+				        	document.getElementById('shippingDAddr').value = '${s.shippingDAddr}';
+				        	
+				        }else{
+				        	
+				        	document.getElementById('devName').value = '';
+				        	document.getElementById('devPhone').value = '';
+				        	document.getElementById('shippingSAddr').value = '';
+				        	document.getElementById('shippingZipcode').value = '';
+				        	document.getElementById('shippingDAddr').value = '';
+				        
+				        }
+				    });
+				});
+				
+				</script>
+                
+                
             <h3>결제정보</h3>
             <hr>
             <h4>기본 결제수단</h4>

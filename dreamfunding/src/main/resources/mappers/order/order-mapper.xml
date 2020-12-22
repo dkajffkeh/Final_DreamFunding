@@ -6,6 +6,17 @@
 		<result column="project_no" property="projectNo"/>
 		<result column="project_title" property="projectTitle"/>	
 	</resultMap>
+	
+	<resultMap id="shippingResultSet" type="Shipping">
+		<result column="shipping_no" property="shippingNo"/>
+		<result column="member_no" property="memberNo"/>
+		<result column="shipping_zipcode" property="shippingZipcode"/>
+		<result column="shpping_d_addr" property="shippingDAddr"/>
+		<result column="shipping_s_addr" property="shippingSAddr"/>
+		<result column="receiever_name" property="receieverName"/>
+		<result column="receiever_phone" property="receieverPhone"/>
+		<result column="shipping_basic" property="shippingBasic"/>
+	</resultMap>
 
 	<select id="selectProject" 
 			parameterType="_int" 
@@ -14,6 +25,14 @@
 		       project_title
 		  from project
 		 where project_no = #{pno}
+	</select>
+	
+	<select id="selectShipping"
+			parameterType="_int"
+			resultMap="shippingResultSet">
+		select *
+		  from shippping
+		 where member_no = #{mno}		
 	</select>
   
 </mapper>
