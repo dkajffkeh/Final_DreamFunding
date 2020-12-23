@@ -35,7 +35,7 @@
           </a>
           <ul class="header__nav">
             <li><a href="categoryViewAll.in">펀딩하기</a></li>
-            <li><a href="#">마이페이지</a></li>
+            <li><a href="mypage.me">마이페이지</a></li>
             <li><a href="scenterMain.gn">고객센터</a></li>
           </ul>
           <button class="btn btn--main"><a href="projectinsert.pi.hy">프로젝트 만들기</a></button>

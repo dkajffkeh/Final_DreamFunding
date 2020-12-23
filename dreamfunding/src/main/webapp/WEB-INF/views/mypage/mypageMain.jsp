@@ -6,7 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
       integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
@@ -16,10 +21,7 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  
   <link rel="stylesheet" href="../../../resources/css/common.css" />
 
 
@@ -118,46 +120,10 @@ text-align:left;}
 
 </head>
 <body>
-<header>
-      <div class="inner">
-        <div class="header__left">
-          <a class="logo" href="">
-            <img src="C:/DreamFunding-FrontRepo/webapp/resources/images/mainlogo.png" alt="" />
-          </a>
-          <ul class="header__nav">
-            <li><a href="#">펀딩하기</a></li>
-            <li><a href="#">마이페이지</a></li>
-            <li><a href="#">고객센터</a></li>
-          </ul>
-          <button class="btn btn--main"><a href="#">프로젝트 만들기</a></button>
-        </div>
 
-        <!-- 로그인 전 출력 영역 -->
-        <div class="header__right">
-          <div class="search__box">
-            <input type="text" class="search-bar" placeholder="프로젝트 검색" />
-            <span class="material-icons"> search </span>
-          </div>
-          <a href="#" class="sign__group">로그인</a>
-          <a href="#" class="sign__group">회원가입</a>
-        </div>
+  <jsp:include page="../common/menubar.jsp"/>
 
-        <!-- 로그인 시 출력 영역 -->
-        <!-- <div class="header__right">
-          <div class="search__box">
-            <input type="text" class="search-bar" placeholder="프로젝트 검색" />
-            <span class="material-icons"> search </span>
-          </div>
 
-          <i class="header__icon"
-            ><span class="material-icons"> notifications </span></i
-          >
-          <i class="header__icon"
-            ><span class="material-icons"> account_circle </span></i
-          >
-        </div> -->
-      </div>
-    </header>
 
     <br>
     <div class="wrap1">
@@ -198,7 +164,7 @@ text-align:left;}
               <div class="tab-content" >
                 
                 <div id="menu1" class="container tab-pane active" ><br><br><br>
-                  <a href=""><h4 class="supporter-menu" style="font-weight:bold;">펀딩한 프로젝트</h4></a><br><br>
+                  <a href="mypageFundingProject.me"><h4 class="supporter-menu" style="font-weight:bold;">펀딩한 프로젝트</h4></a><br><br>
                   <a href=""><h4 class="supporter-menu" style="font-weight:bold;">관심있는 프로젝트</h4></a><br><br>
                   <a href=""><h4 class="supporter-menu" style="font-weight:bold;">메시지</h4></a>
                 </div>
