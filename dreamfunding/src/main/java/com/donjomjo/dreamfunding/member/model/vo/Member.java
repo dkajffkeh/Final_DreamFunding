@@ -21,7 +21,7 @@ public class Member {
 	private Date memCreate;
 	private String gender;
 	private String memPfPath;
-	private String memSystemnate;
+	private String memSystemname;
 	private String memStatus;
 	private String memLink;
 	private String refresToken;
