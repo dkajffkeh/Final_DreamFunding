@@ -6,7 +6,7 @@ $(function () {
 
 })
 
-$("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('focus keyup change', function () {
+$("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('onpaste focus keyup change instanceCreated', function () {
 
     const projectCondition = $("input[name='projectGoal']:checked").val() != "";
     const categoryCheck = $("#exampleFormControlSelect1").val() != "";
@@ -17,7 +17,7 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('focus keyup
 
     let startArr = $("input[name='projectStartDate']").val().split('-');
     let endArr = $("input[name='projectEndDate']").val().split('-');
-
+    let urlcolorCheck = $("#urlCheck").css('color') == 'rgb(0, 128, 0)';
     let startDate = new Date(startArr[0], startArr[1], startArr[2]);
     let endDate = new Date(endArr[0], endArr[1], endArr[2])
 
@@ -25,10 +25,10 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('focus keyup
     let day = 1000 * 60 * 60 * 24;
 
     const dateCheck = (diff / day) > 0;
-    const thumbnailFile = $("input[name='thumbfile']").val() != "";
-    const profileCheck = $("input[name='profile']").val() != "";
+    const thumbnailFile = $("input[name='thumbfile']").val() != "" || $("#thumbnail_img").attr('src') != '/dreamfunding/resources/images/캡처.JPG';
+    const profileCheck = $("input[name='profile']").val() != "" || $("#profile_img").attr('src') != '/dreamfunding/resources/images/Capture.JPG';
     const introCheck = $("input[name='creatorIntro']").val() != "";
-    const contentCehck = CKEDITOR.instances['editor.ck'].getData() != "";
+    const contentCehck = CKEDITOR.instances['editor1'].getData() != "";
 
     if (projectCondition
         && categoryCheck
@@ -36,6 +36,7 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('focus keyup
         && subTitleCheck
         && projectGoalCheck
         && urlCheck
+        && urlcolorCheck
         && dateCheck
         && thumbnailFile
         && profileCheck
@@ -56,14 +57,14 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('focus keyup
 
     }
 
-    completeCheck();
+
 
 })
 
 
 $("#notice_wrapper input").on('keyup focus', function () {
 
-    const policyCehck1 = CKEDITOR.instances['editor2.ck'].getData() != "";
+    const policyCehck1 = CKEDITOR.instances['editor2'].getData() != "";
     const phoneCheck = $("input[name='creatorEmail']").val() != "";
 
 
@@ -83,10 +84,10 @@ $("#notice_wrapper input").on('keyup focus', function () {
     }
 })
 
-$("#subinfo_wrapper").on('keyup focus', function () {
+$("#subinfo_wrapper input").on('keyup focus', function () {
 
-    const bankCheck = $("input[name='bank']").val() != "";
-    const bankAccountCheck = $("input[name='bankAccount']").val() != "";
+    const bankCheck = $("input[name='bankNo']").val() != "";
+    const bankAccountCheck = $("input[name='creatorAccount']").val() != "";
     const holderCheck = $("input[name='accountHolder']").val() != "";
 
     if (bankCheck && bankAccountCheck && holderCheck) {
@@ -119,7 +120,9 @@ $("input").on('focus keyup change', function () {
 
     }
 
-    if (result == 4 && $("#urlCheck").css('color') == "green") {
+
+
+    if (result == 4) {
 
         $(".btn-primary.btn4").attr('disabled', false);
     } else {

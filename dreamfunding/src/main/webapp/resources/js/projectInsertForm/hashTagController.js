@@ -43,7 +43,7 @@ $("#tagInsertBtn").click(function () {
                 //해시테그 입력값을 태그에 뿌려줌.
                 $("#hasgtagInput").val('');
                 $("#hashtagDisplayArea").html(hashHTML);
-                valueresult = '#' + resultArr.join("#");
+                valueresult = '#' + resultArr.join(" #");
                 $("#hashtags").attr('value', valueresult);
 
             } else {

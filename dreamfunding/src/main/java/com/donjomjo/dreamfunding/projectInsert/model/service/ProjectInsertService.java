@@ -33,4 +33,10 @@ public interface ProjectInsertService {
 	public int deleteReward(ProjectInsert pi);
 	
 	public int insertRewardOnly(Reward r,RewardOption ro);
+	
+	public ProjectInsert ajaxProjectSelector(int pno);
+	
+	public ArrayList<Reward> ajaxRewardSelector(int pno);
+
+	public ArrayList<RewardOption> ajaxOptionSelector(String [] rList);
 }

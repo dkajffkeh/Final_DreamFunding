@@ -79,6 +79,21 @@ public class ProjectInsertDao {
 		return sqlSession.insert("proInsertMapper.insertOption", ro);
 	}
 
+	public ProjectInsert ajaxProjectSelector(SqlSessionTemplate sqlSession, int pno) {
+		
+		return sqlSession.selectOne("proInsertMapper.ajaxProjectSelector", pno);
+	}
+
+	public ArrayList<Reward> ajaxRewardSelector(SqlSessionTemplate sqlSession, int pno) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("proInsertMapper.ajaxRewardSelector", pno);
+	}
+
+	public ArrayList<RewardOption> ajaxOptionSelector(SqlSessionTemplate sqlSession, String[] rList) {
+		
+		return (ArrayList)sqlSession.selectList("proInsertMapper.ajaxOptionSelector",rList);
+	}
+
 	
 
 	

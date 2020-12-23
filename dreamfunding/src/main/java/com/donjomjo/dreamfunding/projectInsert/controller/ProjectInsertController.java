@@ -5,8 +5,10 @@ import static com.donjomjo.dreamfunding.common.filehandler.FileRename.fileRename
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,8 @@ import com.donjomjo.dreamfunding.projectInsert.model.vo.Bank;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectCategory;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectInsert;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.Reward;
-import com.donjomjo.dreamfunding.projectInsert.model.vo.RewardOption;;
+import com.donjomjo.dreamfunding.projectInsert.model.vo.RewardOption;
+import com.google.gson.Gson;;
 
 @Controller
 public class ProjectInsertController {
@@ -148,6 +151,29 @@ public class ProjectInsertController {
 		}	
 		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="projectReload.pi.hy", produces="application/json; charset=utf-8")
+	public String ajaxProjectSelector(int pno){
+		
+		return new Gson().toJson(pService.ajaxProjectSelector(pno));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="rewardReload.pi.hy", produces="application/json; charset=utf-8")
+	public String ajaxRewardSelector(int pno){
+		
+		return new Gson().toJson(pService.ajaxRewardSelector(pno));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="optionReload.pi.hy", produces="application/json; charset=utf-8")
+	public String ajaxOptionSelector(HttpServletRequest request){
+		
+		return new Gson().toJson(pService.ajaxOptionSelector(request.getParameterValues("rList[]")));
+	}
+	
+	
 /////////////////////////////////////////<일반 실행메소드 라인>///////////////////////////////////////////////////////////	
 	private List<MultipartFile> listupFiles(MultipartHttpServletRequest mtf){
 		

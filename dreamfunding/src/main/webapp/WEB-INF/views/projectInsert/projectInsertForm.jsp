@@ -63,11 +63,11 @@
 
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                             <label class="btn btn-secondary active">
-                                                <input type="radio" name="projectGoal" value="Y" id="pro_condition1"> 100%
+                                                <input type="radio" name="projectGoal" value="Y" id="pro_condition1" checked> 100%
                                                 이상
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="projectGoal" value="N" id="pro_condition2" checked> 조건 없음
+                                                <input type="radio" name="projectGoal" value="N" id="pro_condition2"> 조건 없음
                                             </label>
                                         </div>
 
@@ -309,7 +309,7 @@
                                     <td class="userInputarea">
                                         <div style="color: white; font-size: 0.1px; height: 0.1px; width: 0.1px;">　
                                         </div>
-                                        <textarea name="projectContent" id="editor.ck"></textarea>
+                                        <textarea name="projectContent" id="editor1"></textarea>
                                     </td>
                                 </tr>
 
@@ -461,7 +461,7 @@
                                     </td>
                                     <td class="userInputarea">
                                         <div style="font-size: 0.1px; height: 0.1px; color:white">　</div>
-                                        <textarea name="projectRefundPolicy" class="form-control" id="editor2.ck"></textarea>
+                                        <textarea name="projectRefundPolicy" class="form-control" id="editor2"></textarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -571,7 +571,7 @@
                                     </div>
                                 </td>
                                 <td class="userInputarea">
-                               <input type="text" name="bankAccount" class="form-control" name="creatorAccount" placeholder="110-296-109579" style="width: 250px;">
+                               <input type="text" name="creatorAccount" class="form-control" name="creatorAccount" placeholder="110-296-109579" style="width: 250px;">
                                 </td>
                             </tr>
                             <tr>

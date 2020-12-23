@@ -110,6 +110,15 @@ public class ProjectInsertServiceImpl implements ProjectInsertService {
 		
 		return 1;
 	}
+
+	@Override
+	public ProjectInsert ajaxProjectSelector(int pno) {return pDao.ajaxProjectSelector(sqlSession,pno);}
+
+	@Override
+	public ArrayList<Reward> ajaxRewardSelector(int pno) {return pDao.ajaxRewardSelector(sqlSession,pno);}
+
+	@Override
+	public ArrayList<RewardOption> ajaxOptionSelector(String [] rList) {return pDao.ajaxOptionSelector(sqlSession,rList);}
 	
 	
 
