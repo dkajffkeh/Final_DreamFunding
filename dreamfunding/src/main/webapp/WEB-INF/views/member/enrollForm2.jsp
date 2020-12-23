@@ -66,39 +66,11 @@
 
     
                   <hr class="my-4">
-                    <p>휴대폰 인증을 먼저 진행해 주세요.</p>
-                <form class="form-signin" >
-                    <table>
-                        <tr>
-                            <td>
-                                휴대폰번호 입력
-                            </td>
-                        </tr>
                     
-                        <tr>
-
-                            <td>
-                                <input type="text" class="form-control form-phone ">
-                            </td>
-                            <td>
-                                <button type="button" class="form-control btn-request">인증번호 요청</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                인증번호 입력
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td colspan="2">
-                                <input type="text" class="form-control form-phone">
-                            </td>
-                            
-                        </tr>
-                    </table>
+                <form class="form-signin" >
+                    
                     <br>
-                    <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit">다음</button>
+                    <a class="btn btn-lg btn-login btn-block text-uppercase" href="enrollForm3.me.jm">다음</a>
                 </form>
               </div>
             </div>

@@ -56,12 +56,23 @@ public class MemberController {
 			mv.setViewName("redirect:/");
 		
 		}
-		System.out.println(loginMem.getGender());
+		
 		return mv;
 		
 	}
+	@RequestMapping("logout.me.jm")
+	public String logoutMember(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	
+	
+	
 	@RequestMapping("insert.me.jm")
 	public void insertMember() {
+		
+		
 		
 	}
 	@RequestMapping("update.me.jm")
