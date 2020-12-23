@@ -41,8 +41,12 @@
           <button class="btn btn--main"><a href="projectinsert.pi.hy">프로젝트 만들기</a></button>
         </div>
 
+
+
+
         <!-- 로그인 전 출력 영역 -->
-         
+        <c:choose>
+        	<c:when test="${ empty loginMem }">
         <div class="header__right">
           <div class="search__box"  >
             <input type="text" class="search-bar" placeholder="프로젝트 검색" id="search" onclick=showHideSearch(); />
@@ -96,45 +100,29 @@
           <a href="enrollForm.me.jm" class="sign__group">회원가입</a>
         </div>
         
+		</c:when>
 
-        <!-- 검색어 슬라이드 스크립트 -->
-        <script>
-          
-          function showHideSearch(){
-              if(document.getElementById("showHideSearch").style.display =='none'){
-                  document.getElementById("showHideSearch").style.display ='block';
-              }
-              else{
-                  document.getElementById("showHideSearch").style.display ='none';
-              }
-          }
-          function searchClose(){
-              if(document.getElementById("showHideSearch").style.display =='none'){
-                  document.getElementById("showHideSearch").style.display ='block';
-              }
-              else{
-                  document.getElementById("showHideSearch").style.display ='none';
-              }
-          }
-        </script>
          
-
+         
+         
+         
+		<c:otherwise>
         <!-- 로그인 시 출력 영역 -->
-        <!--  
+         
         <div class="header__right">
           <div class="search__box">
             <input type="text" class="search-bar" placeholder="프로젝트 검색" onclick=showHideSearch(); />
             <span class="material-icons"> search </span>
-		-->
+		
               <!-- 검색창 클릭 시 나올 창 -->
-              <!--  
+              
               <div class="search-slide" id="showHideSearch" >
                 <div class="search-category">
                   <button class="search-cate-btn">최근</button>
                   <button class="search-cate-btn">카테고리</button>
                 </div>
                 <div class="search-text">
-                 --> 
+                 
                   <!-- 카테고리 -->
                   <!-- <div>
                     <ul>
@@ -148,7 +136,7 @@
                   </div> -->
 
                   <!-- 최근검색어 -->
-                  <!--  
+                  
                   <div class="search-text-content">
                     <ul>
                       <li>
@@ -180,7 +168,9 @@
             
           <i class="header__icon"><span class="material-icons"> account_circle </span></i>
         </div>
-		-->
+		
+		</c:otherwise>
+		</c:choose>
           <!-- 실시간 알림 스크립트 -->
           <script>
             $(document).ready(function(){
@@ -192,6 +182,26 @@
               $('.alarm-btn').popover({title: "<div><a>실시간 알림</a></div>", content: content, html: true, placement: "bottom"}); 
             });
           </script>
+                  <!-- 검색어 슬라이드 스크립트 -->
+        <script>
+          
+          function showHideSearch(){
+              if(document.getElementById("showHideSearch").style.display =='none'){
+                  document.getElementById("showHideSearch").style.display ='block';
+              }
+              else{
+                  document.getElementById("showHideSearch").style.display ='none';
+              }
+          }
+          function searchClose(){
+              if(document.getElementById("showHideSearch").style.display =='none'){
+                  document.getElementById("showHideSearch").style.display ='block';
+              }
+              else{
+                  document.getElementById("showHideSearch").style.display ='none';
+              }
+          }
+        </script>
 
         
 
