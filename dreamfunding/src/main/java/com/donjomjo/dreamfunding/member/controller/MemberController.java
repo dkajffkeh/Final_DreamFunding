@@ -26,17 +26,7 @@ public class MemberController {
 		return "member/loginForm";
 		
 	}
-	@RequestMapping("login.me.jm")
-	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
-		
-		Member loginMem = mService.loginMember(m);
-		
-		session.setAttribute("loginMem", loginMem );
-		
-		mv.setViewName("redirect:/");
-		
-		return mv;
-	}
+
 	@RequestMapping("enrollForm.me.jm")
 	public String enrollForm() {
 		
@@ -48,10 +38,27 @@ public class MemberController {
 		
 		
 		return "member/enrollForm2";
+		
 	}
 	@RequestMapping("enrollForm3.me.jm")
 	public String enrollForm3() {
+		
 		return "member/enrollForm3";
+		
+	}
+	@RequestMapping("login.me.jm")
+	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
+		
+		Member loginMem = mService.loginMember(m);
+		
+		if(loginMem != null) {
+			session.setAttribute("loginMem", loginMem );
+			mv.setViewName("redirect:/");
+		
+		}
+		System.out.println(loginMem.getGender());
+		return mv;
+		
 	}
 	@RequestMapping("insert.me.jm")
 	public void insertMember() {
