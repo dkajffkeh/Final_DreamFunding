@@ -5,8 +5,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.donjomjo.dreamfunding.member.model.service.MemberService;
 import com.donjomjo.dreamfunding.member.model.vo.Member;
@@ -16,25 +16,32 @@ public class MemberController {
 
 	@Autowired
 	private MemberService mService;
-	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 
 	@RequestMapping("loginForm.me.jm")
 	public String loginForm() {
+		
 		return "member/loginForm";
+		
 	}
 	@RequestMapping("login.me.jm")
-	public String loginMember(Member m, HttpSession session) {
+	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
 		
+		Member loginMem = mService.loginMember(m);
 		
+		session.setAttribute("loginMem", loginMem );
 		
+		mv.setViewName("redirect:/");
 		
-		
-		return "";
+		return mv;
 	}
 	@RequestMapping("enrollForm.me.jm")
 	public String enrollForm() {
+		
 		return "member/enrollForm";
+		
 	}
 	@RequestMapping("enrollForm2.me.jm")
 	public String enrollForm2() {
