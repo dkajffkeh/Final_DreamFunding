@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -25,14 +25,14 @@
             <div class="card card-signin my-5">
               <div class="card-body">
                 
-                <h5 class="card-title text-center">╠щ╧ФЁ║Ё╙╢б х╦©Ь╟║ют.</h5>
+                <h5 class="card-title text-center">Й╦┬К╟╘К│²К┌≤К┼■ М ▄Л⌡░Й╟─Л·┘.</h5>
                 <hr class="my-4">
                 <form class="form-signin">
                   
-                  <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> ╠╦╠ш╥н х╦©Ь╟║ют</button>
-                  <button class="btn btn-lg btn-naver btn-block text-uppercase" type="submit"><i class="fab fa-envira mr-2"></i>Ёвюл╧Ж╥н х╦©Ь╟║ют</button>
+                  <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Й╣╛Й╦─К║° М ▄Л⌡░Й╟─Л·┘</button>
+                  <button class="btn btn-lg btn-naver btn-block text-uppercase" type="submit"><i class="fab fa-envira mr-2"></i>К└╓Л²╢К╡└К║° М ▄Л⌡░Й╟─Л·┘</button>
                   <hr class="my-4">
-                  <a class="btn btn-lg btn-login btn-block text-uppercase" href="enrollForm2.me.jm">юл╦чюо╥н х╦©Ь╟║ют</a>
+                  <a class="btn btn-lg btn-login btn-block text-uppercase" href="enrollForm2.me.jm">Л²╢К╘■Л²╪К║° М ▄Л⌡░Й╟─Л·┘</a>
                 </form>
               </div>
             </div>

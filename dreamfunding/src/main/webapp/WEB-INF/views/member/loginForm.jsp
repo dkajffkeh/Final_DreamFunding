@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -23,16 +23,16 @@
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
               <div class="card-body">
-                <h5 class="card-title text-center">ȯ���մϴ�</h5>
+                <h5 class="card-title text-center">환영합니다</h5>
                 <form class="form-signin" action="login.me.jm" method="post">
                   <div class="form-label-group">
                     <input type="email" id="email" class="form-control" name="email" placeholder="Email address" required autofocus>
-                    <label for="email">���̵�(�̸���)</label>
+                    <label for="email">아이디(이메일)</label>
                   </div>
     
                   <div class="form-label-group">
                     <input type="password" id="memberPwd" class="form-control" name="memPwd" placeholder="Password" required>
-                    <label for="memberPwd">��й�ȣ</label>
+                    <label for="memberPwd">비밀번호</label>
                   </div>
     
                   <div class="custom-control custom-checkbox mb-3">
@@ -40,18 +40,18 @@
                         <tr>
                             <td style="width: 270px;">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">��й�ȣ �����ϱ�</label>
+                                <label class="custom-control-label" for="customCheck1">비밀번호 저장하기</label>
                             </td>
                             <td>
-                                <a href="enrollForm.me.jm">ȸ������</a>
+                                <a href="enrollForm.me.jm">회원가입</a>
                             </td>
                         </tr>
                     </table>
                   </div>
-                  <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit">�α���</button>
+                  <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit">로그인</button>
                   <hr class="my-4">
-                  <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> ���۷� �α��� �ϱ�</button>
-                  <button class="btn btn-lg btn-naver btn-block text-uppercase" type="submit"><i class="fab fa-envira mr-2"></i>���̹��� �α��� �ϱ�</button>
+                  <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> 구글로 로그인 하기</button>
+                  <button class="btn btn-lg btn-naver btn-block text-uppercase" type="submit"><i class="fab fa-envira mr-2"></i>네이버로 로그인 하기</button>
                 </form>
               </div>
             </div>
