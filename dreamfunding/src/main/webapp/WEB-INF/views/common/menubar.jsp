@@ -171,7 +171,7 @@
           <i class="header__icon"><span class="material-icons"> account_circle </span></i>&nbsp;&nbsp;
           
           
-            <a href="logout.me.jm"><i class="fas fa-sign-out-alt fa-2x" ></i></a>
+            <a href="logout.me.jm"><i class="fas fa-sign-out-alt" style="font-size: 34px"></i></a>
           
           
           
