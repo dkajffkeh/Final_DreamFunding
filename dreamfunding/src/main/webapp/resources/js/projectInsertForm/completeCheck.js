@@ -1,5 +1,10 @@
-'user strict'
+'use strict'
+/*
+window.onbeforeunload = function (e) {
 
+    return "임시저장을 이용하지 않을경우 페이지 이동시 작성하신 정보는 저장되지 않습니다.";
+}
+*/
 $(function () {
 
     $(".btn-primary.btn4").attr('disabled', true);
@@ -13,7 +18,7 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('onpaste foc
     const titleCheck = $("input[name='projectTitle']").val() != "";
     const subTitleCheck = $("input[name='projectSubtitle']").val() != "";
     const projectGoalCheck = $("input[name='projectGoalPrice']").val() > 0;
-    const urlCheck = $("input[name='projectURL']").val() != "";
+    const urlCheck = $("input[name='projectURL']").val().length > 5;
 
     let startArr = $("input[name='projectStartDate']").val().split('-');
     let endArr = $("input[name='projectEndDate']").val().split('-');
@@ -29,6 +34,8 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('onpaste foc
     const profileCheck = $("input[name='profile']").val() != "" || $("#profile_img").attr('src') != '/dreamfunding/resources/images/Capture.JPG';
     const introCheck = $("input[name='creatorIntro']").val() != "";
     const contentCehck = CKEDITOR.instances['editor1'].getData() != "";
+
+    console.log(projectCondition + " " + categoryCheck + " " + titleCheck + " " + subTitleCheck + " " + projectGoalCheck + " " + urlCheck + " " + urlcolorCheck);
 
     if (projectCondition
         && categoryCheck
@@ -56,8 +63,6 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('onpaste foc
         $("#first_bar").text('스토리  (미완료)');
 
     }
-
-
 
 })
 
@@ -130,12 +135,12 @@ $("input").on('focus keyup change', function () {
     }
 
 })
-
+//url ajax;
 $("input[name='projectURL']").keyup(function () {
 
-    if ($(this).val().length > 5) {
+    if ($(this).val().length > 5 && $("input[name=actionType]").val() == 'insert') {
 
-        $("#urlCheck").css('display', 'block');
+
 
         $.ajax({
             url: "projectUrlCheck.pi.hy",
@@ -149,18 +154,39 @@ $("input[name='projectURL']").keyup(function () {
                     $("#urlCheck").css('color', 'green');
                     $("#urlCheck").text('사용가능한url입니다.')
 
+                } else {
+
+                    $("#urlCheck").css('color', 'red');
+                    $("#urlCheck").text('이미 사용중인 url 입니다.')
+                }
+            },
+
+        })
+
+    } else if ($(this).val().length > 5 && $("input[name=actionType]").val() == 'Reload') {
+
+        $.ajax({
+            url: "ReloadProjectUrlCheck.pi.hy",
+            data: {
+                urlInput: $("input[name='projectURL']").val()
+                , pno: $("input[name='projectNo']").val()
+            },
+            success: function (resultNum) {
+
+                $("#urlCheck").css('display', 'block');
+
+                if (resultNum == 0) {
+
+                    $("#urlCheck").css('color', 'green');
+                    $("#urlCheck").text('사용가능한url입니다.')
 
                 } else {
 
                     $("#urlCheck").css('color', 'red');
                     $("#urlCheck").text('이미 사용중인 url 입니다.')
-
                 }
-
-            },
-
+            }
         })
-
     } else {
 
         $("#urlCheck").css('display', 'none');

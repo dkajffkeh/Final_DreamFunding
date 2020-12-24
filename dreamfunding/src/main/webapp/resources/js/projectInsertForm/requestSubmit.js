@@ -1,4 +1,4 @@
-'user strict'
+'use strict'
 
 $(".btn-primary.btn4").click(function () {
 

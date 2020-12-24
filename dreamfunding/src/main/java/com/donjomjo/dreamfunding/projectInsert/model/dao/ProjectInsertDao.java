@@ -1,6 +1,7 @@
 package com.donjomjo.dreamfunding.projectInsert.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -92,6 +93,15 @@ public class ProjectInsertDao {
 	public ArrayList<RewardOption> ajaxOptionSelector(SqlSessionTemplate sqlSession, String[] rList) {
 		
 		return (ArrayList)sqlSession.selectList("proInsertMapper.ajaxOptionSelector",rList);
+	}
+
+	public String reloadUrlConflictCheck(SqlSessionTemplate sqlSession, String urlInput, String pno) {
+		
+		HashMap<String,String> map = new HashMap<>();
+		map.put("urlInput", urlInput);
+		map.put("pno",pno);
+		
+		return sqlSession.selectOne("proInsertMapper.reloadUrlConflictCheck", map);
 	}
 
 	

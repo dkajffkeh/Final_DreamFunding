@@ -39,4 +39,10 @@ public interface ProjectInsertService {
 	public ArrayList<Reward> ajaxRewardSelector(int pno);
 
 	public ArrayList<RewardOption> ajaxOptionSelector(String [] rList);
+	
+	public String reloadUrlConflictCheck(String urlInput,String pno);
+	
+	public String selectProfile(int pno);
+	
+	public String selectThumbnail(int pno);
 }

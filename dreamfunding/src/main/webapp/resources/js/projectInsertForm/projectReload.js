@@ -1,4 +1,5 @@
 'use strict'
+
 $("#modal_table > tbody > tr").click(function () {
 
     if (confirm($(this).children().eq(2).text() + " 를 불러오시겠습니까?")) {
@@ -10,7 +11,7 @@ $("#modal_table > tbody > tr").click(function () {
                 url: "projectReload.pi.hy",
                 data: { pno: $(this).children().eq(0).text() },
                 success: function (pList) {
-                    console.log(pList);
+
                     resolve();
                     //projectGoal 불러오기
                     if (pList.projectGoal == 'Y') {
@@ -35,8 +36,16 @@ $("#modal_table > tbody > tr").click(function () {
                     $("input[name='projectURL']").val(pList.projectURL);
                     $("input[name='projectStartDate']").val(pList.projectStartDate);
                     $("input[name='projectEndDate']").val(pList.projectEndDate);
-                    $("#thumbnail_img").attr('src', "/dreamfunding/resources/images/projectThumbnail/" + pList.projectFileName);
-                    $("#profile_img").attr('src', "/dreamfunding/resources/images/creatorThumbnail/" + pList.creatorProfile);
+                    if (pList.projectFileName != null) {
+                        $("#thumbnail_img").attr('src', "/dreamfunding/resources/images/projectThumbnail/" + pList.projectFileName);
+                    } else {
+                        $("#thumbnail_img").attr('src', "/dreamfunding/resources/images/캡처.JPG");
+                    }
+                    if (pList.creatorProfile != null) {
+                        $("#profile_img").attr('src', "/dreamfunding/resources/images/creatorThumbnail/" + pList.creatorProfile);
+                    } else {
+                        $("#profile_img").attr('src', "/dreamfunding/resources/images/Capture.JPG");
+                    }
                     $("inpput[name='creatorName']").val(pList.creatorName);
                     $("input[name='creatorIntro']").val(pList.creatorIntro);
                     $("input[name='hashtag']").val(pList.hashtag);
@@ -68,6 +77,8 @@ $("#modal_table > tbody > tr").click(function () {
                     $("input[name='insta']").val(pList.insta);
                     $("input[name='facebook']").val(pList.facebook);
 
+                    $("input[name='projectNo']").remove('value');
+                    $("input[name='projectNo']").attr('value', pList.projectNo);
 
                 }
 
@@ -80,7 +91,7 @@ $("#modal_table > tbody > tr").click(function () {
                     url: "rewardReload.pi.hy",
                     data: { pno: $(this).children().eq(0).text() },
                     success: function (rList) {
-                        console.log(rList);
+
                         resolve(rList);
 
                     }
@@ -99,8 +110,90 @@ $("#modal_table > tbody > tr").click(function () {
                 url: "optionReload.pi.hy",
                 data: { 'rList': rListNum },
                 success: function (oList) {
+                    $("#reward_result_display").children().remove();
+                    if (oList != 'empty') {
+                        let rewardResult = "";
+                        let listCount = 0;
+                        const displayResult = $("#reward_result_display");
 
+                        //리워드 리스트 만큼 for문 돌아감.
+                        for (let i = 0; i < rList.length; i++) {
+
+                            rewardResult += `<div class="rewardContaioner">
+                        <div class="rewardTitleWrapper">
+                        <div class="reward-font">${rList[i].rewardPrice}원 리워드</div>`
+
+                            if (rList[i].rewardStatus == 'N') {
+                                rewardResult += `<div class="reward-font">제공수:무제한</div>
+                                            </div>
+                                            <ul class="rewardOptionLists">       
+                                            `
+                            } else {
+                                rewardResult += `<div class="reward-font">제공수:${rList[i].rewardNumber}</div>
+                                            </div>
+                                        <ul class="rewardOptionLists">`
+                            }
+
+                            for (let j = 0; j < oList.length; j++) {
+
+                                if (rList[i].rewardNo == oList[j].rewardNo) {
+
+                                    rewardResult += `<li>${oList[j].rewardContent}</li>`
+                                    listCount++;
+
+                                }
+
+                            }
+                            if (listCount == 0) {
+                                rewardResult += `<li>옵션이 없는 리워드 입니다.</li>`
+                            }
+
+                            rewardResult += `
+                                </ul>
+                                <div class="rewardTitleWrapper">
+                                <div class="reward-font">배송지 필요여부 : '${rList[i].rewardShCheck}'</div>
+                                <i class="fas fa-trash-alt deleteReward" onclick=removeReward(this)></i>
+                                <div style="display:none">${rList[i].rewardPrice}원</div>
+                                </div>
+                                <input type="hidden" class="rewardArrCehck" name="rewardList[${i}].rewardPrice" value="${rList[i].rewardPrice}">
+                                <input type="hidden" name="rewardList[${i}].rewardNumber" value=" ${rList[i].rewardNumber}">
+                                <input type="hidden" name="rewardList[${i}].rewardAmount" value="${listCount}">
+                                <input type="hidden" name="rewardList[${i}].rewardStatus" value="${rList[i].rewardStatus}">                
+                                <input type="hidden" name="rewardList[${i}].rewardShCheck" value="${rList[i].rewardShCheck}">
+                                `
+                            for (let l = 0; l < oList.length; l++) {
+
+                                if (rList[i].rewardNo == oList[l].rewardNo)
+
+                                    rewardResult += `<input type="hidden" class="optionArrCheck" name="optionList[${l}].rewardContent" value="${oList[l].rewardContent}">`
+
+                            }
+                            rewardResult += `
+                                        </div>
+                                        `
+                            listCount = 0;
+                        }
+
+                        $("#rewardemptyMessage").css('display', 'none');
+                        //입력갑 초기화 하는 함수
+                        clearValues();
+                        //입력값 있는지 없는지 확인
+                        displayResult.append(rewardResult);
+                        completeCheck();
+
+                        function clearValues() {
+
+                            $("#rewardPrice").val('');
+                            $("#rewardCount").val('');
+                            $("#reward-options").val('');
+                            $("#reward_list > li").remove();
+
+                        }
+                    }
+                    console.log(rList);
                     console.log(oList);
+                    $("input[name='actionType']").remove('value');
+                    $("input[name='actionType']").attr('value', 'Reload');
 
                 }
             })

@@ -86,7 +86,7 @@ $("#insertRewardBtn").click(function () {
                                 <ul class="rewardOptionLists">       
                                 `
             if (rewardList.length == 0) {
-                rewardResult += `<li>옵션이 없는 리워드가 생성됩니다.</li>`
+                rewardResult += `<li>옵션이 없는 리워드 입니다.</li>`
             } else {
 
                 for (let j = 0; j < rewardList.length; j++) {
@@ -99,7 +99,7 @@ $("#insertRewardBtn").click(function () {
                                 <div class="rewardTitleWrapper">
                                 <div class="reward-font">배송지 필요여부 : '${addrCheck}'</div>
                                 <i class="fas fa-trash-alt deleteReward" onclick=removeReward(this)></i>
-                                <div style="display:none">${$("#rewardPrice").val()}원 리워드</div>
+                                <div style="display:none">${$("#rewardPrice").val()}원</div>
                                 </div>
                                 <input type="hidden" class="rewardArrCehck" name="rewardList[${(rewardArrCheck)}].rewardPrice" value="${$("#rewardPrice").val()}">                   
                                 <input type="hidden" name="rewardList[${rewardArrCheck}].rewardAmount" value="${rewardList.length}">
@@ -135,7 +135,7 @@ $("#insertRewardBtn").click(function () {
                                     <ul class="rewardOptionLists">       
                                     `
                 if (rewardList.length == 0) {
-                    rewardResult += `<li>옵션이 없는 리워드가 생성됩니다.</li>`
+                    rewardResult += `<li>옵션이 없는 리워드 입니다.</li>`
                 } else {
 
                     for (let j = 0; j < rewardList.length; j++) {
@@ -148,7 +148,7 @@ $("#insertRewardBtn").click(function () {
                                 <div class="rewardTitleWrapper">
                                 <div class="reward-font">배송지 필요여부 : '${addrCheck}'</div>
                                 <i class="fas fa-trash-alt deleteReward" onclick=removeReward(this)></i>
-                                <div style="display:none">${$("#rewardPrice").val()}원 리워드</div>
+                                <div style="display:none">${$("#rewardPrice").val()}원</div>
                                 </div>
                                 <input type="hidden" class="rewardArrCehck" name="rewardList[${rewardArrCheck}].rewardPrice" value="${$("#rewardPrice").val()}">
                                 <input type="hidden" name="rewardList[${rewardArrCheck}].rewardNumber" value="${$("#rewardCount").val()}">
@@ -190,7 +190,7 @@ function clearValues() {
 
 function removeReward(event) {
 
-    if (confirm(event.nextElementSibling.innerHTML + " 원 리워드를 삭제 하시겠습니까?")) {
+    if (confirm(event.nextElementSibling.innerHTML + " 리워드를 삭제 하시겠습니까?")) {
         event.parentNode.parentNode.remove();
 
         if ($("#reward_result_display > div").length == 2) {

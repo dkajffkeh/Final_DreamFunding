@@ -31,10 +31,6 @@ public class ProjectInsertServiceImpl implements ProjectInsertService {
 	@Override
 	public int selectProNo() {return pDao.selectProNo(sqlSession);}
 
-
-	@Override
-	public String urlconflictCheck(String urlInput) {return pDao.urlconflictCheck(sqlSession,urlInput);}
-
 	@Override
 	public ArrayList<ProjectInsert> selectProject(int memNo) {return pDao.selectProject(sqlSession,memNo);}
 
@@ -119,6 +115,24 @@ public class ProjectInsertServiceImpl implements ProjectInsertService {
 
 	@Override
 	public ArrayList<RewardOption> ajaxOptionSelector(String [] rList) {return pDao.ajaxOptionSelector(sqlSession,rList);}
+	
+	@Override
+	public String urlconflictCheck(String urlInput) {return pDao.urlconflictCheck(sqlSession,urlInput);}
+
+	@Override
+	public String reloadUrlConflictCheck(String urlInput, String pno) {return pDao.reloadUrlConflictCheck(sqlSession,urlInput,pno);}
+
+	@Override
+	public String selectProfile(int pno) {
+		
+		return null;
+	}
+
+	@Override
+	public String selectThumbnail(int pno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

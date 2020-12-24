@@ -15,7 +15,6 @@ $(".btn.btn-primary.btn2").click(function () {
 
     swalWithBootstrapButtons.fire({
         title: '저장 하시겠습니까?',
-
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: '저장',

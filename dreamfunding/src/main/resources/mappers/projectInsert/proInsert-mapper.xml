@@ -273,13 +273,17 @@
 					,PROJECT_START_DT=#{projectStartDate}
 					,PROJECT_CLOSE_DT=#{projectEndDate}
 					,PROJECT_URL=#{projectURL}
-					,PROJECT_THUMPATH=#{projectThumbnailPath}
-					,PROJECT_FILENAME=#{projectFileName}
 					,PROJECT_CONTENT=#{projectContent}
 					,PROJECT_VURL=#{projectVideoURL}
 					,PROJECT_REFCON=#{projectRefundPolicy}
+					<if test="projectFileName != null">
+					,PROJECT_THUMPATH=#{projectThumbnailPath}
+					,PROJECT_FILENAME=#{projectFileName}
+					</if>
+					<if test="creatorProfile != null">
 					,CREATOR_THUMPATH=#{creatorThumbnailPath}
 					,CREATOR_PROFILE=#{creatorProfile}
+					</if>
 					,CREATOR_NAME=#{creatorName}
 					,CREATOR_INTRO=#{creatorIntro}
 					,CREATOR_PHONE=#{creatorPhone}
@@ -382,6 +386,22 @@
 			</foreach>
 			ORDER BY REWARD_NO ASC     		 
   	   </select>
-  	   
+  	   <select id="reloadUrlConflictCheck"
+  	   		   resultType="string"
+  	   		   parameterType="hashmap">
+  	   		  SELECT
+     				 COUNT(*)
+				FROM
+					 (      
+				SELECT
+				      PROJECT_URL
+				  FROM
+				      PROJECT
+				 WHERE
+				      PROJECT_NO != #{pno}
+				      )
+				 WHERE
+				     PROJECT_URL= #{urlInput}
+  	   </select>
 
 </mapper>
