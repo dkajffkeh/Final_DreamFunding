@@ -11,7 +11,9 @@ $(function () {
 
 })
 
-$("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('onpaste focus keyup change instanceCreated', function () {
+$("#story_wrapper input").on('onpaste focus keyup change instanceCreated', storyCompleteCheck);
+
+function storyCompleteCheck() {
 
     const projectCondition = $("input[name='projectGoal']:checked").val() != "";
     const categoryCheck = $("#exampleFormControlSelect1").val() != "";
@@ -34,8 +36,6 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('onpaste foc
     const profileCheck = $("input[name='profile']").val() != "" || $("#profile_img").attr('src') != '/dreamfunding/resources/images/Capture.JPG';
     const introCheck = $("input[name='creatorIntro']").val() != "";
     const contentCehck = CKEDITOR.instances['editor1'].getData() != "";
-
-    console.log(projectCondition + " " + categoryCheck + " " + titleCheck + " " + subTitleCheck + " " + projectGoalCheck + " " + urlCheck + " " + urlcolorCheck);
 
     if (projectCondition
         && categoryCheck
@@ -64,10 +64,10 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('onpaste foc
 
     }
 
-})
+}
+$("#notice_wrapper input").on('keyup focus', noticeCompleteCheck);
 
-
-$("#notice_wrapper input").on('keyup focus', function () {
+function noticeCompleteCheck() {
 
     const policyCehck1 = CKEDITOR.instances['editor2'].getData() != "";
     const phoneCheck = $("input[name='creatorEmail']").val() != "";
@@ -87,9 +87,9 @@ $("#notice_wrapper input").on('keyup focus', function () {
         $("#third_bar").text('안내사항  (미완료)');
 
     }
-})
-
-$("#subinfo_wrapper input").on('keyup focus', function () {
+}
+$("#subinfo_wrapper input").on('keyup focus', subinfoCompleteCheck);
+function subinfoCompleteCheck() {
 
     const bankCheck = $("input[name='bankNo']").val() != "";
     const bankAccountCheck = $("input[name='creatorAccount']").val() != "";
@@ -107,26 +107,20 @@ $("#subinfo_wrapper input").on('keyup focus', function () {
         $("#forth_bar").css('color', '#ffffffff');
         $("#forth_bar").text('제작자/부가정보   (미완료)');
 
-
     }
 
-})
-
-$("input").on('focus keyup change', function () {
+}
+$("input").on('focus keyup change', completeSectionCheck);
+function completeSectionCheck() {
     const barColor = $(".bar.upper");
     let result = 0;
-
 
     for (let i = 0; i < barColor.length; i++) {
 
         if (barColor[i].style.backgroundColor == 'rgb(140, 42, 42)') {
             result++;
         }
-
     }
-
-
-
     if (result == 4) {
 
         $(".btn-primary.btn4").attr('disabled', false);
@@ -134,11 +128,12 @@ $("input").on('focus keyup change', function () {
         $(".btn-primary.btn4").attr('disabled', true);
     }
 
-})
+}
 //url ajax;
-$("input[name='projectURL']").keyup(function () {
+$("input[name='projectURL']").on('keyup focus', urlAjax);
+function urlAjax() {
 
-    if ($(this).val().length > 5 && $("input[name=actionType]").val() == 'insert') {
+    if ($("input[name='projectURL']").val().length > 5 && $("input[name=actionType]").val() == 'insert') {
 
 
 
@@ -153,17 +148,19 @@ $("input[name='projectURL']").keyup(function () {
 
                     $("#urlCheck").css('color', 'green');
                     $("#urlCheck").text('사용가능한url입니다.')
+                    storyCompleteCheck();
 
                 } else {
 
                     $("#urlCheck").css('color', 'red');
                     $("#urlCheck").text('이미 사용중인 url 입니다.')
+                    storyCompleteCheck();
                 }
             },
 
         })
 
-    } else if ($(this).val().length > 5 && $("input[name=actionType]").val() == 'Reload') {
+    } else if ($("input[name='projectURL']").val().length > 5 && $("input[name=actionType]").val() == 'Reload') {
 
         $.ajax({
             url: "ReloadProjectUrlCheck.pi.hy",
@@ -179,11 +176,13 @@ $("input[name='projectURL']").keyup(function () {
 
                     $("#urlCheck").css('color', 'green');
                     $("#urlCheck").text('사용가능한url입니다.')
+                    storyCompleteCheck();
 
                 } else {
 
                     $("#urlCheck").css('color', 'red');
                     $("#urlCheck").text('이미 사용중인 url 입니다.')
+                    storyCompleteCheck();
                 }
             }
         })
@@ -193,7 +192,7 @@ $("input[name='projectURL']").keyup(function () {
 
     }
 
-})
+}
 
 
 

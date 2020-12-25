@@ -50,13 +50,17 @@ $("#modal_table > tbody > tr").click(function () {
                     $("input[name='creatorIntro']").val(pList.creatorIntro);
                     $("input[name='hashtag']").val(pList.hashtag);
 
-                    let hashArr = pList.hashtag.split(' ');
-                    let hashresult = "";
-                    for (let i = 0; i < hashArr.length; i++) {
-                        hashresult += `<div class=hashtag>${hashArr[i]}</div>`;
+                    if (pList.hashtag != null) {
+                        let hashArr = pList.hashtag.split(' ');
+                        let hashresult = "";
+                        for (let i = 0; i < hashArr.length; i++) {
+                            hashresult += `<div class=hashtag>${hashArr[i]}</div>`;
+                        }
+
+                        $("#hashtagDisplayArea").css('display', 'block');
+                        $("#hashtagDisplayArea").html(hashresult);
                     }
-                    $("#hashtagDisplayArea").css('display', 'block');
-                    $("#hashtagDisplayArea").html(hashresult);
+
                     $("input[name='projectVideoURL']").val(pList.projectVideoURL);
 
                     CKEDITOR.instances.editor1.setData(pList.projectContent);
@@ -79,7 +83,7 @@ $("#modal_table > tbody > tr").click(function () {
 
                     $("input[name='projectNo']").remove('value');
                     $("input[name='projectNo']").attr('value', pList.projectNo);
-
+                    console.log(pList);
                 }
 
             })
@@ -194,7 +198,12 @@ $("#modal_table > tbody > tr").click(function () {
                     console.log(oList);
                     $("input[name='actionType']").remove('value');
                     $("input[name='actionType']").attr('value', 'Reload');
-
+                    storyCompleteCheck()
+                    noticeCompleteCheck()
+                    subinfoCompleteCheck()
+                    urlAjax();
+                    completeSectionCheck()
+                    swal("불러오기가 완료되었습니다.", "변경사항을 꼼꼼히 체크해주세요", "success");
                 }
             })
 

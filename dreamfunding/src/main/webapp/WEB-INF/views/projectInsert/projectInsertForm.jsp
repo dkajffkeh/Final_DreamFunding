@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+ 
     <title>Document</title>
 </head>
 
@@ -31,7 +31,7 @@
         <form id="insertConroller" enctype="multipart/form-data">
 
             <div id="button_wrapper">
-                <button class="btn btn-primary btn1" type="button"><i class="far fa-eye"></i>&nbsp;&nbsp;미리보기</button>
+                <button class="btn btn-primary btn1" type="button"><i class="fas fa-file-alt"></i>&nbsp;&nbsp;미리보기</button>
                 <button class="btn btn-primary btn2" type="button"><i class="far fa-save"></i>&nbsp;&nbsp;임시저장</button>
                 <button class="btn btn-primary btn3" type="button" data-toggle="modal" data-target=".bd-example-modal-lg"><i
                         class="fas fa-upload"></i>&nbsp;&nbsp;불러오기</button>
@@ -616,8 +616,8 @@
                     <div class="remoteController">
                         <a href="#totheTop" id="topBtn"><i class="fas fa-angle-up"></i></a>
                         <div class="remote_icon">
-                            <i class="far fa-eye"></i>
-                            <i class="far fa-save"></i>
+                            <i class="fas fa-file-alt"></i>
+                            <i class="far fa-save" id="projectSaveBtn"></i>
                             <i class="fas fa-upload"  data-toggle="modal" data-target=".bd-example-modal-lg"></i>
                             <i class="fas fa-handshake"></i>
                         </div>
@@ -673,6 +673,7 @@
         </div>
       </div>
     </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/saveProject.js?ver=1"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/projectReload.js?ver=1"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/requestSubmit.js?ver=1"></script>

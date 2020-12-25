@@ -1,9 +1,11 @@
 'use strict'
 
-$(".btn.btn-primary.btn2").click(function () {
+$(".btn.btn-primary.btn2 , #projectSaveBtn").click(function () {
 
     const formData = new FormData(document.getElementById("insertConroller"));
     formData.append("status", "T");
+    formData.append('projectContent', CKEDITOR.instances['editor1'].getData());
+    formData.append('projectRefundPolicy', CKEDITOR.instances['editor2'].getData())
 
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
@@ -32,9 +34,8 @@ $(".btn.btn-primary.btn2").click(function () {
                 contentType: false,
                 success: function (result) {
                     if (result > 0) {
-                        Swal.fire(
-                            '저장되었습니다!!'
-                        )
+                        swal("저장 되었습니다", "", "success");
+
                     } else {
                         Swal.fire({
                             icon: 'error',

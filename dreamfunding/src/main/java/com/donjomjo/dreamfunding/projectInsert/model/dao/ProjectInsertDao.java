@@ -104,6 +104,15 @@ public class ProjectInsertDao {
 		return sqlSession.selectOne("proInsertMapper.reloadUrlConflictCheck", map);
 	}
 
+	public int insertCKEDitor(SqlSessionTemplate sqlSession, String filename, String filepath) {
+		
+		HashMap<String,String> map = new HashMap<>();
+		map.put("filename", filename);
+		map.put("filepath",filepath);
+		
+		return sqlSession.insert("proInsertMapper.insertCKEDitor",map);
+	}
+
 	
 
 	

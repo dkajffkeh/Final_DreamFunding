@@ -66,6 +66,13 @@
   	    	<result column="RE_OPTION_NAME" property="rewardContent"/>
   	    </resultMap>
   	    
+  	    <resultMap type="com.donjomjo.dreamfunding.projectInsert.model.vo.CKEDitor" id="CKEDitorResultSet">
+  	    <result column="ED_NO" property="editorNo"/>
+  	    <result column="PROJECT_NO" property="projectNo"/>
+  	    <result column="ED_FILENAME" property="filename"/>
+  	    <result column="ED_FILEPATH" property="filePath"/>
+  	    </resultMap>
+  	    
   	   <select id="selectCategory"
   	   		   resultMap="categoryResultSet">
   	   	SELECT
@@ -403,5 +410,22 @@
 				 WHERE
 				     PROJECT_URL= #{urlInput}
   	   </select>
+  	   <insert id="insertCKEDitor"
+  	   	       parameterType="hashmap">
+  	   	       INSERT
+  	   	       		 INTO
+  	   	       		     CKEDITOR
+  	   	       		     (
+  	   	       		     ED_NO						
+						,ED_FILENAME
+						,ED_FILEPATH
+  	   	       		     )
+  	   					 VALUES
+  	   					 (
+  	   					 SEQ_CKNO.NEXTVAL
+  	   					 ,#{filename}
+  	   					 ,#{filepath}
+  	   					 )
+  	   </insert>
 
 </mapper>

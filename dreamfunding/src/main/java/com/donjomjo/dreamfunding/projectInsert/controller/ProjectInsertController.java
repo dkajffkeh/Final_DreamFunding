@@ -5,28 +5,36 @@ import static com.donjomjo.dreamfunding.common.filehandler.FileRenameStringType.
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.donjomjo.dreamfunding.projectInsert.model.service.ProjectInsertService;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.Bank;
+import com.donjomjo.dreamfunding.projectInsert.model.vo.CKEDitor;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectCategory;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectInsert;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.Reward;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.RewardOption;
-import com.google.gson.Gson;;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.sun.xml.internal.ws.util.StringUtils;;
 
 @Controller
 public class ProjectInsertController {
@@ -35,7 +43,7 @@ public class ProjectInsertController {
 	private ProjectInsertService pService;
 
 	@RequestMapping(value="projectinsert.pi.hy")
-	public String sendToProjectInsert(Model model) {
+	private String sendToProjectInsert(Model model) {
 		
 		model.addAttribute("bList",pService.selectBank());
 		model.addAttribute("cList",pService.selectCategory());
@@ -45,15 +53,15 @@ public class ProjectInsertController {
 		
 	}
 	@RequestMapping(value="projectRequest.pi.hy")
-	public String insertProject(MultipartHttpServletRequest mtf,
+	private String insertProject(MultipartHttpServletRequest mtf,
 							    ProjectInsert pi ,
 							    Reward r, 
 							    RewardOption o,
 							    Model model, 
 							    HttpSession session,
 							    String actionType) {
-		//파일 업로드 기능 담당메소드 호출.
 		
+		//actionType => insert 일경우 즉 불러오기를 해서 제출한것이 아닌 작성후 바로 제출하게 된 케이스.
 			if(actionType.equals("insert")) {				
 				insertProject(mtf,pi,r,o,model,session);
 			} 
@@ -63,11 +71,11 @@ public class ProjectInsertController {
 				updateProject(mtf,pi,r,o,model,session);
 			}
 		
-
+			
 		return "redirect:/";
 	}
 	//actionType => insert 일경우 즉 불러오기를 해서 제출한것이 아닌 작성후 바로 제출하게 된 케이스.
-	public void insertProject(
+	private void insertProject(
 			MultipartHttpServletRequest mtf,
 		    ProjectInsert pi ,
 		    Reward r, 
@@ -89,7 +97,7 @@ public class ProjectInsertController {
 		
 	}
 	//actionType => Reload 일 경우 불러오기를 한 후 이용하는 update문
-	public void updateProject(
+	private void updateProject(
 			MultipartHttpServletRequest mtf,
 		    ProjectInsert pi ,
 		    Reward r, 
@@ -99,7 +107,7 @@ public class ProjectInsertController {
 	{		
 		
 		//사진이 새로 올라오게 된 케이스
-		if(!listupFiles(mtf).get(0).isEmpty() && !listupFiles(mtf).get(1).isEmpty()) {	
+		if(!listupFiles(mtf).get(0).isEmpty() || !listupFiles(mtf).get(1).isEmpty()) {	
 			
 			if(!thumbFileparsing(mtf).isEmpty()) {
 				//fileUploader(mtf,pi,session);
@@ -149,7 +157,7 @@ public class ProjectInsertController {
 	
 	@ResponseBody
 	@RequestMapping(value="projectmiddleSave.pi.hy",produces="text/html; charset=utf-8")
-	public String saveMiddleProject(MultipartHttpServletRequest mtf,
+	private String saveMiddleProject(MultipartHttpServletRequest mtf,
 			MultipartFile thumbfile,
 			MultipartFile profile,
 		    ProjectInsert pi ,
@@ -227,21 +235,21 @@ public class ProjectInsertController {
 	
 	@ResponseBody
 	@RequestMapping(value="projectReload.pi.hy", produces="application/json; charset=utf-8")
-	public String ajaxProjectSelector(int pno){
+	private String ajaxProjectSelector(int pno){
 		
 		return new Gson().toJson(pService.ajaxProjectSelector(pno));
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="rewardReload.pi.hy", produces="application/json; charset=utf-8")
-	public String ajaxRewardSelector(int pno){
+	private String ajaxRewardSelector(int pno){
 		
 		return new Gson().toJson(pService.ajaxRewardSelector(pno));
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="optionReload.pi.hy", produces="application/json; charset=utf-8")
-	public String ajaxOptionSelector(HttpServletRequest request){
+	private String ajaxOptionSelector(HttpServletRequest request){
 		
 		if(request.getParameterValues("rList[]")==null) {
 			return "empty";
@@ -252,18 +260,42 @@ public class ProjectInsertController {
 	
 	@ResponseBody
 	@RequestMapping(value="projectUrlCheck.pi.hy",produces="text/html; charset=utf-8")
-	public String urlconflictCheck(String urlInput) {
+	private String urlconflictCheck(String urlInput) {
 		
 		return pService.urlconflictCheck(urlInput);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="ReloadProjectUrlCheck.pi.hy", produces="text/html; charset=utf-8")
-	public String reloadUrlConflictCheck(String urlInput, String pno){		
+	private String reloadUrlConflictCheck(String urlInput, String pno){		
 			
 		return pService.reloadUrlConflictCheck(urlInput, pno);
-	}
+	}	
+	
+	@RequestMapping(value="fileupload.bo", produces="application/json; charset=utf-8", method=RequestMethod.POST)
+	private void fileUploader(MultipartHttpServletRequest multifile,HttpSession session,HttpServletRequest req,HttpServletResponse res) throws IOException {
+			
+		JSONObject jObj = new JSONObject();		
 		
+		MultipartFile file = multifile.getFile("upload");
+		String fileRename = fileRenameString(file.getOriginalFilename());
+	    try {
+			file.transferTo(new File(session.getServletContext().getRealPath("resources/images/CKEDitor/")+fileRename));
+			
+			
+	    } catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    jObj.put("uploaded", pService.insertCKEDitor(fileRename,session.getServletContext().getRealPath("resources/images/CKEDitor/")));
+	    jObj.put("fileName", fileRename);
+	    jObj.put("url", req.getContextPath()+"/resources/images/CKEDitor/"+fileRename);
+	    
+	    res.getWriter().print(jObj);
+	}
 	
 /////////////////////////////////////////<일반 실행메소드 라인>///////////////////////////////////////////////////////////	
 	private List<MultipartFile> listupFiles(MultipartHttpServletRequest mtf){
@@ -274,8 +306,7 @@ public class ProjectInsertController {
 		mlist.add(mtf.getFile("profile"));
 		
 		return mlist;
-		}
-	
+		}	
 	
 	private MultipartFile thumbFileparsing(MultipartHttpServletRequest mtf) {
 		
@@ -285,7 +316,6 @@ public class ProjectInsertController {
 			
 		return mtf.getFile("profile");
 	}
-	
 			
 	//파일 업로드 기능 담당하는 메소드
 	private void fileUploader(MultipartHttpServletRequest mtf,ProjectInsert pi,HttpSession session) {

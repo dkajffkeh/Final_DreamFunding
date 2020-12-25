@@ -3,6 +3,7 @@ package com.donjomjo.dreamfunding.projectInsert.model.service;
 import java.util.ArrayList;
 
 import com.donjomjo.dreamfunding.projectInsert.model.vo.Bank;
+import com.donjomjo.dreamfunding.projectInsert.model.vo.CKEDitor;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectCategory;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectInsert;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.Reward;
@@ -45,4 +46,6 @@ public interface ProjectInsertService {
 	public String selectProfile(int pno);
 	
 	public String selectThumbnail(int pno);
+	
+	public int insertCKEDitor(String filename, String filepath);
 }

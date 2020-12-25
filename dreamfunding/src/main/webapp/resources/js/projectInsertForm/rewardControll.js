@@ -20,8 +20,8 @@ $("#rewardInputBtn").click(function () {
 
     if (optionValues.trim().length != 0) { //뭔가가 입력 된 경우
 
-        if ($("#reward_list > li").length > 4) {//li 가 5보다 크면 넣을수 없음 0 1 2 3 4 까지 실행.
-            alert("최대 5개의 옵션만 추가가 가능합니다");
+        if ($("#reward_list > li").length > 5) {//li 가 5보다 크면 넣을수 없음 0 1 2 3 4 까지 실행.
+            alert("최대 6개의 옵션만 추가가 가능합니다");
         } else {
             createLi.innerHTML = optionValues;
             createInput.setAttribute("value", optionValues);
@@ -204,7 +204,7 @@ function removeReward(event) {
 //작업 완료도를 체크할 수 있음.
 function completeCheck() {
 
-    if ($("#reward_result_display > div").length > 2) {
+    if ($("#reward_result_display > div").length > 0) {
 
         $("#second_bar").css('background-color', '#8c2a2a');
         $("#second_bar").css('color', '#ffffffff');

@@ -133,6 +133,12 @@ public class ProjectInsertServiceImpl implements ProjectInsertService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int insertCKEDitor(String filename, String filepath) {
+		
+		return pDao.insertCKEDitor(sqlSession,filename,filepath);
+	}
 	
 	
 
