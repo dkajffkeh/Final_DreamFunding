@@ -101,7 +101,7 @@
                                     </td>
                                     <td class="userInputarea">
                                         <input type="text" class="form-control pro_title" placeholder="50자 이내로 작성해 주세요" name="projectTitle"
-                                            maxlength="49">
+                                            maxlength="49" style="width:650px;">
                                         <div class="lettercounter lc">0/50</div>
 
                                     </td>
@@ -114,7 +114,7 @@
                                     </td>
                                     <td class="userInputarea">
                                         <input type="text" class="form-control pro_title1" placeholder="50자 이내로 작성해 주세요" name="projectSubtitle"
-                                            maxlength="49">
+                                            maxlength="49" style="width:650px;">
                                         <div class="lettercounter lc1">0/50</div>
                                     </td>
                                 </tr>
@@ -286,7 +286,7 @@
                                 </tr>
                                 <tr>
                                     <td class="explanation_wrapper">
-                                        <div class="inputList_title">동영상 url</div>
+                                        <div class="inputList_title">유튜브 동영상 url</div>
                                         <div class="input_explanation">
                                             내 프로젝트 페인에 보여질<br>
                                             동영상을 올려주세요!<br>
@@ -296,6 +296,22 @@
                                     <td class="userInputarea">
                                         <input type="text" style="width:450px" id="videourlInput" class="form-control" name="projectVideoURL"
                                             placeholder="https://www.youtube.com/xVV8Da9d0ig">
+                                         <div id="videoAnnouncement" style="margin-top:5px">url 이 입력되지 않았습니다.</div>   
+                                      <iframe id="videoIframe" 
+                                     			  style="margin-top:20px; 
+                                     			  margin-bottom:100px;
+                                     			  display:none;" 
+                                     			  width="560" 
+                                     			  height="315" 
+                                     			  src="https://www.youtube.com/embed/" 
+                                     			  frameborder="0" 
+                                     			  allow="accelerometer; 
+                                     			  autoplay; 
+                                     			  clipboard-write; 
+                                     			  encrypted-media; 
+                                     			  gyroscope; 
+                                     			  picture-in-picture" 
+                                     			  allowfullscreen></iframe> 
                                     </td>
                                 </tr>
                                 <tr>
@@ -639,7 +655,7 @@
     </div>
     </form>
     </div>
-    
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> 
    
 
     <!--Modal-->
@@ -685,6 +701,7 @@
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/hashTagController.js?ver=1"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/rewardControll.js?ver=1"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/CKEDITOR.js?ver=1"></script>
+    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/iframeController.js?ver=1"></script>
 
 </body>
 

@@ -203,6 +203,7 @@ $("#modal_table > tbody > tr").click(function () {
                     subinfoCompleteCheck()
                     urlAjax();
                     completeSectionCheck()
+                    videoURLCheck()
                     swal("불러오기가 완료되었습니다.", "변경사항을 꼼꼼히 체크해주세요", "success");
                 }
             })

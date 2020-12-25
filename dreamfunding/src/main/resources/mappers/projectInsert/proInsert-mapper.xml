@@ -282,6 +282,7 @@
 					,PROJECT_URL=#{projectURL}
 					,PROJECT_CONTENT=#{projectContent}
 					,PROJECT_VURL=#{projectVideoURL}
+					,CREATOR_STATUS=#{status}
 					,PROJECT_REFCON=#{projectRefundPolicy}
 					<if test="projectFileName != null">
 					,PROJECT_THUMPATH=#{projectThumbnailPath}
