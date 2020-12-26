@@ -2,4 +2,80 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="projectDetailMapper">
   
+	<resultMap id="detailResultSet" type="Detail">
+    	<result column="PROJECT_NO" property="projectNo"/>
+    	<result column="MEMBER_NO" property="memberNo"/>
+    	<result column="PRO_CATENO" property="proCategoryNo"/>
+    	<result column="BANK_NO" property="bankNo"/>
+    	<result column="PROJECT_GOAL" property="projectGoal"/>
+    	<result column="PROJECT_TITLE" property="projectTitle"/>
+    	<result column="PROJECT_SUBTITLE" property="projectSubtitle"/>
+    	<result column="PROJECT_GPRICE" property="projectGoalPrice"/>
+    	<result column="PROJECT_START_DT" property="projectStartDate"/>
+    	<result column="PROJECT_CLOSE_DT" property="projectEndDate"/>
+    	<result column="PROJECT_URL" property="projectURL"/>
+    	<result column="PROJECT_THUMPATH" property="projectThumbnailPath"/>
+    	<result column="PROJECT_FILENAME" property="projectFileName"/>
+    	<result column="PROJECT_REASON" property="projectReason"/>
+    	<result column="PROJECT_COUNT" property="projectCount"/>
+    	<result column="PROJECT_CONTENT" property="projectContent"/>
+    	<result column="PROJECT_VURL" property="projectVideoURL"/>
+    	<result column="PROJECT_REFCON" property="projectRefundPolicy"/>
+    	<result column="CREATOR_THUMPATH" property="creatorThumbnailPath"/>
+    	<result column="CREATOR_PROFILE" property="creatorProfile"/>
+    	<result column="CREATOR_NAME" property="creatorName"/>
+    	<result column="CREATOR_INTRO" property="creatorIntro"/>
+    	<result column="CREATOR_PHONE" property="creatorPhone"/>
+    	<result column="PHONE_CHECK" property="phoneCheck"/>
+    	<result column="CREATOR_EMAIL" property="creatorEmail"/>
+    	<result column="CREATOR_BANK" property="creatorBank"/>
+    	<result column="CREATOR_ACOUNT" property="creatorAccount"/>
+    	<result column="CREATOR_ACHOLDER" property="accountHolder"/>
+    	<result column="CREATOR_WEBURL" property="webURL"/>
+    	<result column="CREATOR_INSTA" property="insta"/>
+    	<result column="CREATOR_FACEBOOK" property="facebook"/>
+    	<result column="CREATOR_STATUS" property="status"/>
+    	<result column="HASHTAG" property="hashtag"/>
+    	<result column="PROJECT_CRDATE" property="createDate"/>
+    	<result column="PROJECT_TEMPORARY" property="projectTemp"/>
+ 	</resultMap>
+  
+  	<select id="selectDetailAll" parameterType="_int" resultType="Detail">
+  		   SELECT
+	    	  	  PROJECT_NO
+				, MEMBER_NO
+				, PRO_CATENO
+				, BANK_NO
+				, PROJECT_GOAL
+				, PROJECT_TITLE
+				, PROJECT_SUBTITLE
+				, PROJECT_GPRICE
+				, PROJECT_START_DT
+				, PROJECT_CLOSE_DT
+				, PROJECT_URL
+				, PROJECT_THUMPATH
+				, PROJECT_FILENAME
+				, PROJECT_CONTENT
+				, PROJECT_VURL
+				, PROJECT_REFCON
+				, CREATOR_THUMPATH
+				, CREATOR_PROFILE
+				, CREATOR_NAME
+				, CREATOR_INTRO
+				, CREATOR_PHONE
+				, PHONE_CHECK
+				, CREATOR_EMAIL
+				, CREATOR_BANK
+				, CREATOR_ACOUNT
+				, CREATOR_ACHOLDER
+				, CREATOR_WEBURL
+				, CREATOR_INSTA
+				, CREATOR_FACEBOOK
+				, HASHTAG
+				, PROJECT_CRDATE
+				, PROJECT_TEMPORARY
+		     FROM PROJECT
+		    WHERE CREATOR_STATUS = 'U'
+		      AND PROJECT_NO = 1
+  	</select>
 </mapper>

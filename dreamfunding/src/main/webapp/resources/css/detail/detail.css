@@ -17,6 +17,7 @@ main .inner {
 }
 
 .inner .intro-top__wrapper {
+	
 }
 
 .intro-top__wrapper li {
@@ -38,9 +39,16 @@ main .inner {
   background: #fff;
 }
 
-.main__icon {
-  padding: 10px;
+.intro-top__wrapper .profile_wrapper img{
+	 width: 40px;
+	 height: 40px;
 }
+
+.intro-top__wrapper .profile_wrapper .name{
+	 font-size: 15px;
+	 font-weight: bold;
+}
+
 
 .inner .intro-bottom__wrapper {
   display: flex;
@@ -53,6 +61,7 @@ main .inner {
 .intro-left__wrapper .intro-img img {
   width: 100%;
 }
+
 
 .inner .intro-right__wrapper {
   text-align: left;
@@ -110,7 +119,7 @@ main .inner {
 }
 
 .btn--main {
-  width: 320px;
+  width: 200px;
   height: 50px;
   font-size: 17px;
   letter-spacing: 1px;
@@ -266,10 +275,11 @@ main .inner {
   font-weight: bold;
 }
 
+/*
 .creator-title {
   display: flex;
   align-items: center;
-}
+} 
 
 .creator-profile {
   max-width: 40px;
@@ -279,8 +289,16 @@ main .inner {
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
+}  */
+
+.creator-info__wrapper .profile_wrapper {
+	display:flex;
+  	align-items: center;
 }
 
+.creator-info__wrapper .profile_wrapper .name{
+	font-weight: bold;
+}
 .creator-intro {
   padding: 20px 0;
   line-height: 1.5;
@@ -332,6 +350,9 @@ main .inner {
   font-size: 14px;
 }
 
+.reward__wrapper .reward-box a:hover{
+	color:#7f0000;
+}
 .reward-price {
   padding: 10px 0 20px 0;
   font-size: 20px;
@@ -429,8 +450,8 @@ button {
   margin-right: 20px;
 }
 
-.figure {
-  display: flex;
+.profile_wrapper {
+  display: flex !important; 
   justify-content: start;
   padding-bottom: 1rem;
   border-bottom: var(--line);
@@ -444,14 +465,14 @@ button {
   margin-right: 15px;
 }
 
-.fig_caption {
+.profile_caption {
   display: flex;
   flex-direction: column;
   justify-content: start;
   padding: 0.5rem 0;
 }
 
-.name {
+.comment_list .profile_wrapper .profile_caption .name {
   margin-bottom: 0.5rem;
   font-size: 13px;
   font-weight: bold;
@@ -485,6 +506,7 @@ button {
   cursor: pointer;
   text-align: center;
   font-size: 11px;
+  width: 120px;
 }
 
 .comment_options button:not(:last-child) {
@@ -509,11 +531,9 @@ button {
 }
 
 textarea {
-  font-family: "Lato", sans-serif;
-  border: 1px solid var(--color-text);
   width: 100%;
-  color: var(--color-text);
-  padding: 30px 20px;
+  height: 100px;
+  padding: 15px 20px;
 }
 
 .comment_edit_options {
@@ -575,7 +595,7 @@ textarea {
   transition: all 0.3s;
 }
 textarea {
-  resize: none;
+  resize: none !important;
 }
 button {
   outline: none;
@@ -614,4 +634,149 @@ button {
   height: 40px;
   margin-left: auto;
   display: block;
+  color:#fff;
+}
+
+.btn.report:hover{
+	color:#fff;
+}
+
+/* MODAL */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(1000px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(1000px);
+  }
+}
+
+.modal__layout {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  animation: fadeIn 0.4s ease-in-out forwards;
+}
+
+.modal__active {
+  display: flex;
+}
+
+.modal__layout .modal__box {
+  padding: 25px 35px;
+  background: #fff;
+  min-width: 300px;
+  max-height: 550px;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  animation: slideUp 0.4s ease-in-out forwards;
+}
+
+.modal__box h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.modal__btn__wrapper {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sns__icon__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal__btn__wrapper button {
+  width: 45%;
+  height: 30px;
+  padding: 10px 30px;
+  border: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.modal__layout .modal__box h1 {
+  align-self: flex-start;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.modal__layout .modal__box .label {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.modal__layout .modal__box form h1 {
+ 
+}
+
+.modal__layout .modal__box input {
+  margin-bottom: 30px;
+  font-size: 14px;
+  height: 30px;
+  width: 300px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid black;
+  background: none;
+}
+
+.modal__layout .modal__box textarea {
+  font-size: 14px;
+  padding: 10px;
+  border: none;
+  box-sizing: border-box;
+  max-width: 300px;
+  min-height: 150px;
+  max-height: 400px;
+  background: #eee;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.modal--layout .gap {
+  height: 10px;
 }

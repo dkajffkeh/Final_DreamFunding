@@ -2,4 +2,432 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="proInsertMapper">
   
+  	    <resultMap type="ProjectCategory" id="categoryResultSet">
+  	    	<result column="PRO_CATENO" property="projectCategory"/>
+  	    	<result column="PRO_CATENAME" property="projectCategoryName"/>
+  	    </resultMap>
+  	    
+  	    <resultMap type="com.donjomjo.dreamfunding.projectInsert.model.vo.Bank" id="bankResultSet">
+  	   	 <result column="BANK_NO" property="bankNo"/>
+  	     <result column="BANK_NAME" property="bankName"/>
+  	    </resultMap>
+  	    
+  	    <resultMap type="ProjectInsert" id="ProjectResultSetHY">
+  	    	<result column="PROJECT_NO" property="projectNo"/>
+  	    	<result column="MEMBER_NO" property="memberNo"/>
+  	    	<result column="PRO_CATENO" property="proCategoryNo"/>
+  	    	<result column="BANK_NO" property="bankNo"/>
+  	    	<result column="PROJECT_GOAL" property="projectGoal"/>
+  	    	<result column="PROJECT_TITLE" property="projectTitle"/>
+  	    	<result column="PROJECT_SUBTITLE" property="projectSubtitle"/>
+  	    	<result column="PROJECT_GPRICE" property="projectGoalPrice"/>
+  	    	<result column="PROJECT_START_DT" property="projectStartDate"/>
+  	    	<result column="PROJECT_CLOSE_DT" property="projectEndDate"/>
+  	    	<result column="PROJECT_URL" property="projectURL"/>
+  	    	<result column="PROJECT_THUMPATH" property="projectThumbnailPath"/>
+  	    	<result column="PROJECT_FILENAME" property="projectFileName"/>
+  	    	<result column="PROJECT_REASON" property="projectReason"/>
+  	    	<result column="PROJECT_COUNT" property="projectCount"/>
+  	    	<result column="PROJECT_CONTENT" property="projectContent"/>
+  	    	<result column="PROJECT_VURL" property="projectVideoURL"/>
+  	    	<result column="PROJECT_REFCON" property="projectRefundPolicy"/>
+  	    	<result column="CREATOR_THUMPATH" property="creatorThumbnailPath"/>
+  	    	<result column="CREATOR_PROFILE" property="creatorProfile"/>
+  	    	<result column="CREATOR_NAME" property="creatorName"/>
+  	    	<result column="CREATOR_INTRO" property="creatorIntro"/>
+  	    	<result column="CREATOR_PHONE" property="creatorPhone"/>
+  	    	<result column="PHONE_CHECK" property="phoneCheck"/>
+  	    	<result column="CREATOR_EMAIL" property="creatorEmail"/>
+  	    	<result column="CREATOR_BANK" property="creatorBank"/>
+  	    	<result column="CREATOR_ACOUNT" property="creatorAccount"/>
+  	    	<result column="CREATOR_ACHOLDER" property="accountHolder"/>
+  	    	<result column="CREATOR_WEBURL" property="webURL"/>
+  	    	<result column="CREATOR_INSTA" property="insta"/>
+  	    	<result column="CREATOR_FACEBOOK" property="facebook"/>
+  	    	<result column="CREATOR_STATUS" property="status"/>
+  	    	<result column="HASHTAG" property="hashtag"/>
+  	    	<result column="PROJECT_CRDATE" property="createDate"/>
+  	    	<result column="PROJECT_TEMPORARY" property="projectTemp"/>
+  	    </resultMap>
+  	    
+  	    <resultMap type="Reward" id="RewardResultSet">
+  	    	<result column="RE_NO" property="rewardNo"/>
+  	    	<result column="PROJECT_NO" property="projectNo"/>
+  	    	<result column="RE_PRICE" property="rewardPrice"/>
+  	    	<result column="RE_STATUS" property="rewardStatus"/>
+  	    	<result column="RE_NUMBER" property="rewardNumber"/>
+  	    	<result column="RE_SH_STATUS" property="rewardShCheck"/>
+  	    	<result column="RE_SALECOUNT" property="saleCount"/> 	    
+  	    </resultMap>
+  	    
+  	    <resultMap type="RewardOption" id="RewardOptionResultSet">
+  	    	<result column="RE_OPTION_NO" property="optionNo"/>
+  	    	<result column="REWARD_NO" property="rewardNo"/>
+  	    	<result column="RE_OPTION_NAME" property="rewardContent"/>
+  	    </resultMap>
+  	    
+  	    <resultMap type="com.donjomjo.dreamfunding.projectInsert.model.vo.CKEDitor" id="CKEDitorResultSet">
+  	    <result column="ED_NO" property="editorNo"/>
+  	    <result column="PROJECT_NO" property="projectNo"/>
+  	    <result column="ED_FILENAME" property="filename"/>
+  	    <result column="ED_FILEPATH" property="filePath"/>
+  	    </resultMap>
+  	    
+  	   <select id="selectCategory"
+  	   		   resultMap="categoryResultSet">
+  	   	SELECT
+  	   	      PRO_CATENO
+  	         ,PRO_CATENAME
+  	     FROM
+  	         PRO_CATEGORY    
+  	   </select>
+  	   
+  	   <select id="selectBank"
+  	   		   resultMap="bankResultSet">
+  	   	SELECT
+  	   		  BANK_NO
+  	   		 ,BANK_NAME
+  	   	  FROM
+  	   	      BANK	   
+  	   </select>
+  	   <select id="selectProNo"
+  	    	   resultType="_int">
+  	   	SELECT
+		      SEQ_PNO.NEXTVAL
+		  FROM
+		      DUAL 
+  	   </select>
+  	   <insert id="insertProject"
+  	   		   parameterType="ProjectInsert">
+  	   	INSERT
+  	   	      INTO
+  	   	          PROJECT
+  	   	          	(	   
+  	    	  			 PROJECT_NO
+						,MEMBER_NO
+						,PRO_CATENO
+						,BANK_NO
+						,PROJECT_GOAL
+						,PROJECT_TITLE
+						,PROJECT_SUBTITLE
+						,PROJECT_GPRICE
+						,PROJECT_START_DT
+						,PROJECT_CLOSE_DT
+						,PROJECT_URL
+						,PROJECT_THUMPATH
+						,PROJECT_FILENAME
+						,PROJECT_COUNT
+						,PROJECT_CONTENT
+						,PROJECT_VURL
+						,PROJECT_REFCON
+						,CREATOR_THUMPATH
+						,CREATOR_PROFILE
+						,CREATOR_NAME
+						,CREATOR_INTRO
+						,CREATOR_PHONE
+						,PHONE_CHECK
+						,CREATOR_EMAIL
+						,CREATOR_BANK
+						,CREATOR_ACOUNT
+						,CREATOR_ACHOLDER
+						,CREATOR_WEBURL
+						,CREATOR_INSTA
+						,CREATOR_FACEBOOK
+						,CREATOR_STATUS
+						,HASHTAG
+						,PROJECT_CRDATE
+						,PROJECT_TEMPORARY
+	  	   			)
+	  	   			VALUES
+	  	   			(
+	  	   				 #{projectNo}
+						,2
+						,#{proCategoryNo}
+						,#{bankNo}
+						,#{projectGoal}
+						,#{projectTitle}
+						,#{projectSubtitle}
+						,#{projectGoalPrice}
+						,#{projectStartDate}
+						,#{projectEndDate}
+						,#{projectURL}
+						,#{projectThumbnailPath}
+						,#{projectFileName}
+						,0
+						,#{projectContent}
+						,#{projectVideoURL}
+						,#{projectRefundPolicy}
+						,#{creatorThumbnailPath}
+						,#{creatorProfile}
+						,#{creatorName}
+						,#{creatorIntro}
+						,#{creatorPhone}
+						,#{phoneCheck}
+						,#{creatorEmail}
+						,#{creatorBank}
+						,#{creatorAccount}
+						,#{accountHolder}
+						,#{webURL}
+						,#{insta}
+						,#{facebook}
+						,#{status}
+						,#{hashtag}
+						,SYSDATE
+						,'N'
+	  	   			  )	
+ 
+  	   </insert>
+  	   
+  	   <insert id="insertReward"
+  	   		   parameterType="Reward">
+  	   		INSERT
+  	   			  INTO
+  	   			      REWARD
+  	   			      (
+  	   			         RE_NO
+						,PROJECT_NO
+						,RE_PRICE
+						,RE_STATUS
+						,RE_NUMBER
+						,RE_SH_STATUS
+						,RE_SALECOUNT
+  	   			      )
+  	   			      VALUES
+  	   			      (
+  	   			         SEQ_RWNO.NEXTVAL
+						,#{projectNo}
+						,#{rewardPrice}
+						,#{rewardStatus}
+						,#{rewardNumber}
+						,#{rewardShCheck}
+						,0
+  	   			      )
+  	   </insert>
+  	   
+  	   <insert id="insertOption"
+  	   		   parameterType="RewardOption">
+  	   		INSERT
+  	   			  INTO
+  	   			  	  RE_OPTION
+  	   			  	  (
+  	   			  	     RE_OPTION_NO
+						,REWARD_NO
+					    ,RE_OPTION_NAME
+  	   			  	  )
+  	   			  	  VALUES
+  	   			  	  (
+  	   			  	     SEQ_OPNO.NEXTVAL
+						,SEQ_RWNO.CURRVAL
+					    ,#{rewardContent}
+  	   			  	  )
+  	   		
+  	   
+  	   </insert>
+  	   <select id="urlconflictCheck"
+  	   	       parameterType="string"
+  	   	       resultType="string">
+  	   	 	SELECT
+			      COUNT(*) COUNT
+			 FROM
+			      PROJECT
+			 WHERE
+			      PROJECT_URL=#{urlInput}
+  	   </select>
+  	   <select id="selectProjectHY"
+  	   		   parameterType="_int"
+  	   		   resultMap="ProjectResultSetHY">
+  	   		SELECT
+  	   			  PROJECT_NO	   
+  	   		     ,NVL(PROJECT_TITLE,'제목이 지정되지 않았습니다') PROJECT_TITLE
+  	   		     ,CASE 
+     					 WHEN CREATOR_STATUS= 'R' THEN '수락요청'
+     					 WHEN CREATOR_STATUS= 'D' THEN '반려'
+     					 WHEN CREATOR_STATUS= 'T' THEN '임시저장'
+     					 END AS CREATOR_STATUS 		     
+  	   		     ,PROJECT_CRDATE
+  	   		 FROM
+  	   		 	 PROJECT
+  	   		WHERE
+  	   		     MEMBER_NO=#{memNo} 
+  	   		  AND
+  	   		     CREATOR_STATUS='R'
+  	   		  OR
+  	   		     CREATOR_STATUS='D'
+  	   		  OR
+  	   		     CREATOR_STATUS='T'
+  	   		  ORDER BY PROJECT_NO DESC            	     
+  	   </select>
+  	   <select id="projectNumberCheck"
+  	   	       parameterType="_int"
+  	   	       resultType="_int">
+  	   	    SELECT
+  	   	          COUNT(*)
+  	   	      FROM        
+                  PROJECT
+             WHERE
+                  PROJECT_NO=#{projectNo}    	  
+  	   </select>
+  	   <update id="projectUpdateOnly"
+  	   		   parameterType="ProjectInsert">
+  	   		UPDATE
+  	   		      PROJECT
+  	   		   SET			
+					 PRO_CATENO=#{proCategoryNo}
+					,BANK_NO=#{bankNo}
+					,PROJECT_GOAL=#{projectGoal}
+					,PROJECT_TITLE=#{projectTitle}
+					,PROJECT_SUBTITLE=#{projectSubtitle}
+					,PROJECT_GPRICE=#{projectGoalPrice}
+					,PROJECT_START_DT=#{projectStartDate}
+					,PROJECT_CLOSE_DT=#{projectEndDate}
+					,PROJECT_URL=#{projectURL}
+					,PROJECT_CONTENT=#{projectContent}
+					,PROJECT_VURL=#{projectVideoURL}
+					,CREATOR_STATUS=#{status}
+					,PROJECT_REFCON=#{projectRefundPolicy}
+					<if test="projectFileName != null">
+					,PROJECT_THUMPATH=#{projectThumbnailPath}
+					,PROJECT_FILENAME=#{projectFileName}
+					</if>
+					<if test="creatorProfile != null">
+					,CREATOR_THUMPATH=#{creatorThumbnailPath}
+					,CREATOR_PROFILE=#{creatorProfile}
+					</if>
+					,CREATOR_NAME=#{creatorName}
+					,CREATOR_INTRO=#{creatorIntro}
+					,CREATOR_PHONE=#{creatorPhone}
+					,PHONE_CHECK=#{phoneCheck}
+					,CREATOR_EMAIL=#{creatorEmail}
+					,CREATOR_BANK=#{creatorBank}
+					,CREATOR_ACOUNT=#{creatorAccount}
+					,CREATOR_ACHOLDER=#{accountHolder}
+					,CREATOR_WEBURL=#{webURL}
+					,CREATOR_INSTA=#{insta}
+					,CREATOR_FACEBOOK=#{facebook}
+					,HASHTAG=#{hashtag}
+					,PROJECT_CRDATE=SYSDATE
+					,PROJECT_TEMPORARY=#{projectTemp}
+  	   			WHERE
+  	   			     PROJECT_NO=#{projectNo}
+  	   </update>
+  	   <delete id="deleteReward"
+  	   	       parameterType="_int">
+  	   	    DELETE
+  	   	    	  FROM
+  	   	    	      REWARD
+  	   	      WHERE 
+  	   	           PROJECT_NO=#{projectNo}	         
+  	   </delete>
+  	   <select id="ajaxProjectSelector"
+  	   	       resultMap="ProjectResultSetHY"
+  	   	       parameterType="_int">
+  	   	   SELECT
+  	   	         PROJECT_NO
+				,MEMBER_NO
+				,PRO_CATENO
+				,BANK_NO
+				,PROJECT_GOAL
+				,PROJECT_TITLE
+				,PROJECT_SUBTITLE
+				,PROJECT_GPRICE
+				,PROJECT_START_DT
+				,PROJECT_CLOSE_DT
+				,PROJECT_URL
+				,PROJECT_THUMPATH
+				,PROJECT_FILENAME
+				,PROJECT_REASON
+				,PROJECT_COUNT
+				,PROJECT_CONTENT
+				,PROJECT_VURL
+				,PROJECT_REFCON
+				,CREATOR_THUMPATH
+				,CREATOR_PROFILE
+				,CREATOR_NAME
+				,CREATOR_INTRO
+				,CREATOR_PHONE
+				,PHONE_CHECK
+				,CREATOR_EMAIL
+				,CREATOR_BANK
+				,CREATOR_ACOUNT
+				,CREATOR_ACHOLDER
+				,CREATOR_WEBURL
+				,CREATOR_INSTA
+				,CREATOR_FACEBOOK
+				,CREATOR_STATUS
+				,HASHTAG
+				,PROJECT_CRDATE
+				
+		    FROM
+		        PROJECT
+		   WHERE
+		        PROJECT_NO=#{pno}     		     
+  	   </select>
+  	   <select id="ajaxRewardSelector"
+  	   	       parameterType="_int"
+  	   	       resultMap="RewardResultSet">
+  	   	    SELECT
+  	   	          RE_NO
+				 ,PROJECT_NO
+				 ,RE_PRICE
+				 ,RE_STATUS
+				 ,RE_NUMBER
+				 ,RE_SH_STATUS
+				 ,RE_SALECOUNT
+  	   	     FROM
+  	   	         REWARD
+	  	   	WHERE
+			     PROJECT_NO=#{pno}
+			ORDER BY RE_NO ASC      
+  	   
+  	   </select>
+  	   <select id="ajaxOptionSelector"
+  	   		   parameterType="java.util.ArrayList"
+  	   		   resultMap="RewardOptionResultSet">
+  	   		SELECT
+  	   			  RE_OPTION_NO
+				 ,REWARD_NO
+				 ,RE_OPTION_NAME
+			 FROM
+			     RE_OPTION
+			WHERE REWARD_NO IN
+			<foreach collection="array" item="array" index="index" open="(" close=")" separator=",">
+			 	#{array}
+			</foreach>
+			ORDER BY REWARD_NO ASC     		 
+  	   </select>
+  	   <select id="reloadUrlConflictCheck"
+  	   		   resultType="string"
+  	   		   parameterType="hashmap">
+  	   		  SELECT
+     				 COUNT(*)
+				FROM
+					 (      
+				SELECT
+				      PROJECT_URL
+				  FROM
+				      PROJECT
+				 WHERE
+				      PROJECT_NO != #{pno}
+				      )
+				 WHERE
+				     PROJECT_URL= #{urlInput}
+  	   </select>
+  	   <insert id="insertCKEDitor"
+  	   	       parameterType="hashmap">
+  	   	       INSERT
+  	   	       		 INTO
+  	   	       		     CKEDITOR
+  	   	       		     (
+  	   	       		     ED_NO						
+						,ED_FILENAME
+						,ED_FILEPATH
+  	   	       		     )
+  	   					 VALUES
+  	   					 (
+  	   					 SEQ_CKNO.NEXTVAL
+  	   					 ,#{filename}
+  	   					 ,#{filepath}
+  	   					 )
+  	   </insert>
+
 </mapper>

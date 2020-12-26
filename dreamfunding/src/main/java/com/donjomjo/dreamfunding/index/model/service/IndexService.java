@@ -1,5 +1,35 @@
 package com.donjomjo.dreamfunding.index.model.service;
 
-public class IndexService {
+import java.util.ArrayList;
+
+import com.donjomjo.dreamfunding.index.model.vo.Index;
+
+public interface IndexService {
+	
+	
+	// 1. 진행중인 펀딩 조회용 서비스
+	ArrayList<Index> selectProgressFundingList();
+	
+	// 2. 실시간 랭킹 조회용 서비스
+	ArrayList<Index> selectRankingList();
+	
+	// 3. 종료된 펀딩 조회용 서비스
+	ArrayList<Index> selectClosedFundingList();
+	
+	// 4. 프로젝트 상세조회용 서비스
+	int increaseCount(int projectNo);
+	Index selectDetailProject();
+	
+	// 5. 실시간 문의하기 채팅 서비스
+	
+	// 6. 실시간 알림 서비스
+	
+	// 7. 최근검색어 서비스
+	
+	// 8. 
+	
+	
+	
+	
 
 }

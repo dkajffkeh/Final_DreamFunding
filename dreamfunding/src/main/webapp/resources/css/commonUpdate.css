@@ -10,6 +10,11 @@ a {
     text-decoration: none;
     color: #333;
 }
+
+a:hover {
+    text-decoration: none !important;
+}
+
 .inner {
     max-width: 1200px;
     margin: 0 auto;
@@ -29,6 +34,12 @@ header .inner {
     display: flex;
     flex: 1;
     align-items: center;
+}
+
+.header__left li{
+	display: flex;
+	align-items: center; 
+	justify-content: center;
 }
 
 header a:hover {
@@ -96,6 +107,8 @@ header a:hover {
 }
 .header__left .header__nav {
     display: flex;
+    align-items: center;
+    margin-bottom: 0;
 }
 
 .header__nav li a {
