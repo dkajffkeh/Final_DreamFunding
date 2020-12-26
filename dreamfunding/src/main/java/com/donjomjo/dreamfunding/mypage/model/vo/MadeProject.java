@@ -1,5 +1,5 @@
 package com.donjomjo.dreamfunding.mypage.model.vo;
 
-public class Mypage {
+public class MadeProject {
 
 }
