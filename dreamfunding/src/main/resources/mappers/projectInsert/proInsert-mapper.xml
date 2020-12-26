@@ -254,7 +254,8 @@
   	   		  OR
   	   		     CREATOR_STATUS='D'
   	   		  OR
-  	   		     CREATOR_STATUS='T'          	     
+  	   		     CREATOR_STATUS='T'
+  	   		  ORDER BY PROJECT_NO DESC            	     
   	   </select>
   	   <select id="projectNumberCheck"
   	   	       parameterType="_int"

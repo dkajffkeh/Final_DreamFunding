@@ -34,6 +34,7 @@ import com.donjomjo.dreamfunding.projectInsert.model.vo.Reward;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.RewardOption;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.sun.istack.internal.logging.Logger;
 import com.sun.xml.internal.ws.util.StringUtils;;
 
 @Controller
@@ -131,26 +132,45 @@ public class ProjectInsertController {
 				settingPronoToReward(pi,r);
 				pService.deleteReward(pi);
 				pService.insertRewardOnly(r, o);
-			
-				
+							
 			}
 		  //사진은 안올라온 케이스. 그냥 업데이트만 하면됨.
 		} else  {
 		
-			    if(pService.projectUpdateOnly(pi)>0) {
-				
+			    if(pService.projectUpdateOnly(pi)>0) {				
 			   	
 			    deleteEmptyArray(r,o);
 				settingPronoToReward(pi,r);	
 				pService.deleteReward(pi);		
-				pService.insertRewardOnly(r, o);
-			    
+				pService.insertRewardOnly(r, o);			    
 				
 			}
 			
 		}
 		
 		
+	}
+	
+	@RequestMapping(value="aaaabbbb.pi.hy")
+	public String toPreview(int pno,Model model) {
+		/*
+		model.addAttribute("project", pService.ajaxProjectSelector(pi.getProjectNo()));
+		model.addAttribute("rList", pService.ajaxRewardSelector(pi.getProjectNo()));
+		ArrayList<Reward> rList = pService.ajaxRewardSelector(pi.getProjectNo());
+		
+		String [] opList = new String[rList.size()];
+		
+		for(int i = 0 ; i<rList.size(); i++) {
+			
+			opList[i] = ""+rList.get(i).getRewardNo();
+			
+		}
+		System.out.println(pi);
+		System.out.println(pService.ajaxRewardSelector(pi.getProjectNo()));
+		System.out.println(Arrays.toString(opList));
+		*/
+		System.out.println(pno);
+		return "projectInsert/projectPreview";
 	}
 	
 	

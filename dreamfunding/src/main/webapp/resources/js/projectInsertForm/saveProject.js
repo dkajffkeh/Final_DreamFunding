@@ -33,6 +33,7 @@ $(".btn.btn-primary.btn2 , #projectSaveBtn").click(function () {
                 processData: false,
                 contentType: false,
                 success: function (result) {
+
                     if (result > 0) {
                         swal("저장 되었습니다", "", "success");
                         $("input[name='actionType']").remove('value');

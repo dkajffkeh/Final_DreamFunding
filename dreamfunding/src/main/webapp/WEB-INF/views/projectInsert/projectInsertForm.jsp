@@ -31,7 +31,7 @@
         <form id="insertConroller" enctype="multipart/form-data">
 
             <div id="button_wrapper">
-                <button class="btn btn-primary btn1" type="button"><i class="fas fa-file-alt"></i>&nbsp;&nbsp;미리보기</button>
+                <button class="btn btn-primary btn1" type="button" id="previewBtn"><i class="fas fa-file-alt"></i>&nbsp;&nbsp;미리보기</button>
                 <button class="btn btn-primary btn2" type="button"><i class="far fa-save"></i>&nbsp;&nbsp;임시저장</button>
                 <button class="btn btn-primary btn3" type="button" data-toggle="modal" data-target=".bd-example-modal-lg"><i
                         class="fas fa-upload"></i>&nbsp;&nbsp;불러오기</button>
@@ -294,8 +294,12 @@
                                         </div>
                                     </td>
                                     <td class="userInputarea">
+                                    <span style="display:flex; align-items: center;">
                                         <input type="text" style="width:450px" id="videourlInput" class="form-control" name="projectVideoURL"
                                             placeholder="https://www.youtube.com/xVV8Da9d0ig">
+                                        <button type="button" class="btn btn-outline hashtagBtn" data-toggle="modal" data-target=".bd-example-modal-lggg" style="height:40px; font-weight:bold;"> 영상 입력방법 보기</button>        
+                                        <!-- Youtube Description Modal -->                            
+                                     </span>       
                                          <div id="videoAnnouncement" style="margin-top:5px">url 이 입력되지 않았습니다.</div>   
                                       <iframe id="videoIframe" 
                                      			  style="margin-top:20px; 
@@ -658,10 +662,9 @@
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> 
    
 
-    <!--Modal-->
-    
+    <!--Modal projectReload-->
 
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" data-toggle="modal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" data-toggle="modal1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content" style="padding: 10px 5px 5px 10px;">
           <h1 style="font-size: 2.0rem;">불러오기</h1>
@@ -689,10 +692,25 @@
         </div>
       </div>
     </div>
+    
+	    <div class="modal fade bd-example-modal-lggg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content" style="padding: 10px 10px 10px 10px">
+	      <span style="font-size:2rem; font-weight:bold ;">&laquo; 유트브 영상 업로드 방법 &raquo; </span>
+	      <img src="${pageContext.request.contextPath}/resources/images/youtubeDescription/youtube1.JPG" style="margin-top:30px; margin-bottom:10px">
+	      <span style="font-size:1.4rem; font-weight:bold ;">유튜브 영상 아래 공유 버튼을 클릭해주세요.</span>
+	      <img src="${pageContext.request.contextPath}/resources/images/youtubeDescription/youtube2.JPG" style="margin-top:30px; margin-bottom:10px">
+	      <span style="font-size:1.4rem; font-weight:bold ;">이후 보여지는 주소를 복사하여 저희 웹사이트 입력란에 붙여넣기 해주세요.</span>
+	    </div>
+	  </div>
+	</div>
+	    
+ 
+    
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/saveProject.js?ver=1"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/projectReload.js?ver=1"></script>
-    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/requestSubmit.js?ver=1"></script>
+    <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/forwardingController.js?ver=1"></script>
 	<script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/loadProject.js?ver=1"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/completeCheck.js?ver=1"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/calculatorLettersDate.js?ver=1"></script>
