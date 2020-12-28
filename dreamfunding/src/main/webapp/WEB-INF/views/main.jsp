@@ -435,6 +435,10 @@
       	<a href="detailStory.de">고독한 디테일방</a>
       </div>
       
+      <div>
+      	<a href="daminIndex.ad">졸라 고독한 관리자페이지</a>
+      </div>
+      
     </main>
 	
 	

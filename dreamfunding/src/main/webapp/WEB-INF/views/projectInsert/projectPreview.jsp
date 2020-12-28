@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -223,7 +225,7 @@
              <c:forEach var="i" items="${ rList }"> 
                    
               <div class="reward-box">
-                  <div class="reward-price">${ i.rewardPrice } 원 펀딩</div>
+                  <div class="reward-price"><fmt:formatNumber value="${ i.rewardPrice }" pattern="#,###,###" /> + </div>
                   <ul class="reward-option">
               	<c:if test="${ !oList.equals('emptyArr') }">
                		<c:forEach var="j" items="${ oList }">
