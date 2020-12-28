@@ -23,6 +23,7 @@ public class IndexServiceImpl implements IndexService {
 	public ArrayList<Index> selectProgressFundingList() {
 		
 		return iDao.selectProgressFundingList(sqlSession);
+		
 	}
 
 	@Override

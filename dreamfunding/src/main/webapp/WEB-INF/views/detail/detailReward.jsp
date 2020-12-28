@@ -49,17 +49,20 @@
 		
 
             <div class="reward-label" id="rewardLabel">리워드 선택</div>
-    
+    		
 		      <c:forEach var="w" items="${ rw }">
 		        <div class="reward__wrapper">	
 		          <div class="reward-box">
 		            <a href="#">
 		              <div class="reward-price">
 		              <fmt:formatNumber type="number" maxFractionDigits="3" value="${w.rewardPrice}"/>원 펀딩</div>
-		             
+		                   
 		              <ul class="reward-option">
-		                <li>${w.rewardOptionName }</li> 
+		             	<c:forEach var="o" items="${ w.detailRewardOptList }">
+		               		 <li>${ o.rewardContent }</li> 
+		                </c:forEach>
 		              </ul>    
+		              
 		              <c:choose>
 		                <c:when test="${w.rewardStatus eq 'N'}">
 		                  <div class="reward-status">제한 수량 무제한</div>

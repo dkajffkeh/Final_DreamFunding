@@ -15,7 +15,6 @@ public class IndexDao {
 		
 		return (ArrayList)sqlSession.selectList("indexMapper.selectProgressFundingList");
 		
-		
 	}
 
 }

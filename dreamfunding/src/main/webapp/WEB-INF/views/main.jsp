@@ -147,89 +147,61 @@
             <!-- 진행중인 펀딩 리스트 start -->
             <section class="thumbnail thumbnail-a">
               <ul class="card-list">
-                <li class="card-item">
-                  <div class="card-image" style="background-image: url(../../../resources/images/book12.jpg)">
-                    <img src="../../../resources/images/book12.jpg" alt="책">
-                    <div>
-                      <div class="like">
-                        <span class="material-icons md-36">favorite</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-desc">
-                      <div class="project-content">
-                          <div class="project-company">BeatChef</div>
-                          <div class="project-title">'취미부터 입문자까지 1시간 완성' 비트메이킹 전자책</div>
-                      </div>
-                      <div class="project-detail">
-                          <div class="funding-percent">370% 달성!</div>
-                          <div class="funding-d-day">D - 10</div>
-                      </div>
-                  </div>
-                </li>
-                <li class="card-item">
-                  <figure class="card-image" style="background-image: url(../../../resources/images/book1.jpg)">
-                    <img src="../../../resources/images/book1.jpg" alt="책">
-                    <div>
-                      <div class="like">
-                        <span class="material-icons md-36">favorite</span>
-                      </div>
-                    </div>
-                  </figure>
-                  <div class="card-desc">
-                      <div class="project-content">
-                          <div class="project-company">회사이름</div>
-                          <div class="project-title">프로젝트 제목</div>
-                      </div>
-                      <div class="project-detail">
-                          <div class="funding-percent">펀딩 퍼센트</div>
-                          <div class="funding-d-day">디데이</div>
-                      </div>
-                  </div>
-                </li>
-                <li class="card-item">
-                  <figure class="card-image" style="background-image: url(../../../resources/images/book2.jpg)">
-                    <img src="../../../resources/images/book2.jpg" alt="책">
-                    <div>
-                      <div class="like">
-                        <span class="material-icons md-36">favorite</span>
-                      </div>
-                    </div>
-                  </figure>
-                  <div class="card-desc">
-                      <div class="project-content">
-                          <div class="project-company">회사이름</div>
-                          <div class="project-title">프로젝트 제목</div>
-                      </div>
-                      <div class="project-detail">
-                          <div class="funding-percent">펀딩 퍼센트</div>
-                          <div class="funding-d-day">디데이</div>
-                      </div>
-                  </div>
-                </li>
-                <li class="card-item">
-                  <figure class="card-image" style="background-image: url(../../../resources/images/book9.jpg)">
-                    <img src="../../../resources/images/book9.jpg" alt="책">
-                    <div>
-                      <div class="like">
-                        <span class="material-icons md-36">favorite</span>
-                      </div>
-                    </div>
-                  </figure>
-                  <div class="card-desc">
-                      <div class="project-content">
-                          <div class="project-company">회사이름</div>
-                          <div class="project-title">프로젝트 제목</div>
-                      </div>
-                      <div class="project-detail">
-                          <div class="funding-percent">펀딩 퍼센트</div>
-                          <div class="funding-d-day">디데이</div>
-                      </div>
-                  </div>
-                </li>
+                
               </ul>
             </section>
             <!-- 진행중인 펀딩 리스트 end -->
+            
+            
+            <!-- 진행중인 펀딩 리스트 ajax -->
+            <script>
+	        	$(function(){
+	        		selectProgressFundingList();
+	        	})
+	        	
+	        	function selectProgressFundingList(progressList){
+	        		
+	        		$.ajax({
+	        			url:"progressList.do",
+	        			success:function(progressList){
+	        				
+	        				var value = "";
+	        				for(var i in progressList){
+	    						value += "<li class='card-item'>" + 
+		    								 "<figure class='card-image' style='background-image: url(" + progressList[i].projectThumPath + progressList[i].projectFileName + ")'>" +
+					    	                    "<img src='../../../resources/images/book2.jpg'>" +
+					    	                    "<div>" +
+					    	                      "<div class='like'>" +
+					    	                        "<span class='material-icons md-36'>favorite</span>" +
+					    	                      "</div>" +
+					    	                    "</div>" +
+					    	                  "</figure>" +
+					    	                  "<div class='card-desc'>" +
+					    	                      "<div class='project-content'>" +
+					    	                          "<div class='project-company'>" + progressList[i].creatorName + "</div>" +
+					    	                          "<div class='project-title'>" + progressList[i].projectTitle + "</div>" +
+					    	                      "</div>" +
+					    	                      "<div class='project-detail'>" +
+					    	                          "<div class='funding-percent'>" + progressList[i].projectStartDt + "</div>" +
+					    	                          "<div class='funding-d-day'>" + progressList[i].projectCloseDt + "</div>" + 
+					    	                      "</div>" +
+					    	                  "</div>" +
+				    	                  "</li>";
+	        				}
+	        				
+	        				$(".thumbnail-a ul").html(value);
+	        				
+	        				
+	        				
+	        				
+	        			},error:function(){
+	        				console.log("ajax 통신 실패!");
+	        			}
+	        		})
+	        		
+	        	}
+	        </script>
+            
 
             <!-- 더보기 버튼 -->
             <div class="more more-a">

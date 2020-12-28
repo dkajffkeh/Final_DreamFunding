@@ -69,8 +69,8 @@ public class DetailController {
 		
 			ArrayList<DetailReward> rw = dService.selectDetailReward(pno);
 			
-			// System.out.println("rw: " + rw);
-			
+			System.out.println(rw);
+		
 			model.addAttribute("rw", rw);
 			
 			return "detail/detailStory";

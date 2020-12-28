@@ -10,6 +10,7 @@ import com.donjomjo.dreamfunding.detail.model.dao.DetailDao;
 import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
 import com.donjomjo.dreamfunding.detail.model.vo.Like;
 import com.donjomjo.dreamfunding.detail.model.vo.Reply;
 import com.donjomjo.dreamfunding.detail.model.vo.SubReply;
@@ -49,6 +50,7 @@ public class DetailServiceImpl implements DetailService {
 
 		return dDao.selectDetailReward(sqlSession, pno);
 	}
+	
 
 	@Override
 	public int insertLike(Like like) {

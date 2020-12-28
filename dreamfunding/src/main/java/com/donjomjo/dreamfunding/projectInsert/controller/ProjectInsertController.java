@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.donjomjo.dreamfunding.projectInsert.model.service.ProjectInsertService;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.Bank;
@@ -147,30 +149,82 @@ public class ProjectInsertController {
 			}
 			
 		}
-		
-		
+
 	}
 	
-	@RequestMapping(value="aaaabbbb.pi.hy")
-	public String toPreview(int pno,Model model) {
-		/*
-		model.addAttribute("project", pService.ajaxProjectSelector(pi.getProjectNo()));
-		model.addAttribute("rList", pService.ajaxRewardSelector(pi.getProjectNo()));
-		ArrayList<Reward> rList = pService.ajaxRewardSelector(pi.getProjectNo());
+	@RequestMapping(value="gotoPreview")
+	public ModelAndView toPreview(ProjectInsert pi,ModelAndView model) {
 		
-		String [] opList = new String[rList.size()];
-		
-		for(int i = 0 ; i<rList.size(); i++) {
+		 ProjectInsert pro = pService.preViewProjectSelector(pi.getProjectNo());
+		 model.addObject("project", pro);
+	
+		//날짜
+		if(pro.getHashtag() != null) {
+			model.addObject("hashArr", pro.getHashtag().split(" "));
+		} else {
+			model.addObject("hashArr", "emptyArr");
+		}
+		if(pro.getProjectVideoURL() != null) {
 			
-			opList[i] = ""+rList.get(i).getRewardNo();
+			model.addObject("videoURL", pro.getProjectVideoURL().substring(pro.getProjectVideoURL().lastIndexOf("/")));
+			
+		} else {
+			model.addObject("videoURL", "emptyURL");
+		}
+		
+		if(pro.getProjectEndDate()!=null && pro.getProjectStartDate()!=null) {
+			
+			Calendar start = Calendar.getInstance();
+			Calendar end = Calendar.getInstance();
+			
+			String[] startArr = pro.getProjectStartDate().split("-");
+			String[] endArr = pro.getProjectEndDate().split("-");
+			
+		start.set(Integer.parseInt(startArr[0]),Integer.parseInt(startArr[1]),Integer.parseInt(startArr[2]));
+		long startSecond = start.getTimeInMillis()/86400000;
+		end.set(Integer.parseInt(endArr[0]),Integer.parseInt(endArr[1]),Integer.parseInt(endArr[2]));
+		long endSecond = end.getTimeInMillis()/86400000;
+		
+		model.addObject("dDay", (int)(endSecond-startSecond)+1);	
+			
+		} else {
+			model.addObject("dDay",0);
+		}
+	
+		
+		ArrayList <Reward> rList = pService.ajaxRewardSelector(pi.getProjectNo());
+		
+		if(rList.isEmpty()) {
+			
+			model.addObject("rList","emptyArr");
+			
+		} else {
+			
+			model.addObject("rList",rList);
+			
+			String [] opList = new String[rList.size()];
+			
+			for(int i = 0 ; i<rList.size(); i++) {
+				
+				opList[i] = ""+rList.get(i).getRewardNo();
+				
+			}
+		
+		if(pService.ajaxOptionSelector(opList).isEmpty()) {
+			
+			model.addObject("oList", "emptyArr");
+		
+		} else {
+			
+			model.addObject("oList", pService.ajaxOptionSelector(opList));
+		}
+				
 			
 		}
-		System.out.println(pi);
-		System.out.println(pService.ajaxRewardSelector(pi.getProjectNo()));
-		System.out.println(Arrays.toString(opList));
-		*/
-		System.out.println(pno);
-		return "projectInsert/projectPreview";
+		
+
+		model.setViewName("projectInsert/projectpreview");
+		return model;
 	}
 	
 	
@@ -186,7 +240,7 @@ public class ProjectInsertController {
 		    RewardOption o,
 		    Model model, 
 		    HttpSession session) {
-		
+	
 		//존재하는 프로젝트 업데이트 해야함.
 		if(pService.projectNumberCheck(pi)>0) { //업데이트 실행 해야함.
 			

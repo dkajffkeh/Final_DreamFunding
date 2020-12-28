@@ -4,6 +4,8 @@ $(".btn.btn-primary.btn2 , #projectSaveBtn").click(function () {
 
     const formData = new FormData(document.getElementById("insertConroller"));
     formData.append("status", "T");
+    formData.delete('projectContent');
+    formData.delete('projectRefundPolicy');
     formData.append('projectContent', CKEDITOR.instances['editor1'].getData());
     formData.append('projectRefundPolicy', CKEDITOR.instances['editor2'].getData())
 

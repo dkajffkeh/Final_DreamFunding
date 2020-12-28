@@ -113,6 +113,11 @@ public class ProjectInsertDao {
 		return sqlSession.insert("proInsertMapper.insertCKEDitor",map);
 	}
 
+	public ProjectInsert preViewProjectSelector(SqlSessionTemplate sqlSession, int pno) {
+		
+		return sqlSession.selectOne("proInsertMapper.preViewProjectSelector",pno);
+	}
+
 	
 
 	
