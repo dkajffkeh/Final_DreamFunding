@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     <link
         href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Source+Sans+Pro:wght@200&display=swap"
         rel="stylesheet">   
@@ -171,7 +172,7 @@
                                             <div class="datedisplay" style="display: flex;">
                                                 <div class="startdate" style="width:280px;
                                                                       font-size: 1.2rem;"></div>
-                                                <div class="enddate" style="font-size: 1.2rem;"></div>
+                                                <div class="enddate" style="font-size: 1.2rem; margin-left:65px"></div>
                                             </div>
                                             <div class="totaldate" align="center" style="font-size: 1.5rem;
                                                            margin-top: 10px;">프로젝트 기간</div>
@@ -301,7 +302,7 @@
                                         <!-- Youtube Description Modal -->                            
                                      </span>       
                                          <div id="videoAnnouncement" style="margin-top:5px">url 이 입력되지 않았습니다.</div>   
-                                      <iframe id="videoIframe" 
+                                    <!--  <iframe id="videoIframe" 
                                      			  style="margin-top:20px; 
                                      			  margin-bottom:100px;
                                      			  display:none;" 
@@ -315,7 +316,7 @@
                                      			  encrypted-media; 
                                      			  gyroscope; 
                                      			  picture-in-picture" 
-                                     			  allowfullscreen></iframe> 
+                                     			  allowfullscreen></iframe>   --> 
                                     </td>
                                 </tr>
                                 <tr>
@@ -652,7 +653,7 @@
     <!-- inputtype hidden -->
     <div id="hiddenInputArea" style="display: none;">
         <input tpye="hidden" name="hashtag" id="hashtags">
-        <input tpye="hidden" name="projectNo" value="${proSequence}">
+        <input tpye="hidden" id="hiddenprojectNo" name="projectNo" value="${proSequence}">
         <input tpye="hidden" name="memberNo" value="2">
         <input tpye="hidden" name="actionType" value="insert">
         
@@ -704,9 +705,8 @@
 	    </div>
 	  </div>
 	</div>
-	    
- 
-    
+	
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/saveProject.js?ver=1"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/projectReload.js?ver=1"></script>
@@ -720,6 +720,8 @@
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/rewardControll.js?ver=1"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/CKEDITOR.js?ver=1"></script>
     <script defer src="${pageContext.request.contextPath}/resources/js/projectInsertForm/iframeController.js?ver=1"></script>
+    
+   
 
 </body>
 

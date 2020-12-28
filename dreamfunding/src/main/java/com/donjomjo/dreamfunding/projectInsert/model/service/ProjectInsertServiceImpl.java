@@ -139,6 +139,12 @@ public class ProjectInsertServiceImpl implements ProjectInsertService {
 		
 		return pDao.insertCKEDitor(sqlSession,filename,filepath);
 	}
+
+	@Override
+	public ProjectInsert preViewProjectSelector(int pno) {
+		
+		return pDao.preViewProjectSelector(sqlSession,pno);
+	}
 	
 	
 
