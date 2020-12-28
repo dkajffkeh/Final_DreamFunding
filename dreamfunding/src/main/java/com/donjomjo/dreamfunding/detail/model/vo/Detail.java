@@ -48,5 +48,5 @@ public class Detail {
 	private String status; //프로젝트 상태
 	private String createDate;
 	private String projectTemp; //temp
-	
+	private String projectCategoryName;
 }

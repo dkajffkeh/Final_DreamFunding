@@ -1,9 +1,50 @@
 package com.donjomjo.dreamfunding.detail.model.dao;
 
 import org.springframework.stereotype.Repository;
+
+import com.donjomjo.dreamfunding.detail.model.vo.Detail;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
+
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 
 @Repository
 public class DetailDao {
+	
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("projectDetailMapper.selectListCount");
+	}
+	
+	// 리스트 조회(test)
+	public ArrayList<Detail> selectDetailList(SqlSessionTemplate sqlSession, DetailPageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("projectDetailMapper.selectDetailList", null, rowBounds);
+		
+	}
+	
+	// 프로젝트 글 조회수 증가 
+	public int increaseDetailCount(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("projectDetailMapper.increaseDetailCount", pno);
+	}
 
+	// 프로젝트 번호로 상세 조회 서비스 
+	public Detail selectDetailAll(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("projectDetailMapper.selectDetailAll", pno);
+	}
+
+	// 현재 프로젝트에 연결된 리워드 조회 서비스 
+	public ArrayList<DetailReward> selectDetailReward(SqlSessionTemplate sqlSession, int pno) {
+	
+		return (ArrayList)sqlSession.selectList("projectDetailMapper.selectDetailReward", pno);
+	}
+
+
+	
+	
 }

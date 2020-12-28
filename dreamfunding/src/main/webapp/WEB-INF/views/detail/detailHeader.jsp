@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
  <head>
@@ -27,17 +29,17 @@
         <div class="intro__wrapper">
           <div class="intro-top__wrapper">
             <ul>
-              <li><button type="button" class="btn btn--icon">잡지</button></li>
-              <li>서평 전문 잡지 "드림리뷰오브북스"</li>
+              <li><button type="button" class="btn btn--icon">${ d.projectCategoryName }</button></li>
+              <li>${ d.projectTitle }</li>
               <li>
                   <div class="profile_wrapper">
                         <img
                           class="image"
-                          src="resources/images/book7.jpg"
+                          src="resources/images/${ d.creatorProfile }"
                           alt="유저 프로필 이미지"
                         />  
                         <div class="profile_caption">
-                          <span class="name">드림리뷰오브북스</span>
+                          <span class="name">${ d.creatorName }</span>
                         </div>
                   </div>      
               </li>
@@ -47,7 +49,7 @@
             <div class="intro-left__wrapper">
               <div class="intro-img">
                 <img
-                  src="resources/images/dream.jpg"
+                  src="resources/images/${ d.projectFileName }"
                   alt="프로젝트 대표 이미지"
                 />
               </div>
@@ -71,7 +73,7 @@
                 <div class="funding-status__wrapper">
                   <div class="status-title">남은 기간</div>
                   <div class="value-unit_wrapper">
-                    <div class="status-value">8</div>
+                    <div class="status-value" id="dDay">${ d.projectEndDate }</div>
                     <span class="status-unit">일</span>
                   </div>
                 </div>
@@ -88,11 +90,12 @@
                   <span>
                     목표 금액인
                     <!-- -->
-                    "2,500,000"
-                    <!-- -->원이 모여야만 결제됩니다. <br />
+                    <fmt:formatNumber type="number" maxFractionDigits="3" value="${ d.projectGoalPrice }"/>
+                    <!-- -->원이 모여야만 결제됩니다. <br /></span>
+                    <span>
                     목표 금액을 달성한 경우, 결제예정일은
                     <!-- -->
-                    "12월 25일"
+                    ${ d.projectEndDate } 이후 10일 이내
                     <!-- -->입니다.
                   </span>
                 </div>
@@ -142,10 +145,9 @@
         </div>
       </div>
     </div>
-
     
     <script defer>
-  
+ 
       // sns 모달
       const snsModalOpen = () => {
         document.querySelector("#sns-modal").classList.toggle("modal__active");
@@ -166,7 +168,34 @@
             "slideUp 0.4s ease-in-out forwards";
         }, 400);
       };
+     
+      
+     
+	 
+      function numberWithCommas(x) {
+    	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    	}
+
+      
+     	  // 프로젝트 종료일까지 남은 기간 구하기      
+	  const endDate = new Date(document.querySelector('#dDay').textContent); // 프로젝트 종료일 
+      const now = new Date(); // 현재 날짜
+      const toEndDate = endDate.getTime(); 
+      // 1970년 1월 1일 0시 0분 0초부터 해당 날짜까지의 시간을 밀리초 단위로 환산한 값을 숫자로 반환
+   	  const toNow = now.getTime(); 
+
+   	  const gap = toEndDate - toNow // 현재 날짜에서 종료일까지 차이
+      const resultDay = Math.floor(gap/(1000 * 60 * 60 * 24)); // gap을 일(밀리초 * 초 * 분 * 시간)로 나누기  
+     
+   	  document.querySelector('#dDay').innerText = resultDay;
+ 
+		  		
     </script>
+      
+      
+      
+      
+    	 
     
        
         
