@@ -1,11 +1,22 @@
 package com.donjomjo.dreamfunding.order.model.dao;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.donjomjo.dreamfunding.order.model.vo.MemberPurchase;
+import com.donjomjo.dreamfunding.order.model.vo.PurchaseInfo;
 import com.donjomjo.dreamfunding.order.model.vo.Shipping;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectInsert;
 
@@ -24,4 +35,12 @@ public class OrderDao {
 		return (ArrayList)sqlSession.selectList("orderMapper.selectMemberPurchaseList", mno);
 	}
 
+	public Object puchaseProcess(SqlSessionTemplate sqlSession, PurchaseInfo pi) {
+		
+		
+		return null;
+	}
+
+	
+	
 }
