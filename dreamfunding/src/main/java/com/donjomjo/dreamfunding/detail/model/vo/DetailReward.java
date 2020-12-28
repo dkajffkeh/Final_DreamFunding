@@ -22,8 +22,6 @@ public class DetailReward {
 	private int rewardNumber; // 제공가능수
 	private String rewardShCheck; // 배송지 필요여부
 	private int saleCount; // 판매갯수
-	private int rewardAmount; // 리워드 1번 배열에 리워드 갯수가 몇개가 들어있는지
 	private ArrayList<DetailReward> detailRewardList;
-	private int rewardOptionNo;
-	private String rewardOptionName;
+	private ArrayList<DetailRewardOpt> detailRewardOptList;
 }

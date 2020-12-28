@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
 import com.donjomjo.dreamfunding.detail.model.vo.Like;
 import com.donjomjo.dreamfunding.detail.model.vo.Reply;
 import com.donjomjo.dreamfunding.detail.model.vo.SubReply;
@@ -59,7 +60,6 @@ public interface DetailService {
 	
 	// 대댓글 삭제 서비스
 	int deleteSubReply(int subNo);
-	
 
 
 }

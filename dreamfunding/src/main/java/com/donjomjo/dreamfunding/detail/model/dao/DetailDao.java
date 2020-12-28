@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
 
 import java.util.ArrayList;
 
@@ -41,7 +42,22 @@ public class DetailDao {
 	// 현재 프로젝트에 연결된 리워드 조회 서비스 
 	public ArrayList<DetailReward> selectDetailReward(SqlSessionTemplate sqlSession, int pno) {
 	
-		return (ArrayList)sqlSession.selectList("projectDetailMapper.selectDetailReward", pno);
+			
+		ArrayList<DetailReward> rewards = (ArrayList)sqlSession.selectList("projectDetailMapper.selectDetailReward", pno);
+
+		int rno = 0;
+		
+		for(DetailReward i: rewards) {  
+			rno = i.getRewardNo();// 반복문 돌려 rno에 각각의 리워드 번호 담은 후,
+			
+			ArrayList<DetailRewardOpt> opts = (ArrayList)sqlSession.selectList("projectDetailMapper.selectDetailRewardOpt", rno);
+			// rno 이용하여 <DetailRewardOpt>객체 빈 배열 opts에 리워드 옵션 리스트 조회 내역 담기 
+			
+			i.setDetailRewardOptList(opts);
+			
+		}
+		
+		return rewards;
 	}
 
 

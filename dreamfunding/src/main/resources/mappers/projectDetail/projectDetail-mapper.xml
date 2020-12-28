@@ -49,10 +49,14 @@
   		<result column="RE_NUMBER" property="rewardNumber"/>
   		<result column="RE_SH_STATUS" property="rewardShCheck"/>
   		<result column="RE_SALECOUNT" property="saleCount"/>
-  		<result column="RE_OPTION_NO" property="rewardOptionNo"/>
-  		<result column="RE_OPTION_NAME" property="rewardOptionName"/>
   	</resultMap>
  	
+ 	
+ 	<resultMap id="detailRewardOptResultSet" type="DetailRewardOpt">
+ 		<result column="RE_OPTION_NO" property="optionNo"/>
+		<result column="REWARD_NO" property="rewardNo"/>
+		<result column="RE_OPTION_NAME" property="rewardContent"/>
+ 	</resultMap>
   	
   
    <select id="selectListCount" resultType="_int">
@@ -134,11 +138,17 @@
   	<select id="selectDetailReward" parameterType="_int" resultMap="detailRewardResultSet">
  	SELECT *
   		  FROM REWARD
-  		     , RE_OPTION
-  	     WHERE REWARD_NO = RE_NO 
-           AND PROJECT_NO = #{ pno }
+  	     WHERE PROJECT_NO = #{ pno }
  		 ORDER
  		    BY RE_NO
   	</select>
+  	
+  	<select id="selectDetailRewardOpt" parameterType="_int" resultMap="detailRewardOptResultSet">
+ 	SELECT *
+  		  FROM RE_OPTION
+  	     WHERE REWARD_NO = #{ rno } 
+  	</select>
+  	
+  	
   	
 </mapper>
