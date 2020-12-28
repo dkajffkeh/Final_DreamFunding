@@ -23,23 +23,19 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insertMember(Member m) {
-		return 0;
+		return mDao.insertMember(sqlSession, m);
 	}
 
 	@Override
 	public int updateMember(Member m) {
-		return 0;
+		return mDao.updateMember(sqlSession, m);
 	}
 
 	@Override
-	public int deleteMember(String String) {
-		return 0;
+	public int deleteMember(String email) {
+		return mDao.deleteMember(sqlSession, email);
 	}
 
-	@Override
-	public int idCheck(String userId) {
-		return 0;
-	}
 
 	
 	

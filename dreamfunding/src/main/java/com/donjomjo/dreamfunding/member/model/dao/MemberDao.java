@@ -1,6 +1,7 @@
 package com.donjomjo.dreamfunding.member.model.dao;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.donjomjo.dreamfunding.member.model.vo.Member;
@@ -12,5 +13,17 @@ public class MemberDao {
 		
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}
-	
+
+	public int insertMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.insert("memberMapper.insertMember", m);
+	}
+
+	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMember", m);
+	}
+
+	public int deleteMember(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.update("memberMapper.deleteMember", email);
+	}
+
 }
