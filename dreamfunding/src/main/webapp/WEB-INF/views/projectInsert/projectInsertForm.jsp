@@ -302,21 +302,14 @@
                                         <!-- Youtube Description Modal -->                            
                                      </span>       
                                          <div id="videoAnnouncement" style="margin-top:5px">url 이 입력되지 않았습니다.</div>   
-                                    <!--  <iframe id="videoIframe" 
-                                     			  style="margin-top:20px; 
-                                     			  margin-bottom:100px;
-                                     			  display:none;" 
-                                     			  width="560" 
-                                     			  height="315" 
-                                     			  src="https://www.youtube.com/embed/" 
-                                     			  frameborder="0" 
-                                     			  allow="accelerometer; 
-                                     			  autoplay; 
-                                     			  clipboard-write; 
-                                     			  encrypted-media; 
-                                     			  gyroscope; 
-                                     			  picture-in-picture" 
-                                     			  allowfullscreen></iframe>   --> 
+                                     <iframe width="560" 
+                                     		 height="315"
+                                     		 id="videoIframe" 
+                                     		 src="https://www.youtube.com/embed/"
+                                     		 style="display:none; margin-bottom:80px;" 
+                                     		 frameborder="0" 
+                                     		 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                     		 allowfullscreen></iframe>  
                                     </td>
                                 </tr>
                                 <tr>

@@ -48,16 +48,26 @@
             </ul>
           </div>
           <div class="intro-bottom__wrapper">
-            <div class="intro-left__wrapper">
-            <c:if test = "${ not empty project.projectFileName }">
+            <div class="intro-left__wrapper"> 
+              <c:if test = "${ !videoURL.equals('emptyURL') }">
+            <figure class="intro-img">   
+               <iframe width="620" 
+               		   height="390"    
+               		   src="https://www.youtube.com/embed/${ videoURL }" 
+               		   frameborder="0" 
+               		   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+               		   allowfullscreen></iframe>
+              </figure> 
+              </c:if>
+            <c:if test = "${ not empty project.projectFileName and videoURL.equals('emptyURL') }">
               <figure class="intro-img">   
-                <img
-                  src="${pageContext.request.contextPath}/resources/images/projectThumbnail/${project.projectFileName}"
+               	<img
+                  src="${pageContext.request.contextPath}/resources/images/projectThumbnail/${ project.projectFileName }"
                   alt="프로젝트 대표 이미지"
-                /> 
+                />
               </figure>
               </c:if>
-              <c:if test = "${ empty project.projectFileName }">
+              <c:if test = "${ empty project.projectFileName and videoURL.equals('emptyURL') }">
               <figure class="intro-img">   
                	<img
                   src="${pageContext.request.contextPath}/resources/images/ec025c3.png"
