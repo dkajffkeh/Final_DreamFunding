@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.donjomjo.dreamfunding.index.model.service.IndexService;
 import com.donjomjo.dreamfunding.index.model.vo.Index;
+import com.google.gson.Gson;
 
 @Controller
 public class IndexController {
@@ -52,19 +54,19 @@ public class IndexController {
 		
 	}
 	*/
+
 	
-	@RequestMapping("/")
-	public String selectProgressFundingList(Model model) {
+	@ResponseBody
+	@RequestMapping(value="progressList.do", produces="application/json; charset=utf-8")
+	public String selectProgressFundingList() {
 		
 		ArrayList<Index> progressList = iService.selectProgressFundingList();
 		
-		model.addAttribute("progressList", progressList);
+		System.out.println(progressList);
 		
-		return "main";
-		
+		return new Gson().toJson(progressList);
 		
 	}
-	
 	
 	
 	
