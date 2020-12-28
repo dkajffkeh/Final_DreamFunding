@@ -35,6 +35,7 @@
 			resultMap="projectResultSet">
 		select
 		       project_title
+		     , project_no
 		  from project
 		 where project_no = #{pno}
 	</select>

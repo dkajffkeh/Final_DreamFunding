@@ -3,6 +3,7 @@ package com.donjomjo.dreamfunding.order.model.service;
 import java.util.ArrayList;
 
 import com.donjomjo.dreamfunding.order.model.vo.MemberPurchase;
+import com.donjomjo.dreamfunding.order.model.vo.PurchaseInfo;
 import com.donjomjo.dreamfunding.order.model.vo.Shipping;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectInsert;
 
@@ -13,5 +14,7 @@ public interface OrderService {
 	Shipping selectShipping(int mno);
 
 	ArrayList<MemberPurchase> selectMemberPurchaseList(int mno);
+
+	String purchaseProcess(PurchaseInfo pi);
 
 }
