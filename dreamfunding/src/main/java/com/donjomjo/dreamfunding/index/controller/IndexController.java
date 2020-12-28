@@ -26,48 +26,45 @@ public class IndexController {
 		return "index/categoryViewAll";
 	}
 	
-	// selectProgressFundingList() 진행중인 펀딩리스트 조회
-//	@RequestMapping("list.bo")	// list.bo?currentPage=XX
-//	public String selectBoardList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
-//								Model model) {
-//		
-//		
-//		ArrayList<Board> list = bService.selectBoardList(pi);
-//		
-//		model.addAttribute("pi", pi);
-//		model.addAttribute("list", list);
-//		
-//		return "board/boardListView";
-//		
-//	}
-	
-	/*
-	@RequestMapping("progressList.in")
-	public String selectProgressFundingList(Model model) {
-		
-		ArrayList<Index> progressList = iService.selectProgressFundingList();
-		
-		model.addAttribute("progressList", progressList);
-		
-		return "main";
-		
-		
-	}
-	*/
-
-	
+	// 진행중인 펀딩리스트 조회
 	@ResponseBody
 	@RequestMapping(value="progressList.do", produces="application/json; charset=utf-8")
 	public String selectProgressFundingList() {
 		
 		ArrayList<Index> progressList = iService.selectProgressFundingList();
 		
-		System.out.println(progressList);
+		//System.out.println(progressList);
 		
 		return new Gson().toJson(progressList);
 		
 	}
 	
+	// 랭킹리스트 조회
+	@ResponseBody
+	@RequestMapping(value="rankingList.do", produces="application/json; charset=utf-8")
+	public String selectRankingList() {
+		
+		ArrayList<Index> rankingList = iService.selectRankingList();
+		
+		//System.out.println(rankingList);
+		
+		return new Gson().toJson(rankingList);
+		
+		
+	}
+	
+	// 종료된 펀딩리스트 조회
+	@ResponseBody
+	@RequestMapping(value="closedList.do", produces="application/json; charset=utf-8")
+	public String selectClosedFundingList() {
+		
+		ArrayList<Index> closedList = iService.selectClosedFundingList();
+		
+		//System.out.println(closedList);
+		
+		return new Gson().toJson(closedList);
+		
+	}
 	
 	
 	

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Dream Funding</title>    
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/index.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/index.css?after" />
 </head>
 <body>
 
@@ -192,8 +192,6 @@
 	        				$(".thumbnail-a ul").html(value);
 	        				
 	        				
-	        				
-	        				
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -205,7 +203,7 @@
 
             <!-- 더보기 버튼 -->
             <div class="more more-a">
-              <button type="button" class="more-btn">진행중인 펀딩 더보기</button>
+              <button class="moreBtn">진행중인 펀딩 더보기</button>
             </div>
 
             <!-- 제목 : 실시간 랭킹 -->
@@ -226,92 +224,61 @@
             <!-- 실시간 랭킹 리스트 start -->
             <section class="thumbnail thumbnail-b">
               <ul class="card-list">
-                <li class="card-item">
-                  <figure class="card-image" style="background-image: url(../../../resources/images/book12.jpg)">
-                    <img src="../../../resources/images/book12.jpg" alt="책">
-                    <div>
-                      <div class="like">
-                        <span class="material-icons md-36">favorite</span>
-                      </div>
-                    </div>
-                  </figure>
-                  <div class="card-desc">
-                      <div class="project-content">
-                          <div class="project-company">회사이름</div>
-                          <div class="project-title">프로젝트 제목</div>
-                      </div>
-                      <div class="project-detail">
-                          <div class="funding-percent">펀딩 퍼센트</div>
-                          <div class="funding-d-day">디데이</div>
-                      </div>
-                  </div>
-                </li>
-                <li class="card-item">
-                  <figure class="card-image" style="background-image: url(../../../resources/images/book1.jpg)">
-                    <img src="../../../resources/images/book1.jpg" alt="책">
-                    <div>
-                      <div class="like">
-                        <span class="material-icons md-36">favorite</span>
-                      </div>
-                    </div>
-                  </figure>
-                  <div class="card-desc">
-                      <div class="project-content">
-                          <div class="project-company">회사이름</div>
-                          <div class="project-title">프로젝트 제목</div>
-                      </div>
-                      <div class="project-detail">
-                          <div class="funding-percent">펀딩 퍼센트</div>
-                          <div class="funding-d-day">디데이</div>
-                      </div>
-                  </div>
-                </li>
-                <li class="card-item">
-                  <figure class="card-image" style="background-image: url(../../../resources/images/book2.jpg)">
-                    <img src="../../../resources/images/book2.jpg" alt="책">
-                    <div>
-                      <div class="like">
-                        <span class="material-icons md-36">favorite</span>
-                      </div>
-                    </div>
-                  </figure>
-                  <div class="card-desc">
-                      <div class="project-content">
-                          <div class="project-company">회사이름</div>
-                          <div class="project-title">프로젝트 제목</div>
-                      </div>
-                      <div class="project-detail">
-                          <div class="funding-percent">펀딩 퍼센트</div>
-                          <div class="funding-d-day">디데이</div>
-                      </div>
-                  </div>
-                </li>
-                <li class="card-item">
-                  <figure class="card-image" style="background-image: url(../../../resources/images/book9.jpg)">
-                    <img src="../../../resources/images/book9.jpg" alt="책">
-                    <div>
-                      <div class="like">
-                        <span class="material-icons md-36">favorite</span>
-                      </div>
-                    </div>
-                  </figure>
-                  <div class="card-desc">
-                      <div class="project-content">
-                          <div class="project-company">회사이름</div>
-                          <div class="project-title">프로젝트 제목</div>
-                      </div>
-                      <div class="project-detail">
-                          <div class="funding-percent">펀딩 퍼센트</div>
-                          <div class="funding-d-day">디데이</div>
-                      </div>
-                  </div>
-                </li>
+                
+              </ul>
             </section>
             <!-- 실시간 랭킹 리스트 end -->
+            
+            <!-- 실시간 랭킹 리스트 ajax -->
+            <script>
+	        	$(function(){
+	        		selectRankingList();
+	        	})
+	        	
+	        	function selectRankingList(rankingList){
+	        		
+	        		$.ajax({
+	        			url:"rankingList.do",
+	        			success:function(rankingList){
+	        				
+	        				var value = "";
+	        				for(var i in rankingList){
+	    						value += "<li class='card-item'>" + 
+		    								 "<figure class='card-image' style='background-image: url(" + rankingList[i].projectThumPath + rankingList[i].projectFileName + ")'>" +
+					    	                    "<img src='../../../resources/images/book2.jpg'>" +
+					    	                    "<div>" +
+					    	                      "<div class='like'>" +
+					    	                        "<span class='material-icons md-36'>favorite</span>" +
+					    	                      "</div>" +
+					    	                    "</div>" +
+					    	                  "</figure>" +
+					    	                  "<div class='card-desc'>" +
+					    	                      "<div class='project-content'>" +
+					    	                          "<div class='project-company'>" + rankingList[i].creatorName + "</div>" +
+					    	                          "<div class='project-title'>" + rankingList[i].projectTitle + "</div>" +
+					    	                      "</div>" +
+					    	                      "<div class='project-detail'>" +
+					    	                          "<div class='funding-percent'>" + rankingList[i].projectStartDt + "</div>" +
+					    	                          "<div class='funding-d-day'>" + rankingList[i].projectCloseDt + "</div>" + 
+					    	                      "</div>" +
+					    	                  "</div>" +
+				    	                  "</li>";
+	        				}
+	        				
+	        				$(".thumbnail-b ul").html(value);
+	        				
+	        				
+	        			},error:function(){
+	        				console.log("ajax 통신 실패!");
+	        			}
+	        		})
+	        		
+	        	}
+	        </script>
 
             <!-- 더보기 버튼 -->
             <div class="more more-b">
-              <button type="button" class="more-btn">실시간 랭킹 더보기</button>
+              <button type="button" class="moreBtn">실시간 랭킹 더보기</button>
             </div>
 
             <!-- 제목 : 종료된 펀딩 -->
@@ -323,93 +290,62 @@
             <!-- 종료된 펀딩 리스트 start -->
             <section class="thumbnail thumbnail-c">
               <ul class="card-list">
-                <li class="card-item">
-                  <figure class="card-image" style="background-image: url(../../../resources/images/book12.jpg)">
-                    <img src="../../../resources/images/book12.jpg" alt="책">
-                    <div>
-                      <div class="like">
-                        <span class="material-icons md-36">favorite</span>
-                      </div>
-                    </div>
-                  </figure>
-                  <div class="card-desc">
-                      <div class="project-content">
-                          <div class="project-company">회사이름</div>
-                          <div class="project-title">프로젝트 제목</div>
-                      </div>
-                      <div class="project-detail">
-                          <div class="funding-percent">펀딩 퍼센트</div>
-                          <div class="funding-d-day">디데이</div>
-                      </div>
-                  </div>
-                </li>
-                <li class="card-item">
-                  <figure class="card-image" style="background-image: url(../../../resources/images/book1.jpg)">
-                    <img src="../../../resources/images/book1.jpg" alt="책">
-                    <div>
-                      <div class="like">
-                        <span class="material-icons md-36">favorite</span>
-                      </div>
-                    </div>
-                  </figure>
-                  <div class="card-desc">
-                      <div class="project-content">
-                          <div class="project-company">회사이름</div>
-                          <div class="project-title">프로젝트 제목</div>
-                      </div>
-                      <div class="project-detail">
-                          <div class="funding-percent">펀딩 퍼센트</div>
-                          <div class="funding-d-day">디데이</div>
-                      </div>
-                  </div>
-                </li>
-                <li class="card-item">
-                  <figure class="card-image" style="background-image: url(../../../resources/images/book2.jpg)">
-                    <img src="../../../resources/images/book2.jpg" alt="책">
-                    <div>
-                      <div class="like">
-                        <span class="material-icons md-36">favorite</span>
-                      </div>
-                    </div>
-                  </figure>
-                  <div class="card-desc">
-                      <div class="project-content">
-                          <div class="project-company">회사이름</div>
-                          <div class="project-title">프로젝트 제목</div>
-                      </div>
-                      <div class="project-detail">
-                          <div class="funding-percent">펀딩 퍼센트</div>
-                          <div class="funding-d-day">디데이</div>
-                      </div>
-                  </div>
-                </li>
-                <li class="card-item">
-                  <figure class="card-image" style="background-image: url(../../../resources/images/book9.jpg)">
-                    <img src="../../../resources/images/book9.jpg" alt="책">
-                    <div>
-                      <div class="like">
-                        <span class="material-icons md-36">favorite</span>
-                      </div>
-                    </div>
-                  </figure>
-                  <div class="card-desc">
-                      <div class="project-content">
-                          <div class="project-company">회사이름</div>
-                          <div class="project-title">프로젝트 제목</div>
-                      </div>
-                      <div class="project-detail">
-                          <div class="funding-percent">펀딩 퍼센트</div>
-                          <div class="funding-d-day">디데이</div>
-                      </div>
-                  </div>
-                </li>
+                
               </ul>
             </section>
             <!-- 종료된 펀딩 리스트 end -->
+            
+            <!-- 종료된 펀딩 리스트 ajax -->
+            <script>
+	        	$(function(){
+	        		selectClosedFundingList();
+	        	})
+	        	
+	        	function selectClosedFundingList(closedList){
+	        		
+	        		$.ajax({
+	        			url:"closedList.do",
+	        			success:function(closedList){
+	        				
+	        				var value = "";
+	        				for(var i in closedList){
+	    						value += "<li class='card-item'>" + 
+		    								 "<figure class='card-image' style='background-image: url(" + closedList[i].projectThumPath + closedList[i].projectFileName + ")'>" +
+					    	                    "<img src='../../../resources/images/book2.jpg'>" +
+					    	                    "<div>" +
+					    	                      "<div class='like'>" +
+					    	                        "<span class='material-icons md-36'>favorite</span>" +
+					    	                      "</div>" +
+					    	                    "</div>" +
+					    	                  "</figure>" +
+					    	                  "<div class='card-desc'>" +
+					    	                      "<div class='project-content'>" +
+					    	                          "<div class='project-company'>" + closedList[i].creatorName + "</div>" +
+					    	                          "<div class='project-title'>" + closedList[i].projectTitle + "</div>" +
+					    	                      "</div>" +
+					    	                      "<div class='project-detail'>" +
+					    	                          "<div class='funding-percent'>" + closedList[i].projectStartDt + "</div>" +
+					    	                          "<div class='funding-d-day'>" + closedList[i].projectCloseDt + "</div>" + 
+					    	                      "</div>" +
+					    	                  "</div>" +
+				    	                  "</li>";
+	        				}
+	        				
+	        				$(".thumbnail-c ul").html(value);
+	        				
+	        				
+	        			},error:function(){
+	        				console.log("ajax 통신 실패!");
+	        			}
+	        		})
+	        		
+	        	}
+	        </script>
+            
 
             <!-- 더보기 버튼 -->
             <div class="more more-c">
-              <button type="button" class="more-btn">종료된 펀딩 더보기</button>
+              <button class="moreBtn"><span>종료된 펀딩 더보기</span></button>
             </div>
 
             <!-- 문의하기쪽 아랫부분 공간 -->

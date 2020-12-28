@@ -18,24 +18,24 @@ public class IndexServiceImpl implements IndexService {
 	private IndexDao iDao;
 	
 	
-	
+	// 진행중인 펀딩리스트 조회 서비스
 	@Override
 	public ArrayList<Index> selectProgressFundingList() {
 		
 		return iDao.selectProgressFundingList(sqlSession);
 		
 	}
-
+	
+	// 랭킹 리스트 조회 서비스
 	@Override
 	public ArrayList<Index> selectRankingList() {
-		// TODO Auto-generated method stub
-		return null;
+		return iDao.selectRankingList(sqlSession);
 	}
 
+	// 종료된 펀딩리스트 조회 서비스
 	@Override
 	public ArrayList<Index> selectClosedFundingList() {
-		// TODO Auto-generated method stub
-		return null;
+		return iDao.selectClosedFundingList(sqlSession);
 	}
 
 	@Override
