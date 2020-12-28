@@ -39,7 +39,21 @@ public class IndexController {
 //		
 //	}
 	
+	/*
 	@RequestMapping("progressList.in")
+	public String selectProgressFundingList(Model model) {
+		
+		ArrayList<Index> progressList = iService.selectProgressFundingList();
+		
+		model.addAttribute("progressList", progressList);
+		
+		return "main";
+		
+		
+	}
+	*/
+	
+	@RequestMapping("/")
 	public String selectProgressFundingList(Model model) {
 		
 		ArrayList<Index> progressList = iService.selectProgressFundingList();

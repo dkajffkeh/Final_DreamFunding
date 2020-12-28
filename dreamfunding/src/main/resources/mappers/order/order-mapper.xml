@@ -18,6 +18,18 @@
 		<result column="shipping_basic" property="shippingBasic"/>
 	</resultMap>
 
+	<resultMap id="memberPurchaseResultSet" type="MemberPurchase">
+		<result column="purchase_no" property="purchaseNo"/>
+		<result column="member_no" property="memberNo"/>
+		<result column="purchase_c_number" property="purchaseCNumber"/>
+		<result column="purchase_v_year" property="purchaseVYear"/>
+		<result column="purchase_v_month" property="purchaseVMonth"/>
+		<result column="purchase_c_pwd" property="purchaseCPwd"/>
+		<result column="purchase_c_date" property="purchaseCDate"/>
+		<result column="purchase_bkey" property="purchaseBKey"/>
+		<result column="purchase_email" property="purchaseEmail"/>
+		<result column="purchase_basic" property="purchaseBasic"/>		
+	</resultMap>
 	<select id="selectProject" 
 			parameterType="_int" 
 			resultMap="projectResultSet">
@@ -33,6 +45,22 @@
 		select *
 		  from shippping
 		 where member_no = #{mno}		
+	</select>
+	
+	<select id="selectMemberPurchaseList"
+			parameterType="_int"
+			resultMap="memberPurchaseResultSet">
+			select 
+			       purchase_c_number
+			     , purchase_v_year
+			     , purchase_v_month
+			     , purchase_c_pwd
+			     , purchase_c_date
+			     , purchase_bkey
+			     , purchase_email
+			     , purchase_basic
+			  from member_purchase
+			 where member_no = #{mno}
 	</select>
   
 </mapper>

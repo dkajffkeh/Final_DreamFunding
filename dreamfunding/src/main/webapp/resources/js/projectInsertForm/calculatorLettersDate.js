@@ -29,14 +29,14 @@ $(".form-control.pro_title1").on('focus keyup change,', function () { $(".letter
 $("#creater-intro").on('focus keyup change,', function () { $(".lettercounter.lc2").text($(this).val().length + "/50"); })
 
 
-$(".form-control.date.start").change(function () {
+$(".form-control.date.start").on('change input', function () {
     $(".startdate").text("프로젝트 시작일 : " + $(this).val());
 
     if (!$(".form-control.date.end").val() == false) {
         calculateDday($(this).val(), $(".form-control.date.end").val());
     }
 })
-$(".form-control.date.end").change(function () {
+$(".form-control.date.end").on('change input', function () {
     $(".enddate").text("프로젝트 종료일 : " + $(this).val());
     if (!$(".form-control.date.start") == false) {
         calculateDday($(".form-control.date.start").val(), $(this).val());

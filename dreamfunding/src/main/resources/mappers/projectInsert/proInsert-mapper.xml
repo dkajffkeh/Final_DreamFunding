@@ -50,6 +50,29 @@
   	    	<result column="PROJECT_TEMPORARY" property="projectTemp"/>
   	    </resultMap>
   	    
+  	    <resultMap type="Reward" id="RewardResultSet">
+  	    	<result column="RE_NO" property="rewardNo"/>
+  	    	<result column="PROJECT_NO" property="projectNo"/>
+  	    	<result column="RE_PRICE" property="rewardPrice"/>
+  	    	<result column="RE_STATUS" property="rewardStatus"/>
+  	    	<result column="RE_NUMBER" property="rewardNumber"/>
+  	    	<result column="RE_SH_STATUS" property="rewardShCheck"/>
+  	    	<result column="RE_SALECOUNT" property="saleCount"/> 	    
+  	    </resultMap>
+  	    
+  	    <resultMap type="RewardOption" id="RewardOptionResultSet">
+  	    	<result column="RE_OPTION_NO" property="optionNo"/>
+  	    	<result column="REWARD_NO" property="rewardNo"/>
+  	    	<result column="RE_OPTION_NAME" property="rewardContent"/>
+  	    </resultMap>
+  	    
+  	    <resultMap type="com.donjomjo.dreamfunding.projectInsert.model.vo.CKEDitor" id="CKEDitorResultSet">
+  	    <result column="ED_NO" property="editorNo"/>
+  	    <result column="PROJECT_NO" property="projectNo"/>
+  	    <result column="ED_FILENAME" property="filename"/>
+  	    <result column="ED_FILEPATH" property="filePath"/>
+  	    </resultMap>
+  	    
   	   <select id="selectCategory"
   	   		   resultMap="categoryResultSet">
   	   	SELECT
@@ -231,7 +254,8 @@
   	   		  OR
   	   		     CREATOR_STATUS='D'
   	   		  OR
-  	   		     CREATOR_STATUS='T'          	     
+  	   		     CREATOR_STATUS='T'
+  	   		  ORDER BY PROJECT_NO DESC            	     
   	   </select>
   	   <select id="projectNumberCheck"
   	   	       parameterType="_int"
@@ -257,13 +281,18 @@
 					,PROJECT_START_DT=#{projectStartDate}
 					,PROJECT_CLOSE_DT=#{projectEndDate}
 					,PROJECT_URL=#{projectURL}
-					,PROJECT_THUMPATH=#{projectThumbnailPath}
-					,PROJECT_FILENAME=#{projectFileName}
 					,PROJECT_CONTENT=#{projectContent}
 					,PROJECT_VURL=#{projectVideoURL}
+					,CREATOR_STATUS=#{status}
 					,PROJECT_REFCON=#{projectRefundPolicy}
+					<if test="projectFileName != null">
+					,PROJECT_THUMPATH=#{projectThumbnailPath}
+					,PROJECT_FILENAME=#{projectFileName}
+					</if>
+					<if test="creatorProfile != null">
 					,CREATOR_THUMPATH=#{creatorThumbnailPath}
 					,CREATOR_PROFILE=#{creatorProfile}
+					</if>
 					,CREATOR_NAME=#{creatorName}
 					,CREATOR_INTRO=#{creatorIntro}
 					,CREATOR_PHONE=#{creatorPhone}
@@ -289,5 +318,116 @@
   	   	      WHERE 
   	   	           PROJECT_NO=#{projectNo}	         
   	   </delete>
+  	   <select id="ajaxProjectSelector"
+  	   	       resultMap="ProjectResultSetHY"
+  	   	       parameterType="_int">
+  	   	   SELECT
+  	   	         PROJECT_NO
+				,MEMBER_NO
+				,PRO_CATENO
+				,BANK_NO
+				,PROJECT_GOAL
+				,PROJECT_TITLE
+				,PROJECT_SUBTITLE
+				,PROJECT_GPRICE
+				,PROJECT_START_DT
+				,PROJECT_CLOSE_DT
+				,PROJECT_URL
+				,PROJECT_THUMPATH
+				,PROJECT_FILENAME
+				,PROJECT_REASON
+				,PROJECT_COUNT
+				,PROJECT_CONTENT
+				,PROJECT_VURL
+				,PROJECT_REFCON
+				,CREATOR_THUMPATH
+				,CREATOR_PROFILE
+				,CREATOR_NAME
+				,CREATOR_INTRO
+				,CREATOR_PHONE
+				,PHONE_CHECK
+				,CREATOR_EMAIL
+				,CREATOR_BANK
+				,CREATOR_ACOUNT
+				,CREATOR_ACHOLDER
+				,CREATOR_WEBURL
+				,CREATOR_INSTA
+				,CREATOR_FACEBOOK
+				,CREATOR_STATUS
+				,HASHTAG
+				,PROJECT_CRDATE
+				
+		    FROM
+		        PROJECT
+		   WHERE
+		        PROJECT_NO=#{pno}     		     
+  	   </select>
+  	   <select id="ajaxRewardSelector"
+  	   	       parameterType="_int"
+  	   	       resultMap="RewardResultSet">
+  	   	    SELECT
+  	   	          RE_NO
+				 ,PROJECT_NO
+				 ,RE_PRICE
+				 ,RE_STATUS
+				 ,RE_NUMBER
+				 ,RE_SH_STATUS
+				 ,RE_SALECOUNT
+  	   	     FROM
+  	   	         REWARD
+	  	   	WHERE
+			     PROJECT_NO=#{pno}
+			ORDER BY RE_NO ASC      
+  	   
+  	   </select>
+  	   <select id="ajaxOptionSelector"
+  	   		   parameterType="java.util.ArrayList"
+  	   		   resultMap="RewardOptionResultSet">
+  	   		SELECT
+  	   			  RE_OPTION_NO
+				 ,REWARD_NO
+				 ,RE_OPTION_NAME
+			 FROM
+			     RE_OPTION
+			WHERE REWARD_NO IN
+			<foreach collection="array" item="array" index="index" open="(" close=")" separator=",">
+			 	#{array}
+			</foreach>
+			ORDER BY REWARD_NO ASC     		 
+  	   </select>
+  	   <select id="reloadUrlConflictCheck"
+  	   		   resultType="string"
+  	   		   parameterType="hashmap">
+  	   		  SELECT
+     				 COUNT(*)
+				FROM
+					 (      
+				SELECT
+				      PROJECT_URL
+				  FROM
+				      PROJECT
+				 WHERE
+				      PROJECT_NO != #{pno}
+				      )
+				 WHERE
+				     PROJECT_URL= #{urlInput}
+  	   </select>
+  	   <insert id="insertCKEDitor"
+  	   	       parameterType="hashmap">
+  	   	       INSERT
+  	   	       		 INTO
+  	   	       		     CKEDITOR
+  	   	       		     (
+  	   	       		     ED_NO						
+						,ED_FILENAME
+						,ED_FILEPATH
+  	   	       		     )
+  	   					 VALUES
+  	   					 (
+  	   					 SEQ_CKNO.NEXTVAL
+  	   					 ,#{filename}
+  	   					 ,#{filepath}
+  	   					 )
+  	   </insert>
 
 </mapper>

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 	 #paymentMain{
         width:90%;
@@ -160,7 +161,7 @@
                     <tr>
                         <td colspan="2" style="width:600px"><input type="text" style="width:550px" id="shippingSAddr" name="shippingSAddr"></td>
                         <td align="center"><input type="text" id="shippingZipcode" name="shippingZipcode"></td>
-                        <td><button class="btn btn-primary">우편번호 찾기</button></td>
+                        <td> <input type="button" class="btn btn-primary" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
                     </tr>
                     <tr>
                         <td colspan="4">상세주소</td>
@@ -179,6 +180,36 @@
                     </tr>
                 </table>
                 <br><br>
+                
+                <script>
+
+                    function sample6_execDaumPostcode() {
+                        new daum.Postcode({
+                            oncomplete: function(data) {
+                                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                var addr = ''; // 주소 변수
+                                var extraAddr = ''; // 참고항목 변수
+
+                                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                                    addr = data.roadAddress;
+                                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                                    addr = data.jibunAddress;
+                                }
+
+                                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                document.getElementById('shippingZipcode').value = data.zonecode;
+                                document.getElementById("shippingSAddr").value = addr;
+                                // 커서를 상세주소 필드로 이동한다.
+                                document.getElementById("shippingDAddr").focus();
+                            }
+                        }).open();
+                    }
+                </script>
+                
                 
                 <script>
 
@@ -216,21 +247,10 @@
             <hr>
             <h4>기본 결제수단</h4>
                 <table id="cardSel">
+                	<tbody>
+                		
+                	</tbody>
                     <tr>
-                        <td><input type="radio" name="paymentSel">&nbsp;&nbsp;</td>
-                        <td>
-                            <div>
-                                <p>기본카드</p>
-                                <p> ************1928</p>
-                            </div>
-                        </td>
-                        <td>&nbsp;&nbsp;<input type="radio" name="paymentSel">&nbsp;&nbsp;</td>
-                        <td>
-                            <div>
-                                <p>대비용카드</p>
-                                <p> ************1478</p>
-                            </div>
-                        </td>
                         <td>&nbsp;&nbsp;<input type="radio" name="paymentSel">&nbsp;&nbsp;</td>
                         <td>
                             <div>
@@ -249,8 +269,41 @@
                     
                 </table>
                 <br>
-            <input type="radio" name="paymentSel"> 
+            <input type="radio" name="paymentSel" value="N"> 
             <label for ="paymentSel"><h4>새로운 결제수단</h4></label>
+            
+            
+            <script>
+            	$(function(){
+            		
+            		cardList();
+
+            	})	
+            	
+            	function cardList(){
+            		
+            		var cardsel = 'cardSel';
+            		var result = '<tr>';
+            		console.log(mp[0].purchaseBasic);
+            		
+            		/*
+            		for(var i in mp){
+            			result += 	'<td>' +
+            							'<div>' +
+            								'<p>' + mp[i].purchaseBasic + '</p>' +
+            								'<p> ************' + mp[i].purchaseCNumber.substr(8,4) + '</p>' +
+            							'</div>' +
+            						'</td>';		
+            		}
+            		*/
+            		
+            		result += '</tr>';
+            		cardsel.innerHTML = result;
+            	}
+
+            
+            </script>
+            
 
             <div id="paymentMain">
                 <div id="paymentIns">
@@ -259,19 +312,19 @@
                             <td colspan="4"><b style="font-size:18px">카드번호</b></td>
                         </tr>
                         <tr>
-                            <td><input type="text" style="width:120px"></td>
-                            <td><input type="text" style="width:120px"></td>
-                            <td><input type="text" style="width:120px"></td>
-                            <td><input type="text" style="width:120px"></td>
+                            <td><input type="text" style="width:120px" name="cardNum1" id="cardNum1"></td>
+                            <td><input type="text" style="width:120px" name="cardNum2" id="cardNum2"></td>
+                            <td><input type="text" style="width:120px" name="cardNum3" id="cardNum3"></td>
+                            <td><input type="text" style="width:120px" name="cardNum4" id="cardNum4"></td>
                         </tr>
                         <tr>
                             <td colspan="2"><b style="font-size:18px">유효기간</b></td>
                             <td colspan="2"><b style="font-size:18px">카드 비밀번호</b></td>
                         </tr>
                         <tr>
-                            <td><input type="listbox" style="width:120px"></td>
-                            <td><input type="text" placeholder="mm" style="width:130px"></td>
-                            <td><input type="text" placeholder="앞 2자리" style="width:130px"></td>
+                            <td><input type="text" style="width:120px" name="cardVYear" id="cardVYear"></td>
+                            <td><input type="text" placeholder="mm" style="width:130px" name="cardVMonth" id="cardVMonth"></td>
+                            <td><input type="text" placeholder="앞 2자리" style="width:130px" name="cardPwd" id="cardVPwd"></td>
                             <td></td>
                         </tr>
                         <tr>
@@ -281,10 +334,43 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><input type="text" style="width:520px"></td>
+                            <td colspan="4"><input type="text" style="width:520px" name="cardBirth" id="cardBirth"></td>
                         </tr>
                     </table>
                 </div>
+                
+                <script>
+                	
+                /*
+	                $(document).ready(function(){
+						 
+					    // 라디오버튼 클릭시 이벤트 발생
+					    $("input:radio[name=paymentSel]").click(function(){
+					 
+					        if($("input[name=paymentSel]:checked").val() == 'N'){
+					 
+					        	document.getElementById('devName').value = '${s.receieverName}';
+					        	document.getElementById('devPhone').value = '${s.receieverPhone}';
+					        	document.getElementById('shippingSAddr').value = '${s.shippingSAddr}';
+					        	document.getElementById('shippingZipcode').value = '${s.shippingZipcode}';
+					        	document.getElementById('shippingDAddr').value = '${s.shippingDAddr}';
+					        	
+					        }else{
+					        	
+					        	document.getElementById('devName').value = '';
+					        	document.getElementById('devPhone').value = '';
+					        	document.getElementById('shippingSAddr').value = '';
+					        	document.getElementById('shippingZipcode').value = '';
+					        	document.getElementById('shippingDAddr').value = '';
+					        
+					        }
+					    });
+					});
+                	*/
+                </script>
+                
+                
+                
                 <div id="paymentInfo">
                     <h5>결제(예약)시 주의사항</h5>
                     <p>

@@ -22,7 +22,12 @@
 		<typeAlias type="com.donjomjo.dreamfunding.detail.model.vo.SubReply" alias="SubReply"/>
 		<typeAlias type="com.donjomjo.dreamfunding.detail.model.vo.DetailReward" alias="DetailReward"/>
 		<typeAlias type="com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt" alias="DetailRewardOpt"/>
-		<typeAlias type="com.donjomjo.dreamfunding.order.model.vo.Shipping" alias="d"/>
+		<typeAlias type="com.donjomjo.dreamfunding.order.model.vo.MemberPurchase" alias="MemberPurchase"/>
+		<typeAlias type="com.donjomjo.dreamfunding.order.model.vo.PurchaseInfo" alias="PurchaseInfo"/>
+		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.Funding" alias="funding"/>
+		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.LikeProject" alias="LikeProject"/>
+		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.MadeProject" alias="MadeProject"/>
+		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.MakeProject" alias="MakeProject"/>
 				
 	</typeAliases>
 	 

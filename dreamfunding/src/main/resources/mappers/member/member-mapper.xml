@@ -1,5 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
-  
+  <resultMap type="Member" id="memberResultSet">
+  	<result column="member_no" property="memNo"/>
+  	<result column="member_email" property="email"/>
+  	<result column="member_pwd" property="memNick"/>
+  	<result column="member_name" property="memName"/>
+  	<result column="member_phone" property="phone"/>
+  	<result column="member_createdate" property="memCreate"/>
+  	<result column="member_gender" property="gender"/>
+  	<result column="member_pf_path" property="memPfPath"/>
+  	<result column="member_systemname" property="memSystemname"/>
+  	<result column="member_status" property="memStatus"/>
+  	<result column="member_link" property="memLink"/>
+  	<result column="refres_token" property="refresToken"/>
+  	<result column="access_token" property="accessToken"/>
+  	<result column="status" property="status"/>
+  </resultMap>
+  <!-- 로그인 -->
+  <select id="loginMember" 
+  		  parameterType="Member"
+  		  resultMap="memberResultSet">
+	select
+	  	   MEMBER_NO
+		 , MEMBER_EMAIL
+		 , MEMBER_PWD
+		 , MEMBER_NICKNAME
+		 , MEMBER_NAME
+		 , MEMBER_PHONE
+		 , MEMBER_CREATEDATE
+		 , MEMBER_GENDER
+		 , MEMBER_PF_PATH
+		 , MEMBER_SYSTEMNAME
+		 , MEMBER_STATUS
+		 , MEMBER_LINK
+		 , REFRES_TOKEN
+		 , ACCESS_TOKEN
+		 , STATUS
+	  from member
+	 where MEMBER_STATUS != 4
+	   and member_email = #{ email }
+  </select>
+  <!-- 이메일 중복체크 -->
+	<select id="emailCheck">
+	SELECT
+	       COUNT(*)
+	  FROM MEMBER
+	 WHERE member_email = #{ email }
+	</select>  
+	<!-- 닉네임 중복체크 -->
+	<select id="nickCheck">
+		select
+			   count(*)
+		  from member
+		 where member_nick = #{ memNick }
+	</select>
+	<insert id="insertMember" parameterType="Member">
+		insert
+			into member
+			(
+			  member_no
+			, member_email
+			, member_pwd
+			, member_nickname
+			, member_name
+			, member_phone
+			, member_createdate
+			, member_gender
+
+			)
+			values
+			(
+			  SEQ_MNO.NEXTVAL
+			, #{ email }
+			, #{ memPwd }
+			, #{ memNick }
+			, #{ memName }
+			, #{ phone }
+			, SYSDATE
+			, #{ gender }
+			)
+	
+	</insert>
+	
+	
 </mapper>
