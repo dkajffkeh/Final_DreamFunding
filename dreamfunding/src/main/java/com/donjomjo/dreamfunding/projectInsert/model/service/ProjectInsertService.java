@@ -48,4 +48,6 @@ public interface ProjectInsertService {
 	public String selectThumbnail(int pno);
 	
 	public int insertCKEDitor(String filename, String filepath);
+	
+	public ProjectInsert preViewProjectSelector(int pno);
 }

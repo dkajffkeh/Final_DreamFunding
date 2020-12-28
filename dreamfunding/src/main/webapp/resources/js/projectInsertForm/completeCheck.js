@@ -194,11 +194,4 @@ function urlAjax() {
 
 }
 
-function fileSizeCheck() {
-
-
-
-
-}
-
 
