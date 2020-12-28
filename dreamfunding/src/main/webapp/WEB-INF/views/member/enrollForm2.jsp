@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -22,27 +22,27 @@
             <div class="card card-signin my-5">
               <div class="card-body">
                 
-                <h5 class="card-title text-center">±Ý¹æ³¡³ª´Â È¸¿ø°¡ÀÔ.</h5>
+                <h5 class="card-title text-center">ê¸ˆë°©ëë‚˜ëŠ” íšŒì›ê°€ìž….</h5>
                 <hr class="my-4">
                 
                     <div class="join_inner_float">
                         <div class="input_line">
-                            <h3 class="join_minisub">¾à°üµ¿ÀÇ</h3>
+                            <h3 class="join_minisub">ì•½ê´€ë™ì˜</h3>
                         </div>
 
 
                             <div class="check_line check_all">
-                                <!-- onclickÀº ÀÌº¥Æ® ÇÚµé·¯ÀÌ¹Ç·Î javascript_:°¡ ÇÊ¿ä¾øÀ½ -->
+                                <!-- onclickì€ ì´ë²¤íŠ¸ í•¸ë“¤ëŸ¬ì´ë¯€ë¡œ javascript_:ê°€ í•„ìš”ì—†ìŒ -->
                                 <input name="chkAll" type="checkbox" id="allCheck" class="fakebox" />
-                                <!-- labelÀÇ for´Â id¿Í 1:1 ¸ÅÄª -->
-                                <label for="allCheck" class="">ÀüÃ¼µ¿ÀÇ</label>
+                                <!-- labelì˜ forëŠ” idì™€ 1:1 ë§¤ì¹­ -->
+                                <label for="allCheck" class="">ì „ì²´ë™ì˜</label>
                             </div>
 
                             <div class="check_line">
-                                <!-- ÀüÃ¼µ¿ÀÇ¸¦ Á¦¿ÜÇÑ Ã¼Å©¹Ú½º´Â check¶ó´Â Å¬·¡½º¸¦ Ãß°¡ -->
+                                <!-- ì „ì²´ë™ì˜ë¥¼ ì œì™¸í•œ ì²´í¬ë°•ìŠ¤ëŠ” checkë¼ëŠ” í´ëž˜ìŠ¤ë¥¼ ì¶”ê°€ -->
                                 <input type="checkbox" name="check_01" id="check_01" class="fakebox check">
                                 <label for="check_01" class="labelbox">
-                                    È¸¿ø ÀÌ¿ë ¾à°ü (ÇÊ¼ö)
+                                    íšŒì› ì´ìš© ì•½ê´€ (í•„ìˆ˜)
                                     
                                 </label>
                             </div>
@@ -50,7 +50,7 @@
                             <div class="check_line">
                                 <input type="checkbox" id="check_02" class="fakebox check">
                                 <label for="check_02" class="labelbox">
-                                    °³ÀÎÁ¤º¸ Ã³¸®¹æÄ§ (ÇÊ¼ö)
+                                    ê°œì¸ì •ë³´ ì²˜ë¦¬ë°©ì¹¨ (í•„ìˆ˜)
                                     
                                 </label>
                             </div>
@@ -58,7 +58,7 @@
                             <div class="check_line">
                                 <input type="checkbox" id="check_03" class="fakebox check">
                                 <label for="check_03" class="labelbox">
-                                    °³ÀÎÁ¤º¸ ¼öÁý ¹× ÀÌ¿ë (ÇÊ¼ö) 
+                                    ê°œì¸ì •ë³´ ìˆ˜ì§‘ ë° ì´ìš© (í•„ìˆ˜) 
                                 </label>
                             </div>
 
@@ -66,39 +66,11 @@
 
     
                   <hr class="my-4">
-                    <p>ÈÞ´ëÆù ÀÎÁõÀ» ¸ÕÀú ÁøÇàÇØ ÁÖ¼¼¿ä.</p>
-                <form class="form-signin" >
-                    <table>
-                        <tr>
-                            <td>
-                                ÈÞ´ëÆù¹øÈ£ ÀÔ·Â
-                            </td>
-                        </tr>
                     
-                        <tr>
-
-                            <td>
-                                <input type="text" class="form-control form-phone ">
-                            </td>
-                            <td>
-                                <button type="button" class="form-control btn-request">ÀÎÁõ¹øÈ£ ¿äÃ»</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                ÀÎÁõ¹øÈ£ ÀÔ·Â
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td colspan="2">
-                                <input type="text" class="form-control form-phone">
-                            </td>
-                            
-                        </tr>
-                    </table>
+                <form class="form-signin" >
+                    
                     <br>
-                    <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit">´ÙÀ½</button>
+                    <a class="btn btn-lg btn-login btn-block text-uppercase" href="enrollForm3.me.jm">ë‹¤ìŒ</a>
                 </form>
               </div>
             </div>
@@ -108,12 +80,12 @@
 
       <script type="text/javascript">
         $(document).on("click", "#allCheck", function(e) {
-            // ¸¸¾à ÀüÃ¼ Ã¼Å©¹Ú½º°¡ Ã¼Å©°¡ µÇ¸é
+            // ë§Œì•½ ì „ì²´ ì²´í¬ë°•ìŠ¤ê°€ ì²´í¬ê°€ ë˜ë©´
             if ($(this).is(":checked")) {
-                // ¸ðµç Ã¼Å©¹Ú½º¸¦ Ã¼Å©
+                // ëª¨ë“  ì²´í¬ë°•ìŠ¤ë¥¼ ì²´í¬
                 $(":checkbox.check").prop("checked", true);
             } else {
-                // ¾Æ´Ï¸é ¸ðµç Ã¼Å©¹Ú½º¸¦ ÇØÁ¦
+                // ì•„ë‹ˆë©´ ëª¨ë“  ì²´í¬ë°•ìŠ¤ë¥¼ í•´ì œ
                 $(":checkbox.check").removeAttr("checked");
             }
         });
@@ -121,12 +93,12 @@
         $(document).on("click", ":checkbox.check", function(e) {
             var length = $(":checkbox.check").length;
             var checkLen = $(":checkbox.check:checked").length;
-            // ¸¸¾à ¸ðµç Ã¼Å©¹Ú½º°¡ Ã¼Å©µÈ »óÅÂÀÏ ¶§
+            // ë§Œì•½ ëª¨ë“  ì²´í¬ë°•ìŠ¤ê°€ ì²´í¬ëœ ìƒíƒœì¼ ë•Œ
             if (length == checkLen) {
-                // ÀüÃ¼µ¿ÀÇ¸¦ Ã¼Å©ÇØÁØ´Ù
+                // ì „ì²´ë™ì˜ë¥¼ ì²´í¬í•´ì¤€ë‹¤
                 $(":checkbox#allCheck").prop("checked", true);
             } else {
-                // ¸¸¾à ÇÏ³ª¶óµµ ÇØÁ¦°¡ µÇ¾ú´Ù¸é? ÀüÃ¼µ¿ÀÇ Ã¼Å© ÇØÁ¦
+                // ë§Œì•½ í•˜ë‚˜ë¼ë„ í•´ì œê°€ ë˜ì—ˆë‹¤ë©´? ì „ì²´ë™ì˜ ì²´í¬ í•´ì œ
                 $("#allCheck").removeAttr("checked");
             }
         });

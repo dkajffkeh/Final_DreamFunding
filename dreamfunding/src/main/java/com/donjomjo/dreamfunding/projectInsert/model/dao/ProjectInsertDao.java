@@ -1,6 +1,7 @@
 package com.donjomjo.dreamfunding.projectInsert.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -77,6 +78,44 @@ public class ProjectInsertDao {
 	public int insertRewardOptionOnly(SqlSessionTemplate sqlSession, RewardOption ro) {
 		
 		return sqlSession.insert("proInsertMapper.insertOption", ro);
+	}
+
+	public ProjectInsert ajaxProjectSelector(SqlSessionTemplate sqlSession, int pno) {
+		
+		return sqlSession.selectOne("proInsertMapper.ajaxProjectSelector", pno);
+	}
+
+	public ArrayList<Reward> ajaxRewardSelector(SqlSessionTemplate sqlSession, int pno) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("proInsertMapper.ajaxRewardSelector", pno);
+	}
+
+	public ArrayList<RewardOption> ajaxOptionSelector(SqlSessionTemplate sqlSession, String[] rList) {
+		
+		return (ArrayList)sqlSession.selectList("proInsertMapper.ajaxOptionSelector",rList);
+	}
+
+	public String reloadUrlConflictCheck(SqlSessionTemplate sqlSession, String urlInput, String pno) {
+		
+		HashMap<String,String> map = new HashMap<>();
+		map.put("urlInput", urlInput);
+		map.put("pno",pno);
+		
+		return sqlSession.selectOne("proInsertMapper.reloadUrlConflictCheck", map);
+	}
+
+	public int insertCKEDitor(SqlSessionTemplate sqlSession, String filename, String filepath) {
+		
+		HashMap<String,String> map = new HashMap<>();
+		map.put("filename", filename);
+		map.put("filepath",filepath);
+		
+		return sqlSession.insert("proInsertMapper.insertCKEDitor",map);
+	}
+
+	public ProjectInsert preViewProjectSelector(SqlSessionTemplate sqlSession, int pno) {
+		
+		return sqlSession.selectOne("proInsertMapper.preViewProjectSelector",pno);
 	}
 
 	

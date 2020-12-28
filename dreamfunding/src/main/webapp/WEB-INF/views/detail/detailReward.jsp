@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,13 +17,16 @@
             <div class="creator-label">크리에이터 소개</div>
             <div class="creator-info__wrapper">
              <div class="profile_wrapper">
+                     
                         <img
                           class="image"
-                          src="resources/images/book7.jpg"
+                          src="resources/images/${ d.creatorProfile }"
                           alt="유저 프로필 이미지"
                         />  
+                        
+                        
                         <div class="profile_caption">
-                          <span class="name">드림리뷰오브북스</span>
+                          <span class="name">${ d.creatorName }</span>
                         </div>
                   </div>      
             
@@ -34,53 +39,51 @@
               </div>
 -->
               <div class="creator-intro">
-                드림리뷰오브북스는 각 분야를 전공한 <br />
-                학생들이 모여 만드는 서평 잡지 프로젝트 팀입니다.
+       			 ${d.creatorIntro} 
               </div>
               <div class="btn pressDownButton" onClick="messageModalOpen()">
-                <span class="material-icons"> email </span>크리에이터에게 메시지
-                보내기
+                <span class="material-icons"> email </span>크리에이터에게 메시지 보내기
               </div>
             </div>
+		
+		
 
             <div class="reward-label" id="rewardLabel">리워드 선택</div>
-            <div class="reward__wrapper">
-              <div class="reward-box">
-                <a href="#">
-                  <div class="reward-price">15,000원 펀딩</div>
-                  <div class="reward-option">
-                    <span>기본 옵션 </span>
-                    <span>리워드는 제공되지 않습니다. </span>
-                  </div>
-                  <div class="reward-status">제한 수량 무제한</div>
-                  <div class="reward-salecount">총 5개 펀딩 완료</div>
-                </a>
-              </div>
-              <div class="reward-box">
-                <a href="#">
-                  <div class="reward-price">15,000원 펀딩</div>
-                  <div class="reward-option">
-                    <span>드림리뷰오브북스 0호(x1) </span>
-                  </div>
-                  <div class="reward-status">제한 수량 무제한</div>
-                  <div class="reward-salecount">총 32개 펀딩 완료</div>
-                </a>
-              </div>
-              <div class="reward-box">
-                <a href="#">
-                  <div class="reward-price">25,000원 펀딩</div>
-                  <ul class="reward-option">
-                    <li>드림리뷰오브북스 0호 (x1)</li>
-                    <li>엽서+스티커 세트 (x1)</li>
-                    <li>미니 수첩 (x1)</li>
-                  </ul>
-                  <div class="reward-status">제한 수량 200개</div>
-                  <div class="reward-salecount">총 77개 펀딩 완료</div>
-                </a>
-              </div>
-            </div>
-          </div>
-          
+    		
+		      <c:forEach var="w" items="${ rw }">
+		        <div class="reward__wrapper">	
+		          <div class="reward-box">
+		            <a href="#">
+		              <div class="reward-price">
+		              <fmt:formatNumber type="number" maxFractionDigits="3" value="${w.rewardPrice}"/>원 펀딩</div>
+		                   
+		              <ul class="reward-option">
+		             	<c:forEach var="o" items="${ w.detailRewardOptList }">
+		               		 <li>${ o.rewardContent }</li> 
+		                </c:forEach>
+		              </ul>    
+		              
+		              <c:choose>
+		                <c:when test="${w.rewardStatus eq 'N'}">
+		                  <div class="reward-status">제한 수량 무제한</div>
+		                </c:when>	  
+		                <c:when test="${w.rewardStatus eq 'Y'}">
+		                  <div class="reward-status">제한 수량 ${ w.rewardNumber }개</div>
+		                </c:when>	                  
+		              <c:otherwise>
+		                <div class="reward-status">옵션이 제공되지 않습니다.</div>
+		              </c:otherwise>
+		            </c:choose>
+		      
+		            <c:if test="${!empty w.saleCount}">
+		                <div class="reward-salecount">총 ${ w.saleCount }개 펀딩 완료</div>
+		            </c:if>	
+		            </a> 
+		          </div>
+		        </div>
+		      </c:forEach>
+		      
+              
           
           
     <!-- 메시지 모달 -->

@@ -1,23 +1,30 @@
-'user strict'
+'use strict'
+/*
+window.onbeforeunload = function (e) {
 
+    return "임시저장을 이용하지 않을경우 페이지 이동시 작성하신 정보는 저장되지 않습니다.";
+}
+*/
 $(function () {
 
     $(".btn-primary.btn4").attr('disabled', true);
 
 })
 
-$("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('focus keyup change', function () {
+$("#story_wrapper input").on('onpaste focus keyup change instanceCreated', storyCompleteCheck);
+
+function storyCompleteCheck() {
 
     const projectCondition = $("input[name='projectGoal']:checked").val() != "";
     const categoryCheck = $("#exampleFormControlSelect1").val() != "";
     const titleCheck = $("input[name='projectTitle']").val() != "";
     const subTitleCheck = $("input[name='projectSubtitle']").val() != "";
     const projectGoalCheck = $("input[name='projectGoalPrice']").val() > 0;
-    const urlCheck = $("input[name='projectURL']").val() != "";
+    const urlCheck = $("input[name='projectURL']").val().length > 5;
 
     let startArr = $("input[name='projectStartDate']").val().split('-');
     let endArr = $("input[name='projectEndDate']").val().split('-');
-
+    let urlcolorCheck = $("#urlCheck").css('color') == 'rgb(0, 128, 0)';
     let startDate = new Date(startArr[0], startArr[1], startArr[2]);
     let endDate = new Date(endArr[0], endArr[1], endArr[2])
 
@@ -25,10 +32,10 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('focus keyup
     let day = 1000 * 60 * 60 * 24;
 
     const dateCheck = (diff / day) > 0;
-    const thumbnailFile = $("input[name='thumbfile']").val() != "";
-    const profileCheck = $("input[name='profile']").val() != "";
+    const thumbnailFile = $("input[name='thumbfile']").val() != "" || $("#thumbnail_img").attr('src') != '/dreamfunding/resources/images/캡처.JPG';
+    const profileCheck = $("input[name='profile']").val() != "" || $("#profile_img").attr('src') != '/dreamfunding/resources/images/Capture.JPG';
     const introCheck = $("input[name='creatorIntro']").val() != "";
-    const contentCehck = CKEDITOR.instances['editor.ck'].getData() != "";
+    const contentCehck = CKEDITOR.instances['editor1'].getData() != "";
 
     if (projectCondition
         && categoryCheck
@@ -36,6 +43,7 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('focus keyup
         && subTitleCheck
         && projectGoalCheck
         && urlCheck
+        && urlcolorCheck
         && dateCheck
         && thumbnailFile
         && profileCheck
@@ -56,14 +64,12 @@ $("#story_wrapper input, .cke_editable.cke_editable_themed > p").on('focus keyup
 
     }
 
-    completeCheck();
+}
+$("#notice_wrapper input").on('keyup focus', noticeCompleteCheck);
 
-})
+function noticeCompleteCheck() {
 
-
-$("#notice_wrapper input").on('keyup focus', function () {
-
-    const policyCehck1 = CKEDITOR.instances['editor2.ck'].getData() != "";
+    const policyCehck1 = CKEDITOR.instances['editor2'].getData() != "";
     const phoneCheck = $("input[name='creatorEmail']").val() != "";
 
 
@@ -81,12 +87,12 @@ $("#notice_wrapper input").on('keyup focus', function () {
         $("#third_bar").text('안내사항  (미완료)');
 
     }
-})
+}
+$("#subinfo_wrapper input").on('keyup focus', subinfoCompleteCheck);
+function subinfoCompleteCheck() {
 
-$("#subinfo_wrapper").on('keyup focus', function () {
-
-    const bankCheck = $("input[name='bank']").val() != "";
-    const bankAccountCheck = $("input[name='bankAccount']").val() != "";
+    const bankCheck = $("input[name='bankNo']").val() != "";
+    const bankAccountCheck = $("input[name='creatorAccount']").val() != "";
     const holderCheck = $("input[name='accountHolder']").val() != "";
 
     if (bankCheck && bankAccountCheck && holderCheck) {
@@ -101,38 +107,35 @@ $("#subinfo_wrapper").on('keyup focus', function () {
         $("#forth_bar").css('color', '#ffffffff');
         $("#forth_bar").text('제작자/부가정보   (미완료)');
 
-
     }
 
-})
-
-$("input").on('focus keyup change', function () {
+}
+$("input").on('focus keyup change', completeSectionCheck);
+function completeSectionCheck() {
     const barColor = $(".bar.upper");
     let result = 0;
-
 
     for (let i = 0; i < barColor.length; i++) {
 
         if (barColor[i].style.backgroundColor == 'rgb(140, 42, 42)') {
             result++;
         }
-
     }
-
-    if (result == 4 && $("#urlCheck").css('color') == "green") {
+    if (result == 4) {
 
         $(".btn-primary.btn4").attr('disabled', false);
     } else {
         $(".btn-primary.btn4").attr('disabled', true);
     }
 
-})
+}
+//url ajax;
+$("input[name='projectURL']").on('keyup focus', urlAjax);
+function urlAjax() {
 
-$("input[name='projectURL']").keyup(function () {
+    if ($("input[name='projectURL']").val().length > 5 && $("input[name=actionType]").val() == 'insert') {
 
-    if ($(this).val().length > 5) {
 
-        $("#urlCheck").css('display', 'block');
 
         $.ajax({
             url: "projectUrlCheck.pi.hy",
@@ -145,26 +148,50 @@ $("input[name='projectURL']").keyup(function () {
 
                     $("#urlCheck").css('color', 'green');
                     $("#urlCheck").text('사용가능한url입니다.')
-
+                    storyCompleteCheck();
 
                 } else {
 
                     $("#urlCheck").css('color', 'red');
                     $("#urlCheck").text('이미 사용중인 url 입니다.')
-
+                    storyCompleteCheck();
                 }
-
             },
 
         })
 
+    } else if ($("input[name='projectURL']").val().length > 5 && $("input[name=actionType]").val() == 'Reload') {
+
+        $.ajax({
+            url: "ReloadProjectUrlCheck.pi.hy",
+            data: {
+                urlInput: $("input[name='projectURL']").val()
+                , pno: $("input[name='projectNo']").val()
+            },
+            success: function (resultNum) {
+
+                $("#urlCheck").css('display', 'block');
+
+                if (resultNum == 0) {
+
+                    $("#urlCheck").css('color', 'green');
+                    $("#urlCheck").text('사용가능한url입니다.')
+                    storyCompleteCheck();
+
+                } else {
+
+                    $("#urlCheck").css('color', 'red');
+                    $("#urlCheck").text('이미 사용중인 url 입니다.')
+                    storyCompleteCheck();
+                }
+            }
+        })
     } else {
 
         $("#urlCheck").css('display', 'none');
 
     }
 
-})
-
+}
 
 

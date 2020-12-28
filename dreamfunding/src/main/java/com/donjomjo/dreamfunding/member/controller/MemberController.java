@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -56,12 +57,29 @@ public class MemberController {
 			mv.setViewName("redirect:/");
 		
 		}
-		System.out.println(loginMem.getGender());
+		
 		return mv;
 		
 	}
+	@RequestMapping("logout.me.jm")
+	public String logoutMember(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	
+	
+	
 	@RequestMapping("insert.me.jm")
-	public void insertMember() {
+	public void insertMember(Member m, Model model, HttpSession session) {
+		
+		System.out.println(m);
+		
+		
+		
+		
+		
+		
 		
 	}
 	@RequestMapping("update.me.jm")

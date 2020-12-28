@@ -23,6 +23,8 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <!-- 부트스트랩 css cdn을 추가하면 메뉴바가 깨집니다.. -->
+    <!-- 아이콘fontawesome.com 스크립트  -->
+    <script src="https://kit.fontawesome.com/d324e8cb88.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/commonUpdate.css" />
 </head>
@@ -166,8 +168,16 @@
             <i class="header__icon"><span class="material-icons"> notifications </span></i>
           </button>
             
-          <i class="header__icon"><span class="material-icons"> account_circle </span></i>
+          <i class="header__icon"><span class="material-icons"> account_circle </span></i>&nbsp;&nbsp;
+          
+          
+            <a href="logout.me.jm"><i class="fas fa-sign-out-alt" style="font-size: 34px"></i></a>
+          
+          
+          
+         
         </div>
+
 		
 		</c:otherwise>
 		</c:choose>

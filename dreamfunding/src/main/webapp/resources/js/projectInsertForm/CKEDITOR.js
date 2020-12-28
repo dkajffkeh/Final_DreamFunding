@@ -1,7 +1,8 @@
 'use strict'
 
-CKEDITOR.replace('editor.ck', {
+CKEDITOR.replace('editor1', {
     filebrowserUploadUrl: "fileupload.bo"
 })
 
-CKEDITOR.replace('editor2.ck');
+CKEDITOR.replace('editor2');
+

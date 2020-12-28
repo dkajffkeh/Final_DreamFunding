@@ -29,19 +29,25 @@ $(".form-control.pro_title1").on('focus keyup change,', function () { $(".letter
 $("#creater-intro").on('focus keyup change,', function () { $(".lettercounter.lc2").text($(this).val().length + "/50"); })
 
 
-$(".form-control.date.start").change(function () {
-    $(".startdate").text("프로젝트 시작일 : " + $(this).val());
+$(".form-control.date.start").on('change input paste focus', startCal)
+function startCal() {
 
-    if (!$(".form-control.date.end").val() == false) {
-        calculateDday($(this).val(), $(".form-control.date.end").val());
+    $(".startdate").text("프로젝트 시작일 : " + $(".form-control.date.start").val());
+
+    if (!$("input[name='projectEndDate']").val() == false) {
+        calculateDday($(".form-control.date.start").val(), $("input[name='projectEndDate']").val());
     }
-})
-$(".form-control.date.end").change(function () {
-    $(".enddate").text("프로젝트 종료일 : " + $(this).val());
+}
+$(".form-control.date.end").on('change input paste focus', endCal)
+
+function endCal() {
+
+    $(".enddate").text("프로젝트 종료일 : " + $("input[name='projectEndDate']").val());
     if (!$(".form-control.date.start") == false) {
-        calculateDday($(".form-control.date.start").val(), $(this).val());
+        calculateDday($("input[name='projectStartDate']").val(), $("input[name='projectEndDate']").val());
     }
-})
+}
+
 function calculateDday(start, end) {
     let startArr = start.split('-');
     let endArr = end.split('-');
@@ -54,7 +60,7 @@ function calculateDday(start, end) {
 
     if ((diff / day) > 0) {
         $("#dateError").text('');
-        $("#dateResult").text(`총 ${diff / day}일`);
+        $("#dateResult").text(`총 ${(diff / day) + 1}일`);
     }
     if ((diff / day) < 0) {
         $("#dateResult").text('');

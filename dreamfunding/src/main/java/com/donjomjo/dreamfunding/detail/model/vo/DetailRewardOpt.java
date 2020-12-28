@@ -19,6 +19,6 @@ public class DetailRewardOpt {
 	private int optionNo; // 옵션 식별자
 	private int rewardNo; // 리워드 식별자
 	private String rewardContent; // 옵션내용 
-	private ArrayList<DetailRewardOpt> detailRewardOptList;
+	
 	
 }

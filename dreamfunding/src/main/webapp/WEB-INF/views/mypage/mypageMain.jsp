@@ -128,11 +128,11 @@ text-align:left;}
     <br>
     <div class="wrap1">
        <!--설정아이콘-->
-       <a href=""><span class="material-icons" id="setting">settings</span></a>
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href=""><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg" 
+          <a href="optionProfile.me"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg" 
           class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
         </div>
     </div>
@@ -165,12 +165,12 @@ text-align:left;}
                 
                 <div id="menu1" class="container tab-pane active" ><br><br><br>
                   <a href="mypageFundingProject.me"><h4 class="supporter-menu" style="font-weight:bold;">펀딩한 프로젝트</h4></a><br><br>
-                  <a href=""><h4 class="supporter-menu" style="font-weight:bold;">관심있는 프로젝트</h4></a><br><br>
+                  <a href="myLikeProject.me"><h4 class="supporter-menu" style="font-weight:bold;">관심있는 프로젝트</h4></a><br><br>
                   <a href=""><h4 class="supporter-menu" style="font-weight:bold;">메시지</h4></a>
                 </div>
                 <div id="menu2" class="container tab-pane fade"><br><br><br>
                   <a href=""><h4 class="creator-menu" style="font-weight:bold;">프로젝트 만들기</h4></a><br><br>
-                  <a href=""><h4 class="creator-menu" style="font-weight:bold;">제작한 프로젝트</h4></a><br><br>
+                  <a href="myMadeProject.me"><h4 class="creator-menu" style="font-weight:bold;">제작한 프로젝트</h4></a><br><br>
                   <a href=""><h4 class="creator-menu" style="font-weight:bold;">메시지</h4></a>
                 </div>
               </div>
