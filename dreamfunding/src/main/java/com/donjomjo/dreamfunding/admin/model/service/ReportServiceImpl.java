@@ -20,7 +20,7 @@ public class ReportServiceImpl implements ReportService{
 	@Override
 	public Report selectReport(int rno) {
 		// TODO Auto-generated method stub
-		return null;
+		return rDao.selectReport(sqlSession,rno);
 	}
 
 	@Override

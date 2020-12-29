@@ -28,5 +28,14 @@ public class ReportController {
 		
 		return "admin/reportHandler";
 	}
+	
+	@RequestMapping("reportDetail.re")
+	public String toDetailPage(int rno,Model model) {
+		
+		model.addAttribute("report", rService.selectReport(rno));
+		
+		
+		return "admin/reportDetailview";
+	}
 
 }

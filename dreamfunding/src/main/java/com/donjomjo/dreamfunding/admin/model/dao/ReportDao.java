@@ -12,7 +12,12 @@ public class ReportDao {
 
 	public ArrayList<Report> selectReportList(SqlSessionTemplate sqlSession) {
 		
-		return null;
+		return (ArrayList)sqlSession.selectList("reportMapper.selectReportList");
+	}
+
+	public Report selectReport(SqlSessionTemplate sqlSession, int rno) {
+		
+		return sqlSession.selectOne("reportMapper.selectReport",rno);
 	}
 
 }
