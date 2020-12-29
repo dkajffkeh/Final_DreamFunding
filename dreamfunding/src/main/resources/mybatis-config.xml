@@ -40,6 +40,7 @@
 		<mapper resource="/mappers/order/order-mapper.xml"/>
 		<mapper resource="/mappers/projectDetail/projectDetail-mapper.xml"/>
 		<mapper resource="/mappers/serviceCenter/serviceCenter-mapper.xml"/>
+		<mapper resource="/mappers/admin/report-mapper.xml"/>
 	</mappers>
 
 </configuration>
