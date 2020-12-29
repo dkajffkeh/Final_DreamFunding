@@ -63,7 +63,7 @@
                                         <tr>	
                                             <th colspan="4">
                                             <div style="display:flex; justify-content:center">
-                                            <button type="button" class="btn btn-primary">뒤로가기</button>
+                                            <button type="button" class="btn btn-primary" onclick='history.back();'>뒤로가기</button>
                                             <button type="button" class="btn btn-primary" style="margin:0px 6px 0px 6px">해당 프로젝트로 이동</button>
                                             <button type="button" class="btn btn-secondary">블라인드 처리</button>
                                             </div>

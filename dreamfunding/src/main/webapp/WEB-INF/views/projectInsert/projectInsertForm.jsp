@@ -647,7 +647,7 @@
     <div id="hiddenInputArea" style="display: none;">
         <input tpye="hidden" name="hashtag" id="hashtags">
         <input tpye="hidden" id="hiddenprojectNo" name="projectNo" value="${proSequence}">
-        <input tpye="hidden" name="memberNo" value="2">
+        <input tpye="hidden" name="memberNo" value="${ loginMem.memNo }">
         <input tpye="hidden" name="actionType" value="insert">
         
     </div>

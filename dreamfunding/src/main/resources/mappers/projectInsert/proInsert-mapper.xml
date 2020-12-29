@@ -141,7 +141,7 @@
 	  	   			VALUES
 	  	   			(
 	  	   				 #{projectNo}
-						,2
+						,#{memberNo}
 						,#{proCategoryNo}
 						,#{bankNo}
 						,#{projectGoal}
