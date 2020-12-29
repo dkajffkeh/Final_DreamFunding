@@ -2,62 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mypageMapper">
 
-	<resultMap type="MypageProject" id="MypageProjectResultSet">
-		<result column="PROJECT_NO" property="projectNo"/>
-    	<result column="MEMBER_NO" property="memberNo"/>
-    	<result column="PRO_CATENO" property="projectCategoryNo"/>
-    	<result column="BANK_NO" property="bankNo"/>
-    	<result column="PROJECT_GOAL" property="projectGoal"/>
-    	<result column="PROJECT_TITLE" property="projectTitle"/>
-    	<result column="PROJECT_SUBTITLE" property="projectSubtitle"/>
-    	<result column="PROJECT_GPRICE" property="projectGprice"/>
-    	<result column="PROJECT_START_DT" property="projectStartDate"/>
-    	<result column="PROJECT_CLOSE_DT" property="projectCloseDate"/>
-    	<result column="PROJECT_URL" property="projectURL"/>
-    	<result column="PROJECT_THUMPATH" property="projectThumbnailPath"/>
-    	<result column="PROJECT_FILENAME" property="projectFileName"/>
-    	<result column="PROJECT_REASON" property="projectReason"/>
-    	<result column="PROJECT_COUNT" property="projectCount"/>
-    	<result column="PROJECT_CONTENT" property="projectContent"/>
-    	<result column="PROJECT_VURL" property="projectVideoURL"/>
-    	<result column="PROJECT_REFCON" property="projectRefundPolicy"/>
-    	<result column="CREATOR_THUMPATH" property="creatorThumbnailPath"/>
-    	<result column="CREATOR_PROFILE" property="creatorProfile"/>
-    	<result column="CREATOR_NAME" property="creatorName"/>
-    	<result column="CREATOR_INTRO" property="creatorIntro"/>
-    	<result column="CREATOR_PHONE" property="creatorPhone"/>
-    	<result column="PHONE_CHECK" property="phoneCheck"/>
-    	<result column="CREATOR_EMAIL" property="creatorEmail"/>
-    	<result column="CREATOR_BANK" property="creatorBank"/>
-    	<result column="CREATOR_ACOUNT" property="creatorAccount"/>
-    	<result column="CREATOR_ACHOLDER" property="accountHolder"/>
-    	<result column="CREATOR_WEBURL" property="creatorWebURL"/>
-    	<result column="CREATOR_INSTA" property="creatorInsta"/>
-    	<result column="CREATOR_FACEBOOK" property="creatorFacebook"/>
-    	<result column="CREATOR_STATUS" property="creatorStatus"/>
-    	<result column="HASHTAG" property="hashTag"/>
-    	<result column="PROJECT_CRDATE" property="projcetCreateDate"/>
-    	<result column="PROJECT_TEMPORARY" property="projectTemporary"/>
-    	<result column="PRO_CATENAME" property="projectCategoryName"/>
-		
-	</resultMap>
 	
-	<resultMap type="MypageOption" id="MypageOptionResultSet">
-		<result column="MEMBER_NO" 	property="memberNo"/>
-		<result column="MEMBER_EMAIL" property="memberEmail"/>
-		<result column="MEMBER_PWD" property="memberPwd"/>
-		<result column="MEMBER_NICKNAME" property="memberNickname"/>
-		<result column="MEMBER_NAME" property="memberName"/>
-		<result column="MEMBER_PHONE" property="memberPhone"/>
-		<result column="MEMBER_CREATEDATE" property="memberCreateDate"/>
-		<result column="MEMBER_GENDER" property="memberGender"/>
-		<result column="MEMBER_PF_PATH" property="profileImagePath"/>
-		<result column="MEMBER_SYSTEMNAME" property="memberSystemName"/>
-		<result column="MEMBER_STATUS" property="memberStatus"/>
-		<result column="MEMBER_LINK" property="memberLink"/>
-		<result column="REFRES_TOKEN" property="refresToken"/>
-		<result column="ACCESS_TOKEN" property="accessToken"/>
-		<result column="STATUS" property="Status"/>
-	</resultMap>
   
 </mapper>
