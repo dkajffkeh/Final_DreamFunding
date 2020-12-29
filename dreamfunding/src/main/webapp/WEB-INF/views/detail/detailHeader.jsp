@@ -9,6 +9,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dream Funding</title>
+
+    <!-- Facebook (Common) Open Graph -->
+    <meta property="og:type" content="website" />
+	<meta property="og:url" content="http://localhost:8897/dreamfunding/proDetail.de?pno=${ d.projectNo }" />
+	<meta property="og:title" content="${d.projectTitle}" />
+	<meta property="og:description" content="${d.projectSubtitle}" />
+  	<meta property="og:image" content="https://i.imgur.com/B1Xi5dd.jpg" />
+
+ 	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="${d.projectTitle}" />
+    <meta
+      property="twitter:description"
+      content="${d.projectSubtitle}"
+    />
+    <meta property="twitter:image" content="https://i.imgur.com/B1Xi5dd.jpg" />
+    <meta property="twitter:url" content="http://localhost:8897/dreamfunding/proDetail.de?pno=${ d.projectNo }" />
+    
+    
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -17,10 +36,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="resources/css/detail/detail.css" />
+    <link rel="stylesheet" href="resources/css/detail/detail.css" />    
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
   </head>
 
 <body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v9.0" nonce="Pc0af6ST"></script>
 
  <jsp:include page="../common/menubar.jsp"/>
 
@@ -132,17 +154,16 @@
     <!-- 공유하기 모달 -->
     <div id="sns-modal" class="modal__layout">
       <div id="sns-modal-box" class="modal__box">
+      	<span class="material-icons" onClick="snsModalClose()">close</span>
         <div class="label">프로젝트 공유하기</div>
         <div class="gap"></div>
         <div class="sns__icon__wrapper">
-          <i class="fab fa-twitter fa-3x"></i>
-          <i class="fab fa-facebook fa-3x"></i>
-          <i class="fas fa-comment fa-3x"></i>
+          <a onclick="window.open('https://twitter.com/intent/tweet?text=dreamfunding&url=http://localhost:8897/dreamfunding/proDetail.de?pno=${ d.projectNo }')"><i class="fab fa-twitter fa-3x"></i></a>
+          <a onclick="window.open('https://www.facebook.com/sharer.php?u=http://localhost:8897/dreamfunding/proDetail.de?pno=${ d.projectNo }')"><i class="fab fa-facebook fa-3x"></i></a>
+		  <!-- 웹페이지가 외부에서 접속 가능해야 메타태그 확인 가능, 외부에서 접속할 수 없는 주소  -->
+		  <a id="kakao-link-btn" href="javascript:sendLink()"><i class="fas fa-comment fa-3x"></i></a>
         </div>
-        <div class="modal__btn__wrapper">
-          <button>OK</button>
-          <button class="modal-btn" onClick="snsModalClose()">CANCEL</button>
-        </div>
+        <div class="modal__btn__wrapper"></div>
       </div>
     </div>
     
@@ -170,14 +191,7 @@
       };
      
       
-     
-	 
-      function numberWithCommas(x) {
-    	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    	}
-
-      
-     	  // 프로젝트 종료일까지 남은 기간 구하기      
+      // 프로젝트 종료일까지 남은 기간 구하기  기능   
 	  const endDate = new Date(document.querySelector('#dDay').textContent); // 프로젝트 종료일 
       const now = new Date(); // 현재 날짜
       const toEndDate = endDate.getTime(); 
@@ -189,11 +203,50 @@
      
    	  document.querySelector('#dDay').innerText = resultDay;
  
-		  		
+
+
+	  // 카카오 공유하기 기능
+   	  Kakao.init('71db9ed39bf999a17fc5c0963aa8d2bb');
+   	  function sendLink() {
+   	    Kakao.Link.sendDefault({
+   	      objectType: 'feed',
+   	      content: {
+   	        title: '${ d.projectTitle }',
+   	        description: '${ d.projectSubtitle }',
+   	        imageUrl:
+   	          'https://i.imgur.com/B1Xi5dd.jpg',
+   	          // 외부에서 접근할 수 있는 서버에 업로드된 이미지의 URL만  가능
+   	        link: {
+   	          mobileWebUrl: 'https://developers.kakao.com',
+   	          webUrl: 'https://developers.kakao.com',
+   	        },
+   	      },
+   	      social: {
+   	        likeCount: 286,
+   	        commentCount: 45,
+   	      },
+   	      buttons: [
+   	        {
+   	          title: '웹으로 보기',
+   	          link: {
+   	            mobileWebUrl: 'https://developers.kakao.com',
+   	            webUrl: 'https://developers.kakao.com',
+   	          },
+   	        },
+   	        {
+   	          title: '앱으로 보기',
+   	          link: {
+   	            mobileWebUrl: 'https://developers.kakao.com',
+   	            webUrl: 'https://developers.kakao.com',
+   	          },
+   	        },
+   	      ],
+   	    })
+   	  }
+   	  
     </script>
-      
-      
-      
+    
+	      
       
     	 
     
