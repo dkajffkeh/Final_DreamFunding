@@ -190,6 +190,7 @@
                 <div class="creator-name">${ project.creatorName }</div>
                 </c:if>
               </c:if>
+              
               <c:if test="${not empty project.creatorProfile }">
               
                  <div class="creator-profile">
