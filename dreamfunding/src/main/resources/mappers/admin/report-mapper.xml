@@ -1,5 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reportMapper">
- 
+
+	<resultMap type="Report" id="reportResultSet">
+		<result column="REPORT_NO" property="reportNo"/>
+		<result column="PROJECT_NO" property="projectNo"/>
+		<result column="PROJECT_TITLE" property="projectTitle"/>
+		<result column="MEMBER_NO" property="memberNo"/>
+		<result column="REPORT_CONTENT" property="reportContent"/>
+		<result column="REPORT_DATE" property="reportDate"/>
+		<result column="REPORT_STATUS" property="reportStatus"/>
+	</resultMap>
+	
+	<select id="selectReportList"
+			resultMap="reportResultSet">
+			SELECT
+		         REPORT_NO
+		        ,PROJECT_TITLE AS PROJECT_NO
+		        ,MEMBER_NICKNAME AS MEMBER_NO
+		        ,REPORT_CONTENT
+		        ,TO_CHAR(REPORT_DATE,'YYYY-MM-DD') AS REPORT_DATE
+		        ,CASE 
+		             WHEN REPORT_STATUS= 'P' THEN '진행중'
+		             WHEN REPORT_STATUS= 'D' THEN '처리완료'
+             
+             	END AS REPORT_STATUS 		     
+   FROM
+       REPORT R
+				JOIN PROJECT P ON(R.PROJECT_NO=P.PROJECT_NO)
+				JOIN MEMBER M ON(R.MEMBER_NO=M.MEMBER_NO)
+	</select>
+	
+	<select id="selectReport"
+			resultMap="reportResultSet"
+			parameterType="_int">
+			SELECT
+		         REPORT_NO
+		        ,R.PROJECT_NO
+		        ,PROJECT_TITLE
+		        ,MEMBER_NICKNAME AS MEMBER_NO
+		        ,REPORT_CONTENT
+		        ,TO_CHAR(REPORT_DATE,'YYYY-MM-DD') AS REPORT_DATE
+		        ,CASE 
+		             WHEN REPORT_STATUS= 'P' THEN '진행중'
+		             WHEN REPORT_STATUS= 'D' THEN '처리완료'
+             
+             	END AS REPORT_STATUS 		     
+   FROM
+       REPORT R
+				JOIN PROJECT P ON(R.PROJECT_NO=P.PROJECT_NO)
+				JOIN MEMBER M ON(R.MEMBER_NO=M.MEMBER_NO)
+		WHERE REPORT_NO = #{rno}		
+	</select>
+	<update id="projectBlind"
+			parameterType="_int">
+		UPDATE
+			  PROJECT
+		   SET
+		      CREATOR_STATUS='D'
+		 WHERE
+		      PROJECT_NO=${pno}     	  
+	</update>
+	<update id="rewardStatusUpdate"
+			parameterType="_int">
+		UPDATE	
+			  REPORT
+		   SET
+		      REPORT_STATUS='D'
+		 WHERE
+		      REPORT_NO=${rno}     	  		
+	</update>
+	<update id="reportProfreadDone"
+			parameterType="_int">
+		UPDATE	
+			  REPORT
+		   SET
+		      REPORT_STATUS='D'
+		 WHERE
+		      REPORT_NO=${rno}     	  		
+	</update>
 </mapper>

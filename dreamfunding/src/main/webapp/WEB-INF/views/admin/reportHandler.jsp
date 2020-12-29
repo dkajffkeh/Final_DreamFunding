@@ -13,28 +13,25 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Tables</title>
-
-    <!-- Custom fonts for this template -->
-    <link href="${pageContext.request.contextPath}/resources/adminResources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="${pageContext.request.contextPath}/resources/adminResources/css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
-    <link href="${pageContext.request.contextPath}/resources/adminResources/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<style type="text/css">
+	  #dataTable > tbody > tr{
+	  	cursor:pointer
+	  }
+	  #dataTable > tbody > tr:hover{
+	  background-color:whitesmoke;
+	  color:grey;
+	  }
+		
+	</style>
 
 </head>
 
-<body>
+<body id="page-top">
 
     <!-- Page Wrapper -->
-    <jsp:include page="../common/adminMenu.jsp"/>
+    <div id="wrapper">
 
-  
-        <!-- End of Sidebar -->
+		<jsp:include page="../common/adminSidebar.jsp" />
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -42,9 +39,7 @@
             <!-- Main Content -->
             <div id="content">
 
-                <!-- Topbar -->
-         
-                <!-- End of Topbar -->
+              <jsp:include page="../common/adminSearchbar.jsp" />
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -64,24 +59,29 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th style="width: 15%;">크리에이터명</th>
-                                            <th style="width: 55%;">프로젝트명</th>
-                                          
-                                         
-                                            <th style="width: 15%;">신청한 날짜</th>
-                                            <th style="width: 15%;">상태</th>
+                                        	<th style="display:none"></th>
+                                            <th style="width:18%">크리에이터명</th>
+                                            <th style="width:44%">프로젝트명</th>        
+                                            <th style="width:18%">신청한 날짜</th>
+                                            <th style="width:18%">프로젝트금액</th>
                                         </tr>
                                     </thead>
-                             
-                                    <tbody>      
+                                
+                                    <tbody>
+                                    <c:forEach var="i" items="${ rList }">
                                         <tr>
-                                            <td>Donna Snider</td>
-                                            <td>Customer Support</td>
-                                        
-                                      
-                                            <td>2011/01/25</td>
-                                            <td>처리완료</td>
+                                        	<td style="display:none">${ i.reportNo }</td>	
+                                            <td>${ i.memberNo }</td>
+                                            <td>${ i.projectNo }</td>
+                                            <td>${ i.reportDate }</td>
+                                            <c:if test="${ i.reportStatus.equals('처리완료') }">
+                                            <td style="color:green">${ i.reportStatus }</td>
+                                            </c:if>
+                                            <c:if test="${ i.reportStatus.equals('진행중') }">
+                                            <td style="color:red">${ i.reportStatus }</td>
+                                            </c:if>
                                         </tr>
+                                    </c:forEach>    
                                     </tbody>
                                 </table>
                             </div>
@@ -90,7 +90,7 @@
 
                 </div>
                 <!-- /.container-fluid -->
-
+                
             </div>
             <!-- End of Main Content -->
 
@@ -105,17 +105,49 @@
             <!-- End of Footer -->
 
         </div>
-        
         <!-- End of Content Wrapper -->
 
-    
+    </div>
     <!-- End of Page Wrapper -->
-
+	
     <!-- Scroll to Top Button-->
-   
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
     <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
     
+    <script>
+    	$("#dataTable > tbody > tr").on('click',function(){
+    		
+    		
+    		
+    		location.href="reportDetail.re?rno="+$(this).children().eq(0).text();
+    		
+    		
+    	})
+    
+    </script>
+    
+
     <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath}/resources/adminResources/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/adminResources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

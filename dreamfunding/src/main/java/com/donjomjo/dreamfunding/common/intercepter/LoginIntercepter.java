@@ -1,4 +1,4 @@
-package com.donjomjo.dreamfunding.common.interceptor;
+package com.donjomjo.dreamfunding.common.intercepter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,13 +8,13 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.sun.net.ssl.internal.www.protocol.https.Handler;
 
-public class LoginInterceptor extends HandlerInterceptorAdapter{
+public class LoginIntercepter extends HandlerInterceptorAdapter{
 
 	@Override 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("loginUser")==null){
+		if(session.getAttribute("loginMem")==null){
 			
 			session.setAttribute("alertMsg", "로그인 후 이용가능한 서비스 입니다.");
 			response.sendRedirect(request.getContextPath());

@@ -241,7 +241,7 @@
                                         </div>
                                     </td>
                                     <td class="userInputarea">
-                                    <input type="text" style="width:300px" name="creatorName" class="form-control" maxlength="10" placeholder="드림펀딩">
+                                    <input type="text" style="width:300px" name="creatorName" class="form-control" maxlength="10" value="${ loginMem.memNick }" placeholder="드림펀딩">
                                     </td>
                                 </tr>
                                 <tr>
@@ -490,11 +490,12 @@
                                     <td class="userInputarea" style="display: flex; margin-top: 50px; align-items: center;">
                                         <input type="text" 
                                                class="form-control" 
+                                               value="${ loginMem.phone }"
                                                name="creatorPhone"
                                                style="width:300px"
                                                placeholder="010-1111-2222"> 
                                         <input type="checkbox" 
-                                               name="phoneCheck"
+                                               name="phoneCheck"     
                                                id="revealCheck">
                                         <label for="revealCheck" style="font-size: 1.1rem;">번호 공개</label>    
                                     </td>
@@ -647,7 +648,7 @@
     <div id="hiddenInputArea" style="display: none;">
         <input tpye="hidden" name="hashtag" id="hashtags">
         <input tpye="hidden" id="hiddenprojectNo" name="projectNo" value="${proSequence}">
-        <input tpye="hidden" name="memberNo" value="2">
+        <input tpye="hidden" name="memberNo" value="${ loginMem.memNo }">
         <input tpye="hidden" name="actionType" value="insert">
         
     </div>

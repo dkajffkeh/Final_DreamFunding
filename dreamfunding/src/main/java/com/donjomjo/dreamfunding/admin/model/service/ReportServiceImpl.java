@@ -20,13 +20,31 @@ public class ReportServiceImpl implements ReportService{
 	@Override
 	public Report selectReport(int rno) {
 		// TODO Auto-generated method stub
-		return null;
+		return rDao.selectReport(sqlSession,rno);
 	}
 
 	@Override
 	public ArrayList<Report> selectReportList() {
 		
 		return rDao.selectReportList(sqlSession);
+	}
+
+	@Override
+	public int projectBlind(int pno ,int rno) {
+	
+		if ( rDao.projectBlind(sqlSession,pno)>0) {
+			
+			
+			return rDao.rewardStatusUpdate(sqlSession,rno);
+		}
+		
+		return 0;
+	}
+
+	@Override
+	public int reportProfreadDone(int rno) {
+		
+		return rDao.reportProfreadDone(sqlSession,rno);
 	}
 
 }

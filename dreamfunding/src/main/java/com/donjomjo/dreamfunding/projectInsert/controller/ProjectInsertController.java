@@ -47,12 +47,14 @@ public class ProjectInsertController {
 	
 
 	@RequestMapping(value="projectinsert.pi.hy")
-	private String sendToProjectInsert(Model model) {
+	private String sendToProjectInsert(Model model, int mno) {
 		
 		model.addAttribute("bList",pService.selectBank());
 		model.addAttribute("cList",pService.selectCategory());
 		model.addAttribute("proSequence", pService.selectProNo());
-		model.addAttribute("pList", pService.selectProject(2));
+		model.addAttribute("pList", pService.selectProject(mno));
+		
+		System.out.println(mno);
 		return "projectInsert/projectInsertForm";
 		
 	}
