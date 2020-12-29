@@ -132,7 +132,7 @@ text-align:left;}
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href="optionProfile.me"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg" 
+          <a href="optionProfile.me"><img src="../../../resources/images/book5.jpg" 
           class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
         </div>
     </div>
@@ -164,7 +164,7 @@ text-align:left;}
               <div class="tab-content" >
                 
                 <div id="menu1" class="container tab-pane active" ><br><br><br>
-                  <a href="mypageFundingProject.me"><h4 class="supporter-menu" style="font-weight:bold;">펀딩한 프로젝트</h4></a><br><br>
+                  <a href="myFundingProject.me"><h4 class="supporter-menu" style="font-weight:bold;">펀딩한 프로젝트</h4></a><br><br>
                   <a href="myLikeProject.me"><h4 class="supporter-menu" style="font-weight:bold;">관심있는 프로젝트</h4></a><br><br>
                   <a href=""><h4 class="supporter-menu" style="font-weight:bold;">메시지</h4></a>
                 </div>
