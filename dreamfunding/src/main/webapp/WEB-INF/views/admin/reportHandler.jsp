@@ -74,7 +74,12 @@
                                             <td>${ i.memberNo }</td>
                                             <td>${ i.projectNo }</td>
                                             <td>${ i.reportDate }</td>
-                                            <td>${ i.reportStatus }</td>
+                                            <c:if test="${ i.reportStatus.equals('처리완료') }">
+                                            <td style="color:green">${ i.reportStatus }</td>
+                                            </c:if>
+                                            <c:if test="${ i.reportStatus.equals('진행중') }">
+                                            <td style="color:red">${ i.reportStatus }</td>
+                                            </c:if>
                                         </tr>
                                     </c:forEach>    
                                     </tbody>

@@ -237,7 +237,11 @@
   	   		   parameterType="_int"
   	   		   resultMap="ProjectResultSetHY">
   	   		SELECT
-  	   			  PROJECT_NO	   
+					      *
+				 FROM(
+				 SELECT
+  	   			  PROJECT_NO
+                 ,MEMBER_NO 
   	   		     ,NVL(PROJECT_TITLE,'제목이 지정되지 않았습니다') PROJECT_TITLE
   	   		     ,CASE 
      					 WHEN CREATOR_STATUS= 'R' THEN '수락요청'
@@ -246,16 +250,15 @@
      					 END AS CREATOR_STATUS 		     
   	   		     ,PROJECT_CRDATE
   	   		 FROM
-  	   		 	 PROJECT
+  	   		 	 PROJECT P
   	   		WHERE
-  	   		     MEMBER_NO=#{memNo} 
-  	   		  AND
+                 CREATOR_STATUS= 'D'
+               OR
   	   		     CREATOR_STATUS='R'
-  	   		  OR
-  	   		     CREATOR_STATUS='D'
-  	   		  OR
+  	   		   OR
   	   		     CREATOR_STATUS='T'
-  	   		  ORDER BY PROJECT_NO DESC            	     
+  	   		  ORDER BY PROJECT_NO DESC)
+				 WHERE MEMBER_NO=#{memNo}           	     
   	   </select>
   	   <select id="projectNumberCheck"
   	   	       parameterType="_int"

@@ -29,4 +29,22 @@ public class ReportServiceImpl implements ReportService{
 		return rDao.selectReportList(sqlSession);
 	}
 
+	@Override
+	public int projectBlind(int pno ,int rno) {
+	
+		if ( rDao.projectBlind(sqlSession,pno)>0) {
+			
+			
+			return rDao.rewardStatusUpdate(sqlSession,rno);
+		}
+		
+		return 0;
+	}
+
+	@Override
+	public int reportProfreadDone(int rno) {
+		
+		return rDao.reportProfreadDone(sqlSession,rno);
+	}
+
 }
