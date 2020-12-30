@@ -45,6 +45,51 @@
 		 where creator_status = 'U'
 	</select>
 
+	<select id="selectRankingList" resultMap="indexResultSet">
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+	</select>
+	
+	<select id="selectClosedFundingList" resultMap="indexResultSet">
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+	</select>
 
 
 

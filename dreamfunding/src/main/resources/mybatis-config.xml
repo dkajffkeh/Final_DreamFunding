@@ -28,6 +28,8 @@
 		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.LikeProject" alias="LikeProject"/>
 		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.MadeProject" alias="MadeProject"/>
 		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.MakeProject" alias="MakeProject"/>
+		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.Account" alias="Account"/>
+		<typeAlias type="com.donjomjo.dreamfunding.admin.model.vo.Report" alias="Report"/>
 				
 	</typeAliases>
 	 
@@ -39,6 +41,7 @@
 		<mapper resource="/mappers/order/order-mapper.xml"/>
 		<mapper resource="/mappers/projectDetail/projectDetail-mapper.xml"/>
 		<mapper resource="/mappers/serviceCenter/serviceCenter-mapper.xml"/>
+		<mapper resource="/mappers/admin/report-mapper.xml"/>
 	</mappers>
 
 </configuration>

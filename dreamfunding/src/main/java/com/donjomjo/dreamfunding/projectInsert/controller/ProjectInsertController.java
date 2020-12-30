@@ -47,12 +47,14 @@ public class ProjectInsertController {
 	
 
 	@RequestMapping(value="projectinsert.pi.hy")
-	private String sendToProjectInsert(Model model) {
+	private String sendToProjectInsert(Model model, int mno) {
 		
 		model.addAttribute("bList",pService.selectBank());
 		model.addAttribute("cList",pService.selectCategory());
 		model.addAttribute("proSequence", pService.selectProNo());
-		model.addAttribute("pList", pService.selectProject(2));
+		model.addAttribute("pList", pService.selectProject(mno));
+		
+		System.out.println(mno);
 		return "projectInsert/projectInsertForm";
 		
 	}
@@ -157,11 +159,19 @@ public class ProjectInsertController {
 		
 		 ProjectInsert pro = pService.preViewProjectSelector(pi.getProjectNo());
 		 model.addObject("project", pro);
+	
 		//날짜
 		if(pro.getHashtag() != null) {
 			model.addObject("hashArr", pro.getHashtag().split(" "));
 		} else {
 			model.addObject("hashArr", "emptyArr");
+		}
+		if(pro.getProjectVideoURL() != null) {
+			
+			model.addObject("videoURL", pro.getProjectVideoURL().substring(pro.getProjectVideoURL().lastIndexOf("/")));
+			
+		} else {
+			model.addObject("videoURL", "emptyURL");
 		}
 		
 		if(pro.getProjectEndDate()!=null && pro.getProjectStartDate()!=null) {
@@ -232,7 +242,7 @@ public class ProjectInsertController {
 		    RewardOption o,
 		    Model model, 
 		    HttpSession session) {
-		
+	
 		//존재하는 프로젝트 업데이트 해야함.
 		if(pService.projectNumberCheck(pi)>0) { //업데이트 실행 해야함.
 			

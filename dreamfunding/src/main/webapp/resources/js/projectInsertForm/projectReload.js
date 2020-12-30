@@ -87,6 +87,9 @@ $("#modal_table > tbody > tr").click(function () {
 
                     startCal();
                     endCal();
+                    storyCompleteCheck()
+                    noticeCompleteCheck()
+                    subinfoCompleteCheck()
                 }
 
             })
@@ -200,9 +203,9 @@ $("#modal_table > tbody > tr").click(function () {
 
                     $("input[name='actionType']").remove('value');
                     $("input[name='actionType']").attr('value', 'Reload');
-                    storyCompleteCheck()
-                    noticeCompleteCheck()
-                    subinfoCompleteCheck()
+                    console.log("실행!");
+
+
                     urlAjax();
                     completeSectionCheck()
                     videoURLCheck()

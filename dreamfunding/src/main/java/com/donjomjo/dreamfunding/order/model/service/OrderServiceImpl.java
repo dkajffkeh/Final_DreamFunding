@@ -1,13 +1,24 @@
 package com.donjomjo.dreamfunding.order.model.service;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.donjomjo.dreamfunding.order.model.dao.OrderDao;
 import com.donjomjo.dreamfunding.order.model.vo.MemberPurchase;
+import com.donjomjo.dreamfunding.order.model.vo.PurchaseInfo;
 import com.donjomjo.dreamfunding.order.model.vo.Shipping;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectInsert;
 
@@ -34,6 +45,12 @@ public class OrderServiceImpl implements OrderService{
 		return oDao.selectMemberPurchaseList(sqlSession, mno);
 	}
 
-	
+	@Override
+	public String purchaseProcess(PurchaseInfo pi) {
+		
+		return (String) oDao.puchaseProcess(sqlSession, pi);
+		
+	}
+
 	
 }

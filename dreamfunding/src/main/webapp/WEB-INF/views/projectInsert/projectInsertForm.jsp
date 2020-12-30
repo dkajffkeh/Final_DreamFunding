@@ -114,9 +114,9 @@
                                             부제목을 넣어주세요!</div>
                                     </td>
                                     <td class="userInputarea">
-                                        <input type="text" class="form-control pro_title1" placeholder="50자 이내로 작성해 주세요" name="projectSubtitle"
-                                            maxlength="49" style="width:650px;">
-                                        <div class="lettercounter lc1">0/50</div>
+                                        <input type="text" class="form-control pro_title1" placeholder="200자 이내로 작성해 주세요" name="projectSubtitle"
+                                            maxlength="199" style="width:650px;">
+                                        <div class="lettercounter lc1">0/200</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -241,7 +241,7 @@
                                         </div>
                                     </td>
                                     <td class="userInputarea">
-                                    <input type="text" style="width:300px" name="creatorName" class="form-control" maxlength="10" placeholder="드림펀딩">
+                                    <input type="text" style="width:300px" name="creatorName" class="form-control" maxlength="10" value="${ loginMem.memNick }" placeholder="드림펀딩">
                                     </td>
                                 </tr>
                                 <tr>
@@ -255,8 +255,8 @@
                                     </td>
                                     <td class="userInputarea">
                                         <input type="text" style="width:600px" class="form-control" id="creater-intro" name="creatorIntro"
-                                            maxlength="49" placeholder="소개는 50자 이내로 작성해 주세요!">
-                                        <div class="lettercounter lc2">0/50</div>
+                                            maxlength="199" placeholder="소개는 200자 이내로 작성해 주세요!">
+                                        <div class="lettercounter lc2">0/200</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -302,21 +302,14 @@
                                         <!-- Youtube Description Modal -->                            
                                      </span>       
                                          <div id="videoAnnouncement" style="margin-top:5px">url 이 입력되지 않았습니다.</div>   
-                                    <!--  <iframe id="videoIframe" 
-                                     			  style="margin-top:20px; 
-                                     			  margin-bottom:100px;
-                                     			  display:none;" 
-                                     			  width="560" 
-                                     			  height="315" 
-                                     			  src="https://www.youtube.com/embed/" 
-                                     			  frameborder="0" 
-                                     			  allow="accelerometer; 
-                                     			  autoplay; 
-                                     			  clipboard-write; 
-                                     			  encrypted-media; 
-                                     			  gyroscope; 
-                                     			  picture-in-picture" 
-                                     			  allowfullscreen></iframe>   --> 
+                                     <iframe width="560" 
+                                     		 height="315"
+                                     		 id="videoIframe" 
+                                     		 src="https://www.youtube.com/embed/"
+                                     		 style="display:none; margin-bottom:80px;" 
+                                     		 frameborder="0" 
+                                     		 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                     		 allowfullscreen></iframe>  
                                     </td>
                                 </tr>
                                 <tr>
@@ -497,11 +490,12 @@
                                     <td class="userInputarea" style="display: flex; margin-top: 50px; align-items: center;">
                                         <input type="text" 
                                                class="form-control" 
+                                               value="${ loginMem.phone }"
                                                name="creatorPhone"
                                                style="width:300px"
                                                placeholder="010-1111-2222"> 
                                         <input type="checkbox" 
-                                               name="phoneCheck"
+                                               name="phoneCheck"     
                                                id="revealCheck">
                                         <label for="revealCheck" style="font-size: 1.1rem;">번호 공개</label>    
                                     </td>
@@ -654,7 +648,7 @@
     <div id="hiddenInputArea" style="display: none;">
         <input tpye="hidden" name="hashtag" id="hashtags">
         <input tpye="hidden" id="hiddenprojectNo" name="projectNo" value="${proSequence}">
-        <input tpye="hidden" name="memberNo" value="2">
+        <input tpye="hidden" name="memberNo" value="${ loginMem.memNo }">
         <input tpye="hidden" name="actionType" value="insert">
         
     </div>

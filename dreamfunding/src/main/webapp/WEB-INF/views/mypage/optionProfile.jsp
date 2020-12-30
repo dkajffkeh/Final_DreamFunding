@@ -24,8 +24,234 @@
   
   <link rel="stylesheet" href="../../../resources/css/common.css" />
 <style>
+  
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap");
 
-/*서포터, 크리에이터 메뉴 스타일*/
+/* COMMON */
+* {
+  box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #333;
+}
+
+header .inner {
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.header__left {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+header a:hover {
+  font-weight: bold;
+  color: #ccc4bb;
+}
+
+/* BTN */
+.btn {
+  outline: none;
+  border: none;
+  padding: 7px 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.btn--main {
+  background: #7f0000 linear-gradient(#8b1111, #7f0000);
+  transition: all 0.2s;
+}
+.btn--main:hover {
+  background: #630000;
+  box-shadow: 0 0 7px gray;
+}
+.btn a {
+  color: #fff;
+  font-weight: bold;
+}
+.search__box {
+  position: relative;
+}
+
+.search__box span {
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  cursor: pointer;
+}
+
+.search-bar {
+  width: 200px;
+  font-size: 14px;
+  padding: 5px;
+  outline: none;
+  border: 1px solid #999;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.search-bar:focus {
+  width: 230px;
+  border: 1px solid #000;
+}
+
+.header__left .logo {
+  display: block;
+  max-width: 160px;
+  margin-right: 20px;
+}
+
+.logo img {
+  width: 100%;
+}
+.header__left .header__nav {
+  display: flex;
+}
+
+.header__nav li a {
+  padding: 5px 10px;
+}
+
+.header__left .btn {
+  margin-left: 20px;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.header__right .header__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.header__right .sign__group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.header__icon span {
+  font-size: 30px;
+}
+
+/* FOOTER */
+footer {
+  font-size: 10px;
+  font-weight: 600;
+  position: relative;
+  background-color: #ccc4bb;
+}
+
+footer .footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 2;
+  padding: 10px 0 30px 0;
+  letter-spacing: 0.2px;
+}
+
+.footer__bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.footer__left {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: left;
+}
+
+.footer__left .summary__title {
+  color: #7f0000;
+}
+
+.footer__left .summary__description {
+  color: #333;
+}
+
+.footer__right {
+  text-align: right;
+  display: flex-end;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.footer__right .summary__title {
+  color: #7f0000;
+}
+
+.footer__right .summary__description {
+  color: #333;
+}
+
+.footer__center {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.footer__center img {
+  height: 40px;
+  margin: 0 auto;
+}
+
+.section {
+  min-height: 700px;
+}
+
+    
+/*마이페이지 스타일*/
+
+.wrap1{
+    height:100%;
+    text-align:center;}
+  
+  .page-name{
+     margin-left:60px;
+     padding-top:30px;
+     width:500px;
+     text-align:center;
+     display:inline-block;
+     font-size:30px;}
+  
+  #setting{
+    font-size:40px;
+    float:right;
+    margin-right:20px;
+    margin-top:10px;}
+  
+  .wrap2{
+    text-align:center;}
+  
+  
+  /*서포터, 크리에이터 메뉴 스타일*/
   .nav-link{
     padding-top:15px;
    background-color:#ccc4bb;
@@ -97,9 +323,13 @@
     margin-top:10px;
   }
   
-
-
-/*세부메뉴 스타일*/
+  
+  
+  
+  
+  
+  
+  /*세부메뉴 스타일*/
   
   .detail-menu {
     width:100%;
@@ -212,56 +442,96 @@
     background-color: white;
     color:#7f0000;
   }
-  
+
+ /*세부메뉴 스타일*/
+
+/*세부메뉴css*/
+.nav--top{
+  margin-right:130px;
+}
+.nav--top > ul {
+    
+    font-size: 15px;
+    margin: 0;
+    margin-top:40px;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.nav--top > ul > li {
+    line-height: normal;
+    padding: 0px;
+    margin:  0 0 1rem
+}
+
+@media (min-width: 52em) {
+    .nav--top > ul > li {
+        margin: 0 0 0 5rem;
+        display: inline-block
+    }
+}
+
+.nav--top > ul > li a {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    padding: 0 0 .15rem;
+    text-decoration: none;
+    font-weight: 400;
+    color: #787777
+}
+
+.nav--top > ul > li a:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 100%;
+    bottom: -2px;
+    background: #7f0000;
+    height: 4px;
+    -webkit-transition-property: right;
+    transition-property: right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out
+}
+
+.nav--top > ul > li a:hover:before,
+.nav--top > ul > li a:focus:before,
+.nav--top > ul > li a:active:before,
+.nav--top > ul > li.current_page_item a:before {
+    right: 0
+}
+
+.nav--top > ul > li a:hover,
+.nav--top > ul > li a:focus,
+.nav--top > ul > li a:active,
+.nav--top > ul > li.current_page_item a {
+    border-bottom: 0px solid #fff;
+    color: #121212
+}
+
 </style>
 
-<!--세부메뉴 스크립트-->
-<script>
-  $(document).ready(function(){
-$(".link").addClass("color");
-//   첫번째
-$(".menu--item__one").click(function(){
-   $(".bottom__line").addClass("bottom__active");
-   $(".link").addClass("color");
-   $(".link1").removeClass("color1");
-   $(".link2").removeClass("color2");
-   $(".bottom__line").removeClass("bottom__active1 bottom__active2");
-});
-
-//  두번째
-$(".menu--item__two").click(function(){
-    $(".bottom__line").addClass("bottom__active1");
-    $(".link1").addClass("color1");
-    $(".link").removeClass("color");
-    $(".link2").removeClass("color2");
-    $(".bottom__line").removeClass("bottom__active bottom__active2");
-});
-
-// 세번째
- $(".menu--item__three").click(function(){
-      $(".bottom__line").addClass("bottom__active2");
-      $(".link2").addClass("color2");
-      $(".link").removeClass("color");
-      $(".link1").removeClass("color1");
-      $(".bottom__line").removeClass("bottom__active bottom__active1");
-});
-// 네번째
-$(".menu--item__four").click(function(){
-      $(".bottom__line").addClass("bottom__active2");
-      $(".link2").addClass("color2");
-      $(".link").removeClass("color");
-      $(".link1").removeClass("color1");
-      $(".bottom__line").removeClass("bottom__active bottom__active1");
-});
-});
-</script>
 
 
-</head>
-<body>
 
-<jsp:include page="../common/menubar.jsp"/>
 
+
+  
+
+  </head>
+  <body>
+     <jsp:include page="../common/menubar.jsp"/>
 
     <br>
     <div class="wrap1">
@@ -296,15 +566,16 @@ $(".menu--item__four").click(function(){
                 
               </ul>
             
-              <!--세부메뉴 html-->
+              <!-- 세부메뉴 -->
+                <!--세부메뉴 html-->
             <div class="tab-content" style=" margin-bottom: 10px;">
               <div id="menu1" class="container tab-pane active" ><br><br>
                 <nav class="nav--top">
                   <ul>
-                      <li><a href="#">프로필</a></li>
-                      <li><a href="#">계정</a></li>
-                      <li><a href="#">결제수단</a></li>
-                      <li><a href="#">배송지</a></li>
+                      <li><a href="optionProfile.me">프로필</a></li>
+                      <li><a href="optionAccount.me">계정</a></li>
+                      <li><a href="optionPay.me">결제수단</a></li>
+                      <li><a href="optionShipping.me">배송지</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
@@ -313,7 +584,6 @@ $(".menu--item__four").click(function(){
                 
            
             </div>  
-          </div>
             </div>
             
 
@@ -412,6 +682,5 @@ $(".menu--item__four").click(function(){
         </div>
       </div>
     </footer>
-
-</body>
+  </body>
 </html>

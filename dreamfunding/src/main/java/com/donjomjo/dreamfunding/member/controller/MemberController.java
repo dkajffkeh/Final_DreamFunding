@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.donjomjo.dreamfunding.member.model.service.MemberService;
@@ -71,25 +72,61 @@ public class MemberController {
 	
 	
 	@RequestMapping("insert.me.jm")
-	public void insertMember(Member m, Model model, HttpSession session) {
+	public String insertMember(Member m, Model model, HttpSession session) {
 		
-		System.out.println(m);
+		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
+		
+		m.setMemPwd(encPwd);
+		
+		int result = mService.insertMember(m);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "회원가입 성공!");
+			
+		}
 		
 		
-		
-		
+		return "redirect:/";
 		
 		
 		
 	}
 	@RequestMapping("update.me.jm")
-	public void updateMember() {
+	public String updateMember(Member m, Model model, HttpSession session) {
+		int result = mService.updateMember(m);
+		
+		if(result > 0) {
+			session.setAttribute("loginMem", mService.loginMember(m));
+
+			session.setAttribute("alertMsg", "성공적으로 변경되었습니다!");
+		}
+		
+		return "redirect:/";
 		
 	}
 	@RequestMapping("delete.me.jm")
-	public void deleteMember() {
+	public String deleteMember(String userPwd, HttpSession session, Model model) {
 		
+		Member loginMem = (Member)session.getAttribute("loginMem");
+		String encPwd = loginMem.getMemPwd();
+		
+		if(bcryptPasswordEncoder.matches(userPwd, encPwd)) {
+			
+			int result = mService.deleteMember(loginMem.getEmail());
+			
+			if(result > 0) {
+				
+				session.removeAttribute("loginMem");
+				
+				session.setAttribute("alertMsg", "성공적으로 회원탈퇴 되었습니다. 이용해주셔서 감사합니다.");
+				
+			}
+			
+			return "redirect:/";
+		}
+		
+		return "redirect:/";
 	}
-	
-	
+
+
 	}

@@ -31,5 +31,22 @@
 		</interceptor>
 	</interceptors>
 	  -->
+	  
+	  <interceptors>
+	 	<interceptor>
+	 		<mapping path="/projectinsert.pi.hy"/>	
+	 		<mapping path="/projectRequest.pi.hy"/>	
+	 		<mapping path="/gotoPreview"/>	
+	 		<mapping path="/projectmiddleSave.pi.hy"/>	
+	 		<mapping path="/projectReload.pi.hy"/>	
+	 		<mapping path="/rewardReload.pi.hy"/>	
+	 		<mapping path="/optionReload.pi.hy"/>	
+	 		<mapping path="/projectUrlCheck.pi.hy"/>	
+	 		<mapping path="/ReloadProjectUrlCheck.pi.hy"/>	
+	 		<mapping path="/fileupload.bo"/>	
+	 		
+	 		<beans:bean id="loginIntercepter" class="com.donjomjo.dreamfunding.common.intercepter.LoginIntercepter"/>
+	 	</interceptor>
+	 </interceptors>
 	
 </beans:beans>

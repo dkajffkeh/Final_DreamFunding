@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+
 <style>
 	 #paymentMain{
         width:90%;
@@ -38,7 +40,8 @@
 	<jsp:include page="../common/menubar.jsp"/>
 
 	<div id="inner">
-		<form action="" name="orderInsertForm">
+		<form action="order.send" name="orderInsertForm" onsubmit="return checkCheckBox(this)">
+		<input type="hidden" name="memberNo" value="1">
         <h3 align="center" style="">프로젝트 후원하기</h3>
         <br><br>
         <h3>리워드</h3>
@@ -53,10 +56,11 @@
         <hr>
             <h4> 추가후원금 </h4>
             후원금 : 
-            <input type="number" id="supportPrice" name="supportPrice" onkeyup="verify.sum()" numberOnly> 원
+            <input type="number" id="supportPrice" name="rewardPlus" onkeyup="verify.sum()" numberOnly> 원
             <br><br>
             <div id="total" style="text-align:center"></div>
-            
+            <input type="hidden" name="projectNo" value="${ p.projectNo }">
+
 
         
       <script>
@@ -94,7 +98,8 @@
       				var r = document.getElementById(this.result_id);
       				this.result = subPrice + ${rewardPri};
       				
-      				this.total_html = "<h4> 총합 : " + this.result + " 원 </h4>";
+      				this.total_html = "<h4> 총합 : " + this.result + " 원 </h4>" +
+      									"<input type=\"hidden\" name=\"totalPrice\" value=\" " + this.result + "\" >";
       				r.innerHTML = this.total_html;
       				
       			}
@@ -152,8 +157,8 @@
                         <td colspan="2">전화번호</td>
                     </tr>
                     <tr>
-                        <td colspan="2"><input type="text" id="devName" name="devName" style="width:250px"></td>
-                        <td colspan="2"><input type="text" id="devPhone" name="devPhone" style="width:450px" placeholder="(-)생략 작성"></td>
+                        <td colspan="2"><input type="text" id="receieverName" name="receieverName" style="width:250px"></td>
+                        <td colspan="2"><input type="text" id="receieverPhone" name="receieverPhone" style="width:450px" placeholder="(-)생략 작성"></td>
                     </tr>
                     <tr>
                         <td colspan="4">주소</td>
@@ -173,7 +178,7 @@
                         <td colspan="4">배송시 전달사항</td>
                     </tr>
                     <tr>
-                        <td colspan="4"><input type="text" style="width:100%"></td>
+                        <td colspan="4"><input type="text" style="width:100%" name="purinfoReq"></td>
                     </tr>
                     <tr>
                         <td colspan="4">*요청사항은 배송에 관련된 상황만 적어주세요.</td>
@@ -222,16 +227,16 @@
 				 
 				        if($("input[name=dev]:checked").val() == 'B'){
 				 
-				        	document.getElementById('devName').value = '${s.receieverName}';
-				        	document.getElementById('devPhone').value = '${s.receieverPhone}';
+				        	document.getElementById('receieverName').value = '${s.receieverName}';
+				        	document.getElementById('receieverPhone').value = '${s.receieverPhone}';
 				        	document.getElementById('shippingSAddr').value = '${s.shippingSAddr}';
 				        	document.getElementById('shippingZipcode').value = '${s.shippingZipcode}';
 				        	document.getElementById('shippingDAddr').value = '${s.shippingDAddr}';
 				        	
 				        }else{
 				        	
-				        	document.getElementById('devName').value = '';
-				        	document.getElementById('devPhone').value = '';
+				        	document.getElementById('receieverName').value = '';
+				        	document.getElementById('receieverPhone').value = '';
 				        	document.getElementById('shippingSAddr').value = '';
 				        	document.getElementById('shippingZipcode').value = '';
 				        	document.getElementById('shippingDAddr').value = '';
@@ -248,61 +253,29 @@
             <h4>기본 결제수단</h4>
                 <table id="cardSel">
                 	<tbody>
-                		
-                	</tbody>
-                    <tr>
-                        <td>&nbsp;&nbsp;<input type="radio" name="paymentSel">&nbsp;&nbsp;</td>
-                        <td>
-                            <div>
-                                <p>업무용카드</p>
-                                <p> ************1781</p>
-                            </div>
-                        </td>
-                        <td>&nbsp;&nbsp;<input type="radio" name="paymentSel">&nbsp;&nbsp;</td>
-                        <td>
-                            <div>
-                                <p>국민카드</p>
-                                <p> ************1928</p>
-                            </div>
-                        </td>
-                    </tr>
-                    
+                		<tr>
+                			
+	                		<c:forEach var="c" items="${ mp }" varStatus="i" >
+		                        <td>&nbsp;&nbsp;<input type="radio"  name="paymentSel" value="${ i.index }">&nbsp;&nbsp;</td>
+	                       	 	<td>
+		                            <div>
+		                                <p>${ c.purchaseBasic }</p>
+		                                <p> 
+		                                	************
+		                                	<c:forTokens var="cards" items="${ c.purchaseCNumber }" delims="-" begin="3" end="3" step="1">
+	                								<c:out value="${cards}"/>
+	                						</c:forTokens>
+		                                </p>
+		                            </div>
+	                        	</td>
+	                    	</c:forEach>
+                    	</tr>
+                	</tbody>  
                 </table>
                 <br>
-            <input type="radio" name="paymentSel" value="N"> 
+            <input type="radio" name="paymentSel" value="N" id="paymentSel"> 
             <label for ="paymentSel"><h4>새로운 결제수단</h4></label>
-            
-            
-            <script>
-            	$(function(){
-            		
-            		cardList();
 
-            	})	
-            	
-            	function cardList(){
-            		
-            		var cardsel = 'cardSel';
-            		var result = '<tr>';
-            		console.log(mp[0].purchaseBasic);
-            		
-            		/*
-            		for(var i in mp){
-            			result += 	'<td>' +
-            							'<div>' +
-            								'<p>' + mp[i].purchaseBasic + '</p>' +
-            								'<p> ************' + mp[i].purchaseCNumber.substr(8,4) + '</p>' +
-            							'</div>' +
-            						'</td>';		
-            		}
-            		*/
-            		
-            		result += '</tr>';
-            		cardsel.innerHTML = result;
-            	}
-
-            
-            </script>
             
 
             <div id="paymentMain">
@@ -312,19 +285,19 @@
                             <td colspan="4"><b style="font-size:18px">카드번호</b></td>
                         </tr>
                         <tr>
-                            <td><input type="text" style="width:120px" name="cardNum1" id="cardNum1"></td>
-                            <td><input type="text" style="width:120px" name="cardNum2" id="cardNum2"></td>
-                            <td><input type="text" style="width:120px" name="cardNum3" id="cardNum3"></td>
-                            <td><input type="text" style="width:120px" name="cardNum4" id="cardNum4"></td>
+                            <td><input type="text" style="width:120px" name="cardNum" id="cardNum1"></td>
+                            <td><input type="password" style="width:120px" name="cardNum" id="cardNum2"></td>
+                            <td><input type="password" style="width:120px" name="cardNum" id="cardNum3"></td>
+                            <td><input type="text" style="width:120px" name="cardNum" id="cardNum4"></td>
                         </tr>
                         <tr>
                             <td colspan="2"><b style="font-size:18px">유효기간</b></td>
                             <td colspan="2"><b style="font-size:18px">카드 비밀번호</b></td>
                         </tr>
                         <tr>
-                            <td><input type="text" style="width:120px" name="cardVYear" id="cardVYear"></td>
-                            <td><input type="text" placeholder="mm" style="width:130px" name="cardVMonth" id="cardVMonth"></td>
-                            <td><input type="text" placeholder="앞 2자리" style="width:130px" name="cardPwd" id="cardVPwd"></td>
+                            <td><input type="text" style="width:120px" name="purchaseVYear" id="cardVYear"></td>
+                            <td><input type="text" placeholder="mm" style="width:130px" name="purchaseVMonth" id="cardVMonth"></td>
+                            <td><input type="password" placeholder="앞 2자리" style="width:130px" name="purchaseCPwd" id="cardVPwd"></td>
                             <td></td>
                         </tr>
                         <tr>
@@ -334,40 +307,134 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4"><input type="text" style="width:520px" name="cardBirth" id="cardBirth"></td>
+                            <td colspan="4"><input type="text" style="width:520px" name="purchaseCDate" id="cardBirth"></td>
                         </tr>
                     </table>
                 </div>
                 
                 <script>
                 	
-                /*
+               
 	                $(document).ready(function(){
 						 
 					    // 라디오버튼 클릭시 이벤트 발생
 					    $("input:radio[name=paymentSel]").click(function(){
 					 
 					        if($("input[name=paymentSel]:checked").val() == 'N'){
-					 
-					        	document.getElementById('devName').value = '${s.receieverName}';
-					        	document.getElementById('devPhone').value = '${s.receieverPhone}';
-					        	document.getElementById('shippingSAddr').value = '${s.shippingSAddr}';
-					        	document.getElementById('shippingZipcode').value = '${s.shippingZipcode}';
-					        	document.getElementById('shippingDAddr').value = '${s.shippingDAddr}';
+		        				
+					        	document.getElementById('cardNum1').value = '';
+					        	document.getElementById('cardNum2').value = '';
+					        	document.getElementById('cardNum3').value = '';
+					        	document.getElementById('cardNum4').value = '';
+					        	document.getElementById('cardVYear').value = '';
+					        	document.getElementById('cardVMonth').value = '';
+					        	document.getElementById('cardVPwd').value = '';
+					        	document.getElementById('cardBirth').value = '';
 					        	
 					        }else{
 					        	
-					        	document.getElementById('devName').value = '';
-					        	document.getElementById('devPhone').value = '';
-					        	document.getElementById('shippingSAddr').value = '';
-					        	document.getElementById('shippingZipcode').value = '';
-					        	document.getElementById('shippingDAddr').value = '';
-					        
+					        	
+					        	//var card = document.getElementById('paymentSel').value;	
+					        	var card = $('input:radio[name="paymentSel"]:checked').val();
+
+					        	console.log(card);
+					        	if(card == 0){
+					        		<c:set var="card" value="${card}"/>
+							        	console.log('${mp[0].purchaseCNumber}');
+						        		var cardNum = '${mp[0].purchaseCNumber}';
+						        		var cardnum = cardNum.split('-');
+							        
+							        	for(var i=0; i<4; i++){
+
+							        		document.getElementById('cardNum' + (i+1)).value = cardnum[i];
+							        	}
+							        	
+							        	
+							        	document.getElementById('cardVYear').value = '${ mp[0].purchaseVYear}';
+							        	document.getElementById('cardVMonth').value = '${ mp[0].purchaseVMonth}';
+							        	document.getElementById('cardVPwd').value = '${ mp[0].purchaseCPwd}';
+							        	document.getElementById('cardBirth').value = '${mp[0].purchaseCDate}';
+					        	}else if (card == 1){
+					        		<c:set var="card" value="${card}"/>
+						        		var cardNum = '${mp[1].purchaseCNumber}';
+						        		var cardnum = cardNum.split('-');
+							        
+							        	for(var i=0; i<4; i++){
+
+							        		document.getElementById('cardNum' + (i+1)).value = cardnum[i];
+							        	}
+							        	
+							        	
+							        	document.getElementById('cardVYear').value = '${ mp[1].purchaseVYear}';
+							        	document.getElementById('cardVMonth').value = '${ mp[1].purchaseVMonth}';
+							        	document.getElementById('cardVPwd').value = '${ mp[1].purchaseCPwd}';
+							        	document.getElementById('cardBirth').value = '${mp[1].purchaseCDate}';
+					        	}else if (card == 2){
+					        		<c:set var="card" value="${card}"/>
+						        		var cardNum = '${mp[2].purchaseCNumber}';
+						        		var cardnum = 'cardNum.split('-')';
+							        
+							        	for(var i=0; i<4; i++){
+
+							        		document.getElementById('cardNum' + (i+1)).value = cardnum[i];
+							        	}
+							        	
+							        	
+							        	document.getElementById('cardVYear').value = '${ mp[2].purchaseVYear}';
+							        	document.getElementById('cardVMonth').value = '${ mp[2].purchaseVMonth}';
+							        	document.getElementById('cardVPwd').value = '${ mp[2].purchaseCPwd}';
+							        	document.getElementById('cardBirth').value = '${mp[2].purchaseCDate}';
+					        	}else if (card == 3){
+					        		<c:set var="card" value="${card}"/>
+						        		var cardNum = '${mp[3].purchaseCNumber}';
+						        		var cardnum = 'cardNum.split('-')';
+							        
+							        	for(var i=0; i<4; i++){
+
+							        		document.getElementById('cardNum' + (i+1)).value = cardnum[i];
+							        	}
+							        	
+							        	
+							        	document.getElementById('cardVYear').value = '${ mp[3].purchaseVYear}';
+							        	document.getElementById('cardVMonth').value = '${ mp[3].purchaseVMonth}';
+							        	document.getElementById('cardVPwd').value = '${ mp[3].purchaseCPwd}';
+							        	document.getElementById('cardBirth').value = '${mp[3].purchaseCDate}';
+					        	}else if (card == 4){
+					        		<c:set var="card" value="${card}"/>
+						        		var cardNum = '${mp[4].purchaseCNumber}';
+						        		var cardnum = 'cardNum.split('-')';
+							        
+							        	for(var i=0; i<4; i++){
+
+							        		document.getElementById('cardNum' + (i+1)).value = cardnum[i];
+							        	}
+							        	
+							        	
+							        	document.getElementById('cardVYear').value = '${ mp[4].purchaseVYear}';
+							        	document.getElementById('cardVMonth').value = '${ mp[4].purchaseVMonth}';
+							        	document.getElementById('cardVPwd').value = '${ mp[4].purchaseCPwd}';
+							        	document.getElementById('cardBirth').value = '${mp[4].purchaseCDate}';
+					        	}
+
 					        }
 					    });
 					});
-                	*/
+                	
                 </script>
+                
+                <script>
+		                var result='';
+		                
+			            	$('input[name=cardNum]').map(function(){
+			            		result +=$(this).val();
+			            	});
+			            	
+		            	alert(result);
+                </script>
+                
+                
+                
+                <input type="hidden" name="purchaseCNumber" value="${ result }">
                 
                 
                 
@@ -382,21 +449,72 @@
                     </p>
                 </div>
             </div>
-            <input type="checkbox" name="mainAgree" value="agree">
+            <input type="checkbox" id="mainAgree" name="mainAgree" value="agree">
             <label for ="mainAgree"><b>전체 동의하기</b></label>
             <br>
-            <input type="checkbox" name="subAgree1" value="agree">
+            <input type="checkbox" id="subAgree1" name="subAgree1" value="agree">
             <label for ="subAgree">제 3자에 대한 개인정보 제공 동의하기</label>
             <br>
-            <input type="checkbox" name="subAgree2" value="agree">
+            <input type="checkbox" id="subAgree2" name="subAgree2" value="agree">
             <label for ="subAgree">책임 규정에 대한 동의하기</label>
 
             <br><br>
             <div style="text-align:center">
-                <input class="btn btn-primary" type="submit" value="결제하기"></input>
+                <input class="btn btn-primary" id="paysend" type="submit" value="결제하기" disabled="disabled"></input>
                 <input class="btn btn-secondary" type="reset" value="취소하기"></input>
             </div>    
         </form>
+        
+        
+        <!-- 결제하기버튼 활성화 스크립트 -->
+        <script>
+
+	        $("input#mainAgree").click(function() {
+	        	   if ($("#mainAgree:checked").val() == "agree") // 활성화
+	        	   {
+	        		   document.getElementById('subAgree1').checked = true;
+	        		   document.getElementById('subAgree2').checked = true;
+	        	   }
+	        	   else // 비활성화
+	        	   {
+	        		   document.getElementById('subAgree1').checked = false;
+	        		   document.getElementById('subAgree2').checked = false;
+	        	   }   
+	        	  });
+	        
+	        $("input#mainAgree").click(function() {
+	        	   if ($("#subAgree1:checked").val() == "agree" && $("#subAgree2:checked").val() == "agree") // 활성화
+	        	   {
+	        	    $("input#paysend").removeAttr("disabled");
+	        	   }
+	        	   else // 비활성화
+	        	   {
+	        	    $("input#paysend").attr("disabled", true);
+	        	   }   
+	        	  });
+	        
+	        $("input#subAgree1").click(function() {
+	        	   if ($("#subAgree1:checked").val() == "agree" && $("#subAgree2:checked").val() == "agree") // 활성화
+	        	   {
+	        	    $("input#paysend").removeAttr("disabled");
+	        	   }
+	        	   else // 비활성화
+	        	   {
+	        	    $("input#paysend").attr("disabled", true);
+	        	   }   
+	        	  });
+	        
+	        $("input#subAgree2").click(function() {
+	        	   if ($("#subAgree1:checked").val() == "agree" && $("#subAgree2:checked").val() == "agree") // 활성화
+	        	   {
+	        	    $("input#paysend").removeAttr("disabled");
+	        	   }
+	        	   else // 비활성화
+	        	   {
+	        	    $("input#paysend").attr("disabled", true);
+	        	   }   
+	        	  });
+        </script>
 
 
 

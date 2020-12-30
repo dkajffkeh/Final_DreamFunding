@@ -442,41 +442,86 @@ text-align:left;}
   text-decoration: none;
 }
 
+
+/*세부메뉴css*/
+.nav--top{
+  margin-right:130px;
+}
+.nav--top > ul {
+    
+    font-size: 15px;
+    margin: 0;
+    margin-top:40px;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.nav--top > ul > li {
+    line-height: normal;
+    padding: 0px;
+    margin:  0 0 1rem
+}
+
+@media (min-width: 52em) {
+    .nav--top > ul > li {
+        margin: 0 0 0 5rem;
+        display: inline-block
+    }
+}
+
+.nav--top > ul > li a {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    padding: 0 0 .15rem;
+    text-decoration: none;
+    font-weight: 400;
+    color: #787777
+}
+
+.nav--top > ul > li a:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 100%;
+    bottom: -2px;
+    background: #7f0000;
+    height: 4px;
+    -webkit-transition-property: right;
+    transition-property: right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out
+}
+
+.nav--top > ul > li a:hover:before,
+.nav--top > ul > li a:focus:before,
+.nav--top > ul > li a:active:before,
+.nav--top > ul > li.current_page_item a:before {
+    right: 0
+}
+
+.nav--top > ul > li a:hover,
+.nav--top > ul > li a:focus,
+.nav--top > ul > li a:active,
+.nav--top > ul > li.current_page_item a {
+    border-bottom: 0px solid #fff;
+    color: #121212
+}
    
+
 </style>
 
-<!--세부메뉴 스크립트-->
-<script>
-  $(document).ready(function(){
-$(".link").addClass("color");
-//   첫번째
-$(".menu--item__one").click(function(){
-   $(".bottom__line").addClass("bottom__active");
-   $(".link").addClass("color");
-   $(".link1").removeClass("color1");
-   $(".link2").removeClass("color2");
-   $(".bottom__line").removeClass("bottom__active1 bottom__active2");
-});
 
-//  두번째
-$(".menu--item__two").click(function(){
-    $(".bottom__line").addClass("bottom__active1");
-    $(".link1").addClass("color1");
-    $(".link").removeClass("color");
-    $(".link2").removeClass("color2");
-    $(".bottom__line").removeClass("bottom__active bottom__active2");
-});
-
-// 세번째
- $(".menu--item__three").click(function(){
-      $(".bottom__line").addClass("bottom__active2");
-      $(".link2").addClass("color2");
-      $(".link").removeClass("color");
-      $(".link1").removeClass("color1");
-      $(".bottom__line").removeClass("bottom__active bottom__active1");
-});
-});
-</script>
 
 
 
@@ -521,42 +566,33 @@ $(".menu--item__two").click(function(){
                 </li>
               </ul>
             
-              <!-- 세부메뉴 -->
-              <div class="tab-content"  >
+             
+             <!--세부메뉴 html-->
+            <div class="tab-content" style=" margin-bottom: 10px;">
+              <div id="menu1" class="container tab-pane active" ><br><br>
+                <nav class="nav--top">
+                  <ul>
+                      <li><a href="#">펀딩한 프로젝트</a></li>
+                      <li><a href="#">관심있는 프로젝트</a></li>
+                      <li><a href="#">메시지</a></li>
+                  </ul>
+              </nav>
+              <hr class="line" style=" margin-top:0px;">
                 
-                <div id="menu1" class="container tab-pane active"   ><br><br>
-                  <ul class="detail-menu">
-                    <li class="menu--item__one">
-                      <a class="link">펀딩한 프로젝트</a>
-                    </li>
-                    <li class="menu--item__two">
-                      <a class="link1">관심있는 프로젝트</a>
-                    </li>
-                    <li class="menu--item__three">
-                      <a class="link2">메시지</a>
-                    </li>
-                    <li class="bottom__line" >
-                    </li><hr class="hrs">
-                  </ul>
-                  
-                </div>
-                  
-                <div id="menu2" class="container tab-pane fade"><br><br>
-                  <ul class="detail-menu">
-                    <li class="menu--item__one">
-                      <a class="link">프로젝트 만들기</a>
-                    </li>
-                    <li class="menu--item__two">
-                      <a class="link1">제작한 프로젝트</a>
-                    </li>
-                    <li class="menu--item__three">
-                      <a class="link2">메시지</a>
-                    </li>
-                    <li class="bottom__line">
-                    </li><hr class="hrs">
-                  </ul>
-                </div>
               </div>
+                
+              <div id="menu2" class="container tab-pane fade"><br><br>
+                <nav class="nav--top">
+                  <ul>
+                      <li><a href="#">프로젝트 만들기</a></li>
+                      <li><a href="#">제작한 프로젝트</a></li>
+                      <li><a href="#">메시지</a></li>
+                  </ul>
+              </nav>
+              <hr class="line" style=" margin-top:0px;">
+              </div>
+
+            </div>  
             </div>
 
 
