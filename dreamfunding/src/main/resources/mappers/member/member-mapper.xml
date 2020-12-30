@@ -68,6 +68,7 @@
 			, member_phone
 			, member_createdate
 			, member_gender
+			, member_link
 
 			)
 			values
@@ -80,6 +81,7 @@
 			, #{ phone }
 			, SYSDATE
 			, #{ gender }
+			, 1
 			)
 	
 	</insert>
