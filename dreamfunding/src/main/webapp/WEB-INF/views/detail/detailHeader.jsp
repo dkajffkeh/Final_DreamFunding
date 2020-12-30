@@ -143,9 +143,9 @@
           </div>
         </div>
         <ul class="content__nav">
-          <li class="borderLeftRight"><a href="#">스토리</a></li>
-          <li class="borderLeftRight"><a href="#">커뮤니티</a></li>
-          <li class="borderLeftRight"><a href="#">펀딩 안내</a></li>
+          <li class="borderLeftRight nav-active" id="story-nav"><a href="proDetail.de?pno=${d.projectNo}" onclick="goStory()">스토리</a></li>
+          <li class="borderLeftRight" id="community-nav"><a href="proDetail.de?page=community&pno=${d.projectNo}">커뮤니티</a></li>
+          <li class="borderLeftRight" id="policy-nav"><span onclick="goPolicy()">펀딩 안내</span></li>
         </ul>
         
        
