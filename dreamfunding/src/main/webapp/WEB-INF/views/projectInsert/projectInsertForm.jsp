@@ -114,9 +114,9 @@
                                             부제목을 넣어주세요!</div>
                                     </td>
                                     <td class="userInputarea">
-                                        <input type="text" class="form-control pro_title1" placeholder="50자 이내로 작성해 주세요" name="projectSubtitle"
-                                            maxlength="49" style="width:650px;">
-                                        <div class="lettercounter lc1">0/50</div>
+                                        <input type="text" class="form-control pro_title1" placeholder="200자 이내로 작성해 주세요" name="projectSubtitle"
+                                            maxlength="199" style="width:650px;">
+                                        <div class="lettercounter lc1">0/200</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -255,8 +255,8 @@
                                     </td>
                                     <td class="userInputarea">
                                         <input type="text" style="width:600px" class="form-control" id="creater-intro" name="creatorIntro"
-                                            maxlength="49" placeholder="소개는 50자 이내로 작성해 주세요!">
-                                        <div class="lettercounter lc2">0/50</div>
+                                            maxlength="199" placeholder="소개는 200자 이내로 작성해 주세요!">
+                                        <div class="lettercounter lc2">0/200</div>
                                     </td>
                                 </tr>
                                 <tr>

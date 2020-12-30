@@ -36,15 +36,27 @@
               <c:if test="${empty project.creatorProfile }"> 
               <li>
                 <i class="main__icon"
-                  ><span class="material-icons"> account_circle ${ project.creatorName } </span></i
-                >
-               ${ project.creatorName }
+                  >
+                  <c:if test="${ !empty project.creatorName }">
+                  <span class="material-icons"> account_circle</span>${ project.creatorName }
+                  </c:if>
+                  <c:if test="${  empty project.creatorName }">
+                  <span class="material-icons"> account_circle</span>${ loginMem.memNick } 
+                  </c:if>
+                  </i
+                > 
               </li>
               </c:if>
               <c:if test="${not empty project.creatorProfile }" >
               <li>
+              	<c:if test="${ !empty project.creatorName }">
                 <img id="creatorProfileImg" src="${pageContext.request.contextPath}/resources/images/projectThumbnail/${project.projectFileName}">
                 ${ project.creatorName }
+                </c:if>
+                <c:if test="${ empty project.creatorName }">
+                <img id="creatorProfileImg" src="${pageContext.request.contextPath}/resources/images/projectThumbnail/${project.projectFileName}">
+                ${ loginMem.memNick }
+                </c:if>
               </li>
               </c:if>
             </ul>
