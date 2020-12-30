@@ -27,7 +27,12 @@ $("#previewBtn").on('click', function () {
         contentType: false,
         success: function (result) {
 
+
+
             if (result > 0) {
+
+                $("input[name='actionType']").remove('value');
+                $("input[name='actionType']").attr('value', 'Reload');
 
                 const previewfrm = document.getElementById("insertConroller");
                 window.open("", "preview");
