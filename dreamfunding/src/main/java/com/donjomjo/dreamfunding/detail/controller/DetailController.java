@@ -54,24 +54,22 @@ public class DetailController {
 
 	@RequestMapping(value="proDetail.de")
 	public String selectDetailAll(int pno, Model model){
-		// 조회수 증가 
 		
-		int result = dService.increaseDetailCount(pno);
+		// 조회수 증가 
+		int result = dService.increaseDetailCount(pno); 
 		
 		if(result>0) { // 유효한 게시글 
 			Detail d = dService.selectDetailAll(pno);
 			// pno과 일치하는 게시글 Detail 객체에 담기
-			
-			// System.out.println("d : " + d); // 담김
-			
+	
 			model.addAttribute("d", d); 
 			// d라는 키값으로 detail객체 담기
 		
 			ArrayList<DetailReward> rw = dService.selectDetailReward(pno);
-			
-			System.out.println(rw);
 		
 			model.addAttribute("rw", rw);
+		
+			
 			
 			return "detail/detailStory";
 			
