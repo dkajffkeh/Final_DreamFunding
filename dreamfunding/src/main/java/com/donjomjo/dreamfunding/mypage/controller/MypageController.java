@@ -34,6 +34,11 @@ public class MypageController {
 		return "mypage/mypageMadeProject";
 	}
 	
+	@RequestMapping("makeProject.me")
+	public String makeProjectPage() {
+		return "mypage/makeProjectPage";
+	}
+	
 	@RequestMapping("optionAccount.me")
 	public String optionAccount() {
 		return "mypage/optionAccount";
@@ -48,4 +53,10 @@ public class MypageController {
 	public String optionProfile() {
 		return "mypage/optionProfile";
 	}
+	
+	@RequestMapping("optionShipping.me")
+	public String optionShipping() {
+		return "mypage/optionShipping";
+	}
+	
 }

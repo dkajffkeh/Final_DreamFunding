@@ -22,6 +22,7 @@
     />
   
   <link rel="stylesheet" href="../../../resources/css/common.css" />
+  
 <style>
     @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap");
 
@@ -407,62 +408,6 @@ text-align:left;}
   margin-top:8px;
 
 }
-
-.p{
-  font-size:18px;
-  width:200px;
-}
-
-.profile-wrap{margin:10px;
-margin-left:30px;
-margin-right:30px;}
-
-.profile{
-  text-align:left;
-  margin:30px;
-  margin-left:220px;
-  width:700px;
-}
-
-.togglee{float:right;
-margin-right:20px;}
-
-.button{
-  text-decoration: none;
-  border:none;
-  background-color: white;
-  color:#7f0000;
-}
-
-.button1{
-  text-decoration: none;
-  border:none;
-  background-color: white;
-  color:#7f0000;
-}
-
-.button2{
-  text-decoration: none;
-  border:none;
-  background-color: white;
-  color:#7f0000;
-}
-
-.button3{
-  text-decoration: none;
-  border:none;
-  background-color: white;
-  color:#7f0000;
-}
-
-.button4{
-  text-decoration: none;
-  border:none;
-  background-color: white;
-  color:#7f0000;
-}
-
-
 /*세부메뉴 스타일*/
 
 /*세부메뉴css*/
@@ -540,8 +485,8 @@ margin-right:20px;}
     color: #121212
 }
 
-/*결제수단 박스*/
-.pay{
+/*배송지 박스*/
+.shipbox{
   border:2px solid rgba(128, 128, 128, 0.158);
   margin-left:300px;
   margin-top:30px;
@@ -550,17 +495,10 @@ margin-right:20px;}
   display:block;
 }
 
-.pay-img{
-  border:1px solid black;
-  width:100px;
-  height:100px;
-  margin:20px;
-  margin-top:25px;
-  margin-left:25px;
-}
-.pay-content{
+
+.ship-content{
   display:inline-block;
-  transform: translate(-50%,-180%);
+  transform: translate(-190%,60%);
 }
 
 .label {
@@ -572,7 +510,7 @@ margin-right:20px;}
 
 .danger {background-color: #f44336;} 
 
-.delete{transform: translate(40%, -550%);}
+.delete{transform: translate(40%, -30%);}
 </style>
 
 
@@ -585,6 +523,7 @@ margin-right:20px;}
   <body>
     
     <jsp:include page="../common/menubar.jsp"/>
+
     <br>
     <div class="wrap1">
        <!--설정아이콘-->
@@ -618,7 +557,7 @@ margin-right:20px;}
                 
               </ul>
             
-               <!-- 세부메뉴 -->
+              <!-- 세부메뉴 -->
                  <!--세부메뉴 html-->
             <div class="tab-content" style=" margin-bottom: 10px;">
               <div id="menu1" class="container tab-pane active" ><br><br>
@@ -640,19 +579,18 @@ margin-right:20px;}
             
 
             <div style="width:600px; margin-bottom:100px; margin-left:300px;
-                  margin-top:40px;" ><h style="float:left; font-weight:bold">등록된 결제수단</h>
+                  margin-top:40px;" ><h style="float:left; font-weight:bold">등록된 배송지</h>
               <a href="" style="float:right;">+추가</a></div>
             
             <!--결제수단 박스-->
-            <div class="pay">
-              <div class="pay-img"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/bank.png" style="width:100%; height:100%;"></div>
-              <div class="pay-content"><span class="label danger">기본</span><h>기업은행</h><br><h>************1234</h></div>
+            <div class="shipbox">
+
+              <div class="ship-content">홍길동<span class="label danger">기본배송지</span><br><h>서울시 강남구</h><br><h>01035451232</h></div>
               <div class="delete"><a href="">삭제</a></div>
             </div>
 
-            <div class="pay">
-              <div class="pay-img"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/bank.png" style="width:100%; height:100%;"></div>
-              <div class="pay-content"><span class="label danger">기본</span><h>기업은행</h><br><h>************1234</h></div>
+            <div class="shipbox">
+              <div class="ship-content">혼길동<span class="label danger">기본배송지</span><br><h>서울시 강서구</h><br><h>01033325148</h></div>
               <div class="delete"><a href="">삭제</a></div>
             </div>
             
@@ -696,3 +634,4 @@ margin-right:20px;}
     </footer>
   </body>
 </html>
+  
