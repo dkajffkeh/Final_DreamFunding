@@ -40,8 +40,7 @@
 	<jsp:include page="../common/menubar.jsp"/>
 
 	<div id="inner">
-		<form action="order.send" name="orderInsertForm" onsubmit="return checkCheckBox(this)">
-		<input type="hidden" name="memberNo" value="1">
+		<form action="order.send" name="orderInsertForm" id="fndInsert2" method="post"> <!--onsubmit="return checkCheckBox(this)" -->
         <h3 align="center" style="">프로젝트 후원하기</h3>
         <br><br>
         <h3>리워드</h3>
@@ -295,7 +294,7 @@
                             <td colspan="2"><b style="font-size:18px">카드 비밀번호</b></td>
                         </tr>
                         <tr>
-                            <td><input type="text" style="width:120px" name="purchaseVYear" id="cardVYear"></td>
+                            <td><input type="text" placeholder="YYYY" style="width:120px" name="purchaseVYear" id="cardVYear"></td>
                             <td><input type="text" placeholder="mm" style="width:130px" name="purchaseVMonth" id="cardVMonth"></td>
                             <td><input type="password" placeholder="앞 2자리" style="width:130px" name="purchaseCPwd" id="cardVPwd"></td>
                             <td></td>
@@ -422,19 +421,13 @@
                 	
                 </script>
                 
-                <script>
-		                var result='';
-		                
-			            	$('input[name=cardNum]').map(function(){
-			            		result +=$(this).val();
-			            	});
-			            	
-		            	alert(result);
-                </script>
                 
+                <input type="hidden" name="purchaseCNumber" id="purchaseCNumber">
+                <input type="hidden" name="purchaseBkey">
+                <input type="hidden" name="payToken" id="payToken">
+                <input type="hidden" name="mno" value="${ mno }">
+                <input type="hidden" name="pno" value="${ p.projectNo }">
                 
-                
-                <input type="hidden" name="purchaseCNumber" value="${ result }">
                 
                 
                 
@@ -465,6 +458,127 @@
             </div>    
         </form>
         
+        <script>
+        /*
+        $(function(){
+        	$("#paysend").on("click", function(){
+            	
+            	
+            	gainToken();
+            	
+            	var token = $("#payToken").val();
+            	ajaxBilling();
+            
+            })
+        })
+        
+        $(function(){
+        	$("#paysend1").on("click", function(){
+            	
+            	
+            	gainToken();
+            	
+            	var token = $("#payToken").val();
+            	ajaxBilling();
+            
+            })
+        })
+        */
+        <!--
+        // header 정보를 추가합니다. 
+		var myHeaders = new Headers();
+		myHeaders.append("Authorization", "Bearer mF_9.B5f-4.1JqM");
+		fetch('https://server.example.com/resource',{
+		    "headers":myHeaders
+		}).then(function(res){
+		    // 서버의 응답이 json인 경우 아래의 코드를 통해서 js의 객체로 변환된 결과를 얻을 수 있습니다. 
+		    return res.json();
+		}).then(function(data){
+		    // json으로 변환된 결과를 출력합니다. 
+		    console.log(data);
+		});
+        -->
+        function gainToken(){
+      		
+  			var impKey = "imp_apikey";
+  			var impSecret = "ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f";
+        	
+        	$.ajax({
+        		url: "https://api.iamport.kr/users/getToken",
+        		type: "POST",
+        		data:{ imp_key:impKey,
+        			   imp_secret:impSecret
+        			 },
+        		dataType:"JSON",
+        		error: function(e){ console(e) },
+				success: function(result){
+					
+					var key = result.response.access_token;
+					console.log(key);
+					$("input[name=payToken]").val(key);
+				}
+        	});
+        	
+        	
+        }
+        
+        /*
+     	// Ajax로 카드사와 통신하는 메서드
+        function ajaxBilling() {
+        	var c1 = $("#cardNum1").val();
+        	var c2 = $("#cardNum2").val();
+        	var c3 = $("#cardNum3").val();
+        	var c4 = $("#cardNum4").val();
+        	var card_number = c1 + "-" + c2 + "-" + c3 + "-" + c4;
+        	$("input[name=purchaseCNumber]").val(card_number);
+        	
+        	var vm = $("#cardVMonth").val();
+        	var vy = $("#cardVYear").val();
+        	var expiry = vy + "-" + vm;
+        	
+        	var birth = $("#cardBirth").val();
+        	var pwd_2digit = $("#cardVPwd").val();
+        	var authori = "Bearer " +  $("#payToken").val();
+        	var amount = $("input[name=totalPrice]").val();
+        	
+        	var result = "";
+        	for ( var i = 0 ; i < 5 ; i++ ) {
+        		result += Math.floor(Math.random() * 10);
+        	}
+        	console.log(result)
+        	$("input[name=bKey]").val("${ prj.pNo }" + "_" + "${ loginUser.userNo }" + "_"+ result+ "_" + $("#cardNo4").val() );
+        	var merchant_uid = $("input[name=bKey]").val();
+        	var customer_uid = "12454sdfsdf1";
+        	var buyerName = "테스트"
+        	$.ajax({
+        		url: "https://api.iamport.kr/subscribe/payments/onetime",
+        		type: "POST",
+        		data: {
+        				Authorization:authori
+        				},
+        				{ merchant_uid: merchant_uid,
+        				amount:amount,
+        				tax_free:0,
+        			    card_number: card_number,
+        				expiry: expiry,
+        				birth: birth,
+        				pwd_2digit: pwd_2digit,
+        				customer_uid: customer_uid,
+        				name:"default",
+        				buyer_name: buyerName
+        				},
+        		dataType: "JSON",
+        		error: function(e){ console.log(e) },
+        		success: function( result ){
+        			console.log(result);
+        			// 카드정보 입력에 성공하면 폼을 서브밋해 우리 서버로 정보를 넘김
+        			$("#fndInsert2").submit();
+        		}
+        	});
+        }
+        */
+        </script>
+        
         
         <!-- 결제하기버튼 활성화 스크립트 -->
         <script>
@@ -483,9 +597,13 @@
 	        	  });
 	        
 	        $("input#mainAgree").click(function() {
-	        	   if ($("#subAgree1:checked").val() == "agree" && $("#subAgree2:checked").val() == "agree") // 활성화
+	        	   if ($("#subAgree1:checked").val() == "agree" && $("#subAgree2:checked").val() == "agree"
+	        			   ) // 활성화
 	        	   {
 	        	    $("input#paysend").removeAttr("disabled");
+	        	    var cardNumber = $("#cardNum1").val() + "-" + $("#cardNum2").val() + "-" 
+	        	    				+$("#cardNum3").val() + "-" +$("#cardNum4").val();
+	        	    document.getElementById('purchaseCNumber').value = cardNumber;
 	        	   }
 	        	   else // 비활성화
 	        	   {
@@ -497,6 +615,9 @@
 	        	   if ($("#subAgree1:checked").val() == "agree" && $("#subAgree2:checked").val() == "agree") // 활성화
 	        	   {
 	        	    $("input#paysend").removeAttr("disabled");
+	        	    var cardNumber = $("#cardNum1").val() + "-" + $("#cardNum2").val() + "-" 
+    								+$("#cardNum3").val() + "-" +$("#cardNum4").val();
+	        	    document.getElementById('purchaseCNumber').value = cardNumber;
 	        	   }
 	        	   else // 비활성화
 	        	   {
@@ -508,6 +629,9 @@
 	        	   if ($("#subAgree1:checked").val() == "agree" && $("#subAgree2:checked").val() == "agree") // 활성화
 	        	   {
 	        	    $("input#paysend").removeAttr("disabled");
+	        	    var cardNumber = $("#cardNum1").val() + "-" + $("#cardNum2").val() + "-" 
+									+$("#cardNum3").val() + "-" +$("#cardNum4").val();
+	        	    document.getElementById('purchaseCNumber').value = cardNumber;
 	        	   }
 	        	   else // 비활성화
 	        	   {
