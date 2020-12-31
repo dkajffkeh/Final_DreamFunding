@@ -57,7 +57,7 @@
                   <div class="profile_wrapper">
                         <img
                           class="image"
-                          src="resources/images/${ d.creatorProfile }"
+                          src="resources/images/creatorThumbnail/${ d.creatorProfile }"
                           alt="유저 프로필 이미지"
                         />  
                         <div class="profile_caption">
@@ -71,7 +71,7 @@
             <div class="intro-left__wrapper">
               <div class="intro-img">
                 <img
-                  src="resources/images/${ d.projectFileName }"
+                  src="resources/images/projectThumbnail/${ d.projectFileName }"
                   alt="프로젝트 대표 이미지"
                 />
               </div>

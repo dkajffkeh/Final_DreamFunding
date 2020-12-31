@@ -212,6 +212,13 @@ main .inner {
   transform-origin: bottom left;
 }
 
+
+.nav-active{
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+
 .content__wrapper {
   background: #fff;
   display: flex;
@@ -637,7 +644,6 @@ button {
   line-height: 1.8;
   font-size: 14px;
   margin-bottom: 30px;
-  padding-left: 10px;
 }
 
 .detail-policy.dream {

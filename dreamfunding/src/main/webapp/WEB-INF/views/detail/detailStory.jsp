@@ -25,7 +25,7 @@
         <div class="content__wrapper">
           <div class="section-left" id="story-section">
             <div class="story-content">
-              <img src="resources/images/${ d.projectFileName }" alt="" />
+              <img src="resources/images/projectThumbnail/${ d.projectFileName }" alt="프로젝트 메인이미지" />
           	  ${ d.projectContent }
             </div>
             <div class="hashtag-box">
