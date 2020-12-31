@@ -25,8 +25,8 @@ $(function () {
 
 //input letter counters
 $(".form-control.pro_title").on('focus keyup change,', function () { $(".lettercounter.lc").text($(this).val().length + "/50"); })
-$(".form-control.pro_title1").on('focus keyup change,', function () { $(".lettercounter.lc1").text($(this).val().length + "/50"); })
-$("#creater-intro").on('focus keyup change,', function () { $(".lettercounter.lc2").text($(this).val().length + "/50"); })
+$(".form-control.pro_title1").on('focus keyup change,', function () { $(".lettercounter.lc1").text($(this).val().length + "/200"); })
+$("#creater-intro").on('focus keyup change,', function () { $(".lettercounter.lc2").text($(this).val().length + "/200"); })
 
 
 $(".form-control.date.start").on('change input paste focus', startCal)

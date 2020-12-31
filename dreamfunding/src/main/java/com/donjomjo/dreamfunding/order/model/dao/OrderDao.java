@@ -15,10 +15,12 @@ import org.json.simple.parser.JSONParser;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.donjomjo.dreamfunding.member.model.vo.Member;
 import com.donjomjo.dreamfunding.order.model.vo.MemberPurchase;
 import com.donjomjo.dreamfunding.order.model.vo.PurchaseInfo;
 import com.donjomjo.dreamfunding.order.model.vo.Shipping;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectInsert;
+import com.donjomjo.dreamfunding.projectInsert.model.vo.Reward;
 
 @Repository
 public class OrderDao {
@@ -36,8 +38,19 @@ public class OrderDao {
 	}
 
 	public Object puchaseProcess(SqlSessionTemplate sqlSession, PurchaseInfo pi) {
-		
-		
+
+		return null;
+	}
+
+	public Member selectMember(SqlSessionTemplate sqlSession, int mno) {
+		return sqlSession.selectOne("orderMapper.selectMemer", mno);
+	}
+
+	public int insertPurchseInfo(SqlSessionTemplate sqlSession, PurchaseInfo pi) {
+		return sqlSession.insert("orderMapeer.insertPurchaseInsert", pi);
+	}
+
+	public Reward selectReward(SqlSessionTemplate sqlSession, int reno) {
 		return null;
 	}
 

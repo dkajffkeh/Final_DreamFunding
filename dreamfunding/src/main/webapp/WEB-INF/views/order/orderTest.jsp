@@ -56,35 +56,54 @@
 		<a href="orderCom.co"></a>
 	</div>
 	
-	<form action="https://www.myservice.com/subscription/issue-billing" method="post">
-	    <div>
-	        <label for="card_number">카드 번호 XXXX-XXXX-XXXX-XXXX</label>
-	        <input id="card_number" type="text" name="card_number">
-	    </div>
-	    <div>
-	        <label for="expiry">카드 유효기간 YYYY-MM</label>
-	        <input id="expiry" type="text" name="expiry">
-	    </div>
-	    <div>
-	        <label for="birth">생년월일 YYMMDD</label>
-	        <input id="birth" type="text" name="birth">
-	    </div>
-	    <div>
-	        <label for="pwd_2digit">카드 비밀번호 앞 두자리 XX</label>
-	        <input id="pwd_2digit" type="text" name="pwd_2digit">
-	    </div>
-	    <input hidden type="text" value="gildong_0001_1234" name="customer_uid">
-	    <input type="submit" value="결제하기">
-  	</form>
-  	
-  	<a href="hello3.no">테스트</a>
-  	
+	
   	<form action="hello3.no" method="post">
   		<input type="hidden" name="imp_key" value="imp_apikey">
   		<input type="hidden" name="imp_secret" value="ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f">
   		<input type="submit">
   	</form>
+  	
+  	<input type="hidden" name="payToken">
+  	
+  	
+  	<script>
+  	
+  	$(function(){
+    	$("#test1").on("click", function(){
+  		
+  		gainToken();
+  		
+  		
+    	})
+  	})
+  	
+  	
+  	function gainToken(){
+  		
+  			var impKey = "imp_apikey";
+  			var impSecret = "ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f";
+        	
+        	$.ajax({
+        		url: "https://api.iamport.kr/users/getToken",
+        		type: "POST",
+        		data:{ imp_key:impKey,
+        			   imp_secret:impSecret
+        			 },
+        		dataType:"JSON",
+        		error: function(e){ console(e) },
+				success: function(result){
+					
+					var key = result.response.access_token;
+					console.log(key);
+					$("input[name=payToken]").val(key);
 	
+					
+				}
+        	});
+        	
+        	
+        }
+  	</script>
 	
 	<script>
 					/*

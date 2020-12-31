@@ -100,7 +100,7 @@ public class ProjectInsertDao {
 		HashMap<String,String> map = new HashMap<>();
 		map.put("urlInput", urlInput);
 		map.put("pno",pno);
-		
+		System.out.println(pno+"   "+urlInput);
 		return sqlSession.selectOne("proInsertMapper.reloadUrlConflictCheck", map);
 	}
 

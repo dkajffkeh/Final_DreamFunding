@@ -16,11 +16,13 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.donjomjo.dreamfunding.member.model.vo.Member;
 import com.donjomjo.dreamfunding.order.model.dao.OrderDao;
 import com.donjomjo.dreamfunding.order.model.vo.MemberPurchase;
 import com.donjomjo.dreamfunding.order.model.vo.PurchaseInfo;
 import com.donjomjo.dreamfunding.order.model.vo.Shipping;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectInsert;
+import com.donjomjo.dreamfunding.projectInsert.model.vo.Reward;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -50,6 +52,21 @@ public class OrderServiceImpl implements OrderService{
 		
 		return (String) oDao.puchaseProcess(sqlSession, pi);
 		
+	}
+
+	@Override
+	public Member selectMember(int mno) {
+		return oDao.selectMember(sqlSession, mno);
+	}
+
+	@Override
+	public int insertPurchaseInfo(PurchaseInfo pi) {
+		return oDao.insertPurchseInfo(sqlSession, pi);
+	}
+
+	@Override
+	public Reward selectReward(int reno) {
+		return oDao.selectReward(sqlSession, reno);
 	}
 
 	
