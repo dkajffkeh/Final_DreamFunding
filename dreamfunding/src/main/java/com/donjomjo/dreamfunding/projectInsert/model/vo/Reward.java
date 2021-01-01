@@ -16,4 +16,7 @@ public class Reward {
 	private int saleCount;
 	private int rewardAmount; //리워드 1번 배열에 리워드 갯수가 몇개가 들어있는지.
 	private ArrayList<Reward> rewardList;
+	
+	
+	
 }

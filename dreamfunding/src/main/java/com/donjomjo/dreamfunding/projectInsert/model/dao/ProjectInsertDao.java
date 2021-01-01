@@ -100,7 +100,7 @@ public class ProjectInsertDao {
 		HashMap<String,String> map = new HashMap<>();
 		map.put("urlInput", urlInput);
 		map.put("pno",pno);
-		
+		System.out.println(pno+"   "+urlInput);
 		return sqlSession.selectOne("proInsertMapper.reloadUrlConflictCheck", map);
 	}
 
@@ -111,6 +111,11 @@ public class ProjectInsertDao {
 		map.put("filepath",filepath);
 		
 		return sqlSession.insert("proInsertMapper.insertCKEDitor",map);
+	}
+
+	public ProjectInsert preViewProjectSelector(SqlSessionTemplate sqlSession, int pno) {
+		
+		return sqlSession.selectOne("proInsertMapper.preViewProjectSelector",pno);
 	}
 
 	

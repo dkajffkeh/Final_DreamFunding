@@ -141,7 +141,7 @@
 	  	   			VALUES
 	  	   			(
 	  	   				 #{projectNo}
-						,2
+						,#{memberNo}
 						,#{proCategoryNo}
 						,#{bankNo}
 						,#{projectGoal}
@@ -237,7 +237,11 @@
   	   		   parameterType="_int"
   	   		   resultMap="ProjectResultSetHY">
   	   		SELECT
-  	   			  PROJECT_NO	   
+					      *
+				 FROM(
+				 SELECT
+  	   			  PROJECT_NO
+                 ,MEMBER_NO 
   	   		     ,NVL(PROJECT_TITLE,'제목이 지정되지 않았습니다') PROJECT_TITLE
   	   		     ,CASE 
      					 WHEN CREATOR_STATUS= 'R' THEN '수락요청'
@@ -246,16 +250,15 @@
      					 END AS CREATOR_STATUS 		     
   	   		     ,PROJECT_CRDATE
   	   		 FROM
-  	   		 	 PROJECT
+  	   		 	 PROJECT P
   	   		WHERE
-  	   		     MEMBER_NO=#{memNo} 
-  	   		  AND
+                 CREATOR_STATUS= 'D'
+               OR
   	   		     CREATOR_STATUS='R'
-  	   		  OR
-  	   		     CREATOR_STATUS='D'
-  	   		  OR
+  	   		   OR
   	   		     CREATOR_STATUS='T'
-  	   		  ORDER BY PROJECT_NO DESC            	     
+  	   		  ORDER BY PROJECT_NO DESC)
+				 WHERE MEMBER_NO=#{memNo}           	     
   	   </select>
   	   <select id="projectNumberCheck"
   	   	       parameterType="_int"
@@ -325,6 +328,55 @@
   	   	         PROJECT_NO
 				,MEMBER_NO
 				,PRO_CATENO
+				,BANK_NO
+				,PROJECT_GOAL
+				,PROJECT_TITLE
+				,PROJECT_SUBTITLE
+				,PROJECT_GPRICE
+				,PROJECT_START_DT
+				,PROJECT_CLOSE_DT
+				,PROJECT_URL
+				,PROJECT_THUMPATH
+				,PROJECT_FILENAME
+				,PROJECT_REASON
+				,PROJECT_COUNT
+				,PROJECT_CONTENT
+				,PROJECT_VURL
+				,PROJECT_REFCON
+				,CREATOR_THUMPATH
+				,CREATOR_PROFILE
+				,CREATOR_NAME
+				,CREATOR_INTRO
+				,CREATOR_PHONE
+				,PHONE_CHECK
+				,CREATOR_EMAIL
+				,CREATOR_BANK
+				,CREATOR_ACOUNT
+				,CREATOR_ACHOLDER
+				,CREATOR_WEBURL
+				,CREATOR_INSTA
+				,CREATOR_FACEBOOK
+				,CREATOR_STATUS
+				,HASHTAG
+				,PROJECT_CRDATE
+				
+		    FROM
+		        PROJECT
+		   WHERE
+		        PROJECT_NO=#{pno}     		     
+  	   </select>
+  	   <select id="preViewProjectSelector"
+  	   	       resultMap="ProjectResultSetHY"
+  	   	       parameterType="_int">
+  	   	   SELECT
+  	   	         PROJECT_NO
+				,MEMBER_NO
+				,(SELECT
+				      PRO_CATENAME
+				 FROM
+				     PROJECT P
+				JOIN PRO_CATEGORY C ON(P.PRO_CATENO=C.PRO_CATENO)
+				WHERE P.PROJECT_NO = #{pno}) PRO_CATENO
 				,BANK_NO
 				,PROJECT_GOAL
 				,PROJECT_TITLE

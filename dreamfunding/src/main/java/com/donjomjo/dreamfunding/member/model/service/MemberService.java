@@ -10,9 +10,9 @@ public interface MemberService {
 	
 	int updateMember(Member m);
 	
-	int deleteMember(String String);
+	int deleteMember(String email);
 	
-	int idCheck(String userId);
+
 	
 	
 }

@@ -82,7 +82,7 @@
                     </tr>
                 </table>
                   <hr class="my-4">
-                  <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit">회원가입</button>
+                  <button class="btn btn-lg btn-login btn-block text-uppercase" id="enroll-btn" type="submit">회원가입</button>
                   
 
                 </form>
@@ -91,5 +91,6 @@
           </div>
         </div>
       </div>
+
 </body>
 </html>

@@ -29,6 +29,7 @@ $("#modal_table > tbody > tr").click(function () {
                         $("input[name='projectGoal']:radio[value='N']").parent().addClass('active')
                     }
 
+
                     $("#exampleFormControlSelect1").val(pList.proCategoryNo);
                     $("input[name='projectTitle']").val(pList.projectTitle);
                     $("input[name='projectSubtitle']").val(pList.projectSubtitle);
@@ -83,7 +84,18 @@ $("#modal_table > tbody > tr").click(function () {
 
                     $("input[name='projectNo']").remove('value');
                     $("input[name='projectNo']").attr('value', pList.projectNo);
-                    console.log(pList);
+
+                    $("input[name='actionType']").remove('value');
+                    $("input[name='actionType']").attr('value', 'Reload');
+
+                    startCal();
+                    endCal();
+                    storyCompleteCheck()
+                    noticeCompleteCheck()
+                    subinfoCompleteCheck()
+                    urlAjax();
+
+                    videoURLCheck()
                 }
 
             })
@@ -194,16 +206,13 @@ $("#modal_table > tbody > tr").click(function () {
 
                         }
                     }
-                    console.log(rList);
-                    console.log(oList);
+
                     $("input[name='actionType']").remove('value');
                     $("input[name='actionType']").attr('value', 'Reload');
-                    storyCompleteCheck()
-                    noticeCompleteCheck()
-                    subinfoCompleteCheck()
-                    urlAjax();
-                    completeSectionCheck()
-                    videoURLCheck()
+                    console.log("실행!");
+
+                    completeSectionCheck();
+
                     swal("불러오기가 완료되었습니다.", "변경사항을 꼼꼼히 체크해주세요", "success");
                 }
             })

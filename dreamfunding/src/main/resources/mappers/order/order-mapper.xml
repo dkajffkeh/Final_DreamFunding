@@ -4,7 +4,8 @@
 
 	<resultMap id="projectResultSet" type="ProjectInsert">
 		<result column="project_no" property="projectNo"/>
-		<result column="project_title" property="projectTitle"/>	
+		<result column="project_title" property="projectTitle"/>
+		<result column="project_close_dt" property="projectEndDate"/>	
 	</resultMap>
 	
 	<resultMap id="shippingResultSet" type="Shipping">
@@ -30,11 +31,33 @@
 		<result column="purchase_email" property="purchaseEmail"/>
 		<result column="purchase_basic" property="purchaseBasic"/>		
 	</resultMap>
+	
+	<resultMap type="Member" id="memberResultSet">
+	  	<result column="member_no" property="memNo"/>
+	  	<result column="member_email" property="email"/>
+	  	<result column="member_pwd" property="memNick"/>
+	  	<result column="member_name" property="memName"/>
+	  	<result column="member_phone" property="phone"/>
+	  	<result column="member_createdate" property="memCreate"/>
+	  	<result column="member_gender" property="gender"/>
+	  	<result column="member_pf_path" property="memPfPath"/>
+	  	<result column="member_systemname" property="memSystemname"/>
+	  	<result column="member_status" property="memStatus"/>
+	  	<result column="member_link" property="memLink"/>
+	  	<result column="refres_token" property="refresToken"/>
+	  	<result column="access_token" property="accessToken"/>
+	  	<result column="status" property="status"/>
+	  </resultMap>
+	
+	
+	
 	<select id="selectProject" 
 			parameterType="_int" 
 			resultMap="projectResultSet">
 		select
 		       project_title
+		     , project_no
+		     , project_close_dt
 		  from project
 		 where project_no = #{pno}
 	</select>
@@ -62,5 +85,62 @@
 			  from member_purchase
 			 where member_no = #{mno}
 	</select>
+	
+	<select id="selectMember"
+			parameterType="_int"
+			resultMap="memberResultSet">
+		select *
+		  from member
+		 where member_no = #{mno}
+	</select>
+	
+	<insert id="insertPurchaseInsert" parameterType="PurchaseInfo">
+		insert 
+		  into purchaseInfo
+		  (
+		     purinfo_no
+		   , member_no
+		   , re_no
+		   , reward_amount
+		   , reward_plus
+		   , purinfo_status
+		   , delivery_status
+		   , shipping_zipcode
+		   , shipping_s_addr
+		   , shipping_d_addr
+		   , receiever_name
+		   , reveiever_phone
+		   , purinfo_req
+		   , purchase_c_number
+		   , purchase_v_year
+		   , purchase_v_month
+		   , purchase_c_pwd
+		   , purchase_c_date
+		   , purchase_bkey
+		   , purchase_email
+		  )
+		  values
+		  (
+		     seq_odno.nextval
+		   , #{memberNo}
+		   , #{reNo}
+		   , #{rewardAmount}
+		   , #{rewardPlus}
+		   , "Y"
+		   , #{shippingZipecode}
+		   , #{shippingSAddr}
+		   , #{shippingDAddr}
+		   , #{receieverName}
+		   , #{receieverPhone}
+		   , #{purinfoReq}
+		   , #{purchaseCNumber}
+		   , #{purchaseVYear}
+		   , #{purchaseVMonth}
+		   , #{purchaseCPwd}
+		   , #{purchaseCDate}
+		   , #{purchaseBkey}
+		   , "" 
+		  )
+	</insert>
   
 </mapper>

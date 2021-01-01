@@ -55,6 +55,7 @@
 		  from member
 		 where member_nick = #{ memNick }
 	</select>
+	<!-- 회원가입 -->
 	<insert id="insertMember" parameterType="Member">
 		insert
 			into member
@@ -67,6 +68,7 @@
 			, member_phone
 			, member_createdate
 			, member_gender
+			, member_link
 
 			)
 			values
@@ -79,9 +81,31 @@
 			, #{ phone }
 			, SYSDATE
 			, #{ gender }
+			, 1
 			)
 	
 	</insert>
+	<update id="updateMember" parameterType="Member">
+		update
+		       member
+		   set email = #{email}
+		     , gender = #{gender}
+		     , age = #{age}
+		     , phone = #{phone}
+		     , address = #{address}
+		     , modify_date = sysdate
+		 where MEMBER_EMAIL = #{email}
+	</update>
 	
+	<update id="deleteMember" parameterType="string">
+		update
+		       member
+		   set status = '4'
+		     , modify_date = sysdate
+		 where MEMBER_EMAIL = #{email}
+	</update>
+	
+	
+
 	
 </mapper>

@@ -65,6 +65,7 @@
     border: none;
     color: rgb(218, 216, 216);
     padding: 0.3rem;
+    cursor: pointer;
 }
 .like .material-icons{
     font-size: 36px;
@@ -325,7 +326,7 @@
 /* qna button */
 .sticky {
     position: sticky;
-    top: 30vh;
+    top: 10vh;
     margin-left: 80vw;
     height: 0;
     z-index: 200;
@@ -346,7 +347,15 @@
 .spanQna{
     vertical-align: top;
 }
-
+.moreBtn{
+	width: 300px;
+	height : 40px;
+    background-color: white;
+    border: solid 1px rgb(235, 235, 235);
+}
+.moreBtn:hover{
+    background-color: #fff7ed;
+}
 
 
 

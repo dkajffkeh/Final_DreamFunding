@@ -52,14 +52,18 @@ main .inner {
 
 .inner .intro-bottom__wrapper {
   display: flex;
+  padding: 0 40px 0 55px;
 }
 .inner .intro-left__wrapper {
-  max-width: 600px;
   display: flex;
+  max-width: 600px;
+  max-height: 500px;
+  margin-bottom: 20px;
 }
 
 .intro-left__wrapper .intro-img img {
   width: 100%;
+  height: 100%;
 }
 
 
@@ -170,6 +174,16 @@ main .inner {
   color: #333;
 }
 
+.content__nav li span {
+  color: rgb(109, 109, 109);
+  cursor:pointer;
+}
+
+.content__nav li span:hover {
+  font-weight: 700;
+  color: #333;
+}
+
 .content__nav li:nth-child(1) {
   margin-left: 40px;
 }
@@ -198,11 +212,19 @@ main .inner {
   transform-origin: bottom left;
 }
 
+
+.nav-active{
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+
 .content__wrapper {
   background: #fff;
   display: flex;
   gap: 40px;
   justify-content: center;
+  padding: 0 70px 0 60px;
 }
 
 .section-left {
@@ -257,6 +279,7 @@ main .inner {
 
 /* SECTION RIGHT */
 .section-right {
+
 }
 
 /* CREATOR INFO */
@@ -267,6 +290,7 @@ main .inner {
   justify-content: center;
   align-items: center;
   letter-spacing: 0.3px;
+  width: 380px;
 }
 
 .creator-label {
@@ -342,19 +366,20 @@ main .inner {
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 6px rgb(197, 194, 194);
-  padding: 20px;
+  padding: 25px 25px;
   letter-spacing: 0.3px;
   margin-bottom: 30px;
   line-height: 1.5;
   cursor: pointer;
   font-size: 14px;
+  width: 380px;
 }
 
 .reward__wrapper .reward-box a:hover{
 	color:#7f0000;
 }
 .reward-price {
-  padding: 10px 0 20px 0;
+  margin-bottom: 15px;
   font-size: 20px;
   font-weight: bold;
 }
@@ -619,7 +644,6 @@ button {
   line-height: 1.8;
   font-size: 14px;
   margin-bottom: 30px;
-  padding-left: 10px;
 }
 
 .detail-policy.dream {
@@ -726,6 +750,15 @@ button {
   align-items: center;
 }
 
+.sns__icon__wrapper a, button {
+	cursor: pointer;
+}
+
+.sns__icon__wrapper a:hover {
+	color:#333;
+}
+
+
 .modal__btn__wrapper button {
   width: 45%;
   height: 30px;
@@ -734,8 +767,10 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 }
+
+
+
 
 .modal__layout .modal__box h1 {
   align-self: flex-start;
@@ -747,6 +782,11 @@ button {
   font-size: 20px;
   font-weight: bold;
   text-align: center;
+}
+
+.modal__layout .modal__box span {
+  text-align: right;
+  cursor: pointer;
 }
 
 .modal__layout .modal__box form h1 {
@@ -779,4 +819,9 @@ button {
 
 .modal--layout .gap {
   height: 10px;
+}
+
+
+.disable-section{
+	display:none;
 }
