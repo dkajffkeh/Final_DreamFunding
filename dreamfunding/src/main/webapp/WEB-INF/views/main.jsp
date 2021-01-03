@@ -218,7 +218,7 @@
 
             <!-- 더보기 버튼 -->
             <div class="more more-a">
-              <button class="moreBtn">진행중인 펀딩 더보기</button>
+              <button class="moreBtn" onclick="location.href='progressMore.do'">진행중인 펀딩 더보기</button>
             </div>
 
             <!-- 제목 : 실시간 랭킹 -->
@@ -293,7 +293,7 @@
 
             <!-- 더보기 버튼 -->
             <div class="more more-b">
-              <button type="button" class="moreBtn">실시간 랭킹 더보기</button>
+              <button class="moreBtn" onclick="location.href='rankingMore.do'">실시간 랭킹 더보기</button>
             </div>
 
             <!-- 제목 : 종료된 펀딩 -->
@@ -360,7 +360,7 @@
 
             <!-- 더보기 버튼 -->
             <div class="more more-c">
-              <button class="moreBtn"><span>종료된 펀딩 더보기</span></button>
+              <button class="moreBtn" onclick="location.href='closedMore.do'"><span>종료된 펀딩 더보기</span></button>
             </div>
 
             <!-- 문의하기쪽 아랫부분 공간 -->

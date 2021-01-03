@@ -56,6 +56,7 @@
 /* qna form */
 .qna-form{
     width: 360px;
+    display:none;
 }
 .qna-full{
     background-color: white;
@@ -152,7 +153,7 @@
 /* qna button */
 .sticky {
     position: sticky;
-    top: 20vh;
+    top: 10vh;
     margin-left: 80vw;
     height: 0;
     z-index: 200;
