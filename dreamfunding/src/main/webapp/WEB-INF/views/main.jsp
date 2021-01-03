@@ -98,17 +98,17 @@
                 <div class="btn1">
                   <span class="material-icons md-48">navigate_before</span>
                 </div>
-                <img src="../../../resources/images/book7.jpg" alt="메인이미지" width="1200px" height="400px">
+                <img src="${pageContext.request.contextPath}/resources/images/book7.jpg" alt="메인이미지" width="1200px" height="400px">
                 <div class="btn2"><span class="material-icons md-48">navigate_next</span></div>
               </div>
               <div class="inner-image">
                 <div class="btn1"><span class="material-icons md-48">navigate_before</span></div>
-                <img src="../../../resources/images/book5.jpg" alt="메인이미지" width="1200px" height="400px">
+                <img src="${pageContext.request.contextPath}/resources/images/book5.jpg" alt="메인이미지" width="1200px" height="400px">
                 <div class="btn2"><span class="material-icons md-48">navigate_next</span></div>
               </div>
               <div class="inner-image">
                 <div class="btn1"><span class="material-icons md-48">navigate_before</span></div>
-                <img src="../../../resources/images/book14.jpg" alt="메인이미지" width="1200px" height="400px">
+                <img src="${pageContext.request.contextPath}/resources/images/book14.jpg" alt="메인이미지" width="1200px" height="400px">
                 <div class="btn2"><span class="material-icons md-48">navigate_next</span></div>
               </div>
             </div>
@@ -135,7 +135,7 @@
               <span class="title-sub">드림펀딩에서 핫한 프로젝트들을 만나보세요!</span>
               <!-- select-box -->
               <div class="select-a">
-                <select class="select-box">
+                <select class="select-box" id="progressSelect" onchange="fcProgressSelect">
                   <option value disabled="disabled" hidden="hidden"></option>
                   <option value="1">펀딩금액순</option>
                   <option value="2">마감임박순</option>
@@ -168,7 +168,7 @@
 	        				var value = "";
 	        				for(var i in progressList){
 	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + progressList[i].projectThumPath + progressList[i].projectFileName + ")'>" +
+		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + progressList[i].projectFileName + ")'>" +
 					    	                    "<img src='../../../resources/images/book2.jpg'>" +
 					    	                    "<div>" +
 					    	                      "<div class='like'>" +
@@ -199,11 +199,26 @@
 	        		
 	        	}
 	        </script>
+	        
+	        <!-- select box 진행중인 펀딩 -->
+	        <script>
+	        	function fcProgressSelect(){
+	        		
+	        		var itemIdSelect = document.getElementById("progressSelect");
+	        		
+	        		var itemId = itemIdSelect.options[itemIdSelect.selectedIndex].value;
+	        		console.log("itemId" + itemId);
+	        		
+	        		
+	        	}
+	        
+	        
+	        </script>
             
 
             <!-- 더보기 버튼 -->
             <div class="more more-a">
-              <button class="moreBtn">진행중인 펀딩 더보기</button>
+              <button class="moreBtn" onclick="location.href='progressMore.do'">진행중인 펀딩 더보기</button>
             </div>
 
             <!-- 제목 : 실시간 랭킹 -->
@@ -244,7 +259,7 @@
 	        				var value = "";
 	        				for(var i in rankingList){
 	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + rankingList[i].projectThumPath + rankingList[i].projectFileName + ")'>" +
+		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + rankingList[i].projectFileName + ")'>" +
 					    	                    "<img src='../../../resources/images/book2.jpg'>" +
 					    	                    "<div>" +
 					    	                      "<div class='like'>" +
@@ -278,7 +293,7 @@
 
             <!-- 더보기 버튼 -->
             <div class="more more-b">
-              <button type="button" class="moreBtn">실시간 랭킹 더보기</button>
+              <button class="moreBtn" onclick="location.href='rankingMore.do'">실시간 랭킹 더보기</button>
             </div>
 
             <!-- 제목 : 종료된 펀딩 -->
@@ -310,7 +325,7 @@
 	        				var value = "";
 	        				for(var i in closedList){
 	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + closedList[i].projectThumPath + closedList[i].projectFileName + ")'>" +
+		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + closedList[i].projectFileName + ")'>" +
 					    	                    "<img src='../../../resources/images/book2.jpg'>" +
 					    	                    "<div>" +
 					    	                      "<div class='like'>" +
@@ -345,7 +360,7 @@
 
             <!-- 더보기 버튼 -->
             <div class="more more-c">
-              <button class="moreBtn"><span>종료된 펀딩 더보기</span></button>
+              <button class="moreBtn" onclick="location.href='closedMore.do'"><span>종료된 펀딩 더보기</span></button>
             </div>
 
             <!-- 문의하기쪽 아랫부분 공간 -->

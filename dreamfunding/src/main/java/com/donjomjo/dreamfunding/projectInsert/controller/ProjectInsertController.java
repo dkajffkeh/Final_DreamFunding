@@ -127,7 +127,7 @@ public class ProjectInsertController {
 				profileUploader(profileParsing(mtf),pi,session);
 			}
 			//DB에서 파일을 불러 온 후 삭제				
-			//2개 다 바꿨을때만 처리됨.	
+			
 				
 			//프로젝트는 무조건 insert 돼야함.
 			if(pService.projectUpdateOnly(pi)>0) {
@@ -153,7 +153,7 @@ public class ProjectInsertController {
 		}
 
 	}
-	
+	//임시저장 데이터 뿌려주기
 	@RequestMapping(value="gotoPreview")
 	public ModelAndView toPreview(ProjectInsert pi,ModelAndView model) {
 		

@@ -66,6 +66,27 @@ public class IndexController {
 		
 	}
 	
+	// 진행중인 펀딩 더보기 클릭 시 페이지이동
+	@RequestMapping("progressMore.do")
+	public String progressMore() {
+		
+		return "index/progressFundingMore";
+	}
+	
+	// 실시간 랭킹 더보기 클릭 시 페이지이동
+	@RequestMapping("rankingMore.do")
+	public String rankingMore() {
+		
+		return "index/rankingMore";
+	}
+	
+	// 종료된 펀딩 더보기 클릭 시 페이지이동
+	@RequestMapping("closedMore.do")
+	public String closedMore() {
+		
+		return "index/closedFundingMore";
+	}
+	
 	
 	
 	
