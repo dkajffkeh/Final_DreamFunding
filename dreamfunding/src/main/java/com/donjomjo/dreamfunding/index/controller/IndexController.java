@@ -87,8 +87,44 @@ public class IndexController {
 		return "index/closedFundingMore";
 	}
 	
+	// 진행중인 펀딩(펀딩금액순) 조회
+	@ResponseBody
+	@RequestMapping(value="selectMoney.do", produces="application/json; charset=utf-8")
+	public String selectFundingMoney() {
+		
+		ArrayList<Index> selectMoneyList = iService.selectFundingMoney();
+		
+		//System.out.println(selectMoneyList);
+		
+		return new Gson().toJson(selectMoneyList);
+		
+	}
 	
-	
+	// 진행중인 펀딩(마감임박순) 조회
+	@ResponseBody
+	@RequestMapping(value="selectClosed.do", produces="application/json; charset=utf-8")
+	public String selectClosed() {
+		
+		ArrayList<Index> selectClosedList = iService.selectFundingMoney();
+		
+		//System.out.println(selectClosedList);
+		
+		return new Gson().toJson(selectClosedList);
+		
+	}
+	// 진행중인 펀딩(최신순) 조회
+	@ResponseBody
+	@RequestMapping(value="selectNew.do", produces="application/json; charset=utf-8")
+	public String selectNew() {
+		
+		ArrayList<Index> selectNewList = iService.selectFundingMoney();
+		
+		//System.out.println(selectNewList);
+		
+		return new Gson().toJson(selectNewList);
+		
+	}
+
 	
 	
 
