@@ -105,7 +105,7 @@ public class IndexController {
 	@RequestMapping(value="selectClosed.do", produces="application/json; charset=utf-8")
 	public String selectClosed() {
 		
-		ArrayList<Index> selectClosedList = iService.selectFundingMoney();
+		ArrayList<Index> selectClosedList = iService.selectClosed();
 		
 		//System.out.println(selectClosedList);
 		
@@ -117,7 +117,7 @@ public class IndexController {
 	@RequestMapping(value="selectNew.do", produces="application/json; charset=utf-8")
 	public String selectNew() {
 		
-		ArrayList<Index> selectNewList = iService.selectFundingMoney();
+		ArrayList<Index> selectNewList = iService.selectNew();
 		
 		//System.out.println(selectNewList);
 		
