@@ -101,5 +101,20 @@ public class OrderServiceImpl implements OrderService{
 		return oDao.selectOrderList(sqlSession);
 	}
 
+	@Override
+	public PurchaseInfo selectCancelId(int oNo) {
+		return oDao.selectCanceldId(sqlSession, oNo);
+	}
+
+	@Override
+	public int updateOrder(int oNo) {
+		return oDao.updateOrder(sqlSession, oNo);
+	}
+
+	@Override
+	public PurchaseInfo selectCancelOrder(int oNo) {
+		return oDao.selectCancelOrder(sqlSession, oNo);
+	}
+
 	
 }
