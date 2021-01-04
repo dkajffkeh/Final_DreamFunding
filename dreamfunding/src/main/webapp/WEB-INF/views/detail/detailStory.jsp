@@ -16,6 +16,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/resources/css/detail/detail.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
 
 <body>
@@ -60,8 +61,15 @@
                 해당 프로젝트에 허위사실 및 지적재산권 침해, 기타 드림펀딩의
                 정책을 위반하는 내용이 있다면 신고해주세요
               </div>
-              <button class="btn btn--main report">신고하기</button>
-            </div>
+              <c:choose>
+              <c:when test="${ !empty loginMem }">
+              <button class="btn btn--main report" onClick="reportModalOpen()">신고하기</button>
+              </c:when>
+              <c:otherwise>
+              <button class="btn btn--main report" onClick="reportModalOpen()" disabled>신고하기</button>
+              </c:otherwise>
+              </c:choose>	
+           	</div>
           </div>
           
           <jsp:include page="detailReward.jsp"/>
@@ -70,29 +78,96 @@
       </div>
     </main>
 
+
+
+ 	<!-- 신고하기 모달 -->
+    <div id="report-modal" class="modal__layout">
+      <div id="report-modal-box" class="modal__box">
+        <div class="label">프로젝트 신고하기</div>
+        <div class="gap"></div>    
+        <form action="" method="post">
+          <h1>신고할 프로젝트</h1>
+			  <div class="pro-title">${ d.projectTitle }</div>
+          <h1>신고내용</h1>
+	          <textarea name="reportContent" id="reportContent" placeholder="신고사유를 작성해주세요."></textarea>
+	          <div class="modal__btn__wrapper">
+	            <button onclick="addReport()">OK</button>
+	            <button class="modal-btn" onClick="reportModalClose()">CANCEL</button>
+	          </div>
+        </form>
+      </div>
+    </div>
+    
+    
+    
    <jsp:include page="../common/footer.jsp"/>
 
-<script>
-const goStory = () => {
-    document
-      .querySelector("#story-section")
-      .classList.remove("disable-section");
-    document
-      .querySelector("#policy-section")
-      .classList.add("disable-section");
-  };
+	<script defer >
+	const goStory = () => {
+	    document
+	      .querySelector("#story-section")
+	      .classList.remove("disable-section");
+	    document
+	      .querySelector("#policy-section")
+	      .classList.add("disable-section");
+	  };
+		
+	const goPolicy = () => {
+	    document
+	      .querySelector("#story-section")
+	      .classList.add("disable-section");
+	    document
+	      .querySelector("#policy-section")
+	      .classList.remove("disable-section");
+	  };
 	
-const goPolicy = () => {
-    document
-      .querySelector("#story-section")
-      .classList.add("disable-section");
-    document
-      .querySelector("#policy-section")
-      .classList.remove("disable-section");
-  };
-
-
-</script>
+	  // report 모달
+	  const reportModalOpen = () => {
+	    document
+	      .querySelector("#report-modal")
+	      .classList.toggle("modal__active");
+	  };
+	  const reportModalClose = () => {
+	    document.querySelector("#report-modal").style.animation =
+	      "fadeOut 0.4s ease-in-out forwards";
+	    document.querySelector("#report-modal-box").style.animation =
+	      "slideDown 0.4s ease-in-out forwards";
+	
+	    setTimeout(() => {
+	      document
+	        .querySelector("#report-modal")
+	        .classList.toggle("modal__active");
+	      document.querySelector("#report-modal").style.animation =
+	        "fadeIn 0.4s ease-in-out forwards";
+	      document.querySelector("#report-modal-box").style.animation =
+	        "slideUp 0.4s ease-in-out forwards";
+	    }, 400);
+	  };
+	  
+	  
+	   // 신고하기 등록 
+	   const addReport =()=> {
+	  		 if(document.querySelector('#reportContent').value.trim().length > 0) {
+		  		 axios.get('report.de',{
+		  			 params:{
+			  				 memNo:'${loginMem.memNo}',
+			  				 pno:'${d.projectNo}',
+			  			     reportContent:document.querySelector('#reportContent').value,
+		  					 }
+			  		 })
+			  		 .then(response=>{
+			         if(response.data==='success'){
+			           alert('신고가 정상적으로 접수되었습니다.');
+			           reportModalClose();
+			         }
+			       }).catch(()=>{
+			         alert('신고에 실패했습니다.');
+			         reportModalClose();
+			       })
+			     }
+			   }
+		  
+	</script>
 
 </body>
 </html>
