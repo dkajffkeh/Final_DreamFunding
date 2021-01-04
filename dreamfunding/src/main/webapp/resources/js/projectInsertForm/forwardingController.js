@@ -8,7 +8,7 @@ $(".btn-primary.btn4 , #projectInsertBtn").click(function () {
 })
 
 
-$("#previewBtn").on('click', function () {
+$("#previewBtn , #projectPreviewBtn").on('click', function () {
 
     const formData = new FormData(document.getElementById("insertConroller"));
     formData.append("status", "T");
