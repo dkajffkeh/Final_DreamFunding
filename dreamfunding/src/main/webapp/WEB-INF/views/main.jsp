@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Dream Funding</title>    
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/index.css?after" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/index.css" />
 </head>
 <body>
 
@@ -152,7 +152,6 @@
             </section>
             <!-- 진행중인 펀딩 리스트 end -->
             
-            
             <!-- 진행중인 펀딩 리스트 ajax -->
             <script>
 	        	$(function(){
@@ -171,7 +170,8 @@
 		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + progressList[i].projectFileName + ")'>" +
 					    	                    "<div>" +
 					    	                      "<div class='like'>" +
-					    	                        "<span class='material-icons md-36'>favorite</span>" +
+					    	                        "<div class='finish'><span>마감임박</span></div>" +
+					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
 					    	                      "</div>" +
 					    	                    "</div>" +
 					    	                  "</figure>" +
@@ -202,7 +202,7 @@
 	        <!-- select box 진행중인 펀딩 -->
 	        <script>
 	        
-	        function changeSelect(selectList){
+	        function changeSelect(){
 	        	
 	        	var selectOption = document.getElementById("selectValue");
 	        	
@@ -223,23 +223,28 @@
 	        				for(var i in selectMoneyList){
 	    						value += "<li class='card-item'>" + 
 		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectMoneyList[i].projectFileName + ")'>" +
-					    	                    "<div>" +
-					    	                      "<div class='like'>" +
-					    	                        "<span class='material-icons md-36'>favorite</span>" +
-					    	                      "</div>" +
-					    	                    "</div>" +
-					    	                  "</figure>" +
-					    	                  "<div class='card-desc'>" +
-					    	                      "<div class='project-content'>" +
-					    	                          "<div class='project-company'>" + selectMoneyList[i].creatorName + "</div>" +
-					    	                          "<div class='project-title'>" + selectMoneyList[i].projectTitle + "</div>" +
-					    	                      "</div>" +
-					    	                      "<div class='project-detail'>" +
-					    	                          "<div class='funding-percent'>" + selectMoneyList[i].projectStartDt + "</div>" +
-					    	                          "<div class='funding-d-day'>" + selectMoneyList[i].projectCloseDt + "</div>" + 
-					    	                      "</div>" +
-					    	                  "</div>" +
-				    	                  "</li>";
+			    								 "<div>" +
+					    	                      "<div class='like'>";
+					    	                        
+		    	                if(selectMoneyList[i].projectCloseDt == 0){
+		    	                	value += "<div class='finish'><span>마감임박</span></div>";
+		    	                }
+		    	                	
+		    	                value += "<div><span class='material-icons md-36'>favorite</span></div>" +
+		    	                      "</div>" +
+		    	                    "</div>" +
+			    	                  "</figure>" +
+			    	                  "<div class='card-desc'>" +
+			    	                      "<div class='project-content'>" +
+			    	                          "<div class='project-company'>" + selectMoneyList[i].creatorName + "</div>" +
+			    	                          "<div class='project-title'>" + selectMoneyList[i].projectTitle + "</div>" +
+			    	                      "</div>" +
+			    	                      "<div class='project-detail'>" +
+			    	                          "<div class='funding-percent'>" + selectMoneyList[i].projectStartDt + "</div>" +
+			    	                          "<div class='funding-d-day'>" + selectMoneyList[i].projectCloseDt + "</div>" + 
+			    	                      "</div>" +
+			    	                  "</div>" +
+		    	                  "</li>";
 	        				}
 	        				$(".thumbnail-a ul").html(value);
 	        			},error:function(){
@@ -249,26 +254,27 @@
 	        	}else if(selectedValue == 2){
 	        		$.ajax({
 	        			url:"selectClosed.do",
-	        			success:function(selectList){
+	        			success:function(selectClosedList){
 	        				console.log("마감임박순 통신성공");
 	        				var value = "";
-	        				for(var i in selectList){
+	        				for(var i in selectClosedList){
 	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectList[i].projectFileName + ")'>" +
-					    	                    "<div>" +
+		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectClosedList[i].projectFileName + ")'>" +
+			    								 "<div>" +
 					    	                      "<div class='like'>" +
-					    	                        "<span class='material-icons md-36'>favorite</span>" +
+					    	                        "<div class='finish'></div>" +
+					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
 					    	                      "</div>" +
 					    	                    "</div>" +
 					    	                  "</figure>" +
 					    	                  "<div class='card-desc'>" +
 					    	                      "<div class='project-content'>" +
-					    	                          "<div class='project-company'>" + selectList[i].creatorName + "</div>" +
-					    	                          "<div class='project-title'>" + selectList[i].projectTitle + "</div>" +
+					    	                          "<div class='project-company'>" + selectClosedList[i].creatorName + "</div>" +
+					    	                          "<div class='project-title'>" + selectClosedList[i].projectTitle + "</div>" +
 					    	                      "</div>" +
 					    	                      "<div class='project-detail'>" +
-					    	                          "<div class='funding-percent'>" + selectList[i].projectStartDt + "</div>" +
-					    	                          "<div class='funding-d-day'>" + selectList[i].projectCloseDt + "</div>" + 
+					    	                          "<div class='funding-percent'>" + selectClosedList[i].projectStartDt + "</div>" +
+					    	                          "<div class='funding-d-day'>" + selectClosedList[i].projectCloseDt + "</div>" + 
 					    	                      "</div>" +
 					    	                  "</div>" +
 				    	                  "</li>";
@@ -281,26 +287,27 @@
 	        	}else{
 	        		$.ajax({
 	        			url:"selectNew.do",
-	        			success:function(selectList){
+	        			success:function(selectNewList){
 	        				console.log("최신순 통신성공");
 	        				var value = "";
-	        				for(var i in selectList){
+	        				for(var i in selectNewList){
 	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectList[i].projectFileName + ")'>" +
-					    	                    "<div>" +
+		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectNewList[i].projectFileName + ")'>" +
+			    								 "<div>" +
 					    	                      "<div class='like'>" +
-					    	                        "<span class='material-icons md-36'>favorite</span>" +
+					    	                        "<div class='finish'></div>" +
+					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
 					    	                      "</div>" +
 					    	                    "</div>" +
 					    	                  "</figure>" +
 					    	                  "<div class='card-desc'>" +
 					    	                      "<div class='project-content'>" +
-					    	                          "<div class='project-company'>" + selectList[i].creatorName + "</div>" +
-					    	                          "<div class='project-title'>" + selectList[i].projectTitle + "</div>" +
+					    	                          "<div class='project-company'>" + selectNewList[i].creatorName + "</div>" +
+					    	                          "<div class='project-title'>" + selectNewList[i].projectTitle + "</div>" +
 					    	                      "</div>" +
 					    	                      "<div class='project-detail'>" +
-					    	                          "<div class='funding-percent'>" + selectList[i].projectStartDt + "</div>" +
-					    	                          "<div class='funding-d-day'>" + selectList[i].projectCloseDt + "</div>" + 
+					    	                          "<div class='funding-percent'>" + selectNewList[i].projectStartDt + "</div>" +
+					    	                          "<div class='funding-d-day'>" + selectNewList[i].projectCloseDt + "</div>" + 
 					    	                      "</div>" +
 					    	                  "</div>" +
 				    	                  "</li>";
@@ -354,9 +361,10 @@
 	        				for(var i in rankingList){
 	    						value += "<li class='card-item'>" + 
 		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + rankingList[i].projectFileName + ")'>" +
-					    	                    "<div>" +
+			    								 "<div>" +
 					    	                      "<div class='like'>" +
-					    	                        "<span class='material-icons md-36'>favorite</span>" +
+					    	                        "<div class='finish'></div>" +
+					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
 					    	                      "</div>" +
 					    	                    "</div>" +
 					    	                  "</figure>" +
@@ -419,9 +427,10 @@
 	        				for(var i in closedList){
 	    						value += "<li class='card-item'>" + 
 		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + closedList[i].projectFileName + ")'>" +
-					    	                    "<div>" +
+			    								 "<div>" +
 					    	                      "<div class='like'>" +
-					    	                        "<span class='material-icons md-36'>favorite</span>" +
+					    	                        "<div class='finish'></div>" +
+					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
 					    	                      "</div>" +
 					    	                    "</div>" +
 					    	                  "</figure>" +

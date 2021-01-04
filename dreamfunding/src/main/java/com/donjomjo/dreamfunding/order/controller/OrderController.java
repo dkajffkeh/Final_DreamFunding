@@ -1,11 +1,17 @@
 package com.donjomjo.dreamfunding.order.controller;
 
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -51,6 +57,15 @@ public class OrderController {
 		return "order/orderTest";
 	}
 	
+	
+	/**
+	 * @param pno : 프로젝트 넘버
+	 * @param mno : 멤버 넘버
+	 * @param rewardNum : 리워드 번호
+	 * @param rewardAmount : 리워드 갯수
+	 * @return
+	 * @throws java.text.ParseException
+	 */
 	@RequestMapping("orderInsert.me")
 	public String OrderInsertPage(int pno, int mno, int rewardNum, int rewardAmount, Model model) throws java.text.ParseException {
 		
@@ -232,7 +247,7 @@ public class OrderController {
 							 " \"}]";	 	
 			
 	 
-			//스케쥴 예약 결제
+			//json 스케쥴객체안 스케쥴 오브젝트
 		 	JSONObject scheduling = new JSONObject();
 		 		scheduling.put("merchant_uid", merchantUid);
 		 		scheduling.put("schedule_at", timeStamp);
@@ -247,21 +262,11 @@ public class OrderController {
 		 	Object sobj = jsonParser.parse(schedule);
 		 	JSONArray scheduleObj = (JSONArray)sobj;
 		 	
-		 	/* 실제 사용 결제
-		 	 JSONObject sendObj = new JSONObject();
-		  		sendObj.put("customer_uid", customerUid);
-				sendObj.put("checking_amount", 100);
-				sendObj.put("card_number", pi.getPurchaseCNumber);
-				sendObj.put("expiry", payDate);
-				sendObj.put("birth", pi.getPurchaseCDate());
-				sendObj.put("pwd_2digit", pi.getPurchaseCPwd());
-				sendObj.put("schedules", scheduleObj);
-		 	 */
-		 	
+			//스케쥴 예약 결제 
 		 	JSONObject sendObj = new JSONObject();
 		  		sendObj.put("customer_uid", customerUid);
 				sendObj.put("checking_amount", 100);
-				sendObj.put("card_number", "5171-3400-0214-4212");
+				sendObj.put("card_number", pi.getPurchaseCNumber());
 				sendObj.put("expiry", payDate);
 				sendObj.put("birth", pi.getPurchaseCDate());
 				sendObj.put("pwd_2digit", pi.getPurchaseCPwd());
@@ -323,19 +328,7 @@ public class OrderController {
 
 		
 	  }
-	
-	/*
-	// 일반 결제
-	JSONObject sendObj = new JSONObject();
-		sendObj.put("merchant_uid", merchant_uid);
-		sendObj.put("amount", "");
-		sendObj.put("card_number", "5171-3400-0214-4212");
-		sendObj.put("expiry", payDate);
-		sendObj.put("birth", pi.getPurchaseCDate());
-		sendObj.put("pwd_2digit", pi.getPurchaseCPwd());
-		sendObj.put("customer_uid", "45464887fdg");
-		sendObj.put("name", "테스트");
-	*/
+
 	
 	@RequestMapping("order.com")
 	public String orderComplete (int pno, Model model){
@@ -371,13 +364,104 @@ public class OrderController {
 		
 	}
 	
-	@RequestMapping("orderCancel.co")
-	public String orderCanceled(int pno, Model modle) {
+	@RequestMapping("orderDetail.com")
+	public String orderAdminDetail(int oNo, Model model) {
 		
+		PurchaseInfo pi = oService.selectCancelOrder(oNo); 
+		
+		System.out.println(pi);
+		model.addAttribute("pi", pi);
+		
+		return "order/orderAdminDetail";
+	}
 	
+	@RequestMapping("orderCancel.co")
+	public String orderCanceled(int oNo, HttpSession session, Model model) throws ParseException, IOException {
+				
+		RestTemplate rest = new RestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+	    headers.setContentType(MediaType.APPLICATION_JSON); 
+	    HttpEntity<String> entity = null;
+
+	    
+
+		// parameter 세팅
+		JSONObject obj = new JSONObject();
+	      obj.put("imp_key","imp_apikey");
+	      obj.put("imp_secret","ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f");
 		
+	    String gettoken = "";
+	      
+	    entity = new HttpEntity(obj.toJSONString(),headers);
+	      
+		//String getToken  =  rest.postForObject("https://api.iamport.kr/users/getToken", obj, String.class);
+		String getToken  =  rest.postForObject("https://api.iamport.kr/users/getToken", entity, String.class);
+
 		
-		return "";
+		System.out.println(getToken);
+				
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObj = (JSONObject) jsonParser.parse(getToken);
+
+		String _token = null;
+		
+		if((Long)jsonObj.get("code")  == 0){
+
+			JSONObject Token = (JSONObject) jsonObj.get("response");
+
+			System.out.println("Token==>>"+Token.get("access_token") );
+
+			_token = (String)Token.get("access_token");
+
+		}
+
+		
+		System.out.println(_token);
+		PurchaseInfo pi = oService.selectCancelId(oNo);
+		
+		String mecuId = pi.getPurchaseBkey();
+		String[] mecuIdArr = mecuId.split("-") ;
+		String merchantUid = mecuIdArr[0];
+		String customerUid = mecuIdArr[1];
+		
+		System.out.println(merchantUid + "-" + customerUid);
+		
+		JSONObject sendObj = new JSONObject();
+	  		sendObj.put("customer_uid", customerUid);
+			sendObj.put("merchantUid", merchantUid);
+		
+		headers.add("Authorization", _token);
+		headers.set("Authorization", _token);
+			
+		entity = new HttpEntity(sendObj.toJSONString(),headers); 
+			
+		String getResult = rest.postForObject("https://api.iamport.kr/subscribe/payments/unschedule", entity, String.class);
+
+		System.out.println(getResult);
+			
+		JSONObject resultObj = (JSONObject) jsonParser.parse(getResult);	
+		
+		if((Long)resultObj.get("code")  == 0){
+			
+			
+			int pResult = oService.updateOrder(oNo);
+			
+			if(pResult > 0) {
+				
+				session.setAttribute("alertMsg", "성공적으로 취소가 완료되었습니다.");
+
+				return "redirect:orderAdmin.com";
+			}else {
+				session.setAttribute("alertMsg", "취소가 실패하였습니다.");
+				
+				return "redirect:orderAdmin.com";
+			}
+		}else {
+			session.setAttribute("alertMsg", "취소가 실패하였습니다.");
+
+			return "redirect:orderAdmin.com";
+		}
 	}
 	
 		

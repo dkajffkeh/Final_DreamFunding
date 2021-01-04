@@ -8,6 +8,7 @@ window.onbeforeunload = function (e) {
 $(function () {
 
     $(".btn-primary.btn4").attr('disabled', true);
+    $("#projectInsertBtn").css('display', 'none');
 
 })
 
@@ -115,17 +116,23 @@ function completeSectionCheck() {
     const barColor = $(".bar.upper");
     let result = 0;
 
+
     for (let i = 0; i < barColor.length; i++) {
 
         if (barColor[i].style.backgroundColor == 'rgb(140, 42, 42)') {
             result++;
         }
     }
+
+
     if (result == 4) {
 
+        $("#projectInsertBtn").css('display', 'block');
         $(".btn-primary.btn4").attr('disabled', false);
     } else {
+        $("#projectInsertBtn").css('display', 'none');
         $(".btn-primary.btn4").attr('disabled', true);
+
     }
 
 }
