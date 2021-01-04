@@ -374,7 +374,7 @@ public class OrderController {
 	@RequestMapping("orderCancel.co")
 	public String orderCanceled(int pno, Model modle) {
 		
-		PurchaseInfo pi = 
+	
 		
 		
 		return "";
