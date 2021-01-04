@@ -19,8 +19,10 @@ import com.donjomjo.dreamfunding.member.model.vo.Member;
 import com.donjomjo.dreamfunding.order.model.vo.MemberPurchase;
 import com.donjomjo.dreamfunding.order.model.vo.PurchaseInfo;
 import com.donjomjo.dreamfunding.order.model.vo.Shipping;
+import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectCategory;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectInsert;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.Reward;
+import com.donjomjo.dreamfunding.projectInsert.model.vo.RewardOption;
 
 @Repository
 public class OrderDao {
@@ -43,16 +45,42 @@ public class OrderDao {
 	}
 
 	public Member selectMember(SqlSessionTemplate sqlSession, int mno) {
-		return sqlSession.selectOne("orderMapper.selectMemer", mno);
+		return sqlSession.selectOne("orderMapper.selectMember", mno);
 	}
 
 	public int insertPurchseInfo(SqlSessionTemplate sqlSession, PurchaseInfo pi) {
-		return sqlSession.insert("orderMapeer.insertPurchaseInsert", pi);
+		return sqlSession.insert("orderMapper.insertPurchaseInsert", pi);
 	}
 
 	public Reward selectReward(SqlSessionTemplate sqlSession, int reno) {
-		return null;
+		return sqlSession.selectOne("orderMapper.selectReward", reno);
 	}
+
+	public ArrayList<RewardOption> selectRewardOption(SqlSessionTemplate sqlSession, int reno) {
+		return (ArrayList)sqlSession.selectList("orderMapper.selectRewardOption",reno);
+	}
+
+	public PurchaseInfo selectPurchaseInfo(SqlSessionTemplate sqlSession, PurchaseInfo pi) {
+		return sqlSession.selectOne("orderMapper.selectPurchaseInfo1", pi);
+	}
+
+	public PurchaseInfo selectPurchaseInfo(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.selectOne("orderMapper.selectPurchaseInfo2", pno);
+	}
+
+	public ProjectCategory selectProjectCate(SqlSessionTemplate sqlSession, int pcno) {
+		return sqlSession.selectOne("orderMapper.selectProjectCate", pcno);
+	}
+
+	public ArrayList<ProjectInsert> selectProjectList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("orderMapper.selectProjectList");
+	}
+
+	public ArrayList<PurchaseInfo> selectOrderList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("orderMapper.selectOrderList");
+	}
+	
+	
 
 	
 	
