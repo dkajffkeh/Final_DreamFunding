@@ -54,7 +54,7 @@ public class ProjectInsertController {
 		model.addAttribute("proSequence", pService.selectProNo());
 		model.addAttribute("pList", pService.selectProject(mno));
 		
-		System.out.println(mno);
+	
 		return "projectInsert/projectInsertForm";
 		
 	}
@@ -345,7 +345,7 @@ public class ProjectInsertController {
 	@ResponseBody
 	@RequestMapping(value="ReloadProjectUrlCheck.pi.hy", produces="text/html; charset=utf-8")
 	private String reloadUrlConflictCheck(String urlInput, String pno){		
-			System.out.println(urlInput+"   "+pno);
+			
 		return pService.reloadUrlConflictCheck(urlInput, pno);
 	}	
 	
