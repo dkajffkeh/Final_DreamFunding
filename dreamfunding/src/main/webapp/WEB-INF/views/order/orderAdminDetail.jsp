@@ -24,13 +24,6 @@
 	rel="stylesheet">
 </head>
 <body id="page-top">
-	
-	<c:if test="${ !empty alertMsg }">
-		<script>
-			alert("${alertMsg}");
-		</script>
-		<c:remove var="alertMsg" scope="session"/>
-	</c:if>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -62,51 +55,41 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>이름</th>
-                                            <th>프로젝트</th>
-                                            <th>승인여부</th>
-                                            <th>결제날짜</th>
-                                            <th>결제금액</th>
-                                            <th>관리</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>project</th>
-                                            <th>Age</th>
-                                            <th>date</th>
-                                            <th>payment</th>
-                                            <th>management</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    	<c:forEach var="ol" items="${ orderList }">
-                                    		<tr>
-	                                            <td>${ ol.receieverName }</td>
-	                                            <td>${ ol.projectTitle }</td>
-	                                            <td>
-	                                            	<c:choose>
-		                                            	<c:when test="${ ol.purinfoStatus eq 'Y' }">
+                                    <tr>
+                                        <th>이름</th>
+                                        <td>${ pi.receieverName }</td>
+                                    </tr>
+                                    <tr>
+                                        <th>프로젝트</th>
+                                        <td>${ pi.projectTitle }</td>
+                                    </tr>
+                                    <tr>
+                                        <th>승인여부</th>
+                                        <td>
+                                       			<c:choose>
+		                                            <c:when test="${ pi.purinfoStatus eq 'Y' }">
 															결제완료
-		                                            	</c:when>
-		                                            	<c:when test="${ ol.purinfoStatus eq 'R' }">
+		                                            </c:when>
+		                                            <c:when test="${ pi.purinfoStatus eq 'R' }">
 															취소요청
-		                                            	</c:when>
-		                                            	<c:when test="${ ol.purinfoStatus eq 'F' }">
+		                                            </c:when>
+		                                            <c:when test="${ pi.purinfoStatus eq 'F' }">
 															취소완료
-		                                            	</c:when>
-	                                            	</c:choose>
-	                                            </td>
-	                                            <td>${ ol.projectCloseDt }</td>
-	                                            <td>${ ol.rewardPlus + (ol.rewardAmount * ol.rewardPrice) }</td>
-	                                            <td><a class="btn btn-danger" href="orderDetail.com?oNo=${ ol.purinfoNo }">취소</a></td>
-	                                        </tr>
-                                    	</c:forEach>
-                                    </tbody>
+		                                            </c:when>
+	                                           </c:choose>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>결제날짜</th>
+                                        <td>${ pi.projectCloseDt }</td>
+                                    </tr>
+                                    <tr>
+                                        <th>결제금액</th>
+                                        <td>${ pi.rewardPlus + (pi.rewardAmount * pi.rewardPrice) }</td>
+                                    </tr>
                                 </table>
+                                <a class="btn btn-danger" href="orderCancel.co?oNo=${ pi.purinfoNo }">취소 요청</a>
+                                <a class="btn btn-secondary" href="javascript:history.go(-1)">뒤로가기</a>
                             </div>
                         </div>
                     </div>

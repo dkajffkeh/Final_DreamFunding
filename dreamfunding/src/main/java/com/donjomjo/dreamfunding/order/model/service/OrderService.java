@@ -39,4 +39,10 @@ public interface OrderService {
 
 	ArrayList<PurchaseInfo> selectOrderList();
 
+	PurchaseInfo selectCancelId(int oNo);
+
+	int updateOrder(int oNo);
+
+	PurchaseInfo selectCancelOrder(int oNo);
+
 }

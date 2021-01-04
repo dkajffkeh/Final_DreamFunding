@@ -79,6 +79,18 @@ public class OrderDao {
 	public ArrayList<PurchaseInfo> selectOrderList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("orderMapper.selectOrderList");
 	}
+
+	public PurchaseInfo selectCanceldId(SqlSessionTemplate sqlSession, int oNo) {
+		return sqlSession.selectOne("orderMapper.selectCancelId", oNo);
+	}
+
+	public int updateOrder(SqlSessionTemplate sqlSession, int oNo) {
+		return sqlSession.update("orderMapper.updateOrder", oNo);
+	}
+
+	public PurchaseInfo selectCancelOrder(SqlSessionTemplate sqlSession, int oNo) {
+		return sqlSession.selectOne("orderMapper.selectCancelOrder",oNo);
+	}
 	
 	
 

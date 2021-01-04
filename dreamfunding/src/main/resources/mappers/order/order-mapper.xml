@@ -317,5 +317,40 @@
 		 where p.re_no = r.re_no
 		   and r.project_no = A.project_no
 	</select>
-  
+	
+	<select id="selectCancelId"
+			parameterType="_int"
+			resultMap="purchaseInfoResultSet">
+			select purchase_bkey
+			  from purchase_info
+			 where purinfo_no = ${purinfoNo}
+	</select>
+	
+	<update id="updateOrder"
+			parameterType="_int">
+		update
+			   purchase_info
+		   set purinfo_status = 'F'
+		     , delivery_status = '취소완료'
+	</update>
+	
+	<select id="selectCancelOrder"
+			parameterType="_int"
+			resultMap="purchaseInfoResultSet">
+		select p.*
+		     , r.re_price
+		     , A.project_title
+		     , A.project_close_dt
+		  from purchase_info p
+		     , reward r
+		     , (
+		        select project_title
+		             , project_no
+		             , project_close_dt
+		          from project
+		        ) A
+		 where p.re_no = r.re_no
+		   and r.project_no = A.project_no
+		   and p.purinfo_no = #{ oNo}
+	</select>  
 </mapper>
