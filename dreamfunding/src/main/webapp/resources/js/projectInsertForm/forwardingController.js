@@ -1,6 +1,6 @@
 'use strict'
 
-$(".btn-primary.btn4").click(function () {
+$(".btn-primary.btn4 , #projectInsertBtn").click(function () {
 
     $("#insertConroller").attr('method', 'post');
     $("#insertConroller").attr('action', "projectRequest.pi.hy?status=R").submit();
