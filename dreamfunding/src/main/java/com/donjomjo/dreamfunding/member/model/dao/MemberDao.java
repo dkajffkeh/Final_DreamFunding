@@ -35,5 +35,8 @@ public class MemberDao {
 		
 		return sqlSession.selectOne("memberMapper.nickCheck", nick);
 	}
+	public String selectAddress(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("memberMapper.selectAddress",email);
+	}
 
 }

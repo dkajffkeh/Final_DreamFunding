@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.ArrayList" %>  
+<%@ page import="javax.mail.*" %>
+<%@ page import ="com.donjomjo.dreamfunding.member.util.Gmail" %>
+<%@ page import ="com.donjomjo.dreamfunding.member.util.SHA256" %>
+<%@ page import ="java.util.Properties" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,18 +40,45 @@
                 
                     <div class="form-label-group">
                         <input type="email" id="email" class="form-control" name="email" placeholder="Email address" required autofocus>
-                        <label for="inputEmail">아이디(이메일)을 입력해주세요</label>
+                        <label for="email">아이디(이메일)을 입력해주세요</label>
                     </div>
 
                     <br>
-                    <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit">링크빋기</button>
+                    <button class="btn btn-lg btn-login btn-block text-uppercase" onclick="cemail">링크빋기</button>
                     <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit">로그인하기</button>
 
-                </form>
+                
               </div>
             </div>
           </div>
         </div>
       </div>
+      
+      <script>
+      $(function(){
+      	
+      	var cemail = ${"#email"}
+      	$("#emailCheck").click(function(){
+      		
+      		$.ajax({
+      			url:"emailCheck.sh",
+      			type:"post",
+      			data:{
+      				email:{email:cemail.val()}
+      			},
+      			type:"post",
+      			
+      			success:function(){
+      			
+      				
+      			}else{
+      				
+      			}			
+      		})
+    		
+      	})
+      	
+      })
+      </script>
 </body>
 </html>

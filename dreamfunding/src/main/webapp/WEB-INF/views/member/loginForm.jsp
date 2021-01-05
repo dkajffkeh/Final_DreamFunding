@@ -17,7 +17,16 @@
 	
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/login.css" />
 </head>
+
 <body>
+
+	<c:if test="${ !empty alertMsg }">
+		<script>
+			alert("${alertMsg}");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
+	
     <div class="container">
         <div class="row">
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -48,7 +57,7 @@
                         </tr>
                     </table>
                   </div>
-                  <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit">로그인</button>
+                  <button class="btn btn-lg btn-login btn-block text-uppercase"  onclick="login();">로그인</button>
                   <hr class="my-4">
                   <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> 구글로 로그인 하기</button>
                   <button class="btn btn-lg btn-naver btn-block text-uppercase" type="submit"><i class="fab fa-envira mr-2"></i>네이버로 로그인 하기</button>
@@ -58,6 +67,7 @@
           </div>
         </div>
       </div>
+
 
 </body>
 </html>

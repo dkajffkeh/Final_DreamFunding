@@ -85,11 +85,17 @@ public class MemberController {
 			session.setAttribute("loginMem", loginMem );
 			mv.setViewName("redirect:/");
 		
+		}else {
+			
+			mv.setViewName("member/loginForm");
+			session.setAttribute("alertMsg", "로그인 실패");
+			
 		}
 		
 		return mv;
 		
 	}
+	
 	@RequestMapping("logout.me.jm")
 	public String logoutMember(HttpSession session) {
 		session.invalidate();
@@ -184,19 +190,7 @@ public class MemberController {
 	    return certifyNum;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="emailCheck.me.jm")
-	public String idCheck(String email) {
-		
-		return String.valueOf(mService.emailCheck(email));
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="memNickCheck.me.jm" )
-	public String nickCheck(String memNick) {
-		
-		return String.valueOf(mService.nickCheck(memNick));
-	}
+
 	@ResponseBody
 	@RequestMapping("certify.me.jm")
 	public String certify(String certify,String check) {
@@ -209,6 +203,17 @@ public class MemberController {
 		
 		return String.valueOf(result);
 	}
-	
-
+	@ResponseBody
+	@RequestMapping("emailCheck.me.jm")
+	public String idCheck(String email) {
+		
+		return String.valueOf(mService.emailCheck(email));
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="memNickCheck.me.jm" )
+	public String nickCheck(String memNick) {
+		
+		return String.valueOf(mService.nickCheck(memNick));
+	}
+}

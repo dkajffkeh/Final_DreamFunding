@@ -67,7 +67,7 @@
 		                   </div>
                         </td>
                         <td>
-                        	<button class="form-control btn-request" data-toggle="modal" data-target="#myModal" onclick="certify();">인증번호 요청</button>
+                        	<button class="form-control btn-request" data-toggle="modal" data-target="#myModal" onclick="certify1();">인증번호 요청</button>
                         </td>
                     </tr>
 
@@ -75,28 +75,20 @@
 
                         <td>
 						   <div class="form-label-group">
-		                    <input type="text" id="phone" class="form-control" name="phone" placeholder="Password" required>
-		                    <label for="phone">인증번호 입력</label>
+		                    <input type="text" id="certify" class="form-control" name="certify" placeholder="Password" required>
+		                    <label for="certify">인증번호 입력</label>
+		                    <input type="hidden" id="certifyNum" value="">
 		                   </div>
                         </td>
                         <td>
-                        	<button class="form-control btn-request" data-toggle="modal" data-target="#myModal" onclick="certify-check();">인증 확인</button>
+                        	<button class="form-control btn-request" data-toggle="modal" data-target="#myModal1" onclick="certifycheck();">인증 확인</button>
                         </td>
                     </tr>
-                    <tr>
 
-                        <td colspan="2">
-                              <div class="form-label-group">
-			                    <input type="text" name="certifyCheck" id="certifyCheck" class="form-control" name="certify" placeholder="Password" required>
-			                    <label id="certifyNum" for="certify">인증번호 입력</label>
-			                  </div>
-                            <input type="hidden" name="certifyNum" id="certifyNum" value="certify">
-                        </td>
-                        
-                    </tr>
                 </table>
+                <div id="check-nick"></div>
                   <hr class="my-4">
-                  <button class="btn btn-lg btn-login btn-block text-uppercase" id="enroll-btn" type="submit">회원가입</button>
+                  <button class="btn btn-lg btn-login btn-block text-uppercase" id="enroll-btn" type="submit" disabled="true">회원가입</button>
                   
 
                 </form>
@@ -116,11 +108,11 @@
                 	
                 	
                     // 인증번호 전달
-                	function certify(){
+                	function certify1(){
                 		$.ajax({
                 			url:"message.me.jm",
                 			data:{
-                				phone:$("#phone").val();
+                				phone:$("#phone").val()
                 			},
                 			type:"post",
                 			success:function(certify){
@@ -129,41 +121,37 @@
                 			error:function(){
                 				console.log("ajax 통신 실패");
                 			},
-                		})
+                		});
                 	};
-                    
-                    function certify-check(){
+                	
+                	
+                	
+                    // 인증번호 확인
+                    function certifycheck(){
                     	
                     	var check = $("#certifyCheck").val();
                     	
-                    	check.keyup(function(){
+                    	
                         	$.ajax({
                         		url:"certify.me.jm",
                         		data:{
-                        			certify:$("#certifyNum").val();
-                        			check:check.val();
+                        			certify:$("#certifyNum").val(),
+                        			check:check.val()
                         		},
                         		type:"post",
                         		success:function(count){
-    	                    			if(check.val().length >= 6){
-    	                    				if(count == 1){
-    	                        				$("#check-certify").show();
-    	            							$("#check-certify").css("color", "green").text("인증번호가 일치합니다.");
-    	                        				cCertify = true
-    	                        			}else{
-    	                        				$("#check-certify").show();
-    	            							$("#check-certify").css("color", "red").text("인증번호가 일치하지않습니다.");
-    	                        				cCertify = false
-    	                        			}
-    	                        		}
+									
                         			
-                        			}
+                        		},
+                        		error:function(){
+                        			console.log("ajax통신 실패");
+                        		}
                         			
                         				
                         		
                         		
-                        	})
-                    	})
+                        	
+                    	});
                     	
 
                     };
@@ -176,12 +164,12 @@
                 	//이메일 중복확인
                 	$(function(){
                 		
-                		var emailInput = $("#enrollForm input[name=email]");	// 아이디 입력하는 input요소객체
+                		var emailInput = $("#enrollForm input[name=email]");	
                 		
                 		emailInput.keyup(function(){
                 			
-                			// 우선 최소 5글자 이상으로 입력했을 때만 중복체크 하도록
-                			if(emailInput.val().length >= 8){ // 중복체크할만함!!
+
+                			if(emailInput.val().length >= 8){ 
                 				
                 				$.ajax({
                 					url:"emailCheck.me.jm", 
@@ -190,18 +178,18 @@
                 					success:function(count){
                 						
                 						if(count == 1){ 
-                							// 중복된 아이디 존재 => 사용불가
-                							// => 메세지 빨간색 출력, 버튼 비활성화
+
                 							$("#check-result").show();
                 							$("#check-result").css("color", "red").text("중복된 이메일 아이디가 존재합니다. 다시 입력해주세요.");
                 							cEmail == false;
-                							
+                							buttonAble()
                 						}else{
                 							// 중복된 아이디 없음 => 사용가능
                 							// => 메세지 초록색 출력, 버튼 활성화
                 							$("#check-result").show();
                 							$("#check-result").css("color", "green").text("사용가능한 이메일입니다.");
                 							cEmail == true;
+                							buttonAble()
                 							
                 						}
                 						
@@ -247,13 +235,13 @@
                 							$("#check-nick").show();
                 							$("#check-nick").css("color", "red").text("중복된 닉네임가 존재합니다. 다시 입력해주세요.");
                 							cNick == false;
-                							
+                							buttonAble()
                 						}else{
 
                 							$("#check-nick").show();
                 							$("#check-nick").css("color", "green").text("사용가능한 닉네임입니다.");
                 							cNick == true;
-                							
+                							buttonAble()
                 						}
                 						
                 					},error:function(){
@@ -277,32 +265,16 @@
                 		
                 	});
                 	
-                	$(function(){
-                		var certifyNum = $("#enrollForm input[name=certifyNum]");	
-                		var usercheck = $("#enrollForm input[name=certifyCheck]")
-                		
-                		usercheck.keyup(function(){
-	                		
-	                		
-	                		
-	                		if(usercheck.val().length >= 2){ 
-		                		if(certifyNum == usercheck){
-		                			$("#check-certify").css("color", "green").text("인증번호가 맞습니다.");
-		                			cPhone == true;
-		                			
-		                		}else{
-		                			$("#check-certify").css("color", "red").text("인증번호가 일치하지 않습니다.");
-		                			cPhone == false;
-		                		}
-	                		}else{
-	            				$("#check-certify").css("color", "black").text("별명을 입력해주세요.");
-	            				
-	                		}
-                		
-                	})
+
+
+            		
                 	
-                	
+                
                 </script>
+                
+                
+                
+                
                 <!-- The Modal -->
 				<div class="modal" id="myModal">
 				  <div class="modal-dialog">
@@ -323,7 +295,7 @@
 				    </div>
 				  </div>
 				</div>
-                
+
                 
                 
               </div>
