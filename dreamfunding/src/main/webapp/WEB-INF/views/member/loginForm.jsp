@@ -23,7 +23,7 @@
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
               <div class="card-body">
-                <h5 class="card-title text-center">환영합니다</h5>
+                <h5 class="card-title text-center">환영합니다<br><small><a href="enrollForm.me.jm">빠른 회원가입!</a></small></h5>
                 <form class="form-signin" action="login.me.jm" method="post">
                   <div class="form-label-group">
                     <input type="email" id="email" class="form-control" name="email" placeholder="Email address" required autofocus>
@@ -38,12 +38,12 @@
                   <div class="custom-control custom-checkbox mb-3">
                     <table>
                         <tr>
-                            <td style="width: 270px;">
+                            <td style="width: 200px;">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">비밀번호 저장하기</label>
+                                <label class="custom-control-label" for="customCheck1">아이디 저장하기</label>
                             </td>
                             <td>
-                                <a href="enrollForm.me.jm">회원가입</a>
+                                <a href="findMember.me.jm">아이디 비밀번호 찾기</a>
                             </td>
                         </tr>
                     </table>

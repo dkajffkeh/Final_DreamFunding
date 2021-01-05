@@ -26,4 +26,14 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.deleteMember", email);
 	}
 
+	public int emailCheck(SqlSessionTemplate sqlSession, String email) {
+		
+		return sqlSession.selectOne("memberMapper.emailCheck", email);
+	}
+
+	public int nickCheck(SqlSessionTemplate sqlSession, String nick) {
+		
+		return sqlSession.selectOne("memberMapper.nickCheck", nick);
+	}
+
 }
