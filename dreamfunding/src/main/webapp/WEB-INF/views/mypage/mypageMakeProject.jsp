@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -22,7 +23,8 @@
     />
   
   <link rel="stylesheet" href="../../../resources/css/common.css" />
-<style>
+  
+  <style>
     @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap");
 
 /* COMMON */
@@ -48,7 +50,7 @@ header .inner {
   align-items: center;
   justify-content: space-between;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .header__left {
@@ -85,6 +87,27 @@ header a:hover {
   color: #fff;
   font-weight: bold;
 }
+.btn--sub {
+  background: none;
+  border:2px solid gray;
+  transition: all 0.2s;
+}
+.btn--sub:hover {
+  box-shadow: 0 0 7px gray;
+}
+.btn--sub a {
+  color: gray;
+}
+
+.btn--sub2 {
+  background: none;
+  border:1px solid gray;
+}
+
+.btn--sub2 a {
+  color: gray;
+}
+
 .search__box {
   position: relative;
 }
@@ -173,6 +196,7 @@ footer .footer__inner {
   line-height: 2;
   padding: 10px 0 30px 0;
   letter-spacing: 0.2px;
+  margin-top: 50px;
 }
 
 .footer__bottom {
@@ -224,6 +248,7 @@ footer .footer__inner {
   min-height: 700px;
 }
 
+
 /*마이페이지 스타일*/
 
 .wrap1{
@@ -247,222 +272,30 @@ footer .footer__inner {
 .wrap2{
   text-align:center;}
 
-
-/*서포터, 크리에이터 메뉴 스타일*/
+  /*서포터, 크리에이터 메뉴 스타일*/
 .nav-link{
+  font-size:20px;
   padding-top:15px;
  background-color:#ccc4bb;
  color:#7f0000;
  text-align:center;}
 
-
-.nav-item{background-color:rgba(153, 153, 153, 0.89);
-    color:#7f0000;}
-
+.nav-item a:hover{
+  background-color:rgba(153, 153, 153, 0.89);
+  color:#7f0000;}
 
 .supporter-menu{
   text-decoration:none;
-text-align:left;}
+text-align:center;}
 
 .creator-menu{
-  text-align:right;}
+  text-align:center;}
 
 .menu-content a{
   text-decoration:none;
 }
 
 
-#menu1{padding:0px;}
-#menu2{padding:0px;}
-
-#menu1 a:hover{
- text-decoration:none;
- color:#7f0000;}
-
-#menu2 a:hover{
-  text-decoration:none;
-  color:#7f0000;}
-
-  .supporter-menu {
-  transform: scale(1);
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
-  transition: all 0.2s ease-in-out;  /* 서서히 확대 */
-}
-.supporter-menu:hover {
-  transform: scale(1.01);
-  -webkit-transform: scale(1.01);
-  -moz-transform: scale(1.01);
-  -ms-transform: scale(1.01);
-  -o-transform: scale(1.01);
-}
-
-.creator-menu {
-  transform: scale(1);
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
-  transition: all 0.2s ease-in-out;  /* 서서히 확대 */
-}
-.creator-menu:hover {
-  transform: scale(1.01);
-  -webkit-transform: scale(1.01);
-  -moz-transform: scale(1.01);
-  -ms-transform: scale(1.01);
-  -o-transform: scale(1.01);
-}
-
-.profile-img{
-  margin-top:10px;
-}
-
-
-
-
-
-
-
-/*세부메뉴 스타일*/
-
-.detail-menu {
-  width:100%;
-  height:50px;
-  text-align:center;
-  position:relative;
-  display:inline-block;
-}
-.menu--item__one {
-  width:100px;
-  list-style:none;
-  display:inline-block;
-  margin-right:35px;
-  margin-left:16px;
-}
-.menu--item__two {
-  width:100px;
-  list-style:none;
-  display:inline-block;
-  margin-right:35px;
-}
-.menu--item__three {
-  width:100px;
-  list-style:none;
-  display:inline-block;
-  margin-right:17px;
-}
-.menu--item__four {
-  width:100px;
-  list-style:none;
-  display:inline-block;
-  margin-right:17px;
-}
-
-.link {
-  text-decoration:none;
-  cursor:pointer;
-}
-.link1 {
-  text-decoration:none;
-  cursor:pointer;
-}
-.link2 {
-  text-decoration:none;
-  cursor:pointer;
-}
-.bottom__line {
-  list-style:none;
-  display:inline-block;
-  margin-left:317.5px;
-  position:absolute;
-  top:30px;
-  left:0px;
-  width:130px;
-  height:3px;
-  background-color: #7f0000;
-  border-radius: 100%;
-  
-}
-.bottom__active {
-  transform: translate3d(0%, 0, 0);
-  transition:all linear 240ms;
-}
-.bottom__active1 {
-  transform: translate3d(130%, 0, 0);
-  transition:all linear 240ms;
-}
-.bottom__active2 {
-  transform: translate3d(260%, 0, 0);
-  transition:all linear 240ms;
-}
-.color,.color1,.color2 {
-  color:#7f0000;
-  transition:all linear 100ms;
-}
-
-.hrs{
-  margin-top:8px;
-
-}
-
-.p{
-  font-size:18px;
-  width:200px;
-}
-
-.profile-wrap{margin:10px;
-margin-left:30px;
-margin-right:30px;}
-
-.profile{
-  text-align:left;
-  margin:30px;
-  margin-left:220px;
-  width:700px;
-}
-
-.togglee{float:right;
-margin-right:20px;}
-
-.button{
-  text-decoration: none;
-  border:none;
-  background-color: white;
-  color:#7f0000;
-}
-
-.button1{
-  text-decoration: none;
-  border:none;
-  background-color: white;
-  color:#7f0000;
-}
-
-.button2{
-  text-decoration: none;
-  border:none;
-  background-color: white;
-  color:#7f0000;
-}
-
-.button3{
-  text-decoration: none;
-  border:none;
-  background-color: white;
-  color:#7f0000;
-}
-
-.button4{
-  text-decoration: none;
-  border:none;
-  background-color: white;
-  color:#7f0000;
-}
-
-
-/*세부메뉴 스타일*/
 
 /*세부메뉴css*/
 .nav--top{
@@ -539,138 +372,203 @@ margin-right:20px;}
     color: #121212
 }
 
-/*결제수단 박스*/
-.pay{
-  border:2px solid rgba(128, 128, 128, 0.158);
-  margin-left:300px;
-  margin-top:30px;
-  width:600px;
-  height:150px;
-  display:block;
+
+
+
+
+
+/*정렬방식 select옵션*/
+.sort{
+float:right;
 }
 
-.pay-img{
-  border:1px solid black;
-  width:100px;
-  height:100px;
-  margin:20px;
-  margin-top:25px;
-  margin-left:25px;
-}
-.pay-content{
+
+
+/* 알림박스*/
+.inform-box{
+  width:850px;
+  height:50px;
   display:inline-block;
-  transform: translate(-50%,-180%);
+  margin:20px auto;
+  margin-left:130px;
+  margin-right:29px;
+  padding-left:30px;
+  line-height: 2.6;
+  font-size:large;
+  background-color: rgba(212, 211, 211, 0.342)
+}
+
+/*제작한 프로젝트 박스*/
+.making-box{
+  border:2px solid rgba(128, 128, 128, 0.336);
+  width:850px;
+  height:180px;
+  display: inline-flex;
+  margin: 20px auto;
+  margin-left:130px;
+  margin-right:110px;}
+
+
+.making-date{
+  display:inline-block;
+  height:30px;
+  margin-left:20px;
+  margin-top:5px;
+
+}
+
+.making-img{
+  display:inline-block;
+  width:200px;
+  height:120px;
+  transform: translate(-41%, 37%);
+}
+
+.making-name{
+  display:inline-flex;
+  height:100px;
+  line-height: 1.8;
+  transform: translate(-35%, 52%);
+  
+}
+
+.making-label{
+  height:40px;
+  display:inline-block;
+  width:100px;
+  transform: translate(-55%, 130%);
+
 }
 
 .label {
-  font-size:10px;
+  width:100%;
   color: white;
-  padding: 5px;
-  border-radius: 50px;
+  padding: 4px;
+  border-radius: 10%;
+  transform: translate(10%, -30%);
+}
+.success {background-color: #7f0000;} /* Green */
+
+.detail-box{
+  display:inline-block;
+  transform: translate(100%, 41%)
+  
 }
 
-.danger {background-color: #f44336;} 
-
-.delete{transform: translate(40%, -550%);}
+#detail-button{
+  font-size: 40px;;
+}
 .h3{margin-top:7px;}
-</style>
 
 
+    </style>
+</head>
+<body>
+<jsp:include page="../common/menubar.jsp"/>
 
-
-
-  
-
-  </head>
-  <body>
-    
-    <jsp:include page="../common/menubar.jsp"/>
-    <br>
     <div class="wrap1">
-       <!--설정아이콘-->
-       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
-       <!-- 마이페이지 프로필 div-->
-        <div class="page-name"> 
-          <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
-          class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
-        </div>
-    </div>
-    
-    
-        
-    
-
+      <!--설정아이콘-->
+      <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
+      <!-- 마이페이지 프로필 div-->
+       <div class="page-name"> 
+         <h style=" font-weight:bold;">마이페이지</h><br>
+         <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
+         class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
+       </div>
+   </div>
 
     <!-- 이곳에 페이지 내용 작성 -->
-    <main class="section">
-      <div class="inner">
-        <!--  페이지 내용 작성하는곳 -->
-        <div class="wrap2">
-           <!--서포터, 크리에이터 탭-->
-            <div class="container mt-3" >
-              <br>
-              
-               <ul class="nav nav-tabs nav-justified" style="border-radius: 20px; border:none;">
-                <li class="nav-item" style="background-color:none; border-radius:20px;">
-                  <a class="nav-link"style="border-radius: 20px; border:1px solid rgb(206, 206, 206);"><h3 class="h3" style="font-weight:bold;">설정</h3></a> 
-                </li>
-                
-              </ul>
+    <main class="section" >
+      <div class="inner" >
+        <div class="wrap2" >
+          <!--서포터, 크리에이터 탭-->
+           <div class="container mt-3" style=" margin-bottom: 10px;">
+             <br>
+             
             
-               <!-- 세부메뉴 -->
-                 <!--세부메뉴 html-->
+              <ul class="nav nav-tabs nav-justified" style="border-radius: 20px; border:none;"  >
+                <li class="nav-item">
+                  <a class="nav-link active" style="line-height:10px; margin-right:10px; border-radius: 20px; border:1px solid rgb(206, 206, 206);" data-toggle="tab" href="#menu1"><h3 class="h3" style="font-weight:bold;">서포터</h3></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" style="border-radius: 20px; border:1px solid rgb(206, 206, 206);" data-toggle="tab" href="#menu2"><h3 class="h3" style="font-weight:bold;">크리에이터</h3></a>
+                </li>
+              </ul>
+
+             <!--세부메뉴 html-->
             <div class="tab-content" style=" margin-bottom: 10px;">
               <div id="menu1" class="container tab-pane active" ><br><br>
                 <nav class="nav--top">
                   <ul>
-                      <li><a href="optionProfile.me">프로필</a></li>
-                      <li><a href="optionAccount.me">계정</a></li>
-                      <li><a href="optionPay.me">결제수단</a></li>
-                      <li><a href="optionShipping.me">배송지</a></li>
+                      <li><a href="myFundingProject.me">펀딩한 프로젝트</a></li>
+                      <li><a href="myLikeProject.me">관심있는 프로젝트</a></li>
+                      <li><a href="mypageMessage.me">메시지</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
                 
               </div>
                 
-           
+              <div id="menu2" class="container tab-pane fade"><br><br>
+                <nav class="nav--top">
+                  <ul>
+                      <li><a href="makeProject.me">프로젝트 만들기</a></li>
+                      <li><a href="myMadeProject.me">제작한 프로젝트</a></li>
+                      <li><a href="mypageMessage.me">메시지</a></li>
+                  </ul>
+              </nav>
+              <hr class="line" style=" margin-top:0px;">
+              </div>
+              <div style="position: relative;">
+                <img src="${pageContext.request.contextPath}/resources/images/book17.PNG" style="height:600px; width:100%;">
+                <div style="left: 800px; bottom: 320px; position: absolute;">
+                
+                  <button class="btn btn--main" style="width:250px; height:50px; font-size:22px;"><a href="projectinsert.pi.hy">프로젝트 만들기</a></button><br>
+                  <button class="btn btn--sub" style="width:250px; height:50px; font-size:22px;"><a href="#">리워드 가이드북</a></button><br>
+                  <button class="btn btn--sub" style="width:250px; height:50px; font-size:22px;"><a href="#">모의펀딩 가이드</a></button>
+                  
+                  
+                </div>
+                
+              </div>
             </div>  
-            </div>   
-            
+          </div>
 
-            <div style="width:600px; margin-bottom:100px; margin-left:300px;
-                  margin-top:40px;" ><h style="float:left; font-weight:bold">등록된 결제수단</h>
-              <a href="" style="float:right;">+추가</a></div>
-            
-            <!--결제수단 박스-->
-            <div class="pay">
-              <div class="pay-img"><img src="${pageContext.request.contextPath}/resources/images/bank.PNG" style="width:100%; height:100%;"></div>
-              <div class="pay-content"><span class="label danger">기본</span><h>기업은행</h><br><h>************1234</h></div>
-              <div class="delete"><a href="">삭제</a></div>
-            </div>
+          <!--진짜 내용 작성시작-->
+          <div class="real-content" ><br><br><br><br>
 
-            <div class="pay">
-              <div class="pay-img"><img src="${pageContext.request.contextPath}/resources/images/bank.PNG" style="width:100%; height:100%;"></div>
-              <div class="pay-content"><span class="label danger">기본</span><h>기업은행</h><br><h>************1234</h></div>
-              <div class="delete"><a href="">삭제</a></div>
+            <br class="logo" href="">
+              <img src="${pageContext.request.contextPath}/resources/images/mainlogo.png" 
+                         style="width:300px; height:50px;" alt="" />
+            </br>
+            <div class="guide-div" style="text-align: center;"><br><br>
+              <div class="subguide" style="margin-right:100px;display:inline-block; border:2px solid rgba(216, 216, 216, 0.89); width:500px; height:200px;">
+                    <br><h5>DREAM FUNDING 도움말</h5><br><br>
+                      <h style="color:gray;">프로젝트를 시작하시는데 어려움을 겪고 계신가요?<br><br>
+                      도움말을 참고해보세요!<br><br></h>
+                <button class="btn btn--sub2" style="margin:auto; width:250px; height:50px; font-size:22px;"><a href="#">자세히 보기</a></button> </div>
+
+              <div class="subguide" style="display:inline-block; border:2px solid rgba(216, 216, 216, 0.89); width:500px; height:200px;">
+                <br><h5>서비스 운영정책</h5><br><br>
+                <h style="color:gray;">서비스, 이용약관 및 서비스 운영정책에
+                  대해 안내해 드립니다.<br><br>
+                도움말을 참고해보세요!<br><br></h>
+                <button class="btn btn--sub2" style="margin:auto; width:250px; height:50px; font-size:22px;"><a href="#">자세히 보기</a></button> </div>
             </div>
             
               
+              
+              
           </div>
-        </div>
-            
-
+         
+       </div>
       </div>
-        
-        
-      
     </main>
 
     <footer>
       <div class="footer__inner">
         <div class="footer__center">
-          <img src="../../../resources/images/logo3.png" alt="" />
+          <img src="C:/DreamFunding-FrontRepo/webapp/resources/images/logo3.png" alt="" />
         </div>
 
         <div class="footer__bottom">
@@ -694,5 +592,6 @@ margin-right:20px;}
         </div>
       </div>
     </footer>
-  </body>
+
+</body>
 </html>

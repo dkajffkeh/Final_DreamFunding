@@ -256,11 +256,8 @@ footer .footer__inner {
  color:#7f0000;
  text-align:center;}
 
-.nav-item{}
-
-.nav-item a:hover{
-  background-color:rgba(153, 153, 153, 0.89);
-  color:#7f0000;}
+.nav-item{background-color:rgba(153, 153, 153, 0.89);
+    color:#7f0000;}
 
 .supporter-menu{
   text-decoration:none;
@@ -465,6 +462,13 @@ margin-right:20px;}
 
 
 /*세부메뉴 스타일*/
+.nav-link{
+  font-size:20px;
+  padding-top:15px;
+ background-color:#ccc4bb;
+ color:#7f0000;
+ text-align:center;}
+
 
 /*세부메뉴css*/
 .nav--top{
@@ -540,6 +544,8 @@ margin-right:20px;}
     border-bottom: 0px solid #fff;
     color: #121212
 }
+
+.h3{margin-top:7px;}
 </style>
 
 
@@ -555,11 +561,11 @@ margin-right:20px;}
     <br>
     <div class="wrap1">
        <!--설정아이콘-->
-       <a href=""><span class="material-icons" id="setting">settings</span></a>
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href=""><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg" 
+          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
           class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
         </div>
     </div>
@@ -578,12 +584,14 @@ margin-right:20px;}
             <div class="container mt-3" >
               <br>
               
-              <ul class="nav nav-tabs nav-justified">
-                <li class="nav-item" >
-                  <a class="nav-link" data-toggle="tab" href="#menu1"><h3 style="font-weight:bold;">옵션</h3></a> 
+              <ul class="nav nav-tabs nav-justified" style="border-radius: 20px; border:none;">
+                <li class="nav-item" style="background-color:none; border-radius:20px;">
+                  <a class="nav-link"style="border-radius: 20px; border:1px solid rgb(206, 206, 206);"><h3 class="h3" style="font-weight:bold;">설정</h3></a> 
                 </li>
                 
               </ul>
+              
+              
             
               <!-- 세부메뉴 -->
                  <!--세부메뉴 html-->
