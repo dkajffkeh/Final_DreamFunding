@@ -568,96 +568,31 @@ float:right;
           </div>
             <!--진짜 내용 작성시작-->
             <div class="real-content"><br>
-              <select class="sort">
-                <option>모두보기</option>
-                <option>펀딩 진행중</option>
-                <option>펀딩 완료</option>
-                <option>취소/ 실패</option>
-              </select><br>
+	              <select class="sort">
+	                <option>모두보기</option>
+	                <option>펀딩 진행중</option>
+	                <option>펀딩 완료</option>
+	                <option>취소/ 실패</option>
+	              </select><br>
 
               <!--펀딩결과 알림 박스-->
               <div class="inform-box">총 ..건의 펀딩결과가 있습니다.</div>
 
               <!--펀딩한 프로젝트 박스-->
+              <c:forEach var="f" items="${list}">
+              <div class="funding-box">
+                <div class="funding-date">${ f.projectStartDate}</div><div></div>
+                <div class="funding-img"><img src="${f.projectThumbnailPath }"
+                                          style="width:200px; height:120px;"></div>
+                                          <div class="funding-label"><span class="label success">펀딩완료</span></div>
+                <div class="funding-name"><br>${f.projectTitle } <br>결제예약 10000원<br>${f.projectCloseDate}</div>
+                <div class="detail-box"><a href=""><span id="detail-button" class="material-icons">
+                  keyboard_arrow_right
+                  </span></a></div>
+              </div>
+              </c:forEach>
               
-              <div class="funding-box">
-                <div class="funding-date">2020.10.10</div><div></div>
-                <div class="funding-img"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg"
-                                          style="width:200px; height:120px;"></div>
-                                          <div class="funding-label"><span class="label success">펀딩완료</span></div>
-                <div class="funding-name"><br>더 나은 내년을 위한 102가지 질문 <매년 쓰는 자서전></더><br>결제예약 10000원<br>결제 예정 날짜 2021.01.12</div>
-                <div class="detail-box"><a href=""><span id="detail-button" class="material-icons">
-                  keyboard_arrow_right
-                  </span></a></div>
-              </div>
-              <div class="funding-box">
-                <div class="funding-date">2020.10.10</div><div></div>
-                <div class="funding-img"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg"
-                                          style="width:200px; height:120px;"></div>
-                                          <div class="funding-label"><span class="label success">펀딩완료</span></div>
-                <div class="funding-name"><br>더 나은 내년을 위한 102가지 질문 <매년 쓰는 자서전></더><br>결제예약 10000원<br>결제 예정 날짜 2021.01.12</div>
-                <div class="detail-box"><a href=""><span id="detail-button" class="material-icons">
-                  keyboard_arrow_right
-                  </span></a></div>
-              </div><div class="funding-box">
-                <div class="funding-date">2020.10.10</div><div></div>
-                <div class="funding-img"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg"
-                                          style="width:200px; height:120px;"></div>
-                                          <div class="funding-label"><span class="label success">펀딩완료</span></div>
-                <div class="funding-name"><br>더 나은 내년을 위한 102가지 질문 <매년 쓰는 자서전></더><br>결제예약 10000원<br>결제 예정 날짜 2021.01.12</div>
-                <div class="detail-box"><a href=""><span id="detail-button" class="material-icons">
-                  keyboard_arrow_right
-                  </span></a></div>
-              </div><div class="funding-box">
-                <div class="funding-date">2020.10.10</div><div></div>
-                <div class="funding-img"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg"
-                                          style="width:200px; height:120px;"></div>
-                                          <div class="funding-label"><span class="label success">펀딩완료</span></div>
-                <div class="funding-name"><br>더 나은 내년을 위한 102가지 질문 <매년 쓰는 자서전></더><br>결제예약 10000원<br>결제 예정 날짜 2021.01.12</div>
-                <div class="detail-box"><a href=""><span id="detail-button" class="material-icons">
-                  keyboard_arrow_right
-                  </span></a></div>
-              </div>
-              <div class="funding-box">
-                <div class="funding-date">2020.10.10</div><div></div>
-                <div class="funding-img"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg"
-                                          style="width:200px; height:120px;"></div>
-                                          <div class="funding-label"><span class="label success">펀딩완료</span></div>
-                <div class="funding-name"><br>더 나은 내년을 위한 102가지 질문 <매년 쓰는 자서전></더><br>결제예약 10000원<br>결제 예정 날짜 2021.01.12</div>
-                <div class="detail-box"><a href=""><span id="detail-button" class="material-icons">
-                  keyboard_arrow_right
-                  </span></a></div>
-              </div>
-              <div class="funding-box">
-                <div class="funding-date">2020.10.10</div><div></div>
-                <div class="funding-img"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg"
-                                          style="width:200px; height:120px;"></div>
-                                          <div class="funding-label"><span class="label success">펀딩완료</span></div>
-                <div class="funding-name"><br>더 나은 내년을 위한 102가지 질문 <매년 쓰는 자서전></더><br>결제예약 10000원<br>결제 예정 날짜 2021.01.12</div>
-                <div class="detail-box"><a href=""><span id="detail-button" class="material-icons">
-                  keyboard_arrow_right
-                  </span></a></div>
-              </div>
-              <div class="funding-box">
-                <div class="funding-date">2020.10.10</div><div></div>
-                <div class="funding-img"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg"
-                                          style="width:200px; height:120px;"></div>
-                                          <div class="funding-label"><span class="label success">펀딩완료</span></div>
-                <div class="funding-name"><br>더 나은 내년을 위한 102가지 질문 <매년 쓰는 자서전></더><br>결제예약 10000원<br>결제 예정 날짜 2021.01.12</div>
-                <div class="detail-box"><a href=""><span id="detail-button" class="material-icons">
-                  keyboard_arrow_right
-                  </span></a></div>
-              </div>
-              <div class="funding-box">
-                <div class="funding-date">2020.10.10</div><div></div>
-                <div class="funding-img"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg"
-                                          style="width:200px; height:120px;"></div>
-                                          <div class="funding-label"><span class="label success">펀딩완료</span></div>
-                <div class="funding-name"><br>더 나은 내년을 위한 102가지 질문 <매년 쓰는 자서전></더><br>결제예약 10000원<br>결제 예정 날짜 2021.01.12</div>
-                <div class="detail-box"><a href=""><span id="detail-button" class="material-icons">
-                  keyboard_arrow_right
-                  </span></a></div>
-              </div>
+              
 
               
               <br><br><br><br>
@@ -665,7 +600,32 @@ float:right;
               
 
             </div>
-          
+          <div id="pagingArea">
+              	<ul class="pagination">
+              	
+              	<c:choose>
+              	  <c:when test="${mypi.currentPage eq 1 }">
+				 	 <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+				  </c:when>
+				  <c:otherwise>
+				 	 <li class="page-item"><a class="page-link" href="myFundingProject.me?currentPage=${mypi.currentPage -1 }">이전</a></li>
+				  </c:otherwise>
+				</c:choose>
+				  
+				  <c:forEach var="p" begin="${mypi.startPage }" end="${mypi.endPage }">
+				    <li class="page-item"><a class="page-link" href="myFundingProject.me?currentPage=${ p }">${ p }</a></li>
+				  </c:forEach>
+				  
+				  <c:choose>
+				  	<c:when test="${mypi.currentPage eq mypi.maxPage }">
+				  		<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+				    </c:when>
+				    <c:otherwise>
+				 		<li class="page-item"><a class="page-link" href="myFundingProject.me?currentPage=${mypi.currentPage +1 }">다음</a></li>
+			  	  	</c:otherwise>
+			  	  </c:choose>
+			  	</ul>
+			  </div>
         </div>
            
         

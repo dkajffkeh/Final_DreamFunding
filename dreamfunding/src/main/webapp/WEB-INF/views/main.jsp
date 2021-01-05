@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Dream Funding</title>    
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/index.css?after" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/index.css" />
 </head>
 <body>
 
@@ -98,17 +98,17 @@
                 <div class="btn1">
                   <span class="material-icons md-48">navigate_before</span>
                 </div>
-                <img src="../../../resources/images/book7.jpg" alt="메인이미지" width="1200px" height="400px">
+                <img src="${pageContext.request.contextPath}/resources/images/book7.jpg" alt="메인이미지" width="1200px" height="400px">
                 <div class="btn2"><span class="material-icons md-48">navigate_next</span></div>
               </div>
               <div class="inner-image">
                 <div class="btn1"><span class="material-icons md-48">navigate_before</span></div>
-                <img src="../../../resources/images/book5.jpg" alt="메인이미지" width="1200px" height="400px">
+                <img src="${pageContext.request.contextPath}/resources/images/book5.jpg" alt="메인이미지" width="1200px" height="400px">
                 <div class="btn2"><span class="material-icons md-48">navigate_next</span></div>
               </div>
               <div class="inner-image">
                 <div class="btn1"><span class="material-icons md-48">navigate_before</span></div>
-                <img src="../../../resources/images/book14.jpg" alt="메인이미지" width="1200px" height="400px">
+                <img src="${pageContext.request.contextPath}/resources/images/book14.jpg" alt="메인이미지" width="1200px" height="400px">
                 <div class="btn2"><span class="material-icons md-48">navigate_next</span></div>
               </div>
             </div>
@@ -135,7 +135,7 @@
               <span class="title-sub">드림펀딩에서 핫한 프로젝트들을 만나보세요!</span>
               <!-- select-box -->
               <div class="select-a">
-                <select class="select-box">
+                <select class="select-box" id="selectValue" onchange="changeSelect()">
                   <option value disabled="disabled" hidden="hidden"></option>
                   <option value="1">펀딩금액순</option>
                   <option value="2">마감임박순</option>
@@ -152,7 +152,6 @@
             </section>
             <!-- 진행중인 펀딩 리스트 end -->
             
-            
             <!-- 진행중인 펀딩 리스트 ajax -->
             <script>
 	        	$(function(){
@@ -168,11 +167,11 @@
 	        				var value = "";
 	        				for(var i in progressList){
 	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + progressList[i].projectThumPath + progressList[i].projectFileName + ")'>" +
-					    	                    "<img src='../../../resources/images/book2.jpg'>" +
+		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + progressList[i].projectFileName + ")'>" +
 					    	                    "<div>" +
 					    	                      "<div class='like'>" +
-					    	                        "<span class='material-icons md-36'>favorite</span>" +
+					    	                        "<div class='finish'><span>마감임박</span></div>" +
+					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
 					    	                      "</div>" +
 					    	                    "</div>" +
 					    	                  "</figure>" +
@@ -199,26 +198,143 @@
 	        		
 	        	}
 	        </script>
+	        
+	        <!-- select box 진행중인 펀딩 -->
+	        <script>
+	        
+	        function changeSelect(){
+	        	
+	        	var selectOption = document.getElementById("selectValue");
+	        	
+	        	var selectedValue = selectOption.options[selectOption.selectedIndex].value;
+	        	
+	        	var selectedText = selectOption.options[selectOption.selectedIndex].text;
+	        	
+	        	console.log(selectedValue);
+	        	
+	        	console.log(selectedText);
+	        	
+				if(selectedValue == 1){
+	        		$.ajax({
+	        			url:"selectMoney.do",
+	        			success:function(selectMoneyList){
+	        				console.log("펀딩금액순 통신성공");
+	        				var value = "";
+	        				for(var i in selectMoneyList){
+	    						value += "<li class='card-item'>" + 
+		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectMoneyList[i].projectFileName + ")'>" +
+			    								 "<div>" +
+					    	                      "<div class='like'>";
+					    	                        
+		    	                if(selectMoneyList[i].projectCloseDt == 0){
+		    	                	value += "<div class='finish'><span>마감임박</span></div>";
+		    	                }
+		    	                	
+		    	                value += "<div><span class='material-icons md-36'>favorite</span></div>" +
+		    	                      "</div>" +
+		    	                    "</div>" +
+			    	                  "</figure>" +
+			    	                  "<div class='card-desc'>" +
+			    	                      "<div class='project-content'>" +
+			    	                          "<div class='project-company'>" + selectMoneyList[i].creatorName + "</div>" +
+			    	                          "<div class='project-title'>" + selectMoneyList[i].projectTitle + "</div>" +
+			    	                      "</div>" +
+			    	                      "<div class='project-detail'>" +
+			    	                          "<div class='funding-percent'>" + selectMoneyList[i].projectStartDt + "</div>" +
+			    	                          "<div class='funding-d-day'>" + selectMoneyList[i].projectCloseDt + "</div>" + 
+			    	                      "</div>" +
+			    	                  "</div>" +
+		    	                  "</li>";
+	        				}
+	        				$(".thumbnail-a ul").html(value);
+	        			},error:function(){
+	        				console.log("ajax 통신 실패!");
+	        			}
+	        		})
+	        	}else if(selectedValue == 2){
+	        		$.ajax({
+	        			url:"selectClosed.do",
+	        			success:function(selectClosedList){
+	        				console.log("마감임박순 통신성공");
+	        				var value = "";
+	        				for(var i in selectClosedList){
+	    						value += "<li class='card-item'>" + 
+		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectClosedList[i].projectFileName + ")'>" +
+			    								 "<div>" +
+					    	                      "<div class='like'>" +
+					    	                        "<div class='finish'></div>" +
+					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
+					    	                      "</div>" +
+					    	                    "</div>" +
+					    	                  "</figure>" +
+					    	                  "<div class='card-desc'>" +
+					    	                      "<div class='project-content'>" +
+					    	                          "<div class='project-company'>" + selectClosedList[i].creatorName + "</div>" +
+					    	                          "<div class='project-title'>" + selectClosedList[i].projectTitle + "</div>" +
+					    	                      "</div>" +
+					    	                      "<div class='project-detail'>" +
+					    	                          "<div class='funding-percent'>" + selectClosedList[i].projectStartDt + "</div>" +
+					    	                          "<div class='funding-d-day'>" + selectClosedList[i].projectCloseDt + "</div>" + 
+					    	                      "</div>" +
+					    	                  "</div>" +
+				    	                  "</li>";
+	        				}
+	        				$(".thumbnail-a ul").html(value);
+	        			},error:function(){
+	        				console.log("ajax 통신 실패!");
+	        			}
+	        		})
+	        	}else{
+	        		$.ajax({
+	        			url:"selectNew.do",
+	        			success:function(selectNewList){
+	        				console.log("최신순 통신성공");
+	        				var value = "";
+	        				for(var i in selectNewList){
+	    						value += "<li class='card-item'>" + 
+		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectNewList[i].projectFileName + ")'>" +
+			    								 "<div>" +
+					    	                      "<div class='like'>" +
+					    	                        "<div class='finish'></div>" +
+					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
+					    	                      "</div>" +
+					    	                    "</div>" +
+					    	                  "</figure>" +
+					    	                  "<div class='card-desc'>" +
+					    	                      "<div class='project-content'>" +
+					    	                          "<div class='project-company'>" + selectNewList[i].creatorName + "</div>" +
+					    	                          "<div class='project-title'>" + selectNewList[i].projectTitle + "</div>" +
+					    	                      "</div>" +
+					    	                      "<div class='project-detail'>" +
+					    	                          "<div class='funding-percent'>" + selectNewList[i].projectStartDt + "</div>" +
+					    	                          "<div class='funding-d-day'>" + selectNewList[i].projectCloseDt + "</div>" + 
+					    	                      "</div>" +
+					    	                  "</div>" +
+				    	                  "</li>";
+	        				}
+	        				$(".thumbnail-a ul").html(value);
+	        			},error:function(){
+	        				console.log("ajax 통신 실패!");
+	        			}
+	        		})
+	        	}
+	        	
+	        }
+	        
+	        
+	        </script>
             
 
             <!-- 더보기 버튼 -->
             <div class="more more-a">
-              <button class="moreBtn">진행중인 펀딩 더보기</button>
+              <button class="moreBtn" onclick="location.href='progressMore.do'">진행중인 펀딩 더보기</button>
             </div>
 
             <!-- 제목 : 실시간 랭킹 -->
             <div class="title title-b">
               <div class="title-main">실시간 랭킹</div>
               <span class="title-sub">오늘 가장 많은 사람들이 <b>#좋아한</b> 프로젝트</span>
-              <!-- select-box -->
-              <div class="select-b">
-                <select class="select-box">
-                  <option value disabled="disabled" hidden="hidden"></option>
-                  <option value="1">펀딩금액순</option>
-                  <option value="2">마감임박순</option>
-                  <option value="3">최신순</option>
-                </select>
-              </div>
+              
             </div>
 
             <!-- 실시간 랭킹 리스트 start -->
@@ -244,11 +360,11 @@
 	        				var value = "";
 	        				for(var i in rankingList){
 	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + rankingList[i].projectThumPath + rankingList[i].projectFileName + ")'>" +
-					    	                    "<img src='../../../resources/images/book2.jpg'>" +
-					    	                    "<div>" +
+		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + rankingList[i].projectFileName + ")'>" +
+			    								 "<div>" +
 					    	                      "<div class='like'>" +
-					    	                        "<span class='material-icons md-36'>favorite</span>" +
+					    	                        "<div class='finish'></div>" +
+					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
 					    	                      "</div>" +
 					    	                    "</div>" +
 					    	                  "</figure>" +
@@ -278,7 +394,7 @@
 
             <!-- 더보기 버튼 -->
             <div class="more more-b">
-              <button type="button" class="moreBtn">실시간 랭킹 더보기</button>
+              <button class="moreBtn" onclick="location.href='rankingMore.do'">실시간 랭킹 더보기</button>
             </div>
 
             <!-- 제목 : 종료된 펀딩 -->
@@ -310,11 +426,11 @@
 	        				var value = "";
 	        				for(var i in closedList){
 	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + closedList[i].projectThumPath + closedList[i].projectFileName + ")'>" +
-					    	                    "<img src='../../../resources/images/book2.jpg'>" +
-					    	                    "<div>" +
+		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + closedList[i].projectFileName + ")'>" +
+			    								 "<div>" +
 					    	                      "<div class='like'>" +
-					    	                        "<span class='material-icons md-36'>favorite</span>" +
+					    	                        "<div class='finish'></div>" +
+					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
 					    	                      "</div>" +
 					    	                    "</div>" +
 					    	                  "</figure>" +
@@ -345,7 +461,7 @@
 
             <!-- 더보기 버튼 -->
             <div class="more more-c">
-              <button class="moreBtn"><span>종료된 펀딩 더보기</span></button>
+              <button class="moreBtn" onclick="location.href='closedMore.do'"><span>종료된 펀딩 더보기</span></button>
             </div>
 
             <!-- 문의하기쪽 아랫부분 공간 -->

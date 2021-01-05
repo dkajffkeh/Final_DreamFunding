@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailReport;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
 
@@ -58,6 +59,11 @@ public class DetailDao {
 		}
 		
 		return rewards;
+	}
+	
+	// 프로젝트 신고 등록 
+	public int insertReport(SqlSessionTemplate sqlSession, DetailReport rp) {
+		return sqlSession.insert("projectDetailMapper.insertReport", rp);
 	}
 
 

@@ -59,9 +59,16 @@
     border-radius: 5px;
 }
 .card-image img { display: none; }
+.finish span{
+	background-color : rgb(127, 0, 0);
+	color : white;
+	padding : 0.3rem;
+	border-radius: 5px;
+}
 .like{
-    display: flex;
-    float: right;
+	display:flex;
+	justify-content:space-between;
+	width:100%;
     border: none;
     color: rgb(218, 216, 216);
     padding: 0.3rem;
@@ -70,7 +77,7 @@
 .like .material-icons{
     font-size: 36px;
 }
-.like:hover{
+.like .material-icons:hover{
     color: rgb(127, 0, 0);
 }
 .card-desc { padding: 1rem; }

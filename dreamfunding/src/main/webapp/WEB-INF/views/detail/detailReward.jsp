@@ -20,7 +20,7 @@
                      
                         <img
                           class="image"
-                          src="resources/images/${ d.creatorProfile }"
+                          src="resources/images/creatorThumbnail/${ d.creatorProfile }"
                           alt="유저 프로필 이미지"
                         />  
                         

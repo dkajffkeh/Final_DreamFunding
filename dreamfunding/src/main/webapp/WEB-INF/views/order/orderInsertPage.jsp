@@ -46,22 +46,21 @@
         <h3>리워드</h3>
         <hr>
            <h4> ${ p.projectTitle } </h4>
-            <ul>
-                <li>${ content } </li>
-                <li>스페셜 책갈피</li>
+            <ul id="optionList">
+            	<c:forEach var="re" items="${ reOp }">
+            		<li>${ re.rewardContent }<li>
+            	</c:forEach>
             </ul>
             <br> 
             <h4 align="center">가격 : ${ rewardPri }  원</h4>
         <hr>
             <h4> 추가후원금 </h4>
             후원금 : 
-            <input type="number" id="supportPrice" name="rewardPlus" onkeyup="verify.sum()" numberOnly> 원
+            <input type="number" id="supportPrice" name="rewardPlus" value="0" onkeyup="verify.sum()" numberOnly> 원
             <br><br>
             <div id="total" style="text-align:center"></div>
             <input type="hidden" name="projectNo" value="${ p.projectNo }">
 
-
-        
       <script>
 	      $("input:text[numberOnly]").on("focus", function() {
 			    var x = $(this).val();
@@ -272,7 +271,7 @@
                 	</tbody>  
                 </table>
                 <br>
-            <input type="radio" name="paymentSel" value="N" id="paymentSel"> 
+            <input type="radio" name="paymentSel" value="N" id="paymentSel" checked> 
             <label for ="paymentSel"><h4>새로운 결제수단</h4></label>
 
             
@@ -427,6 +426,8 @@
                 <input type="hidden" name="payToken" id="payToken">
                 <input type="hidden" name="mno" value="${ mno }">
                 <input type="hidden" name="pno" value="${ p.projectNo }">
+                <input type="hidden" name="reNo" value="${ re.rewardNo }">
+                <input type="hidden" name="rewardAmount" value="${ rewardAmount }">
                 
                 
                 

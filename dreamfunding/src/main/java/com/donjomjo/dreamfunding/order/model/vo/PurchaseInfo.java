@@ -1,6 +1,7 @@
 package com.donjomjo.dreamfunding.order.model.vo;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,6 +34,9 @@ public class PurchaseInfo {
 	private String purchaseBkey;
 	private String purchaseEmail;
 	private int totalPrice; // db에 저장안되는 총합가격
-	
+	private String projectTitle; // db에 저장되지 않는 프로젝트 이름
+	private int rewardPrice; // db에 저장되지 않는 리워드 가격
+	private String projectCloseDt; // db에 저장되지 않는 프로젝트 이름
+
 	
 }

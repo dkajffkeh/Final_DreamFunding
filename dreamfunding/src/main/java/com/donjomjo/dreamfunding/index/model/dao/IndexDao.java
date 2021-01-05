@@ -23,5 +23,19 @@ public class IndexDao {
 		return (ArrayList)sqlSession.selectList("indexMapper.selectClosedFundingList");
 	}
 	
+	// 진행중인 펀딩(펀딩금액순)조회
+	public ArrayList<Index> selectFundingMoney(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("indexMapper.selectFundingMoneyList"); 
+	}
+	
+	// 진행중인 펀딩(펀딩금액순)조회
+	public ArrayList<Index> selectClosed(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("indexMapper.selectClosedList"); 
+	}
+	
+	// 진행중인 펀딩(펀딩금액순)조회
+	public ArrayList<Index> selectNew(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("indexMapper.selectNewList"); 
+	}
 
 }

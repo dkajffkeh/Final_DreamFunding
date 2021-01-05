@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailReport;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
 import com.donjomjo.dreamfunding.detail.model.vo.Like;
@@ -25,6 +26,9 @@ public interface DetailService {
 	
 	// 현재 프로젝트에 연결된 리워드 조회 서비스 
 	ArrayList<DetailReward> selectDetailReward(int pno);
+	
+	// 프로젝트 신고 등록 서비스
+	int insertReport(DetailReport rp);
 	
 	//프로젝트 좋아요 등록 서비스
 	int insertLike(Like like);
@@ -60,6 +64,7 @@ public interface DetailService {
 	
 	// 대댓글 삭제 서비스
 	int deleteSubReply(int subNo);
+
 
 
 }

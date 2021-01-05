@@ -6,104 +6,92 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<style>
+
+		#inner{height:100%;}
+	    #inner>div{width:100%; float:left;}
+	    #titleMain{width:100%; height:10%;}
+	    #titleMain>div{height:100%; float:left;}
+		#order{width:100%; height:40%;}
+		#recommendPro{width:100%; height:50%;}
+		
+	    #titleImg{width: 30%; height:100%;}
+	    #titleSub{width:70%; height:100%;}
+	    	
+	    #recommendPro>div{height:100%; float:left;}
+		#reHead{height:5%; width:100%;}
+	    #subContent{width:10%; height:95%;}
+	    #mainContent{width:90%; height:95%;}
+	    #mainContent>div{height:100%; float:left;}
+	    .subImg1{width: 30%; height:400px;}
+	    #resubImg{width: 30%; height:360px;}
+	    footer{position:relative; bottom:0;}
+ </style>
 </head>
 <body>
 
 	<jsp:include page="../common/menubar.jsp"/>
-
-<div id="inner">
-        <h3 align="center" style="font-weight:bold">결제 완료</h3>
-        <br><br>
+	<div id="inner" class="inner" style="width:1200px; height:auto; margin:auto; overflow-x:hidden; overflow-y:hidden"">
         <div id="titleMain">
-            <div id="titleImg">
-                <img src="../../../resources/images/orderBook1.jpg" style="width:300px; height:250px">
-            </div>
-            <div id="titleSub">
-                <br>
-                <p style="font-size:25px; font-weight:bold;">속셈을 가진 단편만화집</p>
-                만화<br><br><br><br>
-                <p style="font-size:22px; color:red; font-weight:bold;">50% 달성</p>
-            </div>
-
+		        <h3 align="center" style="font-weight:bold">결제 완료</h3>
+		        <br><br>
+	            <div id="titleImg">
+	            	<img
+	                  src="resources/images/projectThumbnail/${ pro.projectFileName }"
+	                  style="width:300px; height:250px"
+	                />
+	            </div>
+	            <div id="titleSub">
+	                <br>
+	                <p style="font-size:25px; font-weight:bold;">
+	               		 ${ pro.projectTitle }
+	                </p>
+	                	${ proc.projectCategoryName }<br><br><br><br>
+	                <p style="font-size:22px; color:red; font-weight:bold;">${ pro.projectEndDate }</p>
+	                            <br><br><br><br>
+	            </div>
         </div>
         <div id="order">
-            <br><br>
-            <h3>리워드</h3>
+            <br><br><br><br>
+            <h3 style="text-align:center; font-weight:bold;">리워드</h3>
             <hr>
-            <h4> 책 책갈피 세트 </h4>
                 <ul>
-                    <li>책</li>
-                    <li>스페셜 책갈피</li>
+	                <c:forEach var="r" items="${ reOp }">
+	            		<li>${ r.rewardContent }<li>
+	            	</c:forEach>
                 </ul>
                 <br>
-                <h4 align="center">가격 : 25,000원</h4>
+                <h4 align="center">가격 : ${ pi.rewardAmount * re.rewardPrice }원</h4>
             <hr>
                 <h4> 추가후원금 </h4>
-                후원금 : 
-                <b>10,000</b> 원
+                 	&nbsp;&nbsp;&nbsp; 후원금 :   
+                <b> ${ pi.rewardPlus }</b> 원
                 <br><br>
-                <h4 align="center">총합 : 35,000원</h4>
+                <h4 align="center">총합 : ${ pi.rewardPlus + (pi.rewardAmount * re.rewardPrice) }원</h4>
             <hr>
         </div>
         <div id="recommendPro">
-            <br>
-            <h3 style="font-weight:bold; text-align:center">후원자 추천 프로젝트</h3>
-        
-            <div id="subImg1">
-                <img src="../../../resources/images/orderBook1.jpg" style="width:300px; height:250px">
-                <br><b>속셈을 가진 단편만화집</b>
-                <br>만화
-                <br><p style="font-size:20px; color:red; font-weight:bold;">50% 달성</p>
+        	<div id="reHead">
+	        	 <br><br>
+	            <h3 align="center" style="font-weight:bold;">후원자 추천 프로젝트</h3>
             </div>
-
-            <div id="subImg1">
-                <img src="../../../resources/images/orderBook1.jpg" style="width:300px; height:250px">
-                <br><b>속셈을 가진 단편만화집</b>
-                <br>만화
-                <br><p style="font-size:20px; color:red; font-weight:bold;">50% 달성</p>
+            <div id="subContent">
+            	&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
-
-            <div id="subImg1">
-                <img src="../../../resources/images/orderBook1.jpg" style="width:300px; height:250px">
-                <br><b>속셈을 가진 단편만화집</b>
-                <br>만화
-                <br><p style="font-size:20px; color:red; font-weight:bold;">50% 달성</p>
-            </div>
-
-            <div id="subImg1">
-                <img src="../../../resources/images/orderBook1.jpg" style="width:300px; height:250px">
-                <br><b>속셈을 가진 단편만화집</b>
-                <br>만화
-                <br><p style="font-size:20px; color:red; font-weight:bold;">50% 달성</p>
-            </div>
-
-            <div id="subImg1">
-                <img src="../../../resources/images/orderBook1.jpg" style="width:300px; height:250px">
-                <br><b>속셈을 가진 단편만화집</b>
-                <br>만화
-                <br><p style="font-size:20px; color:red; font-weight:bold;">50% 달성</p>
-            </div>
-
-            <div id="subImg1">
-                <img src="../../../resources/images/orderBook1.jpg" style="width:300px; height:250px">
-                <br><b>속셈을 가진 단편만화집</b>
-                <br>만화
-                <br><p style="font-size:20px; color:red; font-weight:bold;">50% 달성</p>
-            </div>
-        
-        </div>
-
-
-
+            <div id="mainContent">
+		        <c:forEach var="rPro" items="${ proList }">
+					<div id="resubImg" style="height:360px">
+						<img src="${ rPro.projectThumbnailPath }/${ rPro.projectFileName }" style="width:300px; height:250px">
+		                <br><b  style="display:inline-block; width:300px;">${ rPro.projectTitle }</b>
+		                <br><p style="font-size:20px; color:red; font-weight:bold;">${ rPro.projectEndDate }</p>
+					</div>	
+				</c:forEach>
+			</div>
+		</div>
 
     </div>
-    
-    <br><br><br>
-
-
-
 	<jsp:include page="../common/footer.jsp"/>
-
+	
 
 </body>
 </html>
