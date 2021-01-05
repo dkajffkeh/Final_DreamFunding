@@ -58,13 +58,16 @@ public interface DetailService {
 	int insertSubReply(SubReply subReply);
 	
 	// 대댓글 조회 서비스
-	ArrayList<SubReply> selectSubReply(ArrayList<Reply> reList);
+	ArrayList<SubReply> selectSubReply(int rno);
 	
 	// 대댓글 수정 서비스 
 	int updateSubReply(SubReply subReply);
 	
 	// 대댓글 삭제 서비스
 	int deleteSubReply(int subNo);
+
+	
+
 
 
 

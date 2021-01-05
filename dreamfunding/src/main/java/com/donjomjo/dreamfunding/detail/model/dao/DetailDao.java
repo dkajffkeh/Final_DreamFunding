@@ -9,6 +9,7 @@ import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
 import com.donjomjo.dreamfunding.detail.model.vo.Like;
 import com.donjomjo.dreamfunding.detail.model.vo.Reply;
+import com.donjomjo.dreamfunding.detail.model.vo.SubReply;
 
 import java.util.ArrayList;
 
@@ -84,6 +85,11 @@ public class DetailDao {
 
 	public ArrayList<Reply> selectReply(SqlSessionTemplate sqlSession, int pno) {
 		return (ArrayList)sqlSession.selectList("projectDetailMapper.selectReply", pno);
+	}
+
+	public ArrayList<SubReply> selectSubReply(SqlSessionTemplate sqlSession, int rno) {
+		return (ArrayList)sqlSession.selectList("projectDetailMapper.selectSubReply", rno);
+
 	}
 
 

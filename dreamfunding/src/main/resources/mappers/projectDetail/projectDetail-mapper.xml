@@ -73,6 +73,29 @@
 		<result column="MEMBER_NO" property="memberNo"/>
  	</resultMap>
   
+	<resultMap id="replyResultSet" type="Reply">
+		<result column="REPLY_NO" property="replyNo"/>
+		<result column="MEMBER_NO" property="memberNo"/>
+		<result column="PROJECT_NO" property="projectNo"/>
+		<result column="REPLY_CONTENT" property="replyContent"/>
+		<result column="REPLY_DATE" property="replyDate"/>
+		<result column="REPLY_STATUS" property="replyStatus"/>
+		<result column="MEMBER_PF_PATH" property="memberPfPath"/>
+		<result column="MEMBER_NICKNAME" property="memberNickname"/>
+		
+	</resultMap>
+	
+	<resultMap id="subReplyResultSet" type="SubReply">
+		<result column="SUBRE_ANSNO" property="subReAnsNo"/>
+		<result column="REPLY_NO" property="replyNo"/>
+		<result column="MEMBER_NO" property="memberNo"/>
+		<result column="SUBRE_CONTENT" property="subReContent"/>
+		<result column="SUBRE_DATE" property="subReDate"/>
+		<result column="SUBRE_STATUS" property="subReStatus"/>
+		<result column="MEMBER_PF_PATH" property="memberPfPath"/>
+		<result column="MEMBER_NICKNAME" property="memberNickname"/>
+		
+	</resultMap>
  	
    <select id="selectListCount" resultType="_int">
    	SELECT 
@@ -216,5 +239,33 @@
    	   AND MEMBER_NO = #{memberNo}  
 </select>
 
- 	
+<!-- 댓글 조회 쿼리 -->
+<select id="selectReply" parameterType="_int" resultMap="replyResultSet">
+	SELECT REPLY.PROJECT_NO,
+	       REPLY.MEMBER_NO,
+	       REPLY.REPLY_CONTENT,
+	       REPLY.REPLY_DATE,
+	       REPLY.REPLY_NO,
+	       REPLY.REPLY_STATUS,
+	       M.MEMBER_NICKNAME,
+	       M.MEMBER_PF_PATH
+	  FROM REPLY
+	  LEFT JOIN MEMBER M ON REPLY.MEMBER_NO = M.MEMBER_NO
+	 WHERE PROJECT_NO = #{pno}
+</select>
+
+<!-- 대댓글 조회 쿼리 -->
+<select id="selectSubReply" parameterType="_int" resultMap="subReplyResultSet">
+	SELECT REPLY_ANS.REPLY_NO,
+	       REPLY_ANS.MEMBER_NO,
+	       REPLY_ANS.SUBRE_ANSNO,
+	       REPLY_ANS.SUBRE_CONTENT,
+	       REPLY_ANS.SUBRE_DATE,
+	       REPLY_ANS.SUBRE_STATUS,
+	       M.MEMBER_NICKNAME,
+	       M.MEMBER_PF_PATH
+	  FROM REPLY_ANS
+      LEFT JOIN MEMBER M ON REPLY_ANS.MEMBER_NO = M.MEMBER_NO
+	 WHERE REPLY_NO = #{rno}
+</select>
 </mapper>

@@ -36,8 +36,11 @@
                     <button class="btn btn--main submit">작성하기</button>
                   </div>
                 </form>
-
+                
+				<!-- 댓글조회 -->
+				
                 <ul class="comment_list">
+                <c:forEach var="r" items="${ rl }">           		
                   <li>
                     <div
                       class="comment_card"
@@ -48,17 +51,15 @@
                       <div class="profile_wrapper">
                         <img
                           class="image"
-                          src="resources/images/book7.jpg"
+                          src="resources/images/${ r.memberPfPath }"
                           alt="유저 프로필 이미지"
                         />
                         <div class="profile_caption">
-                          <h5 class="name">김이오</h5>
-                          <p class="date">2020-12-15</p>
+                          <h5 class="name">${ r.memberNickname }</h5>
+                          <p class="date">${ r.replyDate }</p>
                         </div>
                       </div>
-                      <article class="comment_text">
-                        드림리뷰오브북스 응원합니다
-                      </article>
+                      <article class="comment_text">${ r.replyContent }</article>
                       <div class="comment_options">
                         <button
                           data-action="isEditing"
@@ -78,6 +79,7 @@
                           Comments
                         </button>
                       </div>
+					
                       <!-- 댓글수정 -->
                       <div class="comment_edit is_not_active edit-comment">
                         <textarea
@@ -86,7 +88,7 @@
                           class="comment_edit_textarea"
                           cols="0"
                           rows="0"
-                          placeholder="드림리뷰오브북스 응원합니다(기존 댓글 출력)"
+                          value="${ r.replyContent }"
                         ></textarea>
                         <div class="comment_edit_options">
                           <button data-action="submit">Submit</button>
@@ -96,220 +98,7 @@
                         </div>
                       </div>
 
-                      <!-- 대댓글작성 -->
-                      <div class="comment_edit is_not_active add-rereply">
-                        <textarea
-                          name="comment_edit"
-                          id="comment_edit"
-                          class="comment_edit_textarea"
-                          cols="0"
-                          rows="0"
-                          placeholder="답글을 작성하세요."
-                        ></textarea>
-                        <div class="comment_edit_options">
-                          <button data-action="submit">Submit</button>
-                          <button
-                            data-action="cancle"
-                            class="rereply-cancel-btn"
-                          >
-                            Cancle
-                          </button>
-                        </div>
-                      </div>
-                      <div id="rereply-list" class="comments">
-                        <ul class="comment_list rereply_list"></ul>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div
-                      class="comment_card"
-                      id="comment-1"
-                      data-depth="0"
-                      style="margin-left: 0rem"
-                    >
-                      <div class="profile_wrapper">
-                        <img
-                          class="image"
-                          src="resources/images/book15.jpg"
-                          alt="유저 프로필 이미지"
-                        />
-                        <div class="profile_caption">
-                          <h5 class="name">김이사</h5>
-                          <p class="date">2020-12-14</p>
-                        </div>
-                      </div>
-                      <article class="comment_text">
-                        프로젝트 기대하고 있습니다!
-                      </article>
-                      <div class="comment_options">
-                        <button
-                          data-action="isEditing"
-                          class="edit-btn"
-                          style="pointer-events: auto; opacity: 1"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          class="rereply-btn"
-                          data-action="isCommenting"
-                          style="pointer-events: auto; opacity: 1"
-                        >
-                          Comment
-                        </button>
-                        <button class="comment-open-btn" data-action="show_all">
-                          Comments
-                        </button>
-                      </div>
-
-                      <!-- 댓글수정 -->
-                      <div class="comment_edit is_not_active edit-comment">
-                        <textarea
-                          name="comment_edit"
-                          id="comment_edit"
-                          class="comment_edit_textarea"
-                          cols="0"
-                          rows="0"
-                          placeholder="프로젝트 기대하고 있습니다!(기존 댓글 출력)"
-                        ></textarea>
-                        <div class="comment_edit_options">
-                          <button data-action="submit">Submit</button>
-                          <button data-action="cancle" class="edit-cancel-btn">
-                            Cancle
-                          </button>
-                        </div>
-                      </div>
-
-                      <!-- 대댓글작성 -->
-                      <div class="comment_edit is_not_active add-rereply">
-                        <textarea
-                          name="comment_edit"
-                          id="comment_edit"
-                          class="comment_edit_textarea"
-                          cols="0"
-                          rows="0"
-                          placeholder="답글을 작성하세요."
-                        ></textarea>
-                        <div class="comment_edit_options">
-                          <button data-action="submit">Submit</button>
-                          <button
-                            data-action="cancle"
-                            class="rereply-cancel-btn"
-                          >
-                            Cancle
-                          </button>
-                        </div>
-                      </div>
-
-                      <div id="rereply-list" class="comments reply_not_active">
-                        <ul class="comment_list rereply_list">
-                          <li>
-                            <div
-                              class="comment_card"
-                              id="comment-8"
-                              data-depth="1"
-                              style="margin-left: 4rem"
-                            >
-                              <div class="profile_wrapper">
-                                <img
-                                  class="image"
-                                  src="resources/images/dream.jpg"
-                                  alt=""
-                                />
-                                <div class="profile_caption">
-                                  <h5 class="name">드림리뷰오브북스</h5>
-                                  <p class="date">2020-12-14</p>
-                                </div>
-                              </div>
-                              <article class="comment_text">
-                                펀딩 응원 감사드립니다😀
-                              </article>
-                            </div>
-
-                            <div
-                              class="comment_card"
-                              id="comment-9"
-                              data-depth="1"
-                              style="margin-left: 4rem"
-                            >
-                              <div class="profile_wrapper">
-                                <img
-                                  class="image"
-                                  src="resources/images/cat.jpg"
-                                  alt=""
-                                />
-                                <div class="profile_caption">
-                                  <h5 class="name">고양이좋아</h5>
-                                  <p class="date">2020-12-15</p>
-                                </div>
-                              </div>
-                              <article class="comment_text">
-                                펀딩 목표 금액 달성 짱짱!
-                              </article>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div
-                      class="comment_card"
-                      id="comment-1"
-                      data-depth="0"
-                      style="margin-left: 0rem"
-                    >
-                      <div class="profile_wrapper">
-                        <img
-                          class="image"
-                          src="resources/images/book13.jpg"
-                          alt="유저 프로필 이미지"
-                        />
-                        <div class="profile_caption">
-                          <h5 class="name">김이름</h5>
-                          <p class="date">2020-12-13</p>
-                        </div>
-                      </div>
-                      <article class="comment_text">펀딩 완료했어요🖐</article>
-                      <div class="comment_options">
-                        <button
-                          data-action="isEditing"
-                          class="edit-btn"
-                          style="pointer-events: auto; opacity: 1"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          class="rereply-btn"
-                          data-action="isCommenting"
-                          style="pointer-events: auto; opacity: 1"
-                        >
-                          Comment
-                        </button>
-                        <button class="comment-open-btn" data-action="show_all">
-                          Comments
-                        </button>
-                      </div>
-
-                      <!-- 댓글수정 -->
-                      <div class="comment_edit is_not_active edit-comment">
-                        <textarea
-                          name="comment_edit"
-                          id="comment_edit"
-                          class="comment_edit_textarea"
-                          cols="0"
-                          rows="0"
-                          placeholder="펀딩 완료했어요🖐"
-                        ></textarea>
-                        <div class="comment_edit_options">
-                          <button data-action="submit">Submit</button>
-                          <button data-action="cancle" class="edit-cancel-btn">
-                            Cancle
-                          </button>
-                        </div>
-                      </div>
-
-                      <!-- 대댓글작성 -->
+                      <!-- 대댓글 작성 -->
                       <div class="comment_edit is_not_active add-rereply">
                         <textarea
                           name="comment_edit"
@@ -330,8 +119,11 @@
                         </div>
                       </div>
 
+						<!-- 대댓글 조회 -->	
                       <div id="rereply-list" class="comments reply_not_active">
                         <ul class="comment_list rereply_list">
+                          
+                         <c:forEach var="s" items="${ r.subReply }"> 
                           <li>
                             <div
                               class="comment_card"
@@ -342,46 +134,25 @@
                               <div class="profile_wrapper">
                                 <img
                                   class="image"
-                                  src="resources/images/dream.jpg"
+                                  src="resources/images/${s.memberPfPath}"
                                   alt=""
                                 />
                                 <div class="profile_caption">
-                                  <h5 class="name">드림리뷰오브북스</h5>
-                                  <p class="date">2020-12-14</p>
+                                  <h5 class="name">${ s.memberNickname }</h5>
+                                  <p class="date">${ s.subReDate }</p>
                                 </div>
                               </div>
                               <article class="comment_text">
-                                펀딩 응원 감사드립니다😀
+                    			${ s.subReContent}
                               </article>
-                            </div>
+                            </div>                        
 						  </li>
-						  <li>	
-                            <div
-                              class="comment_card"
-                              id="comment-9"
-                              data-depth="1"
-                              style="margin-left: 4rem"
-                            >
-                              <div class="profile_wrapper">
-                                <img
-                                  class="image"
-                                  src="resources/images/cat.jpg"
-                                  alt=""
-                                />
-                                <div class="profile_caption">
-                                  <h5 class="name">고양이좋아</h5>
-                                  <p class="date">2020-12-15</p>
-                                </div>
-                              </div>
-                              <article class="comment_text">
-                                펀딩 목표 금액 달성 짱짱!
-                              </article>
-                            </div>
-                          </li>
+						</c:forEach>
                         </ul>
                       </div>
                     </div>
                   </li>
+                  </c:forEach>
                 </ul>
               </section>
             </div>

@@ -97,15 +97,14 @@ public class DetailServiceImpl implements DetailService {
 	}
 
 	@Override
-	public int insertSubReply(SubReply subReply) {
-		// TODO Auto-generated method stub
-		return 0;
+	public ArrayList<SubReply> selectSubReply(int rno) {
+		return dDao.selectSubReply(sqlSession, rno);
 	}
 
 	@Override
-	public ArrayList<SubReply> selectSubReply(ArrayList<Reply> reList) {
+	public int insertSubReply(SubReply subReply) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
