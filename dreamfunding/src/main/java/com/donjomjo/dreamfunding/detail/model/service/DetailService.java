@@ -31,14 +31,15 @@ public interface DetailService {
 	int insertReport(DetailReport rp);
 	
 	//프로젝트 좋아요 등록 서비스
-	int insertLike(Like like);
-	
+	int insertLike(Like lk);
+
 	// 좋아요 조회 서비스 
-	Like selectLike(Like like);
+	int selectLike(Like lk);
 	
 	// 좋아요 취소 서비스 
-	int deleteLike(Like like);
+	int deleteLike(Like lk);
 	
+
 	
 	// 댓글 등록 서비스 
 	int insertReply(Reply reply);

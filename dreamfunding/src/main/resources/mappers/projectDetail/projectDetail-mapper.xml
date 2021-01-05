@@ -68,8 +68,12 @@
  		<result column="REPORT_STATUS" property="reportStatus"/>
  	</resultMap>
  	
-  	
+  	<resultMap id="likeResultSet" type="Like">
+ 		<result column="PROJECT_NO" property="projectNo"/>
+		<result column="MEMBER_NO" property="memberNo"/>
+ 	</resultMap>
   
+ 	
    <select id="selectListCount" resultType="_int">
    	SELECT 
    		   COUNT(*)
@@ -181,6 +185,36 @@
   				, 'P'
   			   )  
   	</insert>
+  	
+<!-- 좋아요 생성 쿼리 --> 
+<insert id="insertDetailLike" parameterType="Like">
+	INSERT
+	  INTO LIKEY
+	      (
+	          PROJECT_NO
+	        , MEMBER_NO
+	      )
+    VALUES (
+    		   #{projectNo}
+    		 , #{memberNo}
+    		)
+</insert> 	
+
+<!-- 좋아요 삭제 쿼리 -->
+<delete id="deleteDetailLike" parameterType="Like">
+	DELETE 
+	  FROM LIKEY
+	 WHERE PROJECT_NO = #{projectNo}
+	   AND MEMBER_NO = #{memberNo}
+</delete>
+ 	
+<!-- 좋아요 조회 쿼리 -->
+<select id="selectDetailLike" parameterType="Like" resultType="_int">
+	SELECT COUNT(*)
+	  FROM LIKEY
+	 WHERE PROJECT_NO = #{projectNo}
+   	   AND MEMBER_NO = #{memberNo}  
+</select>
 
  	
 </mapper>

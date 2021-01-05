@@ -142,6 +142,11 @@ main .inner {
   background: #fff;
 }
 
+
+.like-btn span{
+	color: #7f0000;
+}
+
 .btn--icon:hover {
   background: rgb(247, 244, 244);
   box-shadow: 0 0 7px rgb(206, 206, 206);
