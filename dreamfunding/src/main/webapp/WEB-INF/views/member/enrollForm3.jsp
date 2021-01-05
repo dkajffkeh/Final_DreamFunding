@@ -152,12 +152,7 @@
     	                        				cCertify = true
     	                        			}else{
     	                        				$("#check-certify").show();
-    	            							$("#check-certify").css("color", "red").text("인증번호가 
-    	            									
-    	            									
-    	            									
-    	            									
-    	            									");
+    	            							$("#check-certify").css("color", "red").text("인증번호가 일치하지않습니다.");
     	                        				cCertify = false
     	                        			}
     	                        		}
