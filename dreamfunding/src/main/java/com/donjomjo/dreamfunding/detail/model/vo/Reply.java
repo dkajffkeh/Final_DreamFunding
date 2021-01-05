@@ -1,5 +1,7 @@
 package com.donjomjo.dreamfunding.detail.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +21,8 @@ public class Reply {
 	private String replyContent; // 댓글내용
 	private String replyDate; // 댓글 작성일
 	private String replyStatus; // 댓글 상태 
+	private ArrayList<SubReply> subReply;
+	private String memberPfPath;
+	private String memberNickname;
 	
 }

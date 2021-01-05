@@ -632,10 +632,12 @@ margin-right:20px;}
                     <button class="button">변경</button>
                     <hr> 
                       </div><br><br>
+                      <!-- 이메일 토글 input값이랑 인증메일 전송 저장 -->
                         <div id="divToggle" style="display: none;">
+                        
                           <button type="button" class="btn" style="background-color: #7f0000; color:white; transform: translate(0%,30%)">저장</button>
                           
-                          </div>
+                        </div>
                           
                           <hr> 
             </div>
@@ -664,6 +666,7 @@ margin-right:20px;}
                         </div><br>
                         <h>비밀번호</h>
                         <br>
+                        <!-- 저장  -->
                           <div id="divToggle1" style="display: none;">
                           	<p>현재 비밀번호</p>
                             <input type="text" class="form-control" id="cmemPwd1" style="width:200px;
@@ -708,6 +711,7 @@ margin-right:20px;}
                           <div id="divToggle2" style="display: none;">
                             <input type="text" class="form-control" id="usr" style="width:200px;
                                           margin-top:5px; margin-bottom:10px;" name="username">
+                                          
                             <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button></div>
                               <hr> 
               </div>
@@ -731,6 +735,7 @@ margin-right:20px;}
                     <div class="togglee">
                       <button class="button3" style="background-color:white;
                         border:none;">연동하기</button>
+                        <!-- 전부 -->
                         <hr> 
                         </div><br><br>
                           
@@ -757,10 +762,11 @@ margin-right:20px;}
                 <p class="p">회원탈퇴</p>
                     <div class="togglee">
                       <button class="button4" style="background-color:white;
+                      
                         border:none;">탈퇴하기</button>
                         <hr> 
                         </div><br><br>
-                          
+                          <!-- 모델창 만들기 -->
                           
                           
                           

@@ -47,6 +47,12 @@ public class MemberServiceImpl implements MemberService {
 		
 		return mDao.nickCheck(sqlSession, nick);
 	}
+
+	@Override
+	public String selectAddress(String email) {
+		
+		return mDao.selectAddress(sqlSession, email);
+	}
 	
 
 

@@ -16,6 +16,6 @@ public interface MemberService {
 	
 	int nickCheck(String nick);
 
-	
+	String selectAddress(String email);
 	
 }

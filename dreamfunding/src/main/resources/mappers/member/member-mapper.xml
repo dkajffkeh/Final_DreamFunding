@@ -105,6 +105,16 @@
 		     , modify_date = sysdate
 		 where MEMBER_EMAIL = #{email}
 	</update>
+	  <select id="selectAddress" 
+	  		  parameterType="Member"
+	  		  resultMap="memberResultSet">
+		select
+			 , MEMBER_PWD
+		  from member
+		 where MEMBER_STATUS != 4
+		   and member_email = #{ email }
+	  </select>
+
 	
 	
 
