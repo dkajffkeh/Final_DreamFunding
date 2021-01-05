@@ -631,7 +631,7 @@ footer .footer__inner {
             <div class="profile-wrap" >
               <div class="profile" >
                 <p class="p">이름</p>
-                  <h>홍길동</h>
+                  <h>${ loginMem.memName }</h>
                     <div class="togglee">
                       <button class="button1" style="background-color:white;
                         border:none;">변경</button>

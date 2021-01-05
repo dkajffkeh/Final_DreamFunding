@@ -619,13 +619,13 @@ margin-right:20px;}
           <div class="profile-wrap" >
             <div class="profile" >
               <p class="p">이메일</p>
-                <h>smallyong1@naver.com</h>
+                <h>${ loginMem.email }</h>
                   <div class="togglee">
                     <button class="button">변경</button>
+                    <hr> 
                       </div><br><br>
                         <div id="divToggle" style="display: none;">
-                          <button type="button" class="btn" style="background-color: #7f0000; color:white;
-                                                              transform: translate(0%,30%)">저장</button>
+                          <button type="button" class="btn" style="background-color: #7f0000; color:white; transform: translate(0%,30%)">저장</button>
                           
                           </div>
                           
@@ -648,13 +648,27 @@ margin-right:20px;}
             <div class="profile-wrap" >
               <div class="profile" >
                 <p class="p" >비밀번호</p>
+                  
                     <div class="togglee">
                       <button class="button1" style="background-color:white;
                         border:none;">변경</button>
-                        </div><br><br>
+                        <hr> 
+                        </div><br>
+                        <h>비밀번호</h>
+                        <br>
                           <div id="divToggle1" style="display: none;">
-                            <input type="text" class="form-control" id="usr" style="width:200px;
-                                          margin-top:5px; margin-bottom:10px;" name="username">
+                          	<p>현재 비밀번호</p>
+                            <input type="text" class="form-control" id="cmemPwd1" style="width:200px;
+                                          margin-top:5px; margin-bottom:10px;" placeholder="현재 비밀번호"; name="memPwd">
+                                          
+                            <input type="password" class="form-control" id="cmemPwd2" placeholder="변경할 비밀번호"; style="width:200px;
+                            margin-top:5px; margin-bottom:10px;" name="cMemPwd">
+                            
+                            <input type="password" class="form-control" id="cmemPwd3" placeholder="변경할 비밀번호 확인"; style="width:200px;
+                            margin-top:5px; margin-bottom:10px;">
+                                          
+                                          
+                                          
                             <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button></div>
                               <hr> 
               </div>
@@ -675,11 +689,14 @@ margin-right:20px;}
             <div class="profile-wrap" >
               <div class="profile">
                 <p class="p">연락처</p>
-                 <h>010-2222-3333</h>
+                 <h>${ loginMem.phone }</h>
                     <div class="togglee">
                       <button class="button2" style="background-color:white;
                         border:none;">변경</button>
-                        </div><br><br>
+                        <hr> 
+                        </div><br>
+                        <h>연락처</h>
+                        <br>
                           <div id="divToggle2" style="display: none;">
                             <input type="text" class="form-control" id="usr" style="width:200px;
                                           margin-top:5px; margin-bottom:10px;" name="username">
@@ -705,12 +722,13 @@ margin-right:20px;}
                 <p class="p">계정연동</p>
                     <div class="togglee">
                       <button class="button3" style="background-color:white;
-                        border:none;">연동</button>
+                        border:none;">연동하기</button>
+                        <hr> 
                         </div><br><br>
-                          <div id="divToggle3" style="display: none;">
-                            <input type="text" class="form-control" id="usr" style="width:200px;
-                                          margin-top:5px; margin-bottom:10px;" name="username">
-                            <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button></div>
+                          
+                          
+                          
+                          
                               <hr> 
               </div>
             </div>
@@ -731,12 +749,13 @@ margin-right:20px;}
                 <p class="p">회원탈퇴</p>
                     <div class="togglee">
                       <button class="button4" style="background-color:white;
-                        border:none;">변경</button>
+                        border:none;">탈퇴하기</button>
+                        <hr> 
                         </div><br><br>
-                          <div id="divToggle4" style="display: none;">
-                            <input type="text" class="form-control" id="usr" style="width:200px;
-                                          margin-top:5px; margin-bottom:10px;" name="username">
-                            <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button></div>
+                          
+                          
+                          
+                          
                               <hr> 
               </div>
             </div>
