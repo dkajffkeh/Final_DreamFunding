@@ -18,4 +18,6 @@ public interface MemberService {
 
 	String selectAddress(String email);
 	
+	int idFind(Member m);
+	
 }

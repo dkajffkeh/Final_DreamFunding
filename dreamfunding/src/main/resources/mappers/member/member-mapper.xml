@@ -105,16 +105,28 @@
 		     , modify_date = sysdate
 		 where MEMBER_EMAIL = #{email}
 	</update>
+	
+	
+	<!-- 질문 (DAO까지는 값이 넘어오는데 여기는 값이 넘어오지 않는다.)-->
 	  <select id="selectAddress" 
-	  		  parameterType="Member"
-	  		  resultMap="memberResultSet">
+	  		  parameterType="string"
+	  		  resultType="string">
 		select
 			 , MEMBER_PWD
 		  from member
 		 where MEMBER_STATUS != 4
 		   and member_email = #{ email }
 	  </select>
-
+	<!-- 아이디찾기(질문) -->  
+	<select id="idFind" parameterType="Member" resultType="_int">
+		select
+			   count(*)
+		  from member
+		 where MEMBER_NAME = #{ memName }
+		   and MEMBER_PHONE = #{ phone }
+		   and where MEMBER_STATUS != 4
+	    
+	</select>
 	
 	
 

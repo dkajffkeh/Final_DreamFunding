@@ -170,13 +170,13 @@ public class MemberController {
 	    Message coolsms = new Message(api_key, api_secret);
 	    String random =  (int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +"";
 	    String certifyNum = random;
-	    // 4 params(to, from, type, text) are mandatory. must be filled
+	    
 	    HashMap<String, String> params = new HashMap<String, String>();
 	    params.put("to", "01083658879");
 	    params.put("from", phone );
 	    params.put("type", "SMS");
 	    params.put("text", "[드림펀딩] 인증번호 " + certifyNum + " 입니다.");
-	    params.put("app_version", "test app 1.2"); // application name and version
+	    params.put("app_version", "test app 1.2");
 
 	    
 	    
@@ -200,7 +200,7 @@ public class MemberController {
 		if(certify.equals(hiddenNum)) {
 			result = 1;
 		}
-		System.out.println(result);
+
 
 		
 		
@@ -219,4 +219,11 @@ public class MemberController {
 		
 		return String.valueOf(mService.nickCheck(memNick));
 	}
+	@ResponseBody
+	@RequestMapping(value="idFind.me.jm" )
+	public String idFind(Member m) {
+		
+		return String.valueOf(mService.idFind(m));
+	}
+	
 }

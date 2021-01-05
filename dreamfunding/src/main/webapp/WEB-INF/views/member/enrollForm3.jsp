@@ -134,7 +134,7 @@
                         		url:"certify.me.jm",
                         		data:{
                         			certify:certify.val(),
-                        			hiddenNum:hiddenNum.val(),
+                        			hiddenNum:hiddenNum.val()
 
                         		},
                         		type:"post",

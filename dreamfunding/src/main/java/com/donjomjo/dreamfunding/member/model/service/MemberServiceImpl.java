@@ -53,6 +53,12 @@ public class MemberServiceImpl implements MemberService {
 		
 		return mDao.selectAddress(sqlSession, email);
 	}
+
+	@Override
+	public int idFind(Member m) {
+		
+		return mDao.idFind(sqlSession, m);
+	}
 	
 
 

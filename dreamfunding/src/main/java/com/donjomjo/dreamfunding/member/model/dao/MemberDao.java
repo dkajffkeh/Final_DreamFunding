@@ -36,7 +36,14 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.nickCheck", nick);
 	}
 	public String selectAddress(SqlSessionTemplate sqlSession, String email) {
+		
 		return sqlSession.selectOne("memberMapper.selectAddress",email);
+	}
+
+	public int idFind(SqlSessionTemplate sqlSession, Member m) {
+		System.out.println(m.getMemName());
+		System.out.println(m.getPhone());
+		return sqlSession.selectOne("memberMapper.idFind", m);
 	}
 
 }
