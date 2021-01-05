@@ -123,39 +123,41 @@
                 			},
                 		});
                 	};
-                	
-                	
-                	
                     // 인증번호 확인
+
                     function certifycheck(){
                     	
-                    	var check = $("#certifyCheck").val();
-                    	
+                    	var certify = $("#certify");
+                    	var hiddenNum = $("#certifyNum");
                     	
                         	$.ajax({
                         		url:"certify.me.jm",
                         		data:{
-                        			certify:$("#certifyNum").val(),
-                        			check:check.val()
+                        			certify:certify.val(),
+                        			hiddenNum:hiddenNum.val(),
+
                         		},
                         		type:"post",
                         		success:function(count){
-									
+	                    			if(check.val().length >= 6){
+	                    				if(count == 1){
+	                        				cCertify = true
+	                        				buttonAble()
+	                        			}else{
+	                        				cCertify = false
+	                        				buttonAble()
+	                        			}
+	                        		}
                         			
                         		},
                         		error:function(){
                         			console.log("ajax통신 실패");
                         		}
-                        			
-                        				
-                        		
-                        		
                         	
                     	});
                     	
 
                     };
-                
                 
                 
                 

@@ -193,13 +193,16 @@ public class MemberController {
 
 	@ResponseBody
 	@RequestMapping("certify.me.jm")
-	public String certify(String certify,String check) {
+	public String certify(String certify,String hiddenNum) {
 		
 		int result = 0;
 		
-		if(certify.equals(check)) {
+		if(certify.equals(hiddenNum)) {
 			result = 1;
 		}
+		System.out.println(result);
+
+		
 		
 		return String.valueOf(result);
 	}
