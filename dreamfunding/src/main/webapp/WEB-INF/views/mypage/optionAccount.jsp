@@ -616,30 +616,17 @@ margin-right:20px;}
 
             <!--이메일-->
 
-            <!--스크립트-->
-            <script>
-            $(function (){
-              $(".button").click(function (){
-                $("#divToggle").toggle();
-              });
-            });
-          </script>
+
           <div class="profile-wrap" >
             <div class="profile" >
               <p class="p">이메일</p>
                 <h>${ loginMem.email }</h>
                   <div class="togglee">
-                    <button class="button">변경</button>
+                    
                     <hr> 
                       </div><br><br>
-                      <!-- 이메일 토글 input값이랑 인증메일 전송 저장 -->
-                        <div id="divToggle" style="display: none;">
-                        
-                          <button type="button" class="btn" style="background-color: #7f0000; color:white; transform: translate(0%,30%)">저장</button>
-                          
-                        </div>
-                          
-                          <hr> 
+
+                   <hr> 
             </div>
           </div>
 
@@ -706,7 +693,7 @@ margin-right:20px;}
                         border:none;">변경</button>
                         <hr> 
                         </div><br>
-                        <h>연락처</h>
+                        
                         <br>
                           <div id="divToggle2" style="display: none;">
                             <input type="text" class="form-control" id="usr" style="width:200px;
@@ -762,15 +749,12 @@ margin-right:20px;}
                 <p class="p">회원탈퇴</p>
                     <div class="togglee">
                       <button class="button4" style="background-color:white;
-                      
                         border:none;">탈퇴하기</button>
                         <hr> 
                         </div><br><br>
                           <!-- 모델창 만들기 -->
                           
-                          
-                          
-                              <hr> 
+                        <hr> 
               </div>
             </div>
                           

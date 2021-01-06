@@ -599,18 +599,35 @@ footer .footer__inner {
           <div class="profile-wrap" >
             <div class="profile">
               <p class="p">프로필변경</p>
-              <a href=""><img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
-                          style="width:70px; height:70px; border-radius: 50%;"></a> 
+              <a href="">
+              <c:choose>
+              <c:when test="${ empty loginMem.memSystemname }">
+              <img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
+                          style="width:70px; height:70px; border-radius: 50%;">
+              </c:when>
+              <img src="${pageContext.request.contextPath}${loginMem.memPfPath}${loginMem.memSystemname}"
+              		 	  style="width:70px; height:70px; border-radius: 50%;">
+               
+              </c:choose>
+              
+              
+              
+              </a> 
                 
                   <div class="togglee">
                     <button class="button">변경</button>
                       </div><br><br>
                         <div id="divToggle" style="display: none;">
-                          <button type="button" class="btn" style="background-color: #7f0000; color:white;
+                        <form action="updateProfile.me.jm" enctype="multipart/form-data">
+                          
+                          <input type="file" id="upfile" name="memSystemname" style="margin-left:10px; transform: translate(30%,-300%);" ></input>
+                          <input type="hidden" name="memPfPath" value="/resources/profile/">
+                          
+                          
+                          <button type="submit" class="btn" style="background-color: #7f0000; color:white;
                                                               transform: translate(0%,30%)">저장</button>
-                          
-                          <input type="file" style="margin-left:10px; transform: translate(30%,-300%);"></input></div>
-                          
+                          </form>
+                          </div>
                           <hr> 
             </div>
           </div>
@@ -629,16 +646,20 @@ footer .footer__inner {
 
             <div class="profile-wrap" >
               <div class="profile" >
-                <p class="p">이름</p>
-                  <h>${ loginMem.memName }</h>
+                <p class="p">닉네임</p>
+                  <h>${ loginMem.memNick }</h>
                     <div class="togglee">
                       <button class="button1" style="background-color:white;
                         border:none;">변경</button>
                         </div><br><br>
                           <div id="divToggle1" style="display: none;">
+                          <form action="updateNick.me.jm" method="post">
                             <input type="text" class="form-control" id="usr" style="width:200px;
                                           margin-top:5px; margin-bottom:10px;" name="username">
-                            <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button></div>
+                            <button type="submit" class="btn" style="background-color: #7f0000; color:white;">저장</button>
+                            
+                            </form>
+                            </div>
                               <hr> 
               </div>
             </div>

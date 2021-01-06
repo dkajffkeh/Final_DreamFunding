@@ -8,8 +8,6 @@ public interface MemberService {
 	
 	int insertMember(Member m);
 	
-	int updateMember(Member m);
-	
 	int deleteMember(String email);
 
 	int emailCheck(String email);
@@ -17,7 +15,16 @@ public interface MemberService {
 	int nickCheck(String nick);
 
 	String selectAddress(String email);
-	
+
 	int idFind(Member m);
+	
+	int updatePwd(Member m);
+	
+	int updateNick(Member m);
+	
+	int updateProfile(Member m);
+	
+	int updatePhone(Member m);
+	
 	
 }
