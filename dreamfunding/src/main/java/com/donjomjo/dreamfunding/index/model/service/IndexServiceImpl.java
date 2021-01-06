@@ -49,6 +49,22 @@ public class IndexServiceImpl implements IndexService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ArrayList<Index> selectFundingMoney() {
+		
+		return iDao.selectFundingMoney(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Index> selectClosed() {
+		return iDao.selectClosed(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Index> selectNew() {
+		return iDao.selectNew(sqlSession);
+	}
 	
 	
 	

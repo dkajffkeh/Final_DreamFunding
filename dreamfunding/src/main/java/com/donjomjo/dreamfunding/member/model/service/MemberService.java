@@ -11,8 +11,13 @@ public interface MemberService {
 	int updateMember(Member m);
 	
 	int deleteMember(String email);
-	
 
+	int emailCheck(String email);
 	
+	int nickCheck(String nick);
+
+	String selectAddress(String email);
+	
+	int idFind(Member m);
 	
 }

@@ -36,6 +36,31 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.deleteMember(sqlSession, email);
 	}
 
+	@Override
+	public int emailCheck(String email) {
+		
+		return mDao.emailCheck(sqlSession, email);
+	}
+
+	@Override
+	public int nickCheck(String nick) {
+		
+		return mDao.nickCheck(sqlSession, nick);
+	}
+
+	@Override
+	public String selectAddress(String email) {
+		
+		return mDao.selectAddress(sqlSession, email);
+	}
+
+	@Override
+	public int idFind(Member m) {
+		
+		return mDao.idFind(sqlSession, m);
+	}
+	
+
 
 	
 	

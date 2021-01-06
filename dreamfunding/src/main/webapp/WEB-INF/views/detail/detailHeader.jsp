@@ -126,10 +126,33 @@
                 <button type="button" class="btn btn--main">
                   <a href="#rewardLabel">프로젝트 밀어주기</a>
                 </button>
-                <div class="btn-icon__wrapper">
-                  <button type="button" class="btn btn--icon">
-                    <span class="material-icons"> favorite_border </span>
-                  </button>
+                <div class="btn-icon__wrapper" id="like-btn__wrapper">
+                  
+                  <c:if test="${!empty loginMem }">
+                  	
+                  	<c:choose>
+                  	  <c:when test="${ lk eq 0 }">
+		                  <button type="button" class="btn btn--icon like-btn" onclick="addLike()" id="addLike">
+		                    <span class="material-icons">favorite_border</span>   
+		                  </button>
+	                  </c:when>
+	                    <c:when test="${ lk eq 1 }">
+		                  <button type="button" class="btn btn--icon like-btn" onclick="removeLike()" id="removeLike">
+		                    <span class="material-icons">favorite</span>   
+		                  </button>
+	                  </c:when>
+	      			</c:choose>
+		           </c:if>
+		           
+		              <c:if test="${empty loginMem }">
+                  	
+	                  <button type="button" class="btn btn--icon" disabled>
+	                    <span class="material-icons"> favorite_border </span>   
+	                  </button>
+	      
+		           </c:if>
+		           
+                   <span class="like-count"></span>
                   <button
                     type="button"
                     class="btn btn--icon"
@@ -144,7 +167,7 @@
         </div>
         <ul class="content__nav">
           <li class="borderLeftRight nav-active" id="story-nav"><a href="proDetail.de?pno=${d.projectNo}" onclick="goStory()">스토리</a></li>
-          <li class="borderLeftRight" id="community-nav"><a href="proDetail.de?page=community&pno=${d.projectNo}">커뮤니티</a></li>
+          <li class="borderLeftRight" id="community-nav"><a href="selectReply.de?page=community&pno=${d.projectNo}">커뮤니티</a></li>
           <li class="borderLeftRight" id="policy-nav"><span onclick="goPolicy()">펀딩 안내</span></li>
         </ul>
         
@@ -191,6 +214,70 @@
       };
      
       
+      
+      const likeBtnWrapper = document.querySelector("#like-btn__wrapper")  
+      const makeLikeBtn =(isOk)=>{
+    	  const likeBtn = document.createElement("button")
+    		likeBtn.type="button"
+    		likeBtn.className="btn btn--icon like-btn"
+    			if(isOk){
+    				likeBtn.onclick=removeLike
+    			}else if(!isOk){
+    				likeBtn.onclick=addLike
+    			}
+    	    		likeBtn.id="addLike"
+   	  const span = document.createElement("span")
+   	   span.className="material-icons"
+   	   span.innerText = isOk ? "favorite" : "favorite_border" 
+   	  
+   	  likeBtn.appendChild(span)
+      likeBtnWrapper.prepend(likeBtn)
+
+      }
+      
+      // 좋아요 추가      
+      const addLike =()=>{
+        axios.get('like.de',{
+          params:{
+		            memNo:'${loginMem.memNo}',
+		            pno:'${d.projectNo}'
+		         }
+        })
+        .then(response=>{
+            if(response.data==='success'){
+              alert('좋아요 성공!');
+              const likeBtn = document.querySelector(".like-btn")
+              likeBtn.remove()
+              makeLikeBtn(true)
+            }
+          }).catch(()=>{
+            alert('좋아요 실패')
+          })
+        }
+      
+      // 좋아요 취소 
+      const removeLike =()=>{
+          axios.get('deletelike.de',{
+            params:{
+  		            memNo:'${loginMem.memNo}',
+  		            pno:'${d.projectNo}'
+  		         }
+          })
+          .then(response=>{
+              if(response.data==='success'){
+                alert('좋아요 취소 성공!');
+                const likeBtn = document.querySelector(".like-btn")
+                likeBtn.remove()
+                makeLikeBtn(false)
+              }
+            }).catch(()=>{
+              alert('좋아요 취소 실패')
+            })
+          }
+      
+   		
+     
+      
       // 프로젝트 종료일까지 남은 기간 구하기  기능   
 	  const endDate = new Date(document.querySelector('#dDay').textContent); // 프로젝트 종료일 
       const now = new Date(); // 현재 날짜
@@ -211,8 +298,8 @@
    	    Kakao.Link.sendDefault({
    	      objectType: 'feed',
    	      content: {
-   	        title: '${ d.projectTitle }',
-   	        description: '${ d.projectSubtitle }',
+   	        title: `${ d.projectTitle }`,
+   	        description: `${ d.projectSubtitle }`,
    	        imageUrl:
    	          'https://i.imgur.com/B1Xi5dd.jpg',
    	          // 외부에서 접근할 수 있는 서버에 업로드된 이미지의 URL만  가능

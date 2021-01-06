@@ -142,6 +142,11 @@ main .inner {
   background: #fff;
 }
 
+
+.like-btn span{
+	color: #7f0000;
+}
+
 .btn--icon:hover {
   background: rgb(247, 244, 244);
   box-shadow: 0 0 7px rgb(206, 206, 206);
@@ -770,8 +775,6 @@ button {
 }
 
 
-
-
 .modal__layout .modal__box h1 {
   align-self: flex-start;
   font-size: 14px;
@@ -787,10 +790,6 @@ button {
 .modal__layout .modal__box span {
   text-align: right;
   cursor: pointer;
-}
-
-.modal__layout .modal__box form h1 {
- 
 }
 
 .modal__layout .modal__box input {
@@ -809,12 +808,17 @@ button {
   padding: 10px;
   border: none;
   box-sizing: border-box;
-  max-width: 300px;
+  width: 300px;
   min-height: 150px;
   max-height: 400px;
   background: #eee;
   border-radius: 5px;
   overflow: auto;
+}
+
+.modal__layout .modal__box .pro-title{
+  margin-bottom: 15px;
+  font-size: 14px;
 }
 
 .modal--layout .gap {

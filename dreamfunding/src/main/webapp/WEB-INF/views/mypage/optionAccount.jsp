@@ -256,11 +256,8 @@ footer .footer__inner {
  color:#7f0000;
  text-align:center;}
 
-.nav-item{}
-
-.nav-item a:hover{
-  background-color:rgba(153, 153, 153, 0.89);
-  color:#7f0000;}
+.nav-item{background-color:rgba(153, 153, 153, 0.89);
+    color:#7f0000;}
 
 .supporter-menu{
   text-decoration:none;
@@ -465,6 +462,13 @@ margin-right:20px;}
 
 
 /*세부메뉴 스타일*/
+.nav-link{
+  font-size:20px;
+  padding-top:15px;
+ background-color:#ccc4bb;
+ color:#7f0000;
+ text-align:center;}
+
 
 /*세부메뉴css*/
 .nav--top{
@@ -540,6 +544,8 @@ margin-right:20px;}
     border-bottom: 0px solid #fff;
     color: #121212
 }
+
+.h3{margin-top:7px;}
 </style>
 
 
@@ -555,11 +561,11 @@ margin-right:20px;}
     <br>
     <div class="wrap1">
        <!--설정아이콘-->
-       <a href=""><span class="material-icons" id="setting">settings</span></a>
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href=""><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg" 
+          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
           class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
         </div>
     </div>
@@ -578,12 +584,14 @@ margin-right:20px;}
             <div class="container mt-3" >
               <br>
               
-              <ul class="nav nav-tabs nav-justified">
-                <li class="nav-item" >
-                  <a class="nav-link" data-toggle="tab" href="#menu1"><h3 style="font-weight:bold;">옵션</h3></a> 
+              <ul class="nav nav-tabs nav-justified" style="border-radius: 20px; border:none;">
+                <li class="nav-item" style="background-color:none; border-radius:20px;">
+                  <a class="nav-link"style="border-radius: 20px; border:1px solid rgb(206, 206, 206);"><h3 class="h3" style="font-weight:bold;">설정</h3></a> 
                 </li>
                 
               </ul>
+              
+              
             
               <!-- 세부메뉴 -->
                  <!--세부메뉴 html-->
@@ -619,15 +627,17 @@ margin-right:20px;}
           <div class="profile-wrap" >
             <div class="profile" >
               <p class="p">이메일</p>
-                <h>smallyong1@naver.com</h>
+                <h>${ loginMem.email }</h>
                   <div class="togglee">
                     <button class="button">변경</button>
+                    <hr> 
                       </div><br><br>
+                      <!-- 이메일 토글 input값이랑 인증메일 전송 저장 -->
                         <div id="divToggle" style="display: none;">
-                          <button type="button" class="btn" style="background-color: #7f0000; color:white;
-                                                              transform: translate(0%,30%)">저장</button>
+                        
+                          <button type="button" class="btn" style="background-color: #7f0000; color:white; transform: translate(0%,30%)">저장</button>
                           
-                          </div>
+                        </div>
                           
                           <hr> 
             </div>
@@ -648,13 +658,28 @@ margin-right:20px;}
             <div class="profile-wrap" >
               <div class="profile" >
                 <p class="p" >비밀번호</p>
+                  
                     <div class="togglee">
                       <button class="button1" style="background-color:white;
                         border:none;">변경</button>
-                        </div><br><br>
+                        <hr> 
+                        </div><br>
+                        <h>비밀번호</h>
+                        <br>
+                        <!-- 저장  -->
                           <div id="divToggle1" style="display: none;">
-                            <input type="text" class="form-control" id="usr" style="width:200px;
-                                          margin-top:5px; margin-bottom:10px;" name="username">
+                          	<p>현재 비밀번호</p>
+                            <input type="text" class="form-control" id="cmemPwd1" style="width:200px;
+                                          margin-top:5px; margin-bottom:10px;" placeholder="현재 비밀번호"; name="memPwd">
+                                          
+                            <input type="password" class="form-control" id="cmemPwd2" placeholder="변경할 비밀번호"; style="width:200px;
+                            margin-top:5px; margin-bottom:10px;" name="cMemPwd">
+                            
+                            <input type="password" class="form-control" id="cmemPwd3" placeholder="변경할 비밀번호 확인"; style="width:200px;
+                            margin-top:5px; margin-bottom:10px;">
+                                          
+                                          
+                                          
                             <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button></div>
                               <hr> 
               </div>
@@ -675,14 +700,18 @@ margin-right:20px;}
             <div class="profile-wrap" >
               <div class="profile">
                 <p class="p">연락처</p>
-                 <h>010-2222-3333</h>
+                 <h>${ loginMem.phone }</h>
                     <div class="togglee">
                       <button class="button2" style="background-color:white;
                         border:none;">변경</button>
-                        </div><br><br>
+                        <hr> 
+                        </div><br>
+                        <h>연락처</h>
+                        <br>
                           <div id="divToggle2" style="display: none;">
                             <input type="text" class="form-control" id="usr" style="width:200px;
                                           margin-top:5px; margin-bottom:10px;" name="username">
+                                          
                             <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button></div>
                               <hr> 
               </div>
@@ -705,12 +734,14 @@ margin-right:20px;}
                 <p class="p">계정연동</p>
                     <div class="togglee">
                       <button class="button3" style="background-color:white;
-                        border:none;">연동</button>
+                        border:none;">연동하기</button>
+                        <!-- 전부 -->
+                        <hr> 
                         </div><br><br>
-                          <div id="divToggle3" style="display: none;">
-                            <input type="text" class="form-control" id="usr" style="width:200px;
-                                          margin-top:5px; margin-bottom:10px;" name="username">
-                            <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button></div>
+                          
+                          
+                          
+                          
                               <hr> 
               </div>
             </div>
@@ -731,12 +762,14 @@ margin-right:20px;}
                 <p class="p">회원탈퇴</p>
                     <div class="togglee">
                       <button class="button4" style="background-color:white;
-                        border:none;">변경</button>
+                      
+                        border:none;">탈퇴하기</button>
+                        <hr> 
                         </div><br><br>
-                          <div id="divToggle4" style="display: none;">
-                            <input type="text" class="form-control" id="usr" style="width:200px;
-                                          margin-top:5px; margin-bottom:10px;" name="username">
-                            <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button></div>
+                          <!-- 모델창 만들기 -->
+                          
+                          
+                          
                               <hr> 
               </div>
             </div>

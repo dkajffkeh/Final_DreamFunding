@@ -255,11 +255,10 @@ footer .footer__inner {
  color:#7f0000;
  text-align:center;}
 
-.nav-item{}
 
-.nav-item a:hover{
-  background-color:rgba(153, 153, 153, 0.89);
-  color:#7f0000;}
+.nav-item{background-color:rgba(153, 153, 153, 0.89);
+    color:#7f0000;}
+
 
 .supporter-menu{
   text-decoration:none;
@@ -573,6 +572,7 @@ margin-right:20px;}
 .danger {background-color: #f44336;} 
 
 .delete{transform: translate(40%, -550%);}
+.h3{margin-top:7px;}
 </style>
 
 
@@ -588,11 +588,11 @@ margin-right:20px;}
     <br>
     <div class="wrap1">
        <!--설정아이콘-->
-       <a href=""><span class="material-icons" id="setting">settings</span></a>
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href=""><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg" 
+          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
           class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
         </div>
     </div>
@@ -611,9 +611,9 @@ margin-right:20px;}
             <div class="container mt-3" >
               <br>
               
-              <ul class="nav nav-tabs nav-justified">
-                <li class="nav-item" >
-                  <a class="nav-link" data-toggle="tab" href="#menu1"><h3 style="font-weight:bold;">옵션</h3></a> 
+               <ul class="nav nav-tabs nav-justified" style="border-radius: 20px; border:none;">
+                <li class="nav-item" style="background-color:none; border-radius:20px;">
+                  <a class="nav-link"style="border-radius: 20px; border:1px solid rgb(206, 206, 206);"><h3 class="h3" style="font-weight:bold;">설정</h3></a> 
                 </li>
                 
               </ul>
@@ -645,13 +645,13 @@ margin-right:20px;}
             
             <!--결제수단 박스-->
             <div class="pay">
-              <div class="pay-img"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/bank.png" style="width:100%; height:100%;"></div>
+              <div class="pay-img"><img src="${pageContext.request.contextPath}/resources/images/bank.PNG" style="width:100%; height:100%;"></div>
               <div class="pay-content"><span class="label danger">기본</span><h>기업은행</h><br><h>************1234</h></div>
               <div class="delete"><a href="">삭제</a></div>
             </div>
 
             <div class="pay">
-              <div class="pay-img"><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/bank.png" style="width:100%; height:100%;"></div>
+              <div class="pay-img"><img src="${pageContext.request.contextPath}/resources/images/bank.PNG" style="width:100%; height:100%;"></div>
               <div class="pay-content"><span class="label danger">기본</span><h>기업은행</h><br><h>************1234</h></div>
               <div class="delete"><a href="">삭제</a></div>
             </div>

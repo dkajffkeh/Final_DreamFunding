@@ -222,6 +222,34 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.6</version>
 		</dependency>
+		<!-- 문자메시지보내기(coolsms) -->
+		<dependency>
+		    <groupId>net.nurigo</groupId>
+		    <artifactId>javaSDK</artifactId>
+		    <version>2.2</version>
+		</dependency>
+		      	<!-- 자바메일 -->
+	       <dependency>
+			    <groupId>javax.mail</groupId>
+			    <artifactId>mail</artifactId>
+			    <version>1.4.7</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.mail</groupId>
+				<artifactId>javax.mail</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+      	<!-- 자바 엑티베이션 프래임워크 -->
+      <dependency>
+		    <groupId>javax.activation</groupId>
+		    <artifactId>activation</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+      
+		
+		
+		
+		
 		        
 	</dependencies>
     <build>

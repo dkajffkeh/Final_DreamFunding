@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.donjomjo.dreamfunding.detail.model.dao.DetailDao;
 import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailReport;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
 import com.donjomjo.dreamfunding.detail.model.vo.Like;
@@ -47,27 +48,34 @@ public class DetailServiceImpl implements DetailService {
 
 	@Override
 	public ArrayList<DetailReward> selectDetailReward(int pno) {
-
 		return dDao.selectDetailReward(sqlSession, pno);
 	}
 	
 
 	@Override
-	public int insertLike(Like like) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertReport(DetailReport rp) {
+		return dDao.insertReport(sqlSession, rp);
 	}
 
 	@Override
-	public Like selectLike(Like like) {
-		// TODO Auto-generated method stub
-		return null;
+	public int insertLike(Like lk) {
+		return dDao.insertLike(sqlSession, lk);
 	}
 
 	@Override
-	public int deleteLike(Like like) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int selectLike(Like lk) {
+		return dDao.selectLike(sqlSession, lk);
+	}
+
+	@Override
+	public int deleteLike(Like lk) {
+		return dDao.deleteLike(sqlSession, lk);
+	}
+
+	
+	@Override
+	public ArrayList<Reply> selectReply(int pno) {
+		return dDao.selectReply(sqlSession, pno);
 	}
 
 	@Override
@@ -75,13 +83,7 @@ public class DetailServiceImpl implements DetailService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	@Override
-	public ArrayList<Reply> selectReply(int pno) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public int updateReply(Reply reply) {
 		// TODO Auto-generated method stub
@@ -95,15 +97,14 @@ public class DetailServiceImpl implements DetailService {
 	}
 
 	@Override
-	public int insertSubReply(SubReply subReply) {
-		// TODO Auto-generated method stub
-		return 0;
+	public ArrayList<SubReply> selectSubReply(int rno) {
+		return dDao.selectSubReply(sqlSession, rno);
 	}
 
 	@Override
-	public ArrayList<SubReply> selectSubReply(ArrayList<Reply> reList) {
+	public int insertSubReply(SubReply subReply) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
@@ -117,6 +118,7 @@ public class DetailServiceImpl implements DetailService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 	
 	

@@ -21,8 +21,10 @@ import com.donjomjo.dreamfunding.order.model.dao.OrderDao;
 import com.donjomjo.dreamfunding.order.model.vo.MemberPurchase;
 import com.donjomjo.dreamfunding.order.model.vo.PurchaseInfo;
 import com.donjomjo.dreamfunding.order.model.vo.Shipping;
+import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectCategory;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectInsert;
 import com.donjomjo.dreamfunding.projectInsert.model.vo.Reward;
+import com.donjomjo.dreamfunding.projectInsert.model.vo.RewardOption;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -67,6 +69,51 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Reward selectReward(int reno) {
 		return oDao.selectReward(sqlSession, reno);
+	}
+
+	@Override
+	public ArrayList<RewardOption> selectRewardOption(int reno) {
+		return oDao.selectRewardOption(sqlSession, reno);
+	}
+
+	@Override
+	public PurchaseInfo selectPurchaseInfo(PurchaseInfo pi) {
+		return oDao.selectPurchaseInfo(sqlSession, pi);
+	}
+
+	@Override
+	public PurchaseInfo selectPurchaseInfo(int pno) {
+		return oDao.selectPurchaseInfo(sqlSession, pno);
+	}
+
+	@Override
+	public ProjectCategory selectProjectCate(int pcno) {
+		return oDao.selectProjectCate(sqlSession, pcno);
+	}
+
+	@Override
+	public ArrayList<ProjectInsert> selectProjectList() {
+		return oDao.selectProjectList(sqlSession);
+	}
+
+	@Override
+	public ArrayList<PurchaseInfo> selectOrderList() {
+		return oDao.selectOrderList(sqlSession);
+	}
+
+	@Override
+	public PurchaseInfo selectCancelId(int oNo) {
+		return oDao.selectCanceldId(sqlSession, oNo);
+	}
+
+	@Override
+	public int updateOrder(int oNo) {
+		return oDao.updateOrder(sqlSession, oNo);
+	}
+
+	@Override
+	public PurchaseInfo selectCancelOrder(int oNo) {
+		return oDao.selectCancelOrder(sqlSession, oNo);
 	}
 
 	

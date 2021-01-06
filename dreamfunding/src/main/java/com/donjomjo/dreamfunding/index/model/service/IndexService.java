@@ -26,7 +26,14 @@ public interface IndexService {
 	
 	// 7. 최근검색어 서비스
 	
-	// 8. 
+	// 8. 진행중인 펀딩(펀딩금액순) 조회
+	ArrayList<Index> selectFundingMoney();
+	
+	// 8. 진행중인 펀딩(마감임박순) 조회
+	ArrayList<Index> selectClosed();
+
+	// 8. 진행중인 펀딩(최신순) 조회
+	ArrayList<Index> selectNew();
 	
 	
 	
