@@ -11,14 +11,11 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Notice {
-	
-	private int noticeNo;
+public class Faq {
+	private int faqNo;
 	private int memberNo;
-	private String noticeTitle;
-	private String noticeContent;
-	private String noticeUpload;
-	private int noticeCount;
-	private String noticeStatus;
-	
+	private String faqTitle;
+	private String faqContent;
+	private String faqStatus;
+	private int faqCate;
 }
