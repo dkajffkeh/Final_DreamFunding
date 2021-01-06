@@ -1,10 +1,12 @@
 package com.donjomjo.dreamfunding.member.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
-
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.donjomjo.dreamfunding.common.filehandler.FileRename;
 import com.donjomjo.dreamfunding.member.model.service.MemberService;
 import com.donjomjo.dreamfunding.member.model.vo.Member;
 
@@ -248,58 +249,8 @@ public class MemberController {
 		return "redirect:/";
 		
 	}
-	@RequestMapping("updateProfile.me.jm")
-	public String updateProfile(Member m, Model model, MultipartFile reupFile, HttpSession session) {
-		
-		if(!reupFile.getOriginalFilename().equals("")) { // 새로 전달된 첨부파일 있을 경우
-			
-			// 만약에 기존의 첨부파일이 있었을 경우 => 삭제
-			if(m.getMemSystemname() != null) {
-				new File(session.getServletContext().getRealPath(m.getMemSystemname())).delete();
-			}
-			
-			// 새로 전달된 첨부파일 => 업로드
-			String changeName = FileRename.fileRename(reupFile);
-			m.setMemPfPath("resources/images/profile/");
-			m.setMemSystemname(changeName);
-		}
-		
-		/*
-		 * Board b 객체의 필드 
-		 * 
-		 * 1. 새로 첨부된 파일 X, 기존의 첨부파일 X
-		 *    --> originName:null, changeName:null
-		 * 
-		 * 2. 새로 첨부된 파일 X, 기존의 첨부파일 O
-		 *    --> originName:기존의 첨부파일 원본명, changeName:기존의 첨부파일 저장경로
-		 *    
-		 * 3. 새로 첨부된 파일 O, 기존의 첨부파일 X
-		 * 	  --> 새로운 첨부파일 업로드 후
-		 *    --> originName:새로운 첨부파일 원본명, changeName:새로운 첨부파일 저장경로
-		 * 
-		 * 4. 새로 첨부된 파일 O, 기존의 첨부파일 O
-		 *    --> 기존의 첨부파일 삭제 후
-		 *    --> 새로운 첨부파일 업로드 후
-		 *    --> originName:새로운 첨부파일 원본명, changeName:새로운 첨부파일 저장경로
-		 * 
-		 */
-		
-		int result = mService.updateProfile(m);
-		
-		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
-			
-			session.setAttribute("alertMsg", "성공적으로 프로필사진이 수정되었습니다.");
-			System.out.println("프로필 수정 성공");
-			System.out.println(m.getMemSystemname());
-			return "redirect:/";
-			
-		}else { // 게시글 수정 실패 
-			model.addAttribute("errorMsg", "프로필 수정 실패");
-			System.out.println("프로필 수정 실패");
-			System.out.println(m.getMemSystemname());
-			return "common/errorPage";
-		}
-	}
+
+	
 	@RequestMapping("updatePhone.me.jm")
 	public String updatePhone(Member m, Model model, HttpSession session) {
 		int result = mService.updatePwd(m);
@@ -311,6 +262,7 @@ public class MemberController {
 		return "redirect:/";
 		
 	}
+
 
 	
 }
