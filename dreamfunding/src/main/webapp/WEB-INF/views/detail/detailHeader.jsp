@@ -38,6 +38,7 @@
     />
     <link rel="stylesheet" href="resources/css/detail/detail.css" />    
     <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
 
 <body>
