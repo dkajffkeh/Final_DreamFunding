@@ -351,8 +351,7 @@
       
       // 대댓글 
         const createReplyTag=(v)=>{
-    	  console.log(v); 
-    	  
+	  
     	  const listItem = document.createElement('li');
     	  	listItem.className = 'rcitem'+v.subReAnsNo;
     	  
@@ -412,7 +411,6 @@
 	    		     }
     	  })
     	  .then((res)=>{
-    		  console.log(res);
     		  if(res.data){
     			  const data=res.data[0]
     			  alert('댓글등록성공!');
@@ -426,16 +424,15 @@
       
       // 댓글 수정 
       const updateReply=(rno, isSub)=>{
-    	  console.log(rno)
     	  if(isSub===0){
-    		  console.log(document.querySelector(".cet"+rno), document.querySelector(".cet"+rno).value)
+    		//  console.log(document.querySelector(".cet"+rno), document.querySelector(".cet"+rno).value)
     		  axios.get('updateReply.de',{
         		  params:{
         			  rno:rno,
         			  replyContent:document.querySelector(".cet"+rno).value
         		  }
         	  }).then(res=>{
-        		  console.log(res.data);
+        		//  console.log(res.data);
         		  if(res.data==='success'){
         			  document.querySelector(".c-content"+rno).innerText=document.querySelector(".cet"+rno).value
         			  editInput[editIndex].classList.toggle("is_not_active")
@@ -445,14 +442,14 @@
         	  })
           // 대댓글 수정   
 	    	  }else if(isSub===1){
-	    		  console.log(document.querySelector(".rcet"+rno))
+	    		//  console.log(document.querySelector(".rcet"+rno))
 	    		  axios.get('updateSubReply.de',{
 	        		  params:{
 	        			  rno:rno,
 	        			  subReplyContent:document.querySelector(".rcet"+rno).value
 	        		  }
 	        	  }).then(res=>{
-	        		  console.log(res.data);
+	        		//  console.log(res.data);
 	        		  if(res.data==='success'){
 	        			  document.querySelector(".ces"+rno).innerText=document.querySelector(".rcet"+rno).value
 	        			  closeSubRe(rno)
@@ -467,31 +464,27 @@
       
       // 댓글 삭제
       const deleteReply=(rno, isSub)=>{
-    	  console.log(rno)
+    	//  console.log(rno)
     	  if(isSub===0){
-    		  console.log(document.querySelector(".cet"+rno), document.querySelector(".cet"+rno).value)
+    		//  console.log(document.querySelector(".cet"+rno), document.querySelector(".cet"+rno).value)
     		  axios.get('deleteReply.de',{
         		  params:{
         			  rno:rno
         		  }
         	  }).then(res=>{
-        		  console.log(res.data);
+        		//  console.log(res.data);
         		  if(res.data==='success'){
-        			  console.log('성공!');
         			  document.querySelector(".citem"+rno).remove()
         		  }else{
         			  alert('댓글수정실패')
         		  }
         	  })
           // 대댓글 삭제 
-    	  }else if(isSub===1){
-    		  console.log(document.querySelector(".rcet"+rno))
     		  axios.get('deleteSubReply.de',{
         		  params:{
         			  sno:rno
         		  }
         	  }).then(res=>{
-        		  console.log(res.data);
         		  if(res.data==='success'){
         			  document.querySelector(".rcitem"+rno).remove()
         		  }else{

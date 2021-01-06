@@ -239,7 +239,6 @@ public class DetailController {
 		
 		int result = dService.updateReply(rp);
 		
-		System.out.println(result);
 		if(result>0) {
 			return "success";
 		}else {
@@ -280,7 +279,6 @@ public class DetailController {
 		
 		if(result>0) {
 			ArrayList<SubReply> sr = dService.selectSubReplyOne(rp);
-			System.out.println(sr);
 			String json = new Gson().toJson(sr);
 			return json;
 		}else {
@@ -299,12 +297,8 @@ public class DetailController {
 		rp.setReplyContent(subReplyContent);
 		rp.setReplyNo(rno);
 		
-		System.out.println(rno);
-		System.out.println(subReplyContent);
-		
 		int result = dService.updateSubReply(rp);
-		
-		System.out.println(result);
+
 		if(result>0) {
 			return "success";
 		}else {
