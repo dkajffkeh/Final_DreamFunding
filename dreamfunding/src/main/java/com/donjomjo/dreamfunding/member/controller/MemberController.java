@@ -1,5 +1,9 @@
 package com.donjomjo.dreamfunding.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.donjomjo.dreamfunding.member.model.service.MemberService;
@@ -71,6 +76,11 @@ public class MemberController {
 	public String redirect() {
 		return "redirect:/";
 	}
+	@RequestMapping("pwModify.me.jm")
+	public String pwModify() {
+		
+		return "member/pwModify";
+	}
 	
 	
 	
@@ -85,11 +95,17 @@ public class MemberController {
 			session.setAttribute("loginMem", loginMem );
 			mv.setViewName("redirect:/");
 		
+		}else {
+			
+			mv.setViewName("member/loginForm");
+			session.setAttribute("alertMsg", "로그인 실패");
+			
 		}
 		
 		return mv;
 		
 	}
+	
 	@RequestMapping("logout.me.jm")
 	public String logoutMember(HttpSession session) {
 		session.invalidate();
@@ -119,19 +135,7 @@ public class MemberController {
 		
 		
 	}
-	@RequestMapping("update.me.jm")
-	public String updateMember(Member m, Model model, HttpSession session) {
-		int result = mService.updateMember(m);
-		
-		if(result > 0) {
-			session.setAttribute("loginMem", mService.loginMember(m));
 
-			session.setAttribute("alertMsg", "성공적으로 변경되었습니다!");
-		}
-		
-		return "redirect:/";
-		
-	}
 	@RequestMapping("delete.me.jm")
 	public String deleteMember(String userPwd, HttpSession session, Model model) {
 		
@@ -164,13 +168,13 @@ public class MemberController {
 	    Message coolsms = new Message(api_key, api_secret);
 	    String random =  (int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +"";
 	    String certifyNum = random;
-	    // 4 params(to, from, type, text) are mandatory. must be filled
+	    
 	    HashMap<String, String> params = new HashMap<String, String>();
 	    params.put("to", "01083658879");
 	    params.put("from", phone );
 	    params.put("type", "SMS");
 	    params.put("text", "[드림펀딩] 인증번호 " + certifyNum + " 입니다.");
-	    params.put("app_version", "test app 1.2"); // application name and version
+	    params.put("app_version", "test app 1.2");
 
 	    
 	    
@@ -184,8 +188,24 @@ public class MemberController {
 	    return certifyNum;
 	}
 	
+
 	@ResponseBody
-	@RequestMapping(value="emailCheck.me.jm")
+	@RequestMapping("certify.me.jm")
+	public String certify(String certify,String hiddenNum) {
+		
+		int result = 0;
+		
+		if(certify.equals(hiddenNum)) {
+			result = 1;
+		}
+
+
+		
+		
+		return String.valueOf(result);
+	}
+	@ResponseBody
+	@RequestMapping("emailCheck.me.jm")
 	public String idCheck(String email) {
 		
 		return String.valueOf(mService.emailCheck(email));
@@ -198,17 +218,51 @@ public class MemberController {
 		return String.valueOf(mService.nickCheck(memNick));
 	}
 	@ResponseBody
-	@RequestMapping("certify.me.jm")
-	public String certify(String certify,String check) {
+	@RequestMapping(value="idFind.me.jm" )
+	public String idFind(Member m) {
+
+		return String.valueOf(mService.idFind(m));
+	}
+	@RequestMapping("updatePwd.me.jm")
+	public String updatePwd(Member m, Model model, HttpSession session) {
+		int result = mService.updatePwd(m);
 		
-		int result = 0;
+		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
 		
-		if(certify.equals(check)) {
-			result = 1;
+		m.setMemPwd(encPwd);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 변경되었습니다!");
 		}
 		
-		return String.valueOf(result);
+		return "redirect:/";
+		
 	}
-	
+	@RequestMapping("updateNick.me.jm")
+	public String updateNick(Member m, Model model, HttpSession session) {
+		int result = mService.updateNick(m);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 변경되었습니다!");
+		}
+		
+		return "redirect:/";
+		
+	}
 
+	
+	@RequestMapping("updatePhone.me.jm")
+	public String updatePhone(Member m, Model model, HttpSession session) {
+		int result = mService.updatePwd(m);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 변경되었습니다!");
+		}
+		
+		return "redirect:/";
+		
 	}
+
+
+	
+}

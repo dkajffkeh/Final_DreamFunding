@@ -52,23 +52,22 @@ public class MypageController {
 		return "mypage/mypageLikeProject";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	// 제작한 프로젝트
 	@RequestMapping("myMadeProject.me")
 	public String mypageMadeProject() {
 		return "mypage/mypageMadeProject";
 	}
 	
+	// 메세지 페이지
+		@RequestMapping("mypageMessage.me")
+		public String mypageMessage() {
+			return "mypage/mypageMessage";
+		}
+	
 	// 프로젝트 만들기
 	@RequestMapping("makeProject.me")
 	public String makeProjectPage() {
-		return "mypage/makeProjectPage";
+		return "mypage/mypageMakeProject";
 	}
 	
 	// 설정-계정
@@ -88,6 +87,7 @@ public class MypageController {
 	public String optionProfile() {
 		return "mypage/optionProfile";
 	}
+	
 	// 설정-배송지등록
 	@RequestMapping("optionShipping.me")
 	public String optionShipping() {

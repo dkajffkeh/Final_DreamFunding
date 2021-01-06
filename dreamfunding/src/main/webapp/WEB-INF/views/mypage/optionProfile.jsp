@@ -258,11 +258,10 @@ footer .footer__inner {
    color:#7f0000;
    text-align:center;}
   
-  .nav-item{}
-  
-  .nav-item a:hover{
-    background-color:rgba(153, 153, 153, 0.89);
+  .nav-item{background-color:rgba(153, 153, 153, 0.89);
     color:#7f0000;}
+  
+  
   
   .supporter-menu{
     text-decoration:none;
@@ -519,7 +518,7 @@ footer .footer__inner {
     border-bottom: 0px solid #fff;
     color: #121212
 }
-
+.h3{margin-top:7px;}
 </style>
 
 
@@ -536,11 +535,11 @@ footer .footer__inner {
     <br>
     <div class="wrap1">
        <!--설정아이콘-->
-       <a href=""><span class="material-icons" id="setting">settings</span></a>
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href=""><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg" 
+          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
           class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
         </div>
     </div>
@@ -559,9 +558,9 @@ footer .footer__inner {
             <div class="container mt-3" >
               <br>
               
-              <ul class="nav nav-tabs nav-justified">
-                <li class="nav-item" >
-                  <a class="nav-link" data-toggle="tab" href="#menu1"><h3 style="font-weight:bold;">옵션</h3></a> 
+               <ul class="nav nav-tabs nav-justified" style="border-radius: 20px; border:none;">
+                <li class="nav-item" style="background-color:none; border-radius:20px;">
+                  <a class="nav-link"style="border-radius: 20px; border:1px solid rgb(206, 206, 206);"><h3 class="h3" style="font-weight:bold;">설정</h3></a> 
                 </li>
                 
               </ul>
@@ -600,18 +599,35 @@ footer .footer__inner {
           <div class="profile-wrap" >
             <div class="profile">
               <p class="p">프로필변경</p>
-              <a href=""><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg"
-                          style="width:70px; height:70px; border-radius: 50%;"></a> 
+              <a href="">
+              <c:choose>
+              <c:when test="${ empty loginMem.memSystemname }">
+              <img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
+                          style="width:70px; height:70px; border-radius: 50%;">
+              </c:when>
+              <img src="${pageContext.request.contextPath}${loginMem.memPfPath}${loginMem.memSystemname}"
+              		 	  style="width:70px; height:70px; border-radius: 50%;">
+               
+              </c:choose>
+              
+              
+              
+              </a> 
                 
                   <div class="togglee">
                     <button class="button">변경</button>
                       </div><br><br>
                         <div id="divToggle" style="display: none;">
-                          <button type="button" class="btn" style="background-color: #7f0000; color:white;
+                        <form action="updateProfile.me.jm" enctype="multipart/form-data">
+                          
+                          <input type="file" id="upfile" name="memSystemname" style="margin-left:10px; transform: translate(30%,-300%);" ></input>
+                          <input type="hidden" name="memPfPath" value="/resources/profile/">
+                          
+                          
+                          <button type="submit" class="btn" style="background-color: #7f0000; color:white;
                                                               transform: translate(0%,30%)">저장</button>
-                          
-                          <input type="file" style="margin-left:10px; transform: translate(30%,-300%);"></input></div>
-                          
+                          </form>
+                          </div>
                           <hr> 
             </div>
           </div>
@@ -630,16 +646,20 @@ footer .footer__inner {
 
             <div class="profile-wrap" >
               <div class="profile" >
-                <p class="p">이름</p>
-                  <h>${ loginMem.memName }</h>
+                <p class="p">닉네임</p>
+                  <h>${ loginMem.memNick }</h>
                     <div class="togglee">
                       <button class="button1" style="background-color:white;
                         border:none;">변경</button>
                         </div><br><br>
                           <div id="divToggle1" style="display: none;">
+                          <form action="updateNick.me.jm" method="post">
                             <input type="text" class="form-control" id="usr" style="width:200px;
                                           margin-top:5px; margin-bottom:10px;" name="username">
-                            <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button></div>
+                            <button type="submit" class="btn" style="background-color: #7f0000; color:white;">저장</button>
+                            
+                            </form>
+                            </div>
                               <hr> 
               </div>
             </div>

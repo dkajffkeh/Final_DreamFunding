@@ -11,14 +11,13 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class Notice {
+public class PageInfo {
 	
-	private int noticeNo;
-	private int memberNo;
-	private String noticeTitle;
-	private String noticeContent;
-	private String noticeUpload;
-	private int noticeCount;
-	private String noticeStatus;
-	
+	private int listCount;
+	private int currentPage;
+	private int startPage;
+	private int endPage;
+	private int maxPage;
+	private int pageLimit;
+	private int boardLimit;
 }

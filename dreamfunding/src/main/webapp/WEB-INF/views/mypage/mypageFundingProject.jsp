@@ -506,11 +506,11 @@ float:right;
     <!-- 마이페이지 고정된 상단 화면-->
     <div class="wrap">
        <!--설정아이콘-->
-       <a href=""><span class="material-icons" id="setting">settings</span></a>
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href=""><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg" 
+          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
           class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
         </div>
     </div>
@@ -544,9 +544,9 @@ float:right;
               <div id="menu1" class="container tab-pane active" ><br><br>
                 <nav class="nav--top">
                   <ul>
-                      <li><a href="#">펀딩한 프로젝트</a></li>
-                      <li><a href="#">관심있는 프로젝트</a></li>
-                      <li><a href="#">메시지</a></li>
+                      <li><a href="myFundingProject.me">펀딩한 프로젝트</a></li>
+                      <li><a href="myLikeProject.me">관심있는 프로젝트</a></li>
+                      <li><a href="mypageMessage">메시지</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
@@ -556,9 +556,9 @@ float:right;
               <div id="menu2" class="container tab-pane fade"><br><br>
                 <nav class="nav--top">
                   <ul>
-                      <li><a href="#">프로젝트 만들기</a></li>
-                      <li><a href="#">제작한 프로젝트</a></li>
-                      <li><a href="#">메시지</a></li>
+                      <li><a href="makeProject.me">프로젝트 만들기</a></li>
+                      <li><a href="myMadeProject.me">제작한 프로젝트</a></li>
+                      <li><a href="mypageMessage">메시지</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
