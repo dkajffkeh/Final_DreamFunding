@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.donjomjo.dreamfunding.common.filehandler.FileRename;
 import com.donjomjo.dreamfunding.member.model.service.MemberService;
 import com.donjomjo.dreamfunding.member.model.vo.Member;
 
@@ -187,6 +188,37 @@ public class MemberController {
 	    }
 	    return certifyNum;
 	}
+	@ResponseBody
+	@RequestMapping(value="emailfind.me.jm")
+	public String emailfind(HttpSession session, Member m) {
+		String api_key = "NCSOS7YWFCF3SGWD";
+	    String api_secret = "WV56MGDCXLSATWCGEBMX1RZWNILYKJBO";
+	    
+	    Message coolsms = new Message(api_key, api_secret);
+	    System.out.println(m.getMemName());
+	    System.out.println(m.getPhone());
+	    System.out.println(mService.selectEmail(m));
+	    
+	    
+	    
+	    HashMap<String, String> params = new HashMap<String, String>();
+	    params.put("to", "01083658879");
+	    params.put("from", m.getPhone() );
+	    params.put("type", "SMS");
+	    params.put("text", "[드림펀딩] 회원님의 이메일은 " + mService.selectEmail(m) + " 입니다.");
+	    params.put("app_version", "test app 1.2");
+
+	    
+	    
+	    try {
+	      JSONObject obj = (JSONObject) coolsms.send(params);
+	      
+	    } catch (CoolsmsException e) {
+	      System.out.println(e.getMessage());
+	      System.out.println(e.getCode());
+	    }
+	    return mService.selectEmail(m);
+	}
 	
 
 	@ResponseBody
@@ -217,12 +249,14 @@ public class MemberController {
 		
 		return String.valueOf(mService.nickCheck(memNick));
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="idFind.me.jm" )
 	public String idFind(Member m) {
 
 		return String.valueOf(mService.idFind(m));
 	}
+	
 	@RequestMapping("updatePwd.me.jm")
 	public String updatePwd(Member m, Model model, HttpSession session) {
 		int result = mService.updatePwd(m);
@@ -241,25 +275,79 @@ public class MemberController {
 	@RequestMapping("updateNick.me.jm")
 	public String updateNick(Member m, Model model, HttpSession session) {
 		int result = mService.updateNick(m);
-		
-		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 변경되었습니다!");
+		System.out.println(m.getMemNick());
+		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
+			
+			session.setAttribute("alertMsg", "프로필 수정 완료");
+			
+			return "mypage/optionProfile";
+			
+		}else { // 게시글 수정 실패 
+			
+			session.setAttribute("alertMsg", "프로필 수정 실패");
+			
+			return "mypage/optionProfile";
 		}
 		
-		return "redirect:/";
 		
 	}
-
+	@RequestMapping("updateProfile.me.jm")
+	   public String updateProfile(Member m, Model model, MultipartFile reupFile, HttpSession session) {
+	         
+	      if(!reupFile.getOriginalFilename().equals("")) {
+	         
+	         if(m.getMemSystemname() != null) {
+	            new File(session.getServletContext().getRealPath(m.getMemPfPath())).delete();
+	         }
+	         
+	         String memSystemname = FileRename.fileRename(reupFile);
+	         
+	         m.setMemPfPath(reupFile.getOriginalFilename());
+	         
+	         m.setMemSystemname("resources/images/profile/"+memSystemname);
+	         
+	         
+	         
+	      }
+	      
+	      int result = mService.updateProfile(m);
+	      
+	      if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
+	         
+	         session.setAttribute("alertMsg", "프로필 수정 완료");
+	         return "mypage/optionProfile";
+	         //System.out.println("수정성공");
+	         
+	      }else { // 게시글 수정 실패 
+	         
+	         session.setAttribute("alertMsg", "프로필 수정 실패");
+	         return "mypage/optionProfile";
+	         //System.out.println("수정실패");
+	      }
+	      
+	      
+	   }
+	
 	
 	@RequestMapping("updatePhone.me.jm")
 	public String updatePhone(Member m, Model model, HttpSession session) {
 		int result = mService.updatePwd(m);
 		
-		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 변경되었습니다!");
+		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
+			
+			session.setAttribute("alertMsg", "프로필 수정 완료");
+			
+			return "mypage/optionProfile";
+			
+		}else { // 게시글 수정 실패 
+			
+			session.setAttribute("alertMsg", "프로필 수정 실패");
+			
+			return "mypage/optionProfile";
 		}
 		
-		return "redirect:/";
+		
+		
 		
 	}
 

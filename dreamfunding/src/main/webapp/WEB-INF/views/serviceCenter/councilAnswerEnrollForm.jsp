@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="${pageContext.request.contextPath}/resources/js/ckeditor/ckeditor.js?ver=1"></script>
 <style>
 	.cdMain{
             width:1000px;            
@@ -90,7 +91,11 @@
             <br>
             <br>       
    		</div>
-			
+		<script type="text/javascript">
+							 CKEDITOR.replace('content'
+							                , {height: 500                                                 
+							                 });
+		</script>
 			
 				 	 	
 	 	 	

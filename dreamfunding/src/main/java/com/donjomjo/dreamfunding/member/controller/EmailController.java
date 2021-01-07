@@ -85,6 +85,7 @@ public class EmailController {
 		System.out.println(email);
 		return "member/loginForm";
 	}
+	
 
 	
 }

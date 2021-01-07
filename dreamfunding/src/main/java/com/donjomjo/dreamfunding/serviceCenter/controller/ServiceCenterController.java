@@ -345,4 +345,21 @@ public class ServiceCenterController {
 		}
 	}
 	
+	@RequestMapping("searchNotice.gn.no")
+	public String searchNotice(@RequestParam(value="currentPage", defaultValue="1")int currentPage, Model model, String cate, String keyword) {
+		
+		int listCount = scService.searchNoticeCount(cate, keyword);
+		
+		PageInfo pi = PageNation.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Notice> list = scService.searchNoticeList(pi, cate, keyword);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		model.addAttribute("keyword", keyword);
+		
+		return "serviceCenter/sCenterMainView";
+		
+	}
+	
 }
