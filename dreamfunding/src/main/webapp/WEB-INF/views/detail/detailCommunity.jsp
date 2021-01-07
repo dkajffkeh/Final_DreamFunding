@@ -197,9 +197,7 @@
 			                        >
 			                          Delete
 			                        </button>
-		                        </c:if>
-	
-                     
+		                        </c:if>   
                             </div>                        
 						  </li>
 						</c:forEach>
@@ -291,12 +289,26 @@
 
    	  rereplyBtn.forEach((v, i) => {
         v.addEventListener("click", () => {
-       	if(editInput[i]){ 
-          editInput[i].classList.add("is_not_active");
-        }
-          rereplyInput[i].classList.toggle("is_not_active");
-       	});
-          
+        	
+        	const cbtn = document.querySelectorAll(".comment-open-btn")[i];
+        	
+        	 if (cbtn.innerText === "Comments") {
+                 cbtn.innerText = "Hide Comments";
+               } else if (rereplyList[i].innerHTML === "") {
+                 commentBtn[i].innerText = "No Comment!";
+               } else {
+                 cbtn.innerText = "Comments";
+               }
+               document
+                 .querySelectorAll(".comments")
+                 [i].classList.toggle("reply_active");	
+
+	       	if(editInput[i]){ 
+	          editInput[i].classList.add("is_not_active");
+	        }
+	          rereplyInput[i].classList.toggle("is_not_active");
+	       	});
+	          
       });
 
       rereplyCancelBtn.forEach((v, i) => {
@@ -332,75 +344,107 @@
  
       // 댓글 등록 
       const addReply =()=>{
-    	/*  
-    	  axios.get('insertReply.de',{
-    		  params:{
-	    			  pno:'${d.projectNo}',
-	    			  replyContent:document.querySelector('#comment-input-area').value
-	    		     }
-    	  })
-    	  .then(response=>{
-    		  if(response.data==='success'){
-    			  alert('댓글등록성공!');
-    		  }
-    	  })
-    	  */
+
     	  location.href="insertReply.de?pno=${d.projectNo}&replyContent="+document.querySelector('#comment-input-area').value
       }
       
       
-      // 대댓글 
-        const createReplyTag=(v)=>{
-	  
-    	  const listItem = document.createElement('li');
-    	  	listItem.className = 'rcitem'+v.subReAnsNo;
-    	  
-    	  const commentCard = document.createElement('div');
-    	  	commentCard.className ='comment_card';
-    	  	commentCard.id='comment-8';
-    	  	commentCard.style.marginLeft='4rem';
-    	  	
-       	  const profileWrapper = document.createElement('div');
-          	  profileWrapper.className = 'profile_wrapper';
-          	  
-	          const profileImg = document.createElement('img');
-	            profileImg.src='resources/images/'+v.memberPfPath;
-	            profileImg.className='image';
-	          const profileCaption = document.createElement('div');
-	              profileCaption.className = 'profile_caption';
-		          const profileName = document.createElement('h5');
-		            profileName.className = 'name';
-		            profileName.innerText = v.memberNickname;
-		          const profileDate = document.createElement('p');
-		            profileDate.className = 'date';
-		            profileDate.innerText = v.subReDate;
-
-	            profileCaption.appendChild(profileName);
-	            profileCaption.appendChild(profileDate);
-	
-	            profileWrapper.appendChild(profileImg);
-	            profileWrapper.appendChild(profileCaption);
-
-        const commentText = document.createElement('article')
-          commentText.className = 'comment_text';
-          const ces = document.createElement('span');
-            ces.className='ces'+v.subReAnsNo;
-            ces.innerText=v.subReContent;
-          const cet=document.createElement('textArea');
-            cet.className="cet cetna rcet"+v.subReAnsNo;
-            cet.name='recomment_eddit';
-            cet.innnerText=v.subReContent;   
-            
-	          commentText.appendChild(ces);
-	          commentText.appendChild(cet);
-          
-	    commentCard.appendChild(profileWrapper);      
-        commentCard.appendChild(commentText);
-	
-        listItem.appendChild(commentCard);
-        document.querySelector('#recom-list'+v.replyNo).prepend(listItem);
-      }
       
+    // 대댓글 
+    const createReplyTag=(v)=>{
+      console.log(v);
+      const loginNo = '${loginMem.memNo}'
+      
+    const listItem = document.createElement('li');
+      listItem.className = 'rcitem'+v.subReAnsNo;
+    
+    const commentCard = document.createElement('div');
+      commentCard.className ='comment_card';
+      commentCard.id='comment-8';
+      commentCard.style.marginLeft='4rem';
+      
+       const profileWrapper = document.createElement('div');
+          profileWrapper.className = 'profile_wrapper';
+          
+        const profileImg = document.createElement('img');
+          profileImg.src='resources/images/'+v.memberPfPath;
+          profileImg.className='image';
+        const profileCaption = document.createElement('div');
+            profileCaption.className = 'profile_caption';
+          const profileName = document.createElement('h5');
+            profileName.className = 'name';
+            profileName.innerText = v.memberNickname;
+          const profileDate = document.createElement('p');
+            profileDate.className = 'date';
+            profileDate.innerText = v.subReDate;
+
+          profileCaption.appendChild(profileName);
+          profileCaption.appendChild(profileDate);
+
+          profileWrapper.appendChild(profileImg);
+          profileWrapper.appendChild(profileCaption);
+
+      const commentText = document.createElement('article')
+        commentText.className = 'comment_text';
+        const ces = document.createElement('span');
+          ces.className='ces'+v.subReAnsNo;
+          ces.innerText=v.subReContent;
+        const cet=document.createElement('textArea');
+          cet.className="cet cetna rcet"+v.subReAnsNo;
+          cet.name='recomment_eddit';
+          cet.innnerText=v.subReContent;   
+          
+          commentText.appendChild(ces);
+          commentText.appendChild(cet);
+      
+      commentCard.appendChild(profileWrapper);      
+      commentCard.appendChild(commentText);
+
+      const recoBtnWrapper = document.createElement('div');
+        recoBtnWrapper.className='recomment_options reco-opt'+v.subReAnsNo;
+        if(v.memberNo === parseInt(loginNo)){
+          const reEditBtn = document.createElement('button');
+            reEditBtn.className='reedit-btn';
+            reEditBtn.style.pointerEvents='auto';
+            reEditBtn.style.opacity='1';
+            reEditBtn.onclick=function(){openSubRe(v.subReAnsNo)};
+            reEditBtn.innerText='Edit';
+
+          const reSubmitBtn = document.createElement('button');
+            reSubmitBtn.className='resubmit-btn';
+            reSubmitBtn.style.pointerEvents='auto';
+            reSubmitBtn.style.opacity='1';
+            reSubmitBtn.style.display='none';
+            reSubmitBtn.onclick=function(){updateReply(v.subReAnsNo, 1)};
+            reSubmitBtn.innerText='Submit';  
+          
+          const reCancelBtn = document.createElement('button');
+            reCancelBtn.className='recancel-btn';
+            reCancelBtn.style.pointerEvents='auto';
+            reCancelBtn.style.opacity='1';
+            reCancelBtn.style.display='none';
+            reCancelBtn.onclick=function(){closeSubRe(v.subReAnsNo)};
+            reCancelBtn.innerText='Cancel'; 
+
+          const reDeleteBtn = document.createElement('button');
+            reDeleteBtn.className='redelete-btn';
+            reDeleteBtn.style.pointerEvents='auto';
+            reDeleteBtn.style.opacity='1';
+            reDeleteBtn.onclick=function(){deleteReply(v.subReAnsNo, 1)};
+            reDeleteBtn.innerText='Delete';
+
+          recoBtnWrapper.appendChild(reEditBtn); 
+          recoBtnWrapper.appendChild(reSubmitBtn);
+          recoBtnWrapper.appendChild(reCancelBtn);
+          recoBtnWrapper.appendChild(reDeleteBtn); 
+        }  
+
+
+      commentCard.appendChild(recoBtnWrapper);
+      listItem.appendChild(commentCard);
+      document.querySelector('#recom-list'+v.replyNo).prepend(listItem);
+
+  }
      
       // 대댓글 등록 
       const addSubReply =(rno)=>{
@@ -413,7 +457,6 @@
     	  .then((res)=>{
     		  if(res.data){
     			  const data=res.data[0]
-    			  alert('댓글등록성공!');
     			  createReplyTag(data);
     			  document.querySelector('.addr'+data.replyNo).classList.toggle("is_not_active");
     		  }else{
@@ -437,7 +480,7 @@
         			  document.querySelector(".c-content"+rno).innerText=document.querySelector(".cet"+rno).value
         			  editInput[editIndex].classList.toggle("is_not_active")
         		  }else{
-        			  alert('댓글수정실패');
+        			  alert('댓글삭제실패');
         		  }
         	  })
           // 대댓글 수정   
@@ -454,7 +497,7 @@
 	        			  document.querySelector(".ces"+rno).innerText=document.querySelector(".rcet"+rno).value
 	        			  closeSubRe(rno)
 	        		  }else{
-	        			  alert('댓글수정실패')
+	        			  alert('댓글삭제실패')
 	        		  }
 	        	  })
 	    	  }
@@ -476,10 +519,11 @@
         		  if(res.data==='success'){
         			  document.querySelector(".citem"+rno).remove()
         		  }else{
-        			  alert('댓글수정실패')
+        			  alert('대댓글삭제실패')
         		  }
-        	  })
+        	  }) 
           // 대댓글 삭제 
+    	  }else if(isSub===1){ 
     		  axios.get('deleteSubReply.de',{
         		  params:{
         			  sno:rno
@@ -488,12 +532,14 @@
         		  if(res.data==='success'){
         			  document.querySelector(".rcitem"+rno).remove()
         		  }else{
-        			  alert('댓글수정실패')
+        			  alert('대댓글삭제실패')
         		  }
         	  })
     	  }
     	  
       }
+      
+      
     </script>
 </body>
 </html>
