@@ -133,7 +133,7 @@
 	                            <figure class="card-image" style="background-image: url(/dreamfunding/resources/images/projectThumbnail/${p.projectFileName})">
 		                            <div>
 				    				  <div class='like'>
-				    				  		"<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>"
+				    				  		<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>
 		  	                  				<div onclick='likeClick(${p.projectNo});'>
 		    	                        	<div id="${p.projectNo}">
 		    	                        		<span class='material-icons md-36' name='likeIcon'>favorite</span>
