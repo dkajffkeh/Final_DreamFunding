@@ -200,7 +200,12 @@ public class IndexController {
 		return new Gson().toJson(likeList);
 		
 	}
-
+	
+	@RequestMapping("search.do")
+	public String search() {
+		
+		return "index/detailSearch";
+	}
 	
 	
 
