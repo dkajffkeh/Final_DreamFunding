@@ -104,6 +104,7 @@
 		     , project_no
 		     , project_close_dt
 		     , pro_cateno
+		     , project_filename
 		  from project
 		 where project_no = #{pno}
 	</select>
@@ -141,55 +142,6 @@
 	</select>
 	
 	<insert id="insertPurchaseInsert" parameterType="PurchaseInfo">
-		<!-- 
-		insert 
-		  into purchase_Info
-		  (
-		     purinfo_no
-		   , member_no
-		   , re_no
-		   , reward_amount
-		   , reward_plus
-		   , purinfo_status
-		   , delivery_status
-		   , shipping_zipcode
-		   , shpping_s_addr
-		   , shipping_d_addr
-		   , receiever_name
-		   , receiever_phone
-		   , purinfo_req
-		   , purchase_c_number
-		   , purchase_v_year
-		   , purchase_v_month
-		   , purchase_c_pwd
-		   , purchase_c_date
-		   , purchase_bkey
-		   , purchase_email
-		  )
-		  values
-		  (
-		     seq_odno.nextval
-		   , #{memberNo}
-		   , #{reNo}
-		   , #{rewardAmount}
-		   , #{rewardPlus}
-		   , "Y"
-		   , "결제완료"
-		   , #{shippingZipcode}
-		   , #{shippingSAddr}
-		   , #{shippingDAddr}
-		   , #{receieverName}
-		   , #{receieverPhone}
-		   , #{purinfoReq}
-		   , #{purchaseCNumber}
-		   , #{purchaseVYear}
-		   , #{purchaseVMonth}
-		   , #{purchaseCPwd}
-		   , #{purchaseCDate}
-		   , #{purchaseBkey}
-		   , "n" 
-		  )
-		   -->
 		  insert 
 		    into purchase_Info
 		    (
@@ -298,6 +250,7 @@
 		     , project_thumpath
 		     , project_filename
 		  from project
+		 where creator_status = 'U'
 	</select>
 	
 	<select id="selectOrderList"

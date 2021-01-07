@@ -30,9 +30,10 @@
     #cardSel div{
         width:180px;
         height:70px;
-        background-color:pink;
+        background-color:lightcoral;
         color:white;
         text-align:center;
+        border-radius:5px;
 </style>
 </head>
 <body>
@@ -56,7 +57,7 @@
         <hr>
             <h4> 추가후원금 </h4>
             후원금 : 
-            <input type="number" id="supportPrice" name="rewardPlus" value="0" onkeyup="verify.sum()" numberOnly> 원
+            <input type="number" id="supportPrice" name="rewardPlus" value="0" onkeyup="verify.sum()" numberOnly required> 원
             <br><br>
             <div id="total" style="text-align:center"></div>
             <input type="hidden" name="projectNo" value="${ p.projectNo }">
@@ -248,7 +249,9 @@
                 
             <h3>결제정보</h3>
             <hr>
-            <h4>기본 결제수단</h4>
+            <c:if test="${ !empty mp }">
+            	<h4>기본 결제수단</h4>
+            </c:if>
                 <table id="cardSel">
                 	<tbody>
                 		<tr>
