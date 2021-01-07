@@ -173,7 +173,7 @@
 		       member
 		   set status = '4'
 		     , modify_date = sysdate
-		 where MEMBER_EMAIL = #{email}
+		 where MEMBER_PWD = #{memPwd}
 	</update>
 	
 	

@@ -651,11 +651,13 @@ margin-right:20px;}
                         border:none;">변경</button>
                         <hr> 
                         </div><br>
-                        <h>비밀번호</h>
+                        
                         <br>
                         <!-- 저장  -->
                           <div id="divToggle1" style="display: none;">
+                          <form action="">
                           	<p>현재 비밀번호</p>
+                          	
                             <input type="text" class="form-control" id="cmemPwd1" style="width:200px;
                                           margin-top:5px; margin-bottom:10px;" placeholder="현재 비밀번호";>
                             <input type="hidden" name="${ loginMem.email }">              
@@ -664,7 +666,10 @@ margin-right:20px;}
                             <input type="password" class="form-control" id="cmemPwd3" placeholder="변경할 비밀번호 확인"; style="width:200px;
                             margin-top:5px; margin-bottom:10px;">
         
-                            <button type="button" class="btn" style="background-color: #7f0000; color:white;" onclick="modifyPwd()">저장</button></div>
+                            <button type="button" class="btn" style="background-color: #7f0000; color:white;" onclick="modifyPwd()">저장</button>
+                            </form>
+                            </div>
+                            
                               <hr> 
                             <script>
                             	function modifyPwd(){
@@ -706,11 +711,13 @@ margin-right:20px;}
                         
                         <br>
                           <div id="divToggle2" style="display: none;">
+                          <form ></form>
                             <input type="text" class="form-control" id="usr" style="width:200px;
                                           margin-top:5px; margin-bottom:10px;" name="username">
                                           
-                            <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button></div>
-                              <hr> 
+                            <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button>
+                          </div>
+                        <hr> 
               </div>
             </div>
 
@@ -758,8 +765,11 @@ margin-right:20px;}
               <div class="profile" >
                 <p class="p">회원탈퇴</p>
                     <div class="togglee">
-                      <button class="button4" style="background-color:white;
-                        border:none;">탈퇴하기</button>
+                      <button type="button" class="btn"  style="background-color:white;color:#7f0000;
+                        border:none;" data-toggle="modal" data-target="#myModal">
+  탈퇴하기
+</button>
+
                         <hr> 
                         </div><br><br>
                           <!-- 모델창 만들기 -->
@@ -772,9 +782,34 @@ margin-right:20px;}
           </div>
         </div>
             
-
-      </div>
-        
+        <!-- The Modal -->
+		<div class="modal" id="myModal">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		
+		      <!-- Modal Header -->
+		      <div class="modal-header">
+		        <h4 class="modal-title">탈퇴 하실건가요..??</h4>
+		        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		      </div>
+		
+		      <!-- Modal body -->
+		      <form  action="delete.me.jm" method="post">
+		      <div class="modal-body">
+		        
+		        <div>탈퇴하시려면 비밀번호를 입력해주세요.</div>
+		        <input type="password" class="form-control" name="memPwd" placeholder="Password" required>
+		        
+		      </div>
+		
+		      <!-- Modal footer -->
+		      <div class="modal-footer">
+		        <button type="submit" class="btn btn-danger">탈퇴하기</button>
+		      </div>
+			</form>
+		    </div>
+		  </div>
+		</div>
         
       
     </main>

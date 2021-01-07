@@ -139,6 +139,8 @@ public class MemberController {
 	@RequestMapping("delete.me.jm")
 	public String deleteMember(String userPwd, HttpSession session, Model model) {
 		
+		System.out.println(m);
+		
 		Member loginMem = (Member)session.getAttribute("loginMem");
 		String encPwd = loginMem.getMemPwd();
 		

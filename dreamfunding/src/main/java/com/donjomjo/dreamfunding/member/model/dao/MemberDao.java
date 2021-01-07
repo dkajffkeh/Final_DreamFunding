@@ -45,7 +45,7 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.idFind", m);
 	}
 	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
-		System.out.println(m);
+
 		return sqlSession.update("memberMapper.updatePwd", m);
 	}
 	public int updateNick(SqlSessionTemplate sqlSession, Member m) {
