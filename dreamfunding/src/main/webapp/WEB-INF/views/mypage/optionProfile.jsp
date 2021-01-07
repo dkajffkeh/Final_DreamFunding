@@ -613,7 +613,7 @@ footer .footer__inner {
                           style="width:70px; height:70px; border-radius: 50%;">
               </c:when>
               <c:otherwise>
-              <img src="${pageContext.request.contextPath}/${loginMem.memPfPath}"
+              <img src="${pageContext.request.contextPath}/resources/images/profile/${loginMem.memSystemname}"
               		 	  style="width:70px; height:70px; border-radius: 50%;">
                </c:otherwise>
               </c:choose>
@@ -665,10 +665,13 @@ footer .footer__inner {
                         border:none;">변경</button>
                         </div><br><br>
                           <div id="divToggle1" style="display: none;">
+                          
                           <form action="updateNick.me.jm" method="post">
-                            <input type="text" class="form-control" id="usr" style="width:200px;
+                            <input type="text" class="form-control" id="memNick" style="width:200px;
                                           margin-top:5px; margin-bottom:10px;" name="memNick">
+                            <input type="hidden" name="email" value="${ loginMem.email }">
                             <button type="submit" class="btn" style="background-color: #7f0000; color:white;">저장</button>
+                            
                             
                             </form>
                             </div>

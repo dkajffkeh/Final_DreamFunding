@@ -87,9 +87,19 @@
 	
 	</insert>
 	
-	
+	<!-- 아이디 찾기  -->
+	<select id="memberList"
+			parameterType="Member"
+  		  resultMap="memberResultSet">
+		select
 
-	
+		   MEMBER_EMAIL
+		 , MEMBER_CREATEDATE
+	  from member
+	 where MEMBER_STATUS != 4
+	   and MEMBER_NAME = #{ memName }
+	   and member_phone = #{ phone }
+	</select>
 	
 	<!-- 비밀번호 찾기 질문 (DAO까지는 값이 넘어오는데 여기는 값이 넘어오지 않는다.)-->
 	  <select id="selectAddress" 
@@ -140,7 +150,7 @@
 	<update id="updateNick" parameterType="Member">
 		update
 		       member
-		   set MEMBER_NICK = #{memNick}
+		   set MEMBER_NICKNAME = #{memNick}
 		 where MEMBER_EMAIL = #{email}
 		   and MEMBER_STATUS != 4
 	</update>

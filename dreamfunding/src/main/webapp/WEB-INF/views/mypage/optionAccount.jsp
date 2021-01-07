@@ -657,18 +657,28 @@ margin-right:20px;}
                           <div id="divToggle1" style="display: none;">
                           	<p>현재 비밀번호</p>
                             <input type="text" class="form-control" id="cmemPwd1" style="width:200px;
-                                          margin-top:5px; margin-bottom:10px;" placeholder="현재 비밀번호"; name="memPwd">
-                                          
+                                          margin-top:5px; margin-bottom:10px;" placeholder="현재 비밀번호";>
+                            <input type="hidden" name="${ loginMem.email }">              
                             <input type="password" class="form-control" id="cmemPwd2" placeholder="변경할 비밀번호"; style="width:200px;
-                            margin-top:5px; margin-bottom:10px;" name="cMemPwd">
-                            
+                            margin-top:5px; margin-bottom:10px;" name="memPwd">
                             <input type="password" class="form-control" id="cmemPwd3" placeholder="변경할 비밀번호 확인"; style="width:200px;
                             margin-top:5px; margin-bottom:10px;">
-                                          
-                                          
-                                          
-                            <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button></div>
+        
+                            <button type="button" class="btn" style="background-color: #7f0000; color:white;" onclick="modifyPwd()">저장</button></div>
                               <hr> 
+                            <script>
+                            	function modifyPwd(){
+                            		
+                            		
+                            		
+                            		
+                            	}
+                            </script>  
+                              
+                              
+                              
+                              
+                              
               </div>
             </div>
 

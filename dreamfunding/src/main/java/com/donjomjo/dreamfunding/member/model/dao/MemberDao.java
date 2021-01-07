@@ -1,5 +1,7 @@
 package com.donjomjo.dreamfunding.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -46,11 +48,12 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updatePwd", m);
 	}
 	public int updateNick(SqlSessionTemplate sqlSession, Member m) {
+		
 		return sqlSession.update("memberMapper.updateNick", m);
 	}
 	public int updateProfile(SqlSessionTemplate sqlSession, Member m) {
 
-	      System.out.println(m);
+	      
 
 	      return sqlSession.update("memberMapper.updateProfile", m);
 	   }
@@ -61,6 +64,13 @@ public class MemberDao {
 	public String selectEmail(SqlSessionTemplate sqlSession, Member m) {
 		
 		return sqlSession.selectOne("memberMapper.selectEmail", m);
+	}
+
+	public ArrayList<Member> memberList(SqlSessionTemplate sqlSession, Member m) {
+	
+
+		return (ArrayList)sqlSession.selectList("memberMapper.memberList", m);
+		
 	}
 	
 	

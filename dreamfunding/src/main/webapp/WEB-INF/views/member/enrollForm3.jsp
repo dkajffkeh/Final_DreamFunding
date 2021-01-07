@@ -41,13 +41,67 @@
                   
                   
                   <div class="form-label-group">
-                    <input type="password" id="memPwd" class="form-control" placeholder="Password" name="memPwd"  required>
+                    <input type="password" id="pw" class="form-control" onchange="check_pw()" placeholder="Password" name="memPwd"  required>
                     <label for="memPwd">비밀번호</label>
                   </div>
                   <div class="form-label-group">
-                    <input type="password" id="memPwd2" class="form-control" placeholder="Password" required>
+                    <input type="password" id="pw2" class="form-control" onchange="check_pw()" placeholder="Password" required>&nbsp;<span id="check"></span>
                     <label for="memPwd2">비밀번호 확인</label>
+                    
                   </div>
+                  
+                   <script>
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+			        function check_pw(){
+			 
+			            var pw = document.getElementById('pw').value;
+			            var SC = ["!","@","#","$","%"];
+			            var check_SC = 0;
+			 
+			            if(pw.length < 6 || pw.length>16){
+			                window.alert('비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.');
+			                document.getElementById('pw').value='';
+			            }
+			            for(var i=0;i<SC.length;i++){
+			                if(pw.indexOf(SC[i]) != -1){
+			                    check_SC = 1;
+			                }
+			            }
+			            if(check_SC == 0){
+			                window.alert('!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.')
+			                document.getElementById('pw').value='';
+			            }
+			            if(document.getElementById('pw').value !='' && document.getElementById('pw2').value!=''){
+			                if(document.getElementById('pw').value==document.getElementById('pw2').value){
+			                    document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
+			                    document.getElementById('check').style.color='blue';
+			                }
+			                else{
+			                    document.getElementById('check').innerHTML='비밀번호가 일치하지 않습니다.';
+			                    document.getElementById('check').style.color='red';
+			                }
+			            }
+			        }
+			    </script>
+                  
+                  
+                  
+                  
+                  
                   <div align="center"> 
                     <input type="radio" name="gender" value="M" id="male">
                     <label for="male">남성</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -67,7 +121,7 @@
 		                   </div>
                         </td>
                         <td>
-                        	<button class="form-control btn-request" data-toggle="modal" data-target="#myModal" onclick="certify1();">인증번호 요청</button>
+                        	<button type="button" class="form-control btn-request" data-toggle="modal" data-target="#myModal" onclick="certify1();">인증번호 요청</button>
                         </td>
                     </tr>
 
@@ -81,14 +135,14 @@
 		                   </div>
                         </td>
                         <td>
-                        	<button class="form-control btn-request" data-toggle="modal" data-target="#myModal1" onclick="certifycheck();">인증 확인</button>
+                        	<button type="button" class="form-control btn-request" data-toggle="modal" data-target="#myModal1" onclick="certifycheck();">인증 확인</button>
                         </td>
                     </tr>
 
                 </table>
                 <div id="check-nick"></div>
                   <hr class="my-4">
-                  <button class="btn btn-lg btn-login btn-block text-uppercase" id="enroll-btn" type="submit" disabled="true">회원가입</button>
+                  <button class="btn btn-lg btn-login btn-block text-uppercase" id="enroll-btn" type="submit" disabled>회원가입</button>
                   
 
                 </form>
@@ -96,16 +150,16 @@
                 	var cNick = false;
                 	var cEmail = false;
                 	var cCertify = false;
-                	
+
                     function buttonAble(){
-                        if(cNick === true && cEmail === true && cPhone === true){
-                            document.getElementById("enroll-btn").removeAttribute("disabled");
-                        }else{
-                            document.getElementById("enroll-btn").disabled ="true";
-                        }
-                    };
-                	
-                	
+
+                    	
+                    	        if(cNick == true && cEmail == true && cCertify == true){
+                    	            document.getElementById("enroll-btn").removeAttribute("disabled");
+                    	        }
+                    	
+
+                    	   }
                 	
                     // 인증번호 전달
                 	function certify1(){
@@ -127,39 +181,27 @@
 
                     function certifycheck(){
                     	
-                    	var certify = $("#certify");
-                    	var hiddenNum = $("#certifyNum");
+                    	var certify = $("#certify").val();
+                    	var hiddenNum = $("#certifyNum").val();
                     	
-                        	$.ajax({
-                        		url:"certify.me.jm",
-                        		data:{
-                        			certify:certify.val(),
-                        			hiddenNum:hiddenNum.val()
+						if(certify === hiddenNum){
+	
+							cCertify = true;
+							buttonAble()
 
-                        		},
-                        		type:"post",
-                        		success:function(count){
-	                    			if(check.val().length >= 6){
-	                    				if(count == 1){
-	                        				cCertify = true
-	                        				buttonAble()
-	                        			}else{
-	                        				cCertify = false
-	                        				buttonAble()
-	                        			}
-	                        		}
-                        			
-                        		},
-                        		error:function(){
-                        			console.log("ajax통신 실패");
-                        		}
-                        	
-                    	});
+							
+						}else{
+							cCertify = false;
+							buttonAble()
+
+							
+						}
                     	
 
                     };
                 
-                
+
+                    
                 
                 
                 
@@ -183,15 +225,18 @@
 
                 							$("#check-result").show();
                 							$("#check-result").css("color", "red").text("중복된 이메일 아이디가 존재합니다. 다시 입력해주세요.");
-                							cEmail == false;
+                							cEmail = false;
                 							buttonAble()
+                							
+                							
                 						}else{
-                							// 중복된 아이디 없음 => 사용가능
-                							// => 메세지 초록색 출력, 버튼 활성화
+
                 							$("#check-result").show();
                 							$("#check-result").css("color", "green").text("사용가능한 이메일입니다.");
-                							cEmail == true;
+                							cEmail = true;
                 							buttonAble()
+                							
+                							
                 							
                 						}
                 						
@@ -201,9 +246,7 @@
                 				});
                 			
                 				
-                			}else{ // 중복체크할 필요도 없음!! 애초에 유효한 아이디가 아님!! 
-                				
-                				// 어떠한 메세지도 안보이고, 버튼 비활성화
+                			}else{ 
                 				$("#check-result").css("color", "black").text("이메일(ID)을 입력하세요");
 
                 				
@@ -236,14 +279,17 @@
 
                 							$("#check-nick").show();
                 							$("#check-nick").css("color", "red").text("중복된 닉네임가 존재합니다. 다시 입력해주세요.");
-                							cNick == false;
+                							cNick = false;
                 							buttonAble()
+                							
                 						}else{
 
                 							$("#check-nick").show();
                 							$("#check-nick").css("color", "green").text("사용가능한 닉네임입니다.");
-                							cNick == true;
+                							cNick = true;
                 							buttonAble()
+                							
+                							
                 						}
                 						
                 					},error:function(){
@@ -252,9 +298,7 @@
                 				});
                 			
                 				
-                			}else{ // 중복체크할 필요도 없음!! 애초에 유효한 아이디가 아님!! 
-                				
-                				// 어떠한 메세지도 안보이고, 버튼 비활성화
+                			}else{ 
                 				$("#check-nick").css("color", "black").text("별명을 입력해주세요.");
 
                 				
