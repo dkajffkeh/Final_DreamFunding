@@ -194,7 +194,10 @@
 		
                     	
                     	        if(cNick == true && cEmail == true && cCertify == true ){
-                    	            document.getElementById("enroll-btn").removeAttribute("disabled");
+                    	        	if(cPwd == true){
+                    	        		document.getElementById("enroll-btn").removeAttribute("disabled");
+                    	        	}
+                    	            
                     	        }
                     	console.log(cPwd);
 

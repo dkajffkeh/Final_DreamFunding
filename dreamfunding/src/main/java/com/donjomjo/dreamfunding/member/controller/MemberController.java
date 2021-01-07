@@ -263,8 +263,7 @@ public class MemberController {
 	@RequestMapping(value="memberList.me.jm" )
 	public String memberList(Member m,Model model) {
 		
-		System.out.println(m);
-		
+
 		ArrayList<Member> list = mService.memberList(m);
 		
 		model.addAttribute("list",list);
@@ -281,7 +280,29 @@ public class MemberController {
 	public String updatePwd(Member m, Model model, HttpSession session) {
 
 		
-		return "redirect:/";
+		
+		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
+		
+		m.setMemPwd(encPwd);
+		
+		
+		int result = mService.updatePwd(m);
+		
+		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
+			
+			session.setAttribute("alertMsg", "프로필 수정 완료");
+			
+			return "member/loginForm.me.jm";
+			
+		}else { // 게시글 수정 실패 
+			
+			session.setAttribute("alertMsg", "프로필 수정 실패");
+			
+			return "member/loginForm.me.jm";
+		}
+		
+		
+		
 		
 	}
 	@RequestMapping("updateNick.me.jm")

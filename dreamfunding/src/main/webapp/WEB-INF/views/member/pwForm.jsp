@@ -46,6 +46,7 @@
                     <br>
                     <button class="btn btn-lg btn-login btn-block text-uppercase" onclick="cemail1">링크빋기</button>
                     </form>
+                    <br>
                     <a class="btn btn-lg btn-login btn-block text-uppercase" href="member/loginForm">로그인하기</a>   
               </div>
             </div>
