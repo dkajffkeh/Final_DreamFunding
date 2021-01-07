@@ -100,7 +100,7 @@
 	            </div>
 	            <br>
 	            <div class="btnArea" align="center">
-	            <button class="btn btn-secondary" onclick="history.back()">목록가기</button>
+	            <a class="btn btn-secondary" href="councilList.gn.no?mno=${loginMem.memNo }" style="width:100px">목록가기</a>
 	            <c:if test="${loginMem.memName eq co.memberName }">
 	            	<a class="btn btn-secondary abtn"  style="width:100px" href="councilUpdateForm.gn.no?cno=${co.councilNo }">수정하기</a>
 	            	<a class="btn btn-danger abtn" style="width:100px" href="councilDelete.gn.no?cno=${co.councilNo }">삭제하기</a>

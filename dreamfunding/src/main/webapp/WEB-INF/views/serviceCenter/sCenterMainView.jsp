@@ -123,9 +123,9 @@
         
         
 
-        <form id="searchForm" action="" method="Get" align="center">
+        <form id="searchForm" action="searchNotice.gn.no" method="Get" align="center">
             <div class="select">
-                <select class="custom-select" name="condition">                  
+                <select class="custom-select" name="cate">                  
                     <option value="title">제목</option>
                     <option value="content">내용</option>
                 </select>

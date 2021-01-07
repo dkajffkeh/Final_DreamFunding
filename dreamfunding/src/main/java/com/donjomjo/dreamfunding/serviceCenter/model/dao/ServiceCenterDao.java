@@ -1,6 +1,7 @@
 package com.donjomjo.dreamfunding.serviceCenter.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -128,5 +129,20 @@ public class ServiceCenterDao {
 		return sqlSession.delete("serviceCenterMapper.deleteCouncilAns", cno);
 	}
 	
+	public int searchNoticeCount(SqlSessionTemplate sqlSession, String cate, String keyword) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("cate", cate);
+		map.put("keyword", keyword);
+		return sqlSession.selectOne("serviceCenterMapper.searchNoticeCount", map);
+	}
+	
+	public ArrayList<Notice> searchNoticeList(SqlSessionTemplate sqlSession, PageInfo pi, String cate, String keyword){
+		HashMap<String, String> map = new HashMap<>();
+		map.put("cate", cate);
+		map.put("keyword", keyword);
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("serviceCenterMapper.searchNoticeList", map, rowBounds);
+	}
 	
 }

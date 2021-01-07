@@ -36,7 +36,10 @@
 			float:left;
 			margin-left:30px;						
 		}
-	
+		#nContent>td{
+			text-align:left;
+		}
+		
 </style>
 
 </head>
@@ -69,13 +72,13 @@
 	                        <th>내용</th>                        
 	                    </tr>
 	                    <tr id="nContent">
-	                        <td colspan="4">${n.noticeContent }</td>
+	                        <td colspan="4" align="center">${n.noticeContent }</td>
 	                    </tr>
 	                </table>                
 	            </div>
 	            <br>
 	            <div class="btnArea" align="center">	            	
-		           <button class="btn btn-secondary" onclick="history.back()">목록가기</button> &nbsp; &nbsp;
+		           <button class="btn btn-secondary" onclick="noticeMain()">목록가기</button> &nbsp; &nbsp;
 		           <c:if test="${loginMem.memStatus eq 2 }">
 			           <button class="btn btn-secondary" onclick="noticeControl(1)">수정하기</button> &nbsp; &nbsp;
 			           <button class="btn btn-danger" onclick="noticeControl(2)">삭제하기</button>
@@ -97,11 +100,12 @@
 			}else if(num == 2){
 				url = "delete.gn.no"				
 			}
-			
 			$("#noticeInfo").attr("action", url).submit();
 			
 		}
-		
+		function noticeMain(){
+			location.href = "scenterMain.gn";
+		}
 		
 	</script>
 	
