@@ -4,9 +4,13 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.donjomjo.dreamfunding.common.model.vo.PageInfo;
+import com.donjomjo.dreamfunding.common.template.Pagination;
 import com.donjomjo.dreamfunding.index.model.service.IndexService;
 import com.donjomjo.dreamfunding.index.model.vo.Index;
 import com.donjomjo.dreamfunding.index.model.vo.Like;
@@ -33,7 +37,7 @@ public class IndexController {
 		
 		ArrayList<Index> progressList = iService.selectProgressFundingList();
 		
-		System.out.println(progressList);
+//		System.out.println(progressList);
 		
 		return new Gson().toJson(progressList);
 		
@@ -68,16 +72,46 @@ public class IndexController {
 	
 	// 진행중인 펀딩 더보기 클릭 시 페이지이동
 	@RequestMapping("progressMore.do")
-	public String progressMore() {
+	public String selectProjectList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+			Model model) {
+
+//		System.out.println(currentPage);
+		int listCount = iService.selectListCount();
+//		System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
+		
+		ArrayList<Index> list = iService.selectProjectList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+//		System.out.println(pi);
+//		System.out.println(list);
 		
 		return "index/progressFundingMore";
+		
 	}
 	
 	// 실시간 랭킹 더보기 클릭 시 페이지이동
 	@RequestMapping("rankingMore.do")
-	public String rankingMore() {
+	public String selectRankingList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+			Model model) {
+
+		System.out.println(currentPage);
+		int listCount = iService.selectListCount();
+		System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
+		
+		ArrayList<Index> list = iService.selectRankingList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		System.out.println(pi);
+		System.out.println(list);
 		
 		return "index/rankingMore";
+		
 	}
 	
 	// 종료된 펀딩 더보기 클릭 시 페이지이동
@@ -128,18 +162,18 @@ public class IndexController {
 	@ResponseBody
 	@RequestMapping(value="likeBtn.do")
 	public int updateLike(int pno, int mno) {
-		System.out.println(pno);
-		System.out.println(mno);
+//		System.out.println(pno);
+//		System.out.println(mno);
 		
 		Like like = new Like();
 		
 		like.setProjectNo(pno);
 		like.setMemberNo(mno);
 		
-		System.out.println(like);
+//		System.out.println(like);
 		
 		int likeYN = iService.likeYN(like); //count로 찾는거 y=1 있다 0없다 있으면 delete 없으면 insert
-		System.out.println(likeYN);
+//		System.out.println(likeYN);
 		
 		int result = 0;
 		if(likeYN == 0) {

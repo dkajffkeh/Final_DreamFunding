@@ -2,9 +2,11 @@ package com.donjomjo.dreamfunding.index.model.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.donjomjo.dreamfunding.common.model.vo.PageInfo;
 import com.donjomjo.dreamfunding.index.model.vo.Index;
 import com.donjomjo.dreamfunding.index.model.vo.Like;
 
@@ -57,4 +59,32 @@ public class IndexDao {
 	public ArrayList<Like> likeList(SqlSessionTemplate sqlSession, int mno){
 		return (ArrayList)sqlSession.selectList("indexMapper.likeList", mno);
 	}
+	
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("indexMapper.selectListCount");
+	}
+	
+	public ArrayList<Index> selectProjectList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("indexMapper.selectProjectList", null, rowBounds);
+		
+	}
+	
+	public ArrayList<Index> selectRankingList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("indexMapper.selectRankingList", null, rowBounds);
+		
+	}
+	
+	
+	
 }
