@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.donjomjo.dreamfunding.detail.model.dao.DetailDao;
 import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailPurchase;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReport;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
@@ -117,6 +118,11 @@ public class DetailServiceImpl implements DetailService {
 	@Override
 	public ArrayList<SubReply> selectSubReplyOne(Reply rp) {
 		return dDao.selectSubReplyOne(sqlSession, rp);
+	}
+
+	@Override
+	public ArrayList<DetailPurchase> selectDetailPurchase(int pno) {
+		return dDao.selectDetailPurchase(sqlSession, pno);
 	}
 
 

@@ -20,6 +20,7 @@ import com.donjomjo.dreamfunding.detail.model.dao.DetailDao;
 import com.donjomjo.dreamfunding.detail.model.service.DetailService;
 import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailPurchase;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReport;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
@@ -86,6 +87,21 @@ public class DetailController {
 			int resultLike = dService.selectLike(lk);
 			
 			model.addAttribute("lk", resultLike);
+			
+			ArrayList<DetailPurchase> dp = dService.selectDetailPurchase(pno);
+			// System.out.println(dp);
+			
+			int totalPrice = 0;
+			int totalAmount = 0;
+			
+			for( DetailPurchase p : dp  ) {
+				totalPrice = totalPrice + (p.getRePrice()*p.getRewardAmount());
+				totalAmount = totalAmount + (p.getRewardAmount());
+			}
+			
+			model.addAttribute("tp", totalPrice);
+			model.addAttribute("ta", totalAmount);
+			
 			
 			return "detail/detailStory";
 			
@@ -198,6 +214,22 @@ public class DetailController {
 			
 			// System.out.println("replyList: " + replyList);
 			model.addAttribute("rl", replyList);
+			
+			
+			ArrayList<DetailPurchase> dp = dService.selectDetailPurchase(pno);
+			System.out.println(dp);
+			
+			int totalPrice = 0;
+			int totalAmount = 0;
+			
+			for( DetailPurchase p : dp  ) {
+				totalPrice = totalPrice + (p.getRePrice()*p.getRewardAmount());
+				totalAmount = totalAmount + (p.getRewardAmount());
+			}
+			
+			model.addAttribute("tp", totalPrice);
+			model.addAttribute("ta", totalAmount);
+			
 			
 			return "detail/detailCommunity";
 			

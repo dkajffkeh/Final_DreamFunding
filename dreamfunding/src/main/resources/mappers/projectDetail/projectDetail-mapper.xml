@@ -95,6 +95,10 @@
 		<result column="MEMBER_NICKNAME" property="memberNickname"/>	
 	</resultMap>
  	
+ 	<resultMap id="DetailPurchaseResultSet" type="DetailPurchase">
+ 		<result column="RE_PRICE" property="rePrice"/>
+ 		<result column="REWARD_AMOUNT" property="rewardAmount"/>
+ 	</resultMap>
    <select id="selectListCount" resultType="_int">
    	SELECT 
    		   COUNT(*)
@@ -369,5 +373,14 @@
 	   AND REPLY_ANS.SUBRE_CONTENT = #{ replyContent }
 </select>
 
-	 
+<!-- 결제정보 조회 쿼리 -->
+
+<select id="selectDetailPurchase" parameterType="_int" resultMap="DetailPurchaseResultSet">
+	SELECT REWARD_AMOUNT, RE_PRICE
+	  FROM PURCHASE_INFO
+	  LEFT JOIN REWARD R ON PURCHASE_INFO.RE_NO = R.RE_NO
+	 WHERE R.PROJECT_NO = #{pno} AND PURINFO_STATUS = 'Y'	 
+</select>
+
+
 </mapper>

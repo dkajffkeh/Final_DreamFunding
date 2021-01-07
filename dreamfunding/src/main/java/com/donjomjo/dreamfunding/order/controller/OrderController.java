@@ -59,6 +59,7 @@ public class OrderController {
 	
 	
 	/**
+	 * 리워드 주문페이지
 	 * @param pno : 프로젝트 넘버
 	 * @param mno : 멤버 넘버
 	 * @param rewardNum : 리워드 번호
@@ -78,9 +79,7 @@ public class OrderController {
 		System.out.println(reOp);
 		
 		int rewardPri = rewardAmount * Integer.parseInt(re.getRewardPrice());
-		
-		System.out.println(mp.get(0));
-		
+				
 		model.addAttribute("mno", mno);
 		model.addAttribute("p", p);
 		model.addAttribute("s", s);
@@ -99,63 +98,6 @@ public class OrderController {
 		
 		return "order/orderInsertPage";
 	}
-	/*
-	@RequestMapping(value="/hello3.no", method= RequestMethod.POST)
-	  public void test3(@RequestBody String imp_key, String imp_secret, Model model) throws ParseException {
-		
-				
-		RestTemplate rest = new RestTemplate();
-		
-		// parameter 세팅
-		JSONObject obj = new JSONObject();
-	      obj.put("imp_key","imp_apikey");
-	      obj.put("imp_secret","ekKoeW8RyKuT0zgaZsUtXXTLQ4AhPFW3ZGseDA6bkA5lamv9OqDMnxyeB9wqOsuO9W3Mx9YSJ4dTqJ3f");
-		
-		String getToken  =  rest.postForObject("https://api.iamport.kr/users/getToken", obj, String.class);
-		
-		System.out.println(getToken);
-		
-		JSONParser jsonParser = new JSONParser();
-		JSONObject jsonObj = (JSONObject) jsonParser.parse(getToken);
-
-		String _token = null;
-
-		if((Long)jsonObj.get("code")  == 0){
-
-			JSONObject Token = (JSONObject) jsonObj.get("response");
-
-			System.out.println("Token==>>"+Token.get("access_token") );
-
-			_token = (String)Token.get("access_token");
-
-		}
-
-		
-		System.out.println(_token);
-		
-		JSONObject sendObj = new JSONObject();
-			sendObj.put("merchant_uid", "ridkf123iferi");
-			sendObj.put("amount", 1);
-			sendObj.put("card_number", "5171-3400-0214-4212");
-			sendObj.put("expiry", "2025-04");
-			sendObj.put("birth", "971201");
-			sendObj.put("pwd_2digit", "57");
-			sendObj.put("customer_uid", "45464887fdg");
-			sendObj.put("name", "테스트");
-
-
-			
-		HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("Authorization", _token);
-		headers.set("Authorization", _token);
-		
-		String getResult = rest.postForObject("https://api.iamport.kr/subscribe/payments/onetime?_token=" + _token  , sendObj, String.class);
-		System.out.println(getResult);
-		
-		
-	  }
-	*/
 	
 	@RequestMapping(value="/order.send", method= RequestMethod.POST, produces ="application/json; charset=UTF-8", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	  public String orderSend(PurchaseInfo pi, int mno, int pno, Model model) throws ParseException, java.text.ParseException {
@@ -178,7 +120,6 @@ public class OrderController {
 	      
 	    entity = new HttpEntity(obj.toJSONString(),headers);
 	      
-		//String getToken  =  rest.postForObject("https://api.iamport.kr/users/getToken", obj, String.class);
 		String getToken  =  rest.postForObject("https://api.iamport.kr/users/getToken", entity, String.class);
 
 		
@@ -323,7 +264,7 @@ public class OrderController {
 			return "redirect:order.com?pno=" + pNo.getPurinfoNo();
 		} else {
 			model.addAttribute("errorMsg", resultObj.get("message") + "결제실패");
-			return "common/errorPage";
+			return "detail/errorPage";
 		}
 
 		
@@ -395,7 +336,6 @@ public class OrderController {
 	      
 	    entity = new HttpEntity(obj.toJSONString(),headers);
 	      
-		//String getToken  =  rest.postForObject("https://api.iamport.kr/users/getToken", obj, String.class);
 		String getToken  =  rest.postForObject("https://api.iamport.kr/users/getToken", entity, String.class);
 
 		

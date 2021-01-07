@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailPurchase;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReport;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
@@ -119,6 +120,10 @@ public class DetailDao {
 
 	public ArrayList<SubReply> selectSubReplyOne(SqlSessionTemplate sqlSession, Reply rp) {
 		return (ArrayList)sqlSession.selectList("projectDetailMapper.selectSubReplyOne", rp);
+	}
+
+	public ArrayList<DetailPurchase> selectDetailPurchase(SqlSessionTemplate sqlSession, int pno) {
+		return (ArrayList)sqlSession.selectList("projectDetailMapper.selectDetailPurchase", pno);
 	}
 
 	

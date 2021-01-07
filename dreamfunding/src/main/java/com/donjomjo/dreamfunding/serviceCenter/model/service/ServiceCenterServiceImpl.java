@@ -189,6 +189,20 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 	}
 
 
+	@Override
+	public int searchNoticeCount(String cate, String keyword) {
+		
+		return scDao.searchNoticeCount(sqlSession, cate, keyword);
+	}
+
+
+	@Override
+	public ArrayList<Notice> searchNoticeList(PageInfo pi, String cate, String keyword) {
+		
+		return scDao.searchNoticeList(sqlSession, pi, cate, keyword);
+	}
+
+
 	
 
 

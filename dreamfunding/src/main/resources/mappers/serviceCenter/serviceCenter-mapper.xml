@@ -301,6 +301,39 @@
   	 where council_no=#{cno}       
   
   </update>
+  <select id="searchNoticeCount" parameterType="hashmap" resultType="_int">
+  	  select
+	         count(*)
+	    from notice     
+	   where notice_status = 'Y'
+	   <if test="cate == 'content'">
+  	     and notice_content
+  	   </if>
+  	   <if test="cate == 'title'">
+  	     and notice_title
+  	   </if> 
+  	       like '%' || #{keyword} || '%'
+  </select>
+  
+  
+  <select id="searchNoticeList" parameterType="hashmap" resultMap="noticeResultSet">
+  	select 
+  	       notice_no
+  	     , member_no
+  	     , notice_title
+  	     , notice_content
+  	     , to_char(notice_upload, 'YYYY-MM-DD') "notice_upload"
+  	     , notice_count
+  	  from notice  
+  	 where notice_status = 'Y'
+  	   <if test="cate == 'content'">
+  	   and notice_content
+  	   </if>
+  	   <if test="cate == 'title'">
+  	   and notice_title
+  	   </if> 
+  	       like '%'||#{keyword}||'%'
+  </select>
   
   
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.donjomjo.dreamfunding.index.model.dao.IndexDao;
 import com.donjomjo.dreamfunding.index.model.vo.Index;
+import com.donjomjo.dreamfunding.index.model.vo.Like;
 
 @Service
 public class IndexServiceImpl implements IndexService {
@@ -65,6 +66,27 @@ public class IndexServiceImpl implements IndexService {
 	public ArrayList<Index> selectNew() {
 		return iDao.selectNew(sqlSession);
 	}
+
+	@Override
+	public int increaseLike(Like like) {
+		return iDao.increaseLike(sqlSession, like);
+	}
+
+	@Override
+	public int likeYN(Like like) {
+		return iDao.likeYN(sqlSession, like);
+	}
+
+	@Override
+	public int deleteLike(Like like) {
+		return iDao.deleteLike(sqlSession, like);
+	}
+
+	@Override
+	public ArrayList<Like> likeList(int mno) {
+		return iDao.likeList(sqlSession, mno);
+	}
+	
 	
 	
 	

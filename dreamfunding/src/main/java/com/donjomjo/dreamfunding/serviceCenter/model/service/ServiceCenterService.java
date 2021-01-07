@@ -16,7 +16,8 @@ public interface ServiceCenterService {
 	int insertNotice(Notice n);
 	int updateNotice(Notice n);
 	int deleteNotice(int nno);
-	
+	int searchNoticeCount(String cate, String keyword);
+	ArrayList<Notice> searchNoticeList(PageInfo pi,String cate, String keyword);
 	
 	int selectFaqListCount(int ctno);
 	ArrayList<Faq> selectFaqList(PageInfo pi, int ctno);
@@ -37,5 +38,6 @@ public interface ServiceCenterService {
 	int insertCouncilAns(Council co);
 	int updateCouncilAns(Council co);
 	int deleteCouncilAns(int cno);
+	
 	
 }

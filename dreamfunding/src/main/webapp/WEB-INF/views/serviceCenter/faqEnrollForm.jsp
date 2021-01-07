@@ -66,7 +66,7 @@
 			            <div class="btnarea" align="center">
 			                <button type="submit" class="btn btn-primary">등록하기</button>
 			                &nbsp;&nbsp;&nbsp;
-			                <button type="reset" class="btn btn-danger">취소하기</button>
+			                <button class="btn btn-danger" onclick="history.back()">뒤로가기</button>
 			            </div>
 		            </form>
       			 </div>

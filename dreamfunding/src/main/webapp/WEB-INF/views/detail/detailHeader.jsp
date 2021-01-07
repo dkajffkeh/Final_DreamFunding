@@ -56,11 +56,16 @@
               <li>${ d.projectTitle }</li>
               <li>
                   <div class="profile_wrapper">
+                        <c:if test="${ !empty d.creatorProfile }">
                         <img
                           class="image"
                           src="resources/images/creatorThumbnail/${ d.creatorProfile }"
                           alt="유저 프로필 이미지"
                         />  
+                      </c:if>  
+                   	 <c:if test="${ empty d.creatorProfile }">
+                   	    <span class="material-icons"> account_circle </span>
+                     </c:if>
                         <div class="profile_caption">
                           <span class="name">${ d.creatorName }</span>
                         </div>
@@ -82,14 +87,18 @@
                 <div class="funding-status__wrapper">
                   <div class="status-title">펀딩금액</div>
                   <div class="value-unit_wrapper">
-                    <div class="status-value">22,562,500</div>
+                    <div class="status-value">
+                    <fmt:formatNumber type="number" maxFractionDigits="3" value="${ tp }"/>
+                    </div>
                     <span class="status-unit">원</span>
                   </div>
                 </div>
+                
+                <fmt:parseNumber value="${d.projectGoalPrice}" var="goalPrice"/>   
                 <div class="funding-status__wrapper">
                   <div class="status-title">달성률</div>
                   <div class="value-unit_wrapper">
-                    <div class="status-value">752</div>
+                    <div class="status-value" id="tp">${ (tp/goalPrice)*100 }</div>
                     <span class="status-unit">%</span>
                   </div>
                 </div>
@@ -97,14 +106,14 @@
                   <div class="status-title">남은 기간</div>
                   <div class="value-unit_wrapper">
                     <div class="status-value" id="dDay">${ d.projectEndDate }</div>
-                    <span class="status-unit">일</span>
+                    <span class="status-unit" id='dDay-unit'>일</span>
                   </div>
                 </div>
                 <div class="funding-status__wrapper">
-                  <div class="status-title">서포터</div>
+                  <div class="status-title">총 펀딩 수</div>
                   <div class="value-unit_wrapper">
-                    <div class="status-value">638</div>
-                    <span class="status-unit">명</span>
+                    <div class="status-value">${ ta }</div>
+                    <span class="status-unit">개</span>
                   </div>
                 </div>
               </div>
@@ -276,9 +285,29 @@
             })
           }
       
+   	  // 프로젝트 달성률 100% 초과 시 css 변경 
+   	  (function(){
+   		const tp = parseFloat(document.querySelector("#tp").innerText);
+   		const res = tp.toString().split('.')[0];
+   		console.log("res:" + res);
+		   		
+        if(res.length > 2){
+          //100이상 -> 100.**
+          console.log(tp.toString().substr(0, 6));
+          document.querySelector('#tp').innerText = tp.toString().substr(0, 6)
+        }else{
+          //10이상  -> 10.**
+          console.log(tp.toString().substr(0, 5));
+          document.querySelector('#tp').innerText = tp.toString().substr(0, 5)
+        }
+        
+   		if(tp>=100){
+   			document.querySelector("#tp").style.color='#7F0000';
+   			document.querySelector("#tp").style.animation='bling 0.7s ease-in-out alternate infinite';
+   		}
    		
-     
-      
+   	  })()
+   	  
       // 프로젝트 종료일까지 남은 기간 구하기  기능   
 	  const endDate = new Date(document.querySelector('#dDay').textContent); // 프로젝트 종료일 
       const now = new Date(); // 현재 날짜
@@ -287,12 +316,27 @@
    	  const toNow = now.getTime(); 
 
    	  const gap = toEndDate - toNow // 현재 날짜에서 종료일까지 차이
-      const resultDay = Math.floor(gap/(1000 * 60 * 60 * 24)); // gap을 일(밀리초 * 초 * 분 * 시간)로 나누기  
+      const resultDay = Math.floor(gap/(1000 * 60 * 60 * 24)+1); // gap을 일(밀리초 * 초 * 분 * 시간)로 나누기  
      
    	  document.querySelector('#dDay').innerText = resultDay;
  
-
-
+      
+ 	  // 프로젝트 종료일/종료일 이후 화면 출력 변경 
+   	  (function(){
+   		  const dDay = parseInt(document.querySelector('#dDay').innerText);
+   		  console.log(dDay);
+   		  if(dDay===0){
+   			  document.querySelector('#dDay').innerText='d-Day';
+   			  document.querySelector('#dDay').style.color='#7F0000';
+   			  document.querySelector('#dDay').style.animation='bling2 0.5s ease-in-out alternate infinite';
+   		  }
+   		  if(dDay<0){
+   			 document.querySelector("#dDay").innerText='프로젝트가 종료되었습니다.';
+   			 document.querySelector("#dDay-unit").innerText=' ';
+   		  }
+   	  })()
+   	  
+   	  
 	  // 카카오 공유하기 기능
    	  Kakao.init('71db9ed39bf999a17fc5c0963aa8d2bb');
    	  function sendLink() {

@@ -21,6 +21,11 @@
 		<result column="HASHTAG" property="hashtag" />
 		<result column="PROJECT_CRDATE" property="projectCrDate" />
 	</resultMap>
+	
+	<resultMap type="IndexLike" id="indexLikeResultSet">
+		<result column="PROJECT_NO" property="projectNo" />
+		<result column="MEMBER_NO" property="memberNo" />
+	</resultMap>
 
 	<select id="selectProgressFundingList" resultMap="indexResultSet">
 		select
@@ -66,6 +71,8 @@
 		     , project_crdate
 		  from project
 		 where creator_status = 'U'
+		 order
+		    by project_count desc
 	</select>
 	
 	<select id="selectClosedFundingList" resultMap="indexResultSet">
@@ -114,6 +121,8 @@
 		     , project_crdate
 		  from project
 		 where creator_status = 'U'
+		 order
+		    by projecct_gprice desc
 	</select>
 	
 	<select id="selectClosedList" resultMap="indexResultSet">
@@ -160,7 +169,40 @@
 		 order
 		    by project_start_dt asc
 	</select>
+	
+	<insert id="increaseLike" 
+			parameterType="IndexLike">
+		insert
+		  into likey
+		  (
+		  	project_no,
+		  	member_no
+		  )
+		  values
+		  (
+		  	#{projectNo}
+		  , #{memberNo}
+		  )
+	</insert>
+	
+	<select id="likeYN" parameterType="IndexLike" resultType="_int">
+		select count(*)
+		  from likey
+		 where project_no = #{projectNo}
+		   and member_no = #{memberNo}
+	</select>
+	
+	<delete id="deleteLike" parameterType="IndexLike">
+		delete from likey
+		 where project_no = #{projectNo}
+		   and member_no = #{memberNo}
+	</delete>
 
+	<select id="likeList" parameterType="_int" resultMap="indexLikeResultSet">
+		select *
+		  from likey
+		 where member_no = #{mno}
+	</select>
 
 
 

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="${pageContext.request.contextPath}/resources/js/ckeditor/ckeditor.js?ver=1"></script>
 <style>
 	  .innerMain{
             width:1000px;            
@@ -52,20 +53,25 @@
                         	<th><label for=content>내용</label><th>
                         </tr>
                         <tr>
-                           <th><textarea class ="form-control" required name="noticeContent" id="content" cols="90" rows="30" style="resize:none" placeholder="내용을 입력해주세요"></textarea></th>
-                        </tr>
-                    </table>
+                           <th><textarea class ="form-control" required name="noticeContent" id="content" cols="150" rows="30" style="resize:none" placeholder="내용을 입력해주세요"></textarea></th>
+                        	
+							</tr>
+				  	</table>
                     <br>
                     <div class="btnArea" align="center">
                         <button type="submit" class="btn btn-secondary">등록하기</button>
-                        <button type="reset" class="btn btn-danger">취소하기</button>
+                        <button class="btn btn-danger" onclick="history.back()">뒤로가기</button>
                     </div>
 
                 </form>
             </div>
             <br><br>
         </div> 
-	
+		<script type="text/javascript">
+							 CKEDITOR.replace('content'
+							                , {height: 500                                                 
+							                 });
+		</script>
 	</div>
 	</main>
 	<jsp:include page="../common/footer.jsp"/>
