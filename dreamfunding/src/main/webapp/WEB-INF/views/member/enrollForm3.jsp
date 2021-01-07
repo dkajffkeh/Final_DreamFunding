@@ -193,7 +193,7 @@
                     function buttonAble(){
 		
                     	
-                    	        if(cNick == true && cEmail == true && cCertify == true && cPwd = true){
+                    	        if(cNick == true && cEmail == true && cCertify == true ){
                     	            document.getElementById("enroll-btn").removeAttribute("disabled");
                     	        }
                     	console.log(cPwd);
