@@ -17,27 +17,21 @@
             <div class="creator-label">크리에이터 소개</div>
             <div class="creator-info__wrapper">
              <div class="profile_wrapper">
-                     
+                     <c:if test="${ !empty d.creatorProfile }">
                         <img
                           class="image"
                           src="resources/images/creatorThumbnail/${ d.creatorProfile }"
                           alt="유저 프로필 이미지"
                         />  
-                        
-                        
-                        <div class="profile_caption">
-                          <span class="name">${ d.creatorName }</span>
-                        </div>
+                      </c:if>  
+                   	 <c:if test="${ empty d.creatorProfile }">
+                   	    <span class="material-icons"> account_circle </span>
+                     </c:if>
+                     <div class="profile_caption">
+                       <span class="name">${ d.creatorName }</span>
+                     </div>
                   </div>      
-            
-<!--           <div class="creator-title">
-                <div class="creator-profile">
-                  <span class="material-icons"> account_circle </span
-                  ><img src="#" alt="" />
-                </div>
-                <div class="creator-name">드림리뷰오브북스</div>
-              </div>
--->
+
               <div class="creator-intro">
        			 ${d.creatorIntro} 
               </div>

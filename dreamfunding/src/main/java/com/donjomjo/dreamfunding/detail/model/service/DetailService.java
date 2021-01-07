@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailPurchase;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReport;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
@@ -67,6 +68,9 @@ public interface DetailService {
 
 	// 대댓글 1개 조회 
 	ArrayList<SubReply> selectSubReplyOne(Reply rp);
+
+	// 결제 정보 조회 
+	ArrayList<DetailPurchase> selectDetailPurchase(int pno);
 
 	
 
