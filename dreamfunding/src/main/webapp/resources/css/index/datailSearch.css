@@ -19,15 +19,28 @@
     border-radius: 5px;
 }
 .card-image img { display: none; }
-.like{
-    float: right;
-    height: 0;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    padding: 1rem;
-    border:none;
+.finish span{
+	background-color : rgb(127, 0, 0);
+	color : white;
+	padding : 0.3rem;
+	border-radius: 5px;
 }
+.like{
+	display:flex;
+	justify-content:space-between;
+	width:100%;
+    border: none;
+    color: rgb(218, 216, 216);
+    padding: 0.3rem;
+    cursor: pointer;
+}
+.like .material-icons{
+    font-size: 36px;
+}
+.like .material-icons:hover{
+    color: rgb(127, 0, 0);
+}
+.card-desc { padding: 1rem; }
 .card-desc{
     display: grid;
     grid-template-rows: 80% 20%;
