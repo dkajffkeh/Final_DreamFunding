@@ -171,8 +171,7 @@
 	<update id="deleteMember" parameterType="string">
 		update
 		       member
-		   set status = '4'
-		     , modify_date = sysdate
+		   set MEMBER_STATUS = '4'
 		 where MEMBER_PWD = #{memPwd}
 	</update>
 	

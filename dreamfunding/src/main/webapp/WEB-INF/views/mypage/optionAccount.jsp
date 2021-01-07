@@ -711,11 +711,13 @@ margin-right:20px;}
                         
                         <br>
                           <div id="divToggle2" style="display: none;">
-                          <form ></form>
+                          <form action="message.me.jm">
+                          
                             <input type="text" class="form-control" id="usr" style="width:200px;
-                                          margin-top:5px; margin-bottom:10px;" name="username">
+                                          margin-top:5px; margin-bottom:10px;" name="phone">
                                           
-                            <button type="button" class="btn" style="background-color: #7f0000; color:white;">저장</button>
+                            <button type="submit" class="btn" style="background-color: #7f0000; color:white;">저장</button>
+                            </form>
                           </div>
                         <hr> 
               </div>
