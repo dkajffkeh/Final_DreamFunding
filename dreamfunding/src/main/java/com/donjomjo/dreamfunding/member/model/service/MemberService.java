@@ -10,7 +10,7 @@ public interface MemberService {
 	
 	int insertMember(Member m);
 	
-	int deleteMember(String email);
+	int deleteMember(Member m);
 
 	int emailCheck(String email);
 	

@@ -22,8 +22,8 @@ public class MemberDao {
 
 
 
-	public int deleteMember(SqlSessionTemplate sqlSession, String email) {
-		return sqlSession.update("memberMapper.deleteMember", email);
+	public int deleteMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.deleteMember", m);
 	}
 
 	public int emailCheck(SqlSessionTemplate sqlSession, String email) {

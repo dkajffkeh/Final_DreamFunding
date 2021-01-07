@@ -137,16 +137,17 @@ public class MemberController {
 	}
 
 	@RequestMapping("delete.me.jm")
-	public String deleteMember(String userPwd, HttpSession session, Model model) {
+	public String deleteMember(Member m, HttpSession session, Model model) {
 		
 		System.out.println(m);
 		
 		Member loginMem = (Member)session.getAttribute("loginMem");
+		
 		String encPwd = loginMem.getMemPwd();
 		
-		if(bcryptPasswordEncoder.matches(userPwd, encPwd)) {
+		if(bcryptPasswordEncoder.matches(m.getMemPwd(), loginMem.getMemPwd())) {
 			
-			int result = mService.deleteMember(loginMem.getEmail());
+			int result = mService.deleteMember(loginMem);
 			
 			if(result > 0) {
 				
