@@ -76,6 +76,12 @@ public class MemberServiceImpl implements MemberService {
 	public int updatePhone(Member m) {
 		return mDao.updatePwd(sqlSession, m);
 	}
+
+	@Override
+	public String selectEmail(Member m) {
+		
+		return mDao.selectEmail(sqlSession, m);
+	}
 	
 
 

@@ -25,6 +25,10 @@ public interface MemberService {
 	int updateProfile(Member m);
 	
 	int updatePhone(Member m);
+
+	String selectEmail(Member m);
+	
+	
 	
 	
 }

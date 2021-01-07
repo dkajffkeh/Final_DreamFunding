@@ -49,11 +49,18 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.updateNick", m);
 	}
 	public int updateProfile(SqlSessionTemplate sqlSession, Member m) {
-		
-		return sqlSession.update("memberMapper.updateProfile", m);
-	}
+
+	      System.out.println(m);
+
+	      return sqlSession.update("memberMapper.updateProfile", m);
+	   }
 	public int updatePhone(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updatePhone", m);
+	}
+
+	public String selectEmail(SqlSessionTemplate sqlSession, Member m) {
+		
+		return sqlSession.selectOne("memberMapper.selectEmail", m);
 	}
 	
 	
