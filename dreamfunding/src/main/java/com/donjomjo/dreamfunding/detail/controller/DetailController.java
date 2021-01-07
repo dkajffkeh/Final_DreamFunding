@@ -27,6 +27,7 @@ import com.donjomjo.dreamfunding.detail.model.vo.Like;
 import com.donjomjo.dreamfunding.detail.model.vo.Reply;
 import com.donjomjo.dreamfunding.detail.model.vo.SubReply;
 import com.donjomjo.dreamfunding.member.model.vo.Member;
+import com.google.gson.Gson;
 
 import oracle.net.aso.r;
 
@@ -158,7 +159,7 @@ public class DetailController {
 	
 	
 	@RequestMapping(value="selectReply.de")
-	public String insertReply(int pno, Like like, Model model, HttpSession session) {
+	public String selectReply(int pno, Model model, HttpSession session) {
 		
 		Member m = (Member)session.getAttribute("loginMem");
 		int uno = m.getMemNo();
@@ -200,16 +201,127 @@ public class DetailController {
 			
 			return "detail/detailCommunity";
 			
-		
-			
-			
-			
+
 		}else { // 유효하지 않은 게시글 
 			
 			model.addAttribute("errorMsg", "존재하지 않거나 삭제된 프로젝트입니다.");
 			return "detail/errorPage";
 		}
 	}
+	
+
+	
+	@RequestMapping(value="insertReply.de")
+	public String insertReply(int pno, String replyContent, Model model, HttpSession session) {
+	
+		Member m = (Member)session.getAttribute("loginMem");
+		int uno = m.getMemNo();
+		
+		Reply rp = new Reply();
+		
+		rp.setMemberNo(uno);
+		rp.setProjectNo(pno);
+		rp.setReplyContent(replyContent);
+		
+		int result = dService.insertReply(rp);
+		
+		return "redirect:selectReply.de?pno="+pno;
+	}	
+	
+	@ResponseBody
+	@RequestMapping(value="updateReply.de")
+	public String updateReply(int rno, String replyContent) {
+		
+		Reply rp = new Reply();
+		
+		rp.setReplyContent(replyContent);
+		rp.setReplyNo(rno);
+		
+		int result = dService.updateReply(rp);
+		
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("deleteReply.de")
+	public String deleteReply(int rno) {
+		
+		int result = dService.deleteReply(rno);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="insertSubReply.de", produces="application/json; charset=utf-8")
+	public String insertSubReply(int rno, String replyContent, Model model, HttpSession session) {
+	
+		Member m = (Member)session.getAttribute("loginMem");
+		int uno = m.getMemNo();
+		
+		Reply rp = new Reply();
+		
+		rp.setMemberNo(uno);
+		rp.setReplyNo(rno);
+		rp.setReplyContent(replyContent);
+			
+		int result = dService.insertSubReply(rp);
+		
+		if(result>0) {
+			ArrayList<SubReply> sr = dService.selectSubReplyOne(rp);
+			String json = new Gson().toJson(sr);
+			return json;
+		}else {
+			return "fail";
+		}
+	
+	}	
+	
+	
+	@ResponseBody
+	@RequestMapping(value="updateSubReply.de")
+	public String updateSubReply(int rno, String subReplyContent) {
+		
+		Reply rp = new Reply();
+		
+		rp.setReplyContent(subReplyContent);
+		rp.setReplyNo(rno);
+		
+		int result = dService.updateSubReply(rp);
+
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+
+	@ResponseBody
+	@RequestMapping("deleteSubReply.de")
+	public String deleteSubReply(int sno) {
+		
+		int result = dService.deleteSubReply(sno);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	
 	
 	
 }

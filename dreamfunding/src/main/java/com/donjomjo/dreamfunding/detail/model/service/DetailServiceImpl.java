@@ -79,44 +79,44 @@ public class DetailServiceImpl implements DetailService {
 	}
 
 	@Override
-	public int insertReply(Reply reply) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertReply(Reply rp) {
+		return dDao.insertReply(sqlSession, rp);
 	}
 	
 	@Override
-	public int updateReply(Reply reply) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateReply(Reply rp) {
+		return dDao.updateReply(sqlSession, rp);
 	}
 
 	@Override
-	public int deleteReply(int reno) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteReply(int rno) {
+		return dDao.deleteReply(sqlSession, rno);
 	}
 
+	
 	@Override
 	public ArrayList<SubReply> selectSubReply(int rno) {
 		return dDao.selectSubReply(sqlSession, rno);
 	}
 
 	@Override
-	public int insertSubReply(SubReply subReply) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertSubReply(Reply rp) {
+		return dDao.insertSubReply(sqlSession, rp);
 	}
 
 	@Override
-	public int updateSubReply(SubReply subReply) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateSubReply(Reply rp) {
+		return dDao.updateSubReply(sqlSession, rp);
 	}
 
 	@Override
-	public int deleteSubReply(int subNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteSubReply(int sno) {
+		return dDao.deleteSubReply(sqlSession, sno);
+	}
+
+	@Override
+	public ArrayList<SubReply> selectSubReplyOne(Reply rp) {
+		return dDao.selectSubReplyOne(sqlSession, rp);
 	}
 
 

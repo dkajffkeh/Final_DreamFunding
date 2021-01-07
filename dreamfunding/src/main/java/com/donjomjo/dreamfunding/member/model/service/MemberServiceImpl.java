@@ -26,10 +26,7 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.insertMember(sqlSession, m);
 	}
 
-	@Override
-	public int updateMember(Member m) {
-		return mDao.updateMember(sqlSession, m);
-	}
+
 
 	@Override
 	public int deleteMember(String email) {
@@ -58,6 +55,32 @@ public class MemberServiceImpl implements MemberService {
 	public int idFind(Member m) {
 		
 		return mDao.idFind(sqlSession, m);
+	}
+	@Override
+	public int updatePwd(Member m) {
+		return mDao.updatePwd(sqlSession, m);
+	}
+
+	@Override
+	public int updateNick(Member m) {
+		
+		return mDao.updatePwd(sqlSession, m);
+	}
+
+	@Override
+	public int updateProfile(Member m) {
+		return mDao.updateProfile(sqlSession, m);
+	}
+
+	@Override
+	public int updatePhone(Member m) {
+		return mDao.updatePwd(sqlSession, m);
+	}
+
+	@Override
+	public String selectEmail(Member m) {
+		
+		return mDao.selectEmail(sqlSession, m);
 	}
 	
 

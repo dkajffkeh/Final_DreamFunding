@@ -16,7 +16,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/resources/css/detail/detail.css" />
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
 
 <body>

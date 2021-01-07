@@ -92,6 +92,34 @@ public class DetailDao {
 
 	}
 
+	public int insertReply(SqlSessionTemplate sqlSession, Reply rp) {
+		return sqlSession.insert("projectDetailMapper.insertReply", rp);
+	}
+
+	public int updateReply(SqlSessionTemplate sqlSession, Reply rp) {
+		return sqlSession.update("projectDetailMapper.updateReply", rp);
+	}
+
+	public int deleteReply(SqlSessionTemplate sqlSession, int rno) {
+		return sqlSession.update("projectDetailMapper.deleteReply", rno);
+	}
+
+
+	public int insertSubReply(SqlSessionTemplate sqlSession, Reply rp) {
+		return sqlSession.insert("projectDetailMapper.insertSubReply", rp);
+	}
+
+	public int updateSubReply(SqlSessionTemplate sqlSession, Reply rp) {
+		return sqlSession.update("projectDetailMapper.updateSubReply", rp);
+	}
+
+	public int deleteSubReply(SqlSessionTemplate sqlSession, int sno) {
+		return sqlSession.update("projectDetailMapper.deleteSubReply", sno);
+	}
+
+	public ArrayList<SubReply> selectSubReplyOne(SqlSessionTemplate sqlSession, Reply rp) {
+		return (ArrayList)sqlSession.selectList("projectDetailMapper.selectSubReplyOne", rp);
+	}
 
 	
 	
