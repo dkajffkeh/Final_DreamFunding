@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.donjomjo.dreamfunding.index.model.service.IndexService;
 import com.donjomjo.dreamfunding.index.model.vo.Index;
+import com.donjomjo.dreamfunding.index.model.vo.Like;
 import com.google.gson.Gson;
 
 @Controller
@@ -33,7 +33,7 @@ public class IndexController {
 		
 		ArrayList<Index> progressList = iService.selectProgressFundingList();
 		
-		//System.out.println(progressList);
+		System.out.println(progressList);
 		
 		return new Gson().toJson(progressList);
 		
@@ -122,6 +122,48 @@ public class IndexController {
 		//System.out.println(selectNewList);
 		
 		return new Gson().toJson(selectNewList);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="likeBtn.do")
+	public int updateLike(int pno, int mno) {
+		System.out.println(pno);
+		System.out.println(mno);
+		
+		Like like = new Like();
+		
+		like.setProjectNo(pno);
+		like.setMemberNo(mno);
+		
+		System.out.println(like);
+		
+		int likeYN = iService.likeYN(like); //count로 찾는거 y=1 있다 0없다 있으면 delete 없으면 insert
+		System.out.println(likeYN);
+		
+		int result = 0;
+		if(likeYN == 0) {
+			iService.increaseLike(like);
+			result = 1;
+			return result;
+			
+		}else {
+			iService.deleteLike(like);
+			result = 0;
+			return result;
+		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="likeList.do", produces="application/json; charset=utf-8")
+	public String likeList(int mno) {
+		
+		ArrayList<Like> likeList = iService.likeList(mno);
+		
+		System.out.println(likeList);
+		
+		return new Gson().toJson(likeList);
 		
 	}
 

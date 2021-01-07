@@ -8,6 +8,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.donjomjo.dreamfunding.index.model.vo.Index" alias="Index"/>
+		<typeAlias type="com.donjomjo.dreamfunding.index.model.vo.Like" alias="IndexLike"/>	
 		<typeAlias type="com.donjomjo.dreamfunding.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.donjomjo.dreamfunding.order.model.vo.Shipping" alias="Shipping"/>
 		<typeAlias type="com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectCategory" alias="ProjectCategory"/>
@@ -29,7 +30,7 @@
 		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.FundingProject" alias="FundingProject"/>
 		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.LikeProject" alias="LikeProject"/>
 		<typeAlias type="com.donjomjo.dreamfunding.admin.model.vo.Report" alias="Report"/>
-				
+			
 	</typeAliases>
 	 
 	<mappers>

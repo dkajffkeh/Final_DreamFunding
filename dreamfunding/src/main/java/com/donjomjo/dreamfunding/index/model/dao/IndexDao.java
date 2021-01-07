@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.donjomjo.dreamfunding.index.model.vo.Index;
+import com.donjomjo.dreamfunding.index.model.vo.Like;
 
 @Repository
 public class IndexDao {
@@ -38,4 +39,22 @@ public class IndexDao {
 		return (ArrayList)sqlSession.selectList("indexMapper.selectNewList"); 
 	}
 
+	public int increaseLike(SqlSessionTemplate sqlSession, Like like) {
+	
+		return sqlSession.insert("indexMapper.increaseLike", like);
+	}
+	
+	public int likeYN(SqlSessionTemplate sqlSession, Like like) {
+		int likeYN = sqlSession.selectOne("indexMapper.likeYN", like);
+		
+		return likeYN;
+	}
+	
+	public int deleteLike(SqlSessionTemplate sqlSession, Like like) {
+		return sqlSession.delete("indexMapper.deleteLike", like);
+	}
+	
+	public ArrayList<Like> likeList(SqlSessionTemplate sqlSession, int mno){
+		return (ArrayList)sqlSession.selectList("indexMapper.likeList", mno);
+	}
 }
