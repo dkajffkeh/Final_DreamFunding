@@ -209,7 +209,7 @@ public class IndexController {
 		
 		ArrayList<Like> likeList = iService.likeList(mno);
 		
-		System.out.println(likeList);
+		//System.out.println(likeList);
 		
 		return new Gson().toJson(likeList);
 		
