@@ -605,9 +605,10 @@ footer .footer__inner {
               <img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
                           style="width:70px; height:70px; border-radius: 50%;">
               </c:when>
-              <img src="${pageContext.request.contextPath}${loginMem.memPfPath}${loginMem.memSystemname}"
+              <c:otherwise>
+              <img src="${pageContext.request.contextPath}/${loginMem.memPfPath}"
               		 	  style="width:70px; height:70px; border-radius: 50%;">
-               
+               </c:otherwise>
               </c:choose>
               
               
@@ -618,11 +619,14 @@ footer .footer__inner {
                     <button class="button">변경</button>
                       </div><br><br>
                         <div id="divToggle" style="display: none;">
-                        <form action="updateProfile.me.jm" enctype="multipart/form-data">
+                        <form action="updateProfile.me.jm" enctype="multipart/form-data" method="post">
                           
-                          <input type="file" id="upfile" name="memSystemname" style="margin-left:10px; transform: translate(30%,-300%);" ></input>
-                          <input type="hidden" name="memPfPath" value="/resources/profile/">
-                          
+                          <input type="file" id="upfile" name="reupFile" style="margin-left:10px; transform: translate(30%,-300%);" >
+                         
+                          <c:if test="${ !empty loginMem.memSystemname }">
+                          <input type="hidden" name="memSystemname" value="${ loginMem.memSystemname }">
+	                      <input type="hidden" name="memPfPath" value="${ loginMem.memPfPath }">
+                          </c:if>
                           
                           <button type="submit" class="btn" style="background-color: #7f0000; color:white;
                                                               transform: translate(0%,30%)">저장</button>

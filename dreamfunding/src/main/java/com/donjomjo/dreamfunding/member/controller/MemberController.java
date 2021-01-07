@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.donjomjo.dreamfunding.common.filehandler.FileRename;
 import com.donjomjo.dreamfunding.member.model.service.MemberService;
 import com.donjomjo.dreamfunding.member.model.vo.Member;
 
@@ -249,7 +250,47 @@ public class MemberController {
 		return "redirect:/";
 		
 	}
-
+	@RequestMapping("updateProfile.me.jm")
+	public String updateProfile(Member m, Model model, MultipartFile reupFile, HttpSession session) {
+			
+		
+		System.out.println(reupFile.getOriginalFilename());
+		
+		
+		
+		if(!reupFile.getOriginalFilename().equals("")) {
+			
+			if(m.getMemSystemname() != null) {
+				new File(session.getServletContext().getRealPath(m.getMemPfPath())).delete();
+			}
+			
+			String memSystemname = FileRename.fileRename(reupFile);
+			System.out.println(memSystemname);
+			m.setMemPfPath(reupFile.getOriginalFilename());
+			
+			m.setMemSystemname("resources/images/profile/"+memSystemname);
+			System.out.println(m.getMemPfPath());
+			System.out.println(m.getMemSystemname());
+			
+			
+		}
+		
+		int result = mService.updateProfile(m);
+		
+		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
+			
+			session.setAttribute("alertMsg", "프로필 수정 완료");
+			
+			return "mypage/optionProfile";
+			
+		}else { // 게시글 수정 실패 
+			session.setAttribute("alertMsg", "프로필 수정 실패");
+			return "mypage/optionProfile";
+		}
+		
+		
+	}
+	
 	
 	@RequestMapping("updatePhone.me.jm")
 	public String updatePhone(Member m, Model model, HttpSession session) {
