@@ -190,7 +190,7 @@
 	    	                  		}
 						    	                        
 						    	               value += "<div onclick='likeClick(" + progressList[i].projectNo + ");'>" + 
-						    	                        	"<div id=" + progressList[i].projectNo + ">" +
+						    	                        	"<div name=" + progressList[i].projectNo + ">" +
 						    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
 						    	                        		"<div class='pno' style='display:none;'>" + progressList[i].projectNo + "</div>" +
 						    	                        	"</div>" +
@@ -215,7 +215,7 @@
 	        				}
 	        				
 	        				$(".thumbnail-a ul").html(value);
-	        				
+	        				likeList();
 	        				
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
@@ -229,10 +229,6 @@
 	        <script>
 	        		var memNo = "${loginMem.memNo}";
 	        		
-	        		$(function(){
-		        		likeList();
-		        	})
-	        		
 	        	
 	        		function likeList() {
 		        	 
@@ -243,9 +239,10 @@
 		        				if(likeList == null){
 		        					return;
 		        				}else{
-		        					console.log()
+		        					//console.log(likeList);
 		        					for(var i in likeList){
-		        						$("#" + likeList[i].projectNo).find(".material-icons").css("color","rgb(127,0,0)");
+		        						//console.log($("[name="+ likeList[i].projectNo +"]"));
+		        						$("[name=" + likeList[i].projectNo + "]").find(".material-icons").css("color","rgb(127,0,0)");
 		        					}
 		        				}
 		        				
@@ -343,7 +340,7 @@
 	    	                  		}
 						    	                        
 	    	                  		value += "<div onclick='likeClick(" + selectMoneyList[i].projectNo + ");'>" + 
-			    	                        	"<div id=" + selectMoneyList[i].projectNo + ">" +
+			    	                        	"<div name=" + selectMoneyList[i].projectNo + ">" +
 			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
 			    	                        		"<div class='pno' style='display:none;'>" + selectMoneyList[i].projectNo + "</div>" +
 			    	                        	"</div>" +
@@ -367,6 +364,7 @@
 	        					}
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -396,7 +394,7 @@
 	    	                  		}
 						    	                        
 	    	                  		value += "<div onclick='likeClick(" + selectClosedList[i].projectNo + ");'>" + 
-			    	                        	"<div id=" + selectClosedList[i].projectNo + ">" +
+			    	                        	"<div name=" + selectClosedList[i].projectNo + ">" +
 			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
 			    	                        		"<div class='pno' style='display:none;'>" + selectClosedList[i].projectNo + "</div>" +
 			    	                        	"</div>" +
@@ -420,6 +418,7 @@
 	    						}                  
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -449,7 +448,7 @@
 	    	                  		}
 						    	                        
 	    	                  		value += "<div onclick='likeClick(" + selectNewList[i].projectNo + ");'>" + 
-			    	                        	"<div id=" + selectNewList[i].projectNo + ">" +
+			    	                        	"<div name=" + selectNewList[i].projectNo + ">" +
 			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
 			    	                        		"<div class='pno' style='display:none;'>" + selectNewList[i].projectNo + "</div>" +
 			    	                        	"</div>" +
@@ -473,6 +472,7 @@
 	        					}                  
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -539,7 +539,7 @@
 	    	                  		}
 						    	                        
 	    	                  		value += "<div onclick='likeClick(" + rankingList[i].projectNo + ");'>" + 
-			    	                        	"<div id=" + rankingList[i].projectNo + ">" +
+			    	                        	"<div name=" + rankingList[i].projectNo + ">" +
 			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
 			    	                        		"<div class='pno' style='display:none;'>" + rankingList[i].projectNo + "</div>" +
 			    	                        	"</div>" +
