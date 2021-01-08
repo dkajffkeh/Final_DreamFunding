@@ -155,8 +155,8 @@
 		           </c:if>
 		           
 		              <c:if test="${empty loginMem }">
-                  	
-	                  <button type="button" class="btn btn--icon" disabled>
+	                 	
+	                  <button type="button" class="btn btn--icon" onclick="alert('로그인해주세요.')">
 	                    <span class="material-icons"> favorite_border </span>   
 	                  </button>
 	      

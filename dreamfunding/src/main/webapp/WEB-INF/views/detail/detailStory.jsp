@@ -27,12 +27,13 @@
             <div class="story-content">
           	  ${ d.projectContent }
             </div>
-            <div class="hashtag-box">
-              <button class="btn hash-btn">#잡지</button>
-              <button class="btn hash-btn">#서평</button>
-              <button class="btn hash-btn">#리뷰</button>
+            <div class="hashtag-box" id="hashtag-box">         
             </div>
           </div>
+          
+          
+          
+          
           
             <div class="section-left disable-section" id="policy-section">
             <div class="policy-label">교환 및 환불 정책</div>
@@ -100,7 +101,7 @@
     
    <jsp:include page="../common/footer.jsp"/>
 
-	<script defer >
+	<script defer>
 	const goStory = () => {
 	    document
 	      .querySelector("#story-section")
@@ -164,7 +165,25 @@
 			       })
 			     }
 			   }
-		  
+	   
+	   
+	   // 해시태그 출력 
+	   let hashTag = '${d.hashtag}';
+	   
+	   (function(){
+		   const ht = hashTag.split(' '); // 공백 기준으로 배열로 담김 
+		   console.log(ht);
+		   
+		   ht.forEach(v=>{
+			   const hbtn = document.createElement('button');
+			   hbtn.className='btn hash-btn';
+			   hbtn.innerText= v;
+			   document.querySelector('#hashtag-box').appendChild(hbtn);
+		   })
+	   })()
+
+	  
+	   
 	</script>
 
 </body>
