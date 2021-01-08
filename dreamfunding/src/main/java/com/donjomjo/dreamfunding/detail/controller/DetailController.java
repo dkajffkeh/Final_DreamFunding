@@ -60,7 +60,7 @@ public class DetailController {
 	
 
 	@RequestMapping(value="proDetail.de")
-	public String selectDetailAll(int pno, Model model, HttpSession session){
+	public String selectDetailAll(int pno, Model model, HttpSession session, Integer page){
 		
 		Member m = (Member)session.getAttribute("loginMem");
 		int uno = 21; // 기본값(안쓰는 유저넘버)
@@ -92,8 +92,22 @@ public class DetailController {
 			
 			model.addAttribute("lk", resultLike);
 			
+
+			// 댓글 
+			ArrayList<Reply> replyList = dService.selectReply(pno);
+		
+			// 대댓글 
+			for(Reply r: replyList) {
+				int rno = r.getReplyNo();
+				ArrayList<SubReply> subList = dService.selectSubReply(rno);
+				r.setSubReply(subList);
+			}
+			
+			// System.out.println("replyList: " + replyList);
+			model.addAttribute("rl", replyList);
+			
+			
 			ArrayList<DetailPurchase> dp = dService.selectDetailPurchase(pno);
-			// System.out.println(dp);
 			
 			int totalPrice = 0;
 			int totalAmount = 0;
@@ -106,16 +120,26 @@ public class DetailController {
 			model.addAttribute("tp", totalPrice);
 			model.addAttribute("ta", totalAmount);
 			
+			int detailPage = page == null ? 1 : page;
 			
-			return "detail/detailStory";
+			if(detailPage == 1) {
+				return "detail/detailStory";
+			}else if(detailPage == 2){
+				return "detail/detailCommunity";
+			}
+			else {
+				return "detail/detailPolicy";
+			}
+					
 			
-		}else { // 유효하지 않은 게시글 
+		}else{ // 유효하지 않은 게시글 
 			
 			model.addAttribute("errorMsg", "존재하지 않거나 삭제된 프로젝트입니다.");
 			return "detail/errorPage";
 		}
 
-	}
+
+}
 
 	@ResponseBody
 	@RequestMapping(value="report.de")
@@ -225,7 +249,7 @@ public class DetailController {
 			
 			
 			ArrayList<DetailPurchase> dp = dService.selectDetailPurchase(pno);
-			System.out.println(dp);
+			// System.out.println(dp);
 			
 			int totalPrice = 0;
 			int totalAmount = 0;
