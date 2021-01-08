@@ -85,6 +85,73 @@ public class IndexDao {
 		
 	}
 	
+	public ArrayList<Index> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi, String keyword){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("indexMapper.selectSearchList", keyword, rowBounds);
+		
+	}
+	
+	
+	public ArrayList<Index> selectMagazineList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("indexMapper.selectMagazineList", null, rowBounds);
+		
+	}
+	
+	public ArrayList<Index> selectEssayList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("indexMapper.selectEssayList", null, rowBounds);
+		
+	}
+	public ArrayList<Index> selectArtList(SqlSessionTemplate sqlSession, PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("indexMapper.selectArtList", null, rowBounds);
+		
+	}
+	public ArrayList<Index> selectHobbyList(SqlSessionTemplate sqlSession, PageInfo pi){
+	
+	int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+	
+	RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+	
+	return (ArrayList)sqlSession.selectList("indexMapper.selectHobbyList", null, rowBounds);
+	
+	}
+	public ArrayList<Index> selectDrawingList(SqlSessionTemplate sqlSession, PageInfo pi){
+	
+	int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+	
+	RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+	
+	return (ArrayList)sqlSession.selectList("indexMapper.selectDrawingList", null, rowBounds);
+	
+	}
+	public ArrayList<Index> selectEtcList(SqlSessionTemplate sqlSession, PageInfo pi){
+	
+	int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+	
+	RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+	
+	return (ArrayList)sqlSession.selectList("indexMapper.selectEtcList", null, rowBounds);
+	
+	}
+	
 	
 	
 }

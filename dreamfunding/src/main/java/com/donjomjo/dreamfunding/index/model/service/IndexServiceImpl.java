@@ -102,6 +102,41 @@ public class IndexServiceImpl implements IndexService {
 	public ArrayList<Index> selectRankingList(PageInfo pi) {
 		return iDao.selectRankingList(sqlSession, pi);
 	}
+
+	@Override
+	public ArrayList<Index> selectSearchList(PageInfo pi, String keyword) {
+		return iDao.selectSearchList(sqlSession, pi, keyword);
+	}
+
+	@Override
+	public ArrayList<Index> selectMagazineList(PageInfo pi) {
+		return iDao.selectMagazineList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Index> selectEssayList(PageInfo pi) {
+		return iDao.selectEssayList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Index> selectArtList(PageInfo pi) {
+		return iDao.selectArtList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Index> selectHobbyList(PageInfo pi) {
+		return iDao.selectHobbyList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Index> selectDrawingList(PageInfo pi) {
+		return iDao.selectDrawingList(sqlSession, pi);
+	}
+	
+	@Override
+	public ArrayList<Index> selectEtcList(PageInfo pi) {
+		return iDao.selectEtcList(sqlSession, pi);
+	}
 	
 	
 	
