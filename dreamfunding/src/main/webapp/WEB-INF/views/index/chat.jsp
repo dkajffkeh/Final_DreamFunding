@@ -21,55 +21,68 @@
 
       <div class="top"> <!---->
         <!-- 문의하기 버튼(sticky) -->
-        <div class="sticky"> 
-          <!-- 문의하기 폼 -->
-          <div class="qna-form" id="showHide">
-            <div class="qna-title">
-              <div class="qna-title-detail">
-                <span>크라우디</span>
-                <button onclick=qnaClose();>X</button>
-              </div>
-              <div class="qna-time">
-                <div>운영시간 아님</div>
-                <div>10시간 뒤 상담이 운영됩니다.</div>
-                <div>상담시간( 9:00am - 6:00pm )</div>
-                <div class="qna-time-image">
-                  <span class="material-icons md-48" id="moon">brightness_2</span>
+    <div class="sticky"> 
+        <!-- 문의하기 폼 -->
+        <div style="border: 1px red;" class="qna-form">
+          <div class="qna-title">
+            <div class="qna-title-detail">
+              <button class="btn-sm">이전</button>
+              <span>크라우디</span>
+              <button>X</button>
+            </div>
+            <div class="qna-title-time">5시간 뒤 상담이 운영됩니다.</div>
+          </div>
+          <div class="qna-full">
+            <div class="qna-today">
+                오늘
+            </div>
+            <!-- 무엇을 도와드릴까요? -->
+            <div class="qna-1">
+              <div class="qna-detail">
+                <div class="qna-profile">
+                  <div class="qna-profile-image" align="center">
+                    <span class="material-icons md-48" id="face">face</span>
+                  </div>
+                  <div class="qna-profile-name">
+                      <span>드림펀딩</span>
+                      <span class="qna-profile-time">5:00 am</span>
+                  </div>
+                  <div class="qna-profile-content">안녕하세요. 드림펀딩입니다. <br>무엇을 도와드릴까요?</div>
                 </div>
               </div>
             </div>
-            <div class="qna-full">
-              <div class="qna-1">
-                <div class="qna-detail">
-                  <div class="qna-profile">
-                    <div class="qna-profile-image">
-                      <span class="material-icons md-48" id="face">face</span>
+            <!-- 유저채팅 -->
+            <div class="qna-2">
+                <div class="qna-detail-user">
+                  <div class="qna-profile-user">
+                    <div class="qna-profile-image" align="center">
+                      <img src="../../../resources/images/heart2.png" width="30px" height="30px">
                     </div>
-                    <div class="qna-profile-name">드림 펀딩</div>
-                    <div class="qna-profile-content">안녕하세요. 드림펀딩입니다. <br>무엇을 도와드릴까요?</div>
-                  </div>
-                  <div class="qna-start-button">
-                    <button class="btn-qna">대화 시작</button>
+                    <div class="qna-profile-name">
+                        <span>user01</span>
+                        <span class="qna-profile-time">5:00 am</span>
+                    </div>
+                    <div class="qna-profile-content-user">안녕하세요. 문의드리겠습니다. <br>회원가입이 안되네용..왜이러져???</div>
                   </div>
                 </div>
               </div>
-              <div class="qna-call">
-                <div>고객센터 ( 031 - 8039 - 5569 )</div>
-              </div>
-              <div class="qna-bottom">
-                <div class="qna-bottom-content">
-                  <span class="material-icons" id="bottom-face">face</span>
-                  <span>실시간 상담 이용중</span>
-                </div>
+            <div class="qna-call">
+              <div></div>
+            </div>
+            <div class="qna-bottom">
+              <div class="qna-bottom-content">
+                <form action="" class="qna-bottom-content-form">
+                    <div class="qna-add-btn">
+                        <img src="${pageContext.request.contextPath}/resources/images/plus.png" width="20px" height="20px">
+                    </div>
+                    <input type="text" name="chatMsg" id="chatMsg" placeholder="메시지를 입력해주세요." class="chat-msg">
+                    <button class="chat-btn">send</button>
+                </form>
               </div>
             </div>
           </div>
-          <!-- 문의하기 버튼 -->
-          <button class="btnQna" onclick=showHide(); >
-            <span class="spanQna">문의하기</span>
-            <span class="material-icons md-48" id="face">face</span>
-          </button>
         </div>
+      </div>
 
         <!-- 문의하기 스크립트 -->
         <script>
