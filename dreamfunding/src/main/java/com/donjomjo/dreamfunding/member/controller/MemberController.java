@@ -168,15 +168,16 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="message.me.jm")
 	public String message(HttpSession session, String phone) {
-		String api_key = "NCSHEUK3RJXIEMML";
-	    String api_secret = "VCNJDK54PK3LEUZKM9H57FNDILILSRM1";
+		String api_key = "NCSOS7YWFCF3SGWD";
+	    String api_secret = "WV56MGDCXLSATWCGEBMX1RZWNILYKJBO";
 	    
 	    Message coolsms = new Message(api_key, api_secret);
+	    
 	    String random =  (int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +"";
 	    String certifyNum = random;
 	    
 	    HashMap<String, String> params = new HashMap<String, String>();
-	    params.put("to", "01083658879");
+	    params.put("to", "01024608879");
 	    params.put("from", phone );
 	    params.put("type", "SMS");
 	    params.put("text", "[드림펀딩] 인증번호 " + certifyNum + " 입니다.");
@@ -186,43 +187,15 @@ public class MemberController {
 	    
 	    try {
 	      JSONObject obj = (JSONObject) coolsms.send(params);
+	      System.out.println(obj.toString());
 	      
+
+
 	    } catch (CoolsmsException e) {
 	      System.out.println(e.getMessage());
 	      System.out.println(e.getCode());
 	    }
 	    return certifyNum;
-	}
-	@ResponseBody
-	@RequestMapping(value="emailfind.me.jm")
-	public String emailfind(HttpSession session, Member m) {
-		String api_key = "NCSOS7YWFCF3SGWD";
-	    String api_secret = "WV56MGDCXLSATWCGEBMX1RZWNILYKJBO";
-	    
-	    Message coolsms = new Message(api_key, api_secret);
-	    System.out.println(m.getMemName());
-	    System.out.println(m.getPhone());
-	    System.out.println(mService.selectEmail(m));
-	    
-	    
-	    
-	    HashMap<String, String> params = new HashMap<String, String>();
-	    params.put("to", "01083658879");
-	    params.put("from", m.getPhone() );
-	    params.put("type", "SMS");
-	    params.put("text", "[드림펀딩] 회원님의 이메일은 " + mService.selectEmail(m) + " 입니다.");
-	    params.put("app_version", "test app 1.2");
-
-	    
-	    
-	    try {
-	      JSONObject obj = (JSONObject) coolsms.send(params);
-	      
-	    } catch (CoolsmsException e) {
-	      System.out.println(e.getMessage());
-	      System.out.println(e.getCode());
-	    }
-	    return mService.selectEmail(m);
 	}
 	
 
