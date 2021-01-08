@@ -12,14 +12,19 @@
 		<result column="creator_status" property="creatorStatus"/>
 	</resultMap>
 	
-					 <select id="selectFundingListCount" resultType="_int">
+					 <select id="selectFundingListCount"
+					 		 parameterType="_int"
+					 		 resultType="_int">
 				   	select
 				   		   count(*)
 				   	  from project
-				   	 where creator_status = 'U'		   
+				   	 where creator_status = 'U'	
+				   	   and member_no = ${ mno }	   
 				   </select>
 				   
-				   <select id="selectFundingList" resultMap="fundingProjectResultSet">
+				   <select id="selectFundingList" 
+				   		   parameterType="_int"
+				   		   resultMap="fundingProjectResultSet">
 					select
 						       project_no
 				             , project_thumpath
@@ -29,6 +34,7 @@
 						     , project_close_dt
 						  from project
 						 where creator_status = 'U'
+						   and member_no = ${ mno}
 				         order
 				            by project_no desc
 				   </select>
@@ -45,27 +51,33 @@
 		<result column="creator_status" property="creatorStatus"/>
 	</resultMap>
 	
-			<select id="selectLikeListCount" resultType="_int">
-						   select
-				   		   count(*)
-				   	  from project
-				   	 where creator_status = 'U'			   
+			<select id="selectLikeListCount"
+					parameterType="_int" 
+					resultType="_int">
+						  select count(*)
+							from likey
+						   where member_no = ${ mno}
 			 </select>
 			 
-			 <select id="selectLikeList" resultMap="likeProjectResultSet">
-			 	select
-			            project_no
-			          , project_thumpath
-			          , project_filename
-			          , project_title
-			          , project_subtitle
-			          , project_gprice
-			          , project_goal
-			          , project_close_dt
-			       from project
-			      where creator_status='U'
-			       order 
-			          by project_no desc
+			 <select id="selectLikeList"
+			 		 parameterType="_int"
+			 		 resultMap="likeProjectResultSet">
+			 	select p.project_no
+				     , p.project_thumpath
+				     , p.project_filename
+				     , p.project_title
+				     , p.project_subtitle
+				     , p.project_gprice
+				     , p.project_goal
+				     , p.project_close_dt
+				  from project p,(
+				                 select *
+				                   from likey
+				                  where member_no = ${mno}
+				                 ) A
+				 where  p.project_no = A.project_no
+				 order
+					by p.project_no desc
 			 </select>
 			 
 		

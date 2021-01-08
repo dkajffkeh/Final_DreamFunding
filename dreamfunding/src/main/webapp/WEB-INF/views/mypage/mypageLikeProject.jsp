@@ -572,9 +572,9 @@ text-align:left;}
               <div id="menu1" class="container tab-pane active" ><br><br>
                 <nav class="nav--top">
                   <ul>
-                      <li><a href="myFundingProject.me">펀딩한 프로젝트</a></li>
-                      <li><a href="myLikeProject.me">관심있는 프로젝트</a></li>
-                      <li><a href="mypageMessage.me">메시지</a></li>
+                      <li><a href="myFundingProject.me?mno=${ loginMem.memNo }">펀딩한 프로젝트</a></li>
+                      <li><a href="myLikeProject.me?mno=${ loginMem.memNo }">관심있는 프로젝트</a></li>
+                      <li><a href="mypageMessage">메시지</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
@@ -605,16 +605,27 @@ text-align:left;}
                 
                 <c:forEach var="l" items="${list}">
                   <li class="like-project-detail">
-                    <figure class="like-project-image" >
-                      <a href=""><img src="${l.projectThumbnailPath }" alt="${l.projectFileName }" style=" border-radius:1%; width:100%; height:200px;"></a>
-                    </figure>
-                    <figcaption>
-                      <h class="like-project-name"><a href="#">${l.projectTitle }</a></h><br>
-                      <h style="font-size:11px;">${l.projectSubTitle }</h><br><br>
-                      <h>${l.projectGoalPrice }</h>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <h style="color:#7f0000;" >${l.projectGoal }</h>
-                      <h style="float:right;">${l.projectCloseDate }</h>
-                    </figcaption>
+                  	<div onclick="location.href='proDetail.de?pno=${ l.projectNo }';">
+	                    <figure class="like-project-image" >
+	                      <a href=""><img src="/dreamfunding/resources/images/projectThumbnail/${ l.projectFileName }" alt="${l.projectFileName }" style=" border-radius:1%; width:100%; height:200px;"></a>
+	                    </figure>
+	                    <figcaption>
+	                      <h class="like-project-name"><a href="#">${l.projectTitle }</a></h><br>
+	                      <h style="font-size:11px;">${l.projectSubTitle }</h><br><br>
+	                      <h>${l.projectGoalPrice }&#8361;</h>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                      <h style="color:#7f0000;" >
+	                      <c:choose>
+	                      	<c:when test="${ l.projectGoal eq 'Y' }">
+	                      		달성
+	                      	</c:when>
+	                      	<c:otherwise>
+	                      	    미달성
+	                      	</c:otherwise>
+	                      </c:choose>
+	                      </h>
+	                      <h style="float:right;">${l.projectCloseDate }</h>
+	                    </figcaption>
+                    </div>
                   </li>
                  </c:forEach>
 

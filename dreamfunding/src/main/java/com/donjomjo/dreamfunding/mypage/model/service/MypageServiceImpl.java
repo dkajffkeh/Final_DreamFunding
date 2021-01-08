@@ -22,13 +22,13 @@ public class MypageServiceImpl implements MypageService{
 	private MypageDao myDao;
    // 펀딩 프로젝트 리스트 갯수
 	@Override
-	public int selectFundingListCount() {
-		return myDao.selectFundingListCount(sqlSession);
+	public int selectFundingListCount(int mno) {
+		return myDao.selectFundingListCount(sqlSession, mno);
 	}
 //펀딩 프로젝트 리스트 조회
 	@Override
-	public List<Object> selectFundingList(MypagePageInfo mypi) {
-		return myDao.selectFundingList(sqlSession, mypi);
+	public List<Object> selectFundingList(int mno, MypagePageInfo mypi) {
+		return myDao.selectFundingList(sqlSession, mno, mypi);
 	}
 
 	@Override
@@ -44,15 +44,15 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 	@Override
-	public int selectLikeListCount() {
+	public int selectLikeListCount(int mno) {
 		
-		return myDao.selectLikeListCount(sqlSession);
+		return myDao.selectLikeListCount(sqlSession, mno);
 	}
 
 	@Override
-	public List<Object> selectLikeList(MypagePageInfo mypi) {
+	public List<Object> selectLikeList(int mno, MypagePageInfo mypi) {
 		
-		return myDao.selectLikeList(sqlSession, mypi);
+		return myDao.selectLikeList(sqlSession, mno, mypi);
 	}
 
 	@Override
@@ -60,6 +60,7 @@ public class MypageServiceImpl implements MypageService{
 		
 		return 0;
 	}
+	
 	
 
 	

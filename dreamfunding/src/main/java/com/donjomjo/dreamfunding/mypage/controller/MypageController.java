@@ -28,11 +28,16 @@ public class MypageController {
 	// 펀딩한 프로젝트 
 	@RequestMapping("myFundingProject.me")
 	public String selectFundingList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
-						Model model) {
-		int listCount = myService.selectFundingListCount();
+						 int mno, Model model) {
+		int listCount = myService.selectFundingListCount(mno);
 		MypagePageInfo mypi = MypagePagination.getMypagePageInfo(listCount, currentPage, 5, 5);
 		
-		List<Object> list = myService.selectFundingList(mypi);
+		List<Object> list = myService.selectFundingList(mno, mypi);
+		
+		System.out.println(listCount);
+		System.out.println(mypi);
+		System.out.println(list);
+		
 		model.addAttribute("mypi", mypi);
 		model.addAttribute("list", list);
 		
@@ -41,11 +46,11 @@ public class MypageController {
 	// 관심있는 프로젝트 
 	@RequestMapping("myLikeProject.me")
 	public String selectLikeList(@RequestParam(value="currentPage", defaultValue="1") int currentPage,
-							Model model) {
-		int listCount = myService.selectLikeListCount();
+							int mno, Model model) {
+		int listCount = myService.selectLikeListCount(mno);
 		MypagePageInfo mypi = MypagePagination.getMypagePageInfo(listCount, currentPage, 5, 6);
 		
-		List<Object> list = myService.selectLikeList(mypi);
+		List<Object> list = myService.selectLikeList(mno,mypi);
 		model.addAttribute("mypi", mypi);
 		model.addAttribute("list", list);
 		

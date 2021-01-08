@@ -12,6 +12,13 @@ public class MypagePagination {
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
+		
+		System.out.println(maxPage);
+		System.out.println(startPage);
+		System.out.println(endPage);
+
+		
+		
 		return new MypagePageInfo(listCount, currentPage, startPage, endPage, maxPage, pageLimit, mypageLimit);
 	}
 	

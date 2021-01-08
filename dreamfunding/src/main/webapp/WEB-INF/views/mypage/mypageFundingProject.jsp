@@ -544,8 +544,8 @@ float:right;
               <div id="menu1" class="container tab-pane active" ><br><br>
                 <nav class="nav--top">
                   <ul>
-                      <li><a href="myFundingProject.me">펀딩한 프로젝트</a></li>
-                      <li><a href="myLikeProject.me">관심있는 프로젝트</a></li>
+                      <li><a href="myFundingProject.me?mno=${ loginMem.memNo }">펀딩한 프로젝트</a></li>
+                      <li><a href="myLikeProject.me?mno=${ loginMem.memNo }">관심있는 프로젝트</a></li>
                       <li><a href="mypageMessage">메시지</a></li>
                   </ul>
               </nav>
@@ -576,13 +576,13 @@ float:right;
 	              </select><br>
 
               <!--펀딩결과 알림 박스-->
-              <div class="inform-box">총 ..건의 펀딩결과가 있습니다.</div>
+              <div class="inform-box">총 ${ mypi.listCount }건의 펀딩결과가 있습니다.</div>
 
               <!--펀딩한 프로젝트 박스-->
               <c:forEach var="f" items="${list}">
-              <div class="funding-box">
+              <div class="funding-box" onclick="location.href='proDetail.de?pno=${ f.projectNo }';">
                 <div class="funding-date">${ f.projectStartDate}</div><div></div>
-                <div class="funding-img"><img src="${f.projectThumbnailPath }"
+                <div class="funding-img"><img src="/dreamfunding/resources/images/projectThumbnail/${ f.projectFileName }"
                                           style="width:200px; height:120px;"></div>
                                           <div class="funding-label"><span class="label success">펀딩완료</span></div>
                 <div class="funding-name"><br>${f.projectTitle } <br>결제예약 10000원<br>${f.projectCloseDate}</div>

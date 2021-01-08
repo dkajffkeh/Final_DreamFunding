@@ -14,8 +14,8 @@ public interface MypageService {
 	 * 펀딩한 프로젝트 페이지------------------------------------------------------------------------------------------------------
 	 */
 	// 펀딩한 프로젝트 리스트 조회용 서비스
-	int selectFundingListCount();
-	List<Object> selectFundingList(MypagePageInfo mypi);
+	int selectFundingListCount(int mno);
+	List<Object> selectFundingList(int mno, MypagePageInfo mypi);
 	// 펀딩한 프로젝트 상세조회용 서비스
 	FundingProjectDetail selectFundingProjectDetail(int pno);
 	// 펀딩한 프로젝트 리스트 삭제 서비스
@@ -24,8 +24,8 @@ public interface MypageService {
 	 * 관심있는 프로젝트------------------------------------------------------------------------------------------------------
 	 */
 	// 관심있는 프로젝트 리스트 조회용 서비스
-	int selectLikeListCount();
-	List<Object> selectLikeList(MypagePageInfo mypi);
+	int selectLikeListCount(int mno);
+	List<Object> selectLikeList(int mno, MypagePageInfo mypi);
 	// 관심있는 프로젝트 리스트 삭제 서비스
 	int deleteLikeProject(int pno);
 	

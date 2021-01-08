@@ -46,7 +46,7 @@
 		</form>
 	</div>
 	<div>
-		<a href="orderCom.co"></a>
+		<a href="orderInsert.me?pno=1&mno=1&rewardNum=1&rewardAmount=1"> 테스트</a>
 	</div>
 	
 	
