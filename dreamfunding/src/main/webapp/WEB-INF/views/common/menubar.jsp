@@ -100,8 +100,8 @@
               <c:otherwise>
               
               
-              <img src="${pageContext.request.contextPath}/resources/images/profile/${loginMem.memSystemname}"
-              		 	  style="text-align: justify; margin-bottom: 1em; display:inline;width:30px; height:30px; border-radius: 50%;">
+              <a href="optionAccount.me"><img src="${pageContext.request.contextPath}/resources/images/profile/${loginMem.memSystemname}"
+              		 	  style="text-align: justify; margin-bottom: 1em; display:inline;width:30px; height:30px; border-radius: 50%;"></a>
               		 	  
               		 	  
                </c:otherwise>
