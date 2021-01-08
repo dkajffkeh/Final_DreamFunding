@@ -1,5 +1,7 @@
 package com.donjomjo.dreamfunding.member.model.service;
 
+import java.util.ArrayList;
+
 import com.donjomjo.dreamfunding.member.model.vo.Member;
 
 public interface MemberService {
@@ -8,7 +10,7 @@ public interface MemberService {
 	
 	int insertMember(Member m);
 	
-	int deleteMember(String email);
+	int deleteMember(Member m);
 
 	int emailCheck(String email);
 	
@@ -27,6 +29,8 @@ public interface MemberService {
 	int updatePhone(Member m);
 
 	String selectEmail(Member m);
+
+	ArrayList<Member> memberList(Member m);
 	
 	
 	

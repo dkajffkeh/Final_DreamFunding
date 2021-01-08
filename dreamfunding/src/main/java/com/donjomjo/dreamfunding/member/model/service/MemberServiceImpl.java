@@ -1,5 +1,7 @@
 package com.donjomjo.dreamfunding.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +31,8 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Override
-	public int deleteMember(String email) {
-		return mDao.deleteMember(sqlSession, email);
+	public int deleteMember(Member m) {
+		return mDao.deleteMember(sqlSession, m);
 	}
 
 	@Override
@@ -64,7 +66,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updateNick(Member m) {
 		
-		return mDao.updatePwd(sqlSession, m);
+		return mDao.updateNick(sqlSession, m);
 	}
 
 	@Override
@@ -74,7 +76,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int updatePhone(Member m) {
-		return mDao.updatePwd(sqlSession, m);
+		return mDao.updatePhone(sqlSession, m);
 	}
 
 	@Override
@@ -82,7 +84,14 @@ public class MemberServiceImpl implements MemberService {
 		
 		return mDao.selectEmail(sqlSession, m);
 	}
-	
+
+	@Override
+	public ArrayList<Member> memberList(Member m) {
+		
+		return mDao.memberList(sqlSession, m);
+	}
+
+
 
 
 	

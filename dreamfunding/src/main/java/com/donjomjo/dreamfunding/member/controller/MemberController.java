@@ -2,8 +2,7 @@ package com.donjomjo.dreamfunding.member.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -92,7 +91,7 @@ public class MemberController {
 		
 		Member loginMem = mService.loginMember(m);
 		
-		if(loginMem != null) {
+		if(loginMem != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginMem.getMemPwd())) {
 			session.setAttribute("loginMem", loginMem );
 			mv.setViewName("redirect:/");
 		
@@ -138,14 +137,17 @@ public class MemberController {
 	}
 
 	@RequestMapping("delete.me.jm")
-	public String deleteMember(String userPwd, HttpSession session, Model model) {
+	public String deleteMember(Member m, HttpSession session, Model model) {
+		
+		System.out.println(m);
 		
 		Member loginMem = (Member)session.getAttribute("loginMem");
+		
 		String encPwd = loginMem.getMemPwd();
 		
-		if(bcryptPasswordEncoder.matches(userPwd, encPwd)) {
+		if(bcryptPasswordEncoder.matches(m.getMemPwd(), loginMem.getMemPwd())) {
 			
-			int result = mService.deleteMember(loginMem.getEmail());
+			int result = mService.deleteMember(loginMem);
 			
 			if(result > 0) {
 				
@@ -254,28 +256,62 @@ public class MemberController {
 	@RequestMapping(value="idFind.me.jm" )
 	public String idFind(Member m) {
 
+
 		return String.valueOf(mService.idFind(m));
 	}
 	
+	
+	
+	// 여기중
+	@RequestMapping(value="memberList.me.jm" )
+	public String memberList(Member m,Model model) {
+		
+
+		ArrayList<Member> list = mService.memberList(m);
+		
+		model.addAttribute("list",list);
+		
+		return "member/emailList";
+				
+	}
+	
+	
+	
+	
+	
 	@RequestMapping("updatePwd.me.jm")
 	public String updatePwd(Member m, Model model, HttpSession session) {
-		int result = mService.updatePwd(m);
+
+		
 		
 		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
 		
 		m.setMemPwd(encPwd);
 		
-		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 변경되었습니다!");
+		
+		int result = mService.updatePwd(m);
+		
+		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
+			
+			session.setAttribute("alertMsg", "프로필 수정 완료");
+			
+			return "member/loginForm.me.jm";
+			
+		}else { // 게시글 수정 실패 
+			
+			session.setAttribute("alertMsg", "프로필 수정 실패");
+			
+			return "member/loginForm.me.jm";
 		}
 		
-		return "redirect:/";
+		
+		
 		
 	}
 	@RequestMapping("updateNick.me.jm")
 	public String updateNick(Member m, Model model, HttpSession session) {
 		int result = mService.updateNick(m);
-		System.out.println(m.getMemNick());
+		
 		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
 			
 			session.setAttribute("alertMsg", "프로필 수정 완료");
@@ -300,13 +336,25 @@ public class MemberController {
 	            new File(session.getServletContext().getRealPath(m.getMemPfPath())).delete();
 	         }
 	         
+	         String savePath = session.getServletContext().getRealPath("resources/images/profile/");
+	         
 	         String memSystemname = FileRename.fileRename(reupFile);
 	         
-	         m.setMemPfPath(reupFile.getOriginalFilename());
-	         
-	         m.setMemSystemname("resources/images/profile/"+memSystemname);
 	         
 	         
+	         m.setMemPfPath(savePath);
+	         
+	         m.setMemSystemname(memSystemname);
+	         
+	         try {
+				reupFile.transferTo(new File(savePath + memSystemname));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	         
 	      }
 	      
@@ -327,6 +375,7 @@ public class MemberController {
 	      
 	      
 	   }
+
 	
 	
 	@RequestMapping("updatePhone.me.jm")
@@ -349,7 +398,9 @@ public class MemberController {
 		
 		
 		
+		
 	}
+	
 
 
 	

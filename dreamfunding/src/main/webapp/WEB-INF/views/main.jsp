@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Dream Funding</title>    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/index.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 
@@ -92,36 +93,38 @@
         <div class="inner">
 
           <!-- 상단 메인 이미지 -->
-          <div style="overflow: hidden;">
+          <div class="main-image-full" style="overflow: hidden;">
             <div class="main-image">
               <div class="inner-image">
-                <div class="btn1">
-                  <span class="material-icons md-48">navigate_before</span>
-                </div>
-                <img src="${pageContext.request.contextPath}/resources/images/book7.jpg" alt="메인이미지" width="1200px" height="400px">
-                <div class="btn2"><span class="material-icons md-48">navigate_next</span></div>
+                <img src="${pageContext.request.contextPath}/resources/images/main01.jpg" alt="메인이미지" width="1200px" height="400px">
               </div>
               <div class="inner-image">
-                <div class="btn1"><span class="material-icons md-48">navigate_before</span></div>
-                <img src="${pageContext.request.contextPath}/resources/images/book5.jpg" alt="메인이미지" width="1200px" height="400px">
-                <div class="btn2"><span class="material-icons md-48">navigate_next</span></div>
+                <img src="${pageContext.request.contextPath}/resources/images/main02.jpg" alt="메인이미지" width="1200px" height="400px">
               </div>
               <div class="inner-image">
-                <div class="btn1"><span class="material-icons md-48">navigate_before</span></div>
-                <img src="${pageContext.request.contextPath}/resources/images/book14.jpg" alt="메인이미지" width="1200px" height="400px">
-                <div class="btn2"><span class="material-icons md-48">navigate_next</span></div>
+                <img src="${pageContext.request.contextPath}/resources/images/main03.jpg" alt="메인이미지" width="1200px" height="400px">
               </div>
+              
             </div>
+          </div>
+          <div class="main-slide-button">
+            	<button class="btn1">1</button>
+            	<button class="btn2">2</button>
+            	<button class="btn3">3</button>
           </div>
 
           <!-- 메인이미지 슬라이드 자바스크립트 -->
           <script>
-            document.querySelector('.btn1').addEventListener('click', function(){
-              document.querySelector('.main-image').style.transform = 'translate(-100vw)';
+          	document.querySelector('.btn1').addEventListener('click', function(){
+              document.querySelector('.main-image').style.transform = 'translate(0vw)';
             });
             document.querySelector('.btn2').addEventListener('click', function(){
+              document.querySelector('.main-image').style.transform = 'translate(-100vw)';
+            });
+            document.querySelector('.btn3').addEventListener('click', function(){
               document.querySelector('.main-image').style.transform = 'translate(-200vw)';
             });
+            
           </script>
 
           
@@ -157,35 +160,58 @@
 	        	$(function(){
 	        		selectProgressFundingList();
 	        	})
-	        	
 	        	function selectProgressFundingList(progressList){
+	        		
+	        		
 	        		
 	        		$.ajax({
 	        			url:"progressList.do",
 	        			success:function(progressList){
 	        				
 	        				var value = "";
+	        				
 	        				for(var i in progressList){
-	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + progressList[i].projectFileName + ")'>" +
-					    	                    "<div>" +
-					    	                      "<div class='like'>" +
-					    	                        "<div class='finish'><span>마감임박</span></div>" +
-					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
-					    	                      "</div>" +
-					    	                    "</div>" +
-					    	                  "</figure>" +
-					    	                  "<div class='card-desc'>" +
-					    	                      "<div class='project-content'>" +
-					    	                          "<div class='project-company'>" + progressList[i].creatorName + "</div>" +
-					    	                          "<div class='project-title'>" + progressList[i].projectTitle + "</div>" +
-					    	                      "</div>" +
-					    	                      "<div class='project-detail'>" +
-					    	                          "<div class='funding-percent'>" + progressList[i].projectStartDt + "</div>" +
-					    	                          "<div class='funding-d-day'>" + progressList[i].projectCloseDt + "</div>" + 
-					    	                      "</div>" +
-					    	                  "</div>" +
-				    	                  "</li>";
+	        					
+	        					var today = new Date();
+		        				var closeDay = new Date(progressList[i].projectCloseDt);
+		        				var gapDay = closeDay.getTime() - today.getTime();
+		        				gapDay = Math.floor(gapDay / (1000 * 60 * 60 * 24));
+		        				
+		        				
+	        					if(i < 8){
+		    						value += "<li class='card-item' onclick='location.href='#'>" + 
+			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + progressList[i].projectFileName + ")'>" +
+						    	                    "<div>" +
+						    	                      "<div class='like'>";
+	    	                  		if(gapDay < 10){
+	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
+	    	                  		}else{
+	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
+	    	                  		}
+						    	                        
+						    	               value += "<div onclick='likeClick(" + progressList[i].projectNo + ");'>" + 
+						    	                        	"<div id=" + progressList[i].projectNo + ">" +
+						    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
+						    	                        		"<div class='pno' style='display:none;'>" + progressList[i].projectNo + "</div>" +
+						    	                        	"</div>" +
+						    	                        "</div>" +
+						    	                      "</div>" +
+						    	                    "</div>" +
+						    	                  "</figure>" +
+						    	                  "<div class='card-desc'>" +
+						    	                      "<div class='project-content'>" +
+						    	                          "<div class='project-company'>" + progressList[i].creatorName + "</div>" +
+						    	                          "<div class='project-title'>" + progressList[i].projectTitle + "</div>" +
+						    	                      "</div>" +
+						    	                      "<div class='project-detail'>" +
+						    	                          "<div class='funding-percent'>" + progressList[i].projectStartDt + "</div>" +
+						    	                          "<div class='funding-d-day'>" + progressList[i].projectCloseDt + "</div>" + 
+						    	                      "</div>" +
+						    	                  "</div>" +
+					    	                  "</li>";
+	        					}else{
+	        						break;
+	        					}                  
 	        				}
 	        				
 	        				$(".thumbnail-a ul").html(value);
@@ -199,8 +225,82 @@
 	        	}
 	        </script>
 	        
+	        <!-- 좋아요 스크립트 -->
+	        <script>
+	        		var memNo = "${loginMem.memNo}";
+	        		
+	        		$(function(){
+		        		likeList();
+		        	})
+	        		
+	        	
+	        		function likeList() {
+		        	 
+		        		$.ajax({
+		        			url:"likeList.do",// 라이크리스트 다셀렉해오는거
+		        			data:{mno:memNo},
+		        			success:function(likeList){
+		        				if(likeList == null){
+		        					return;
+		        				}else{
+		        					console.log()
+		        					for(var i in likeList){
+		        						$("#" + likeList[i].projectNo).find(".material-icons").css("color","rgb(127,0,0)");
+		        					}
+		        				}
+		        				
+		        			},error:function(){
+		        				console.log("memNo없음");
+		        			}
+		        		})
+	        		}
+	        
+	        	function likeClick(pno){
+	        		
+	        		if(memNo == ""){
+    					swal("좋아요 실패", "로그인 후 이용해주세요!", "warning");
+	        		}else{
+	        			$.ajax({
+		        			url:"likeBtn.do",
+		        			data:{
+		        					pno:pno,
+		        					mno:memNo
+	        					 },
+		        			success:function(result){
+		        				
+		        				//console.log(result);
+		        				
+		        				//console.log("좋아요 클릭");
+		        				
+		        				var value="";
+		        				if(result == 1){
+		        					$("#" + pno).find(".material-icons").css("color","rgb(127,0,0)");
+		        					swal("좋아요!", "좋아한 프로젝트에 추가되었습니다.", "success");
+		        				}else{
+		        					$("#" + pno).find(".material-icons").css("color","");
+		        					swal("좋아요 취소!", "취소되었습니다.", "success");	        					
+		        				}
+		        				
+		        				
+		        			},error:function(){
+		        				console.log("ajax 통신 실패!");
+		        			}
+		        		})
+								
+    				}
+	        		
+	        		
+	        	}
+	        	
+	        </script>
+	        
+	        
+	        	
+	        
 	        <!-- select box 진행중인 펀딩 -->
 	        <script>
+	        
+	        
 	        
 	        function changeSelect(){
 	        	
@@ -219,32 +319,52 @@
 	        			url:"selectMoney.do",
 	        			success:function(selectMoneyList){
 	        				console.log("펀딩금액순 통신성공");
+	        				
+	        				
 	        				var value = "";
+	        				
+	        				
 	        				for(var i in selectMoneyList){
-	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectMoneyList[i].projectFileName + ")'>" +
-			    								 "<div>" +
-					    	                      "<div class='like'>";
-					    	                        
-		    	                if(selectMoneyList[i].projectCloseDt == 0){
-		    	                	value += "<div class='finish'><span>마감임박</span></div>";
-		    	                }
-		    	                	
-		    	                value += "<div><span class='material-icons md-36'>favorite</span></div>" +
-		    	                      "</div>" +
-		    	                    "</div>" +
+	        					
+	        					var today = new Date();
+		        				var closeDay = new Date(selectMoneyList[i].projectCloseDt);
+		        				var gapDay = closeDay.getTime() - today.getTime();
+		        				gapDay = Math.floor(gapDay / (1000 * 60 * 60 * 24));
+	        					
+	        					if(i<8){	
+		    						value += "<li class='card-item'>" + 
+			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectMoneyList[i].projectFileName + ")'>" +
+				    								 "<div>" +
+				    				                  "<div class='like'>";
+	    	                  		if(gapDay < 10){
+	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
+	    	                  		}else{
+	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
+	    	                  		}
+						    	                        
+	    	                  		value += "<div onclick='likeClick(" + selectMoneyList[i].projectNo + ");'>" + 
+			    	                        	"<div id=" + selectMoneyList[i].projectNo + ">" +
+			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
+			    	                        		"<div class='pno' style='display:none;'>" + selectMoneyList[i].projectNo + "</div>" +
+			    	                        	"</div>" +
+			    	                        "</div>" +
+			    	                      "</div>" +
+			    	                    "</div>" +
 			    	                  "</figure>" +
-			    	                  "<div class='card-desc'>" +
-			    	                      "<div class='project-content'>" +
-			    	                          "<div class='project-company'>" + selectMoneyList[i].creatorName + "</div>" +
-			    	                          "<div class='project-title'>" + selectMoneyList[i].projectTitle + "</div>" +
-			    	                      "</div>" +
-			    	                      "<div class='project-detail'>" +
-			    	                          "<div class='funding-percent'>" + selectMoneyList[i].projectStartDt + "</div>" +
-			    	                          "<div class='funding-d-day'>" + selectMoneyList[i].projectCloseDt + "</div>" + 
-			    	                      "</div>" +
-			    	                  "</div>" +
-		    	                  "</li>";
+				    	                  "<div class='card-desc'>" +
+				    	                      "<div class='project-content'>" +
+				    	                          "<div class='project-company'>" + selectMoneyList[i].creatorName + "</div>" +
+				    	                          "<div class='project-title'>" + selectMoneyList[i].projectTitle + "</div>" +
+				    	                      "</div>" +
+				    	                      "<div class='project-detail'>" +
+				    	                          "<div class='funding-percent'>" + selectMoneyList[i].projectStartDt + "</div>" +
+				    	                          "<div class='funding-d-day'>" + selectMoneyList[i].projectCloseDt + "</div>" + 
+				    	                      "</div>" +
+				    	                  "</div>" +
+			    	                  "</li>";
+	        					}else{
+	        						break;
+	        					}
 	        				}
 	        				$(".thumbnail-a ul").html(value);
 	        			},error:function(){
@@ -258,26 +378,46 @@
 	        				console.log("마감임박순 통신성공");
 	        				var value = "";
 	        				for(var i in selectClosedList){
-	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectClosedList[i].projectFileName + ")'>" +
-			    								 "<div>" +
-					    	                      "<div class='like'>" +
-					    	                        "<div class='finish'></div>" +
-					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
-					    	                      "</div>" +
-					    	                    "</div>" +
-					    	                  "</figure>" +
-					    	                  "<div class='card-desc'>" +
-					    	                      "<div class='project-content'>" +
-					    	                          "<div class='project-company'>" + selectClosedList[i].creatorName + "</div>" +
-					    	                          "<div class='project-title'>" + selectClosedList[i].projectTitle + "</div>" +
-					    	                      "</div>" +
-					    	                      "<div class='project-detail'>" +
-					    	                          "<div class='funding-percent'>" + selectClosedList[i].projectStartDt + "</div>" +
-					    	                          "<div class='funding-d-day'>" + selectClosedList[i].projectCloseDt + "</div>" + 
-					    	                      "</div>" +
-					    	                  "</div>" +
-				    	                  "</li>";
+	        					
+	        					var today = new Date();
+		        				var closeDay = new Date(selectClosedList[i].projectCloseDt);
+		        				var gapDay = closeDay.getTime() - today.getTime();
+		        				gapDay = Math.floor(gapDay / (1000 * 60 * 60 * 24));
+		        				
+	    						if(i<8){
+		        					value += "<li class='card-item'>" + 
+			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectClosedList[i].projectFileName + ")'>" +
+				    								 "<div>" +
+				    				                  "<div class='like'>";
+	    	                  		if(gapDay < 10){
+	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
+	    	                  		}else{
+	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
+	    	                  		}
+						    	                        
+	    	                  		value += "<div onclick='likeClick(" + selectClosedList[i].projectNo + ");'>" + 
+			    	                        	"<div id=" + selectClosedList[i].projectNo + ">" +
+			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
+			    	                        		"<div class='pno' style='display:none;'>" + selectClosedList[i].projectNo + "</div>" +
+			    	                        	"</div>" +
+			    	                        "</div>" +
+			    	                      "</div>" +
+			    	                    "</div>" +
+			    	                  "</figure>" +
+						    	                  "<div class='card-desc'>" +
+						    	                      "<div class='project-content'>" +
+						    	                          "<div class='project-company'>" + selectClosedList[i].creatorName + "</div>" +
+						    	                          "<div class='project-title'>" + selectClosedList[i].projectTitle + "</div>" +
+						    	                      "</div>" +
+						    	                      "<div class='project-detail'>" +
+						    	                          "<div class='funding-percent'>" + selectClosedList[i].projectStartDt + "</div>" +
+						    	                          "<div class='funding-d-day'>" + selectClosedList[i].projectCloseDt + "</div>" + 
+						    	                      "</div>" +
+						    	                  "</div>" +
+					    	                  "</li>";
+	    						}else{
+	    							break;
+	    						}                  
 	        				}
 	        				$(".thumbnail-a ul").html(value);
 	        			},error:function(){
@@ -291,26 +431,46 @@
 	        				console.log("최신순 통신성공");
 	        				var value = "";
 	        				for(var i in selectNewList){
-	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectNewList[i].projectFileName + ")'>" +
-			    								 "<div>" +
-					    	                      "<div class='like'>" +
-					    	                        "<div class='finish'></div>" +
-					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
-					    	                      "</div>" +
-					    	                    "</div>" +
-					    	                  "</figure>" +
-					    	                  "<div class='card-desc'>" +
-					    	                      "<div class='project-content'>" +
-					    	                          "<div class='project-company'>" + selectNewList[i].creatorName + "</div>" +
-					    	                          "<div class='project-title'>" + selectNewList[i].projectTitle + "</div>" +
-					    	                      "</div>" +
-					    	                      "<div class='project-detail'>" +
-					    	                          "<div class='funding-percent'>" + selectNewList[i].projectStartDt + "</div>" +
-					    	                          "<div class='funding-d-day'>" + selectNewList[i].projectCloseDt + "</div>" + 
-					    	                      "</div>" +
-					    	                  "</div>" +
-				    	                  "</li>";
+	        					
+	        					var today = new Date();
+		        				var closeDay = new Date(selectNewList[i].projectCloseDt);
+		        				var gapDay = closeDay.getTime() - today.getTime();
+		        				gapDay = Math.floor(gapDay / (1000 * 60 * 60 * 24));
+	        					
+	        					if(i<8){
+		    						value += "<li class='card-item'>" + 
+			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectNewList[i].projectFileName + ")'>" +
+				    								 "<div>" +
+				    				                  "<div class='like'>";
+	    	                  		if(gapDay < 10){
+	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
+	    	                  		}else{
+	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
+	    	                  		}
+						    	                        
+	    	                  		value += "<div onclick='likeClick(" + selectNewList[i].projectNo + ");'>" + 
+			    	                        	"<div id=" + selectNewList[i].projectNo + ">" +
+			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
+			    	                        		"<div class='pno' style='display:none;'>" + selectNewList[i].projectNo + "</div>" +
+			    	                        	"</div>" +
+			    	                        "</div>" +
+			    	                      "</div>" +
+			    	                    "</div>" +
+			    	                  "</figure>" +
+						    	                  "<div class='card-desc'>" +
+						    	                      "<div class='project-content'>" +
+						    	                          "<div class='project-company'>" + selectNewList[i].creatorName + "</div>" +
+						    	                          "<div class='project-title'>" + selectNewList[i].projectTitle + "</div>" +
+						    	                      "</div>" +
+						    	                      "<div class='project-detail'>" +
+						    	                          "<div class='funding-percent'>" + selectNewList[i].projectStartDt + "</div>" +
+						    	                          "<div class='funding-d-day'>" + selectNewList[i].projectCloseDt + "</div>" + 
+						    	                      "</div>" +
+						    	                  "</div>" +
+					    	                  "</li>";
+	        					}else{
+	        						break;
+	        					}                  
 	        				}
 	        				$(".thumbnail-a ul").html(value);
 	        			},error:function(){
@@ -333,7 +493,7 @@
             <!-- 제목 : 실시간 랭킹 -->
             <div class="title title-b">
               <div class="title-main">실시간 랭킹</div>
-              <span class="title-sub">오늘 가장 많은 사람들이 <b>#좋아한</b> 프로젝트</span>
+              <span class="title-sub">가장 많은 사람들이 <b>#조회한</b> 프로젝트</span>
               
             </div>
 
@@ -359,26 +519,48 @@
 	        				
 	        				var value = "";
 	        				for(var i in rankingList){
-	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + rankingList[i].projectFileName + ")'>" +
-			    								 "<div>" +
-					    	                      "<div class='like'>" +
-					    	                        "<div class='finish'></div>" +
-					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
-					    	                      "</div>" +
-					    	                    "</div>" +
-					    	                  "</figure>" +
-					    	                  "<div class='card-desc'>" +
-					    	                      "<div class='project-content'>" +
-					    	                          "<div class='project-company'>" + rankingList[i].creatorName + "</div>" +
-					    	                          "<div class='project-title'>" + rankingList[i].projectTitle + "</div>" +
-					    	                      "</div>" +
-					    	                      "<div class='project-detail'>" +
-					    	                          "<div class='funding-percent'>" + rankingList[i].projectStartDt + "</div>" +
-					    	                          "<div class='funding-d-day'>" + rankingList[i].projectCloseDt + "</div>" + 
-					    	                      "</div>" +
-					    	                  "</div>" +
-				    	                  "</li>";
+	        					
+	        					var today = new Date();
+		        				var closeDay = new Date(rankingList[i].projectCloseDt);
+		        				var gapDay = closeDay.getTime() - today.getTime();
+		        				gapDay = Math.floor(gapDay / (1000 * 60 * 60 * 24));
+		        				
+	        					if(i<8){
+	        						
+	        					
+		    						value += "<li class='card-item'>" + 
+			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + rankingList[i].projectFileName + ")'>" +
+				    								 "<div>" +
+				    								 "<div class='like'>";
+	    	                  		if(gapDay < 10){
+	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
+	    	                  		}else{
+	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
+	    	                  		}
+						    	                        
+	    	                  		value += "<div onclick='likeClick(" + rankingList[i].projectNo + ");'>" + 
+			    	                        	"<div id=" + rankingList[i].projectNo + ">" +
+			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
+			    	                        		"<div class='pno' style='display:none;'>" + rankingList[i].projectNo + "</div>" +
+			    	                        	"</div>" +
+			    	                        "</div>" +
+			    	                      "</div>" +
+			    	                    "</div>" +
+			    	                  "</figure>" +
+						    	                  "<div class='card-desc'>" +
+						    	                      "<div class='project-content'>" +
+						    	                          "<div class='project-company'>" + rankingList[i].creatorName + "</div>" +
+						    	                          "<div class='project-title'>" + rankingList[i].projectTitle + "</div>" +
+						    	                      "</div>" +
+						    	                      "<div class='project-detail'>" +
+						    	                          "<div class='funding-percent'>" + rankingList[i].projectStartDt + "</div>" +
+						    	                          "<div class='funding-d-day'>" + rankingList[i].projectCloseDt + "</div>" + 
+						    	                      "</div>" +
+						    	                  "</div>" +
+					    	                  "</li>";
+	        					}else{
+	        						break;
+	        					}
 	        				}
 	        				
 	        				$(".thumbnail-b ul").html(value);
@@ -425,26 +607,30 @@
 	        				
 	        				var value = "";
 	        				for(var i in closedList){
-	    						value += "<li class='card-item'>" + 
-		    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + closedList[i].projectFileName + ")'>" +
-			    								 "<div>" +
-					    	                      "<div class='like'>" +
-					    	                        "<div class='finish'></div>" +
-					    	                        "<div><span class='material-icons md-36'>favorite</span></div>" +
-					    	                      "</div>" +
-					    	                    "</div>" +
-					    	                  "</figure>" +
-					    	                  "<div class='card-desc'>" +
-					    	                      "<div class='project-content'>" +
-					    	                          "<div class='project-company'>" + closedList[i].creatorName + "</div>" +
-					    	                          "<div class='project-title'>" + closedList[i].projectTitle + "</div>" +
-					    	                      "</div>" +
-					    	                      "<div class='project-detail'>" +
-					    	                          "<div class='funding-percent'>" + closedList[i].projectStartDt + "</div>" +
-					    	                          "<div class='funding-d-day'>" + closedList[i].projectCloseDt + "</div>" + 
-					    	                      "</div>" +
-					    	                  "</div>" +
-				    	                  "</li>";
+	        					if(i<8){
+		    						value += "<li class='card-item'>" + 
+			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + closedList[i].projectFileName + ")'>" +
+				    								 "<div>" +
+						    	                      "<div class='like'>" +
+						    	                        "<div class='finish'><span>펀딩완료</span></div>" +
+						    	                        	"<div><span class='material-icons md-36'>favorite</span></div>" +
+						    	                      "</div>" +
+						    	                    "</div>" +
+						    	                  "</figure>" +
+						    	                  "<div class='card-desc'>" +
+						    	                      "<div class='project-content'>" +
+						    	                          "<div class='project-company'>" + closedList[i].creatorName + "</div>" +
+						    	                          "<div class='project-title'>" + closedList[i].projectTitle + "</div>" +
+						    	                      "</div>" +
+						    	                      "<div class='project-detail'>" +
+						    	                          "<div class='funding-percent'>" + closedList[i].projectStartDt + "</div>" +
+						    	                          "<div class='funding-d-day'>" + closedList[i].projectCloseDt + "</div>" + 
+						    	                      "</div>" +
+						    	                  "</div>" +
+					    	                  "</li>";
+	        					}else{
+	        						break;
+	        					}
 	        				}
 	        				
 	        				$(".thumbnail-c ul").html(value);
@@ -466,7 +652,6 @@
 
             <!-- 문의하기쪽 아랫부분 공간 -->
             <div class="bottom">
-              <!-- 여기에 문의하기 그거 들어가야되는디,,,문의하기는 페이지 위에 보여져야되는디,,,, 생각점,,, -->
               <br><br><br><br> 
             </div>
 

@@ -8,34 +8,30 @@
 .inner-image{
     width: 100vw;
     float: left;
-    margin-bottom: 50px;
+    /*margin-bottom: 50px;*/
     position: relative;
 }
+.main-slide-button{
+	margin-bottom : 50px;
+}
+.main-slide-button button{
+	border-radius: 5px;
+}
+.main-slide-button button:hover{
+	background-color:rgb(127, 0, 0);
+	color:white;
+}
 .btn1{
-    position: absolute;
-    bottom: 200px;
-    left: 10px;
-    height: 0;
+    border : none;
     padding: 1rem;
-}
-.btn1 .material-icons{
-    font-size: 48px;
-}
-.btn1 .material-icons:hover{
-    color: rgb(127, 0, 0);
 }
 .btn2{
-    position: absolute;
-    bottom: 200px;
-    left: 1100px;
-    height: 0;
+    border:none;
     padding: 1rem;
 }
-.btn2 .material-icons{
-    font-size: 48px;
-}
-.btn2 .material-icons:hover{
-    color: rgb(127, 0, 0);
+.btn3{
+    border:none;
+    padding: 1rem;
 }
 
 /* card list */
