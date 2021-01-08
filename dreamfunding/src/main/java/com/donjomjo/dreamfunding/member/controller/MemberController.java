@@ -91,6 +91,10 @@ public class MemberController {
 		
 		Member loginMem = mService.loginMember(m);
 		
+		
+
+		
+		
 		if(loginMem != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginMem.getMemPwd())) {
 			session.setAttribute("loginMem", loginMem );
 			mv.setViewName("redirect:/");

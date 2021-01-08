@@ -658,7 +658,7 @@ margin-right:20px;}
                           <form action="updatePwd2.me.jm">
                           	<p>현재 비밀번호</p>
                           	
-                            <input type="password" class="form-control" id="cmemPwd1" style="width:200px;
+                            <input type="password" class="form-control" id="cmemPwd1"  style="width:200px;
                                           margin-top:5px; margin-bottom:10px;" placeholder="현재 비밀번호";>
                             <input type="hidden" name="${ loginMem.email }">              
                             <input type="password" class="form-control" id="cmemPwd2" placeholder="변경할 비밀번호"; style="width:200px;
