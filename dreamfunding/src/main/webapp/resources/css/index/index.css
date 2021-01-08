@@ -39,6 +39,7 @@
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	column-gap: 2%;
+	z-index:1;
 }
 .card-item {
 	margin-bottom: 10px;
@@ -69,6 +70,7 @@
     color: rgb(218, 216, 216);
     padding: 0.3rem;
     cursor: pointer;
+    z-index:999;
 }
 .like .material-icons{
     font-size: 36px;

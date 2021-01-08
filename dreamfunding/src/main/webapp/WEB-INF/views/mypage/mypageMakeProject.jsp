@@ -512,7 +512,7 @@ float:right;
               <div id="menu2" class="container tab-pane fade"><br><br>
                 <nav class="nav--top">
                   <ul>
-                      <li><a href="makeProject.me">프로젝트 만들기</a></li>
+                      <li><a href="projectinsert.pi.hy?mno=${loginMem.memNo}">프로젝트 만들기</a></li>
                       <li><a href="myMadeProject.me">제작한 프로젝트</a></li>
                       <li><a href="mypageMessage.me">메시지</a></li>
                   </ul>

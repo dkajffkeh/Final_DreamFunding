@@ -51,7 +51,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="userHandler">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>유저 관리</span>
                 </a>
