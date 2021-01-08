@@ -176,7 +176,7 @@
           </div>
         </div>
         <ul class="content__nav">
-          <li class="borderLeftRight nav-active" id="story-nav"><a href="proDetail.de?&pno=${d.projectNo}">스토리</a></li>
+          <li class="borderLeftRight" id="story-nav"><a href="proDetail.de?&pno=${d.projectNo}">스토리</a></li>
           <li class="borderLeftRight" id="community-nav"><a href="proDetail.de?page=2&pno=${d.projectNo}">커뮤니티</a></li>
           <li class="borderLeftRight" id="policy-nav"><a href="proDetail.de?page=3&pno=${d.projectNo}">펀딩 안내</a></li>
         </ul>
@@ -202,6 +202,27 @@
     
     <script defer>
  
+    // url에서 쿼리스트링 추출 
+    function getUrlParams() {
+        var params = {};
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+        return params;
+    }
+	
+    // 
+ 	  (function(){
+ 		  //console.log(location.href);
+ 		  //console.log(getUrlParams());
+ 		  const option = parseInt(getUrlParams().page);
+ 		  if(!option){
+ 			 document.querySelector('#story-nav').classList.add("nav-active");		 
+ 		  }else if(option===2){
+ 			 document.querySelector('#community-nav').classList.add("nav-active");	
+ 		  }else{
+ 			 document.querySelector('#policy-nav').classList.add("nav-active");	
+ 		  }
+ 	  })()
+    
       // sns 모달
       const snsModalOpen = () => {
         document.querySelector("#sns-modal").classList.toggle("modal__active");
@@ -306,6 +327,7 @@
    		}
    		
    	  })()
+   	  
    	  
       // 프로젝트 종료일까지 남은 기간 구하기  기능   
 	  const endDate = new Date(document.querySelector('#dDay').textContent); // 프로젝트 종료일 

@@ -217,7 +217,7 @@ main .inner {
   left: 0;
   background-color: #ccc4bb;
   transform-origin: bottom right;
-  transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+  transition: transform 0.1s cubic-bezier(0.86, 0, 0.07, 1);
 }
 
 .borderLeftRight:hover::after {
@@ -227,10 +227,14 @@ main .inner {
 
 
 .nav-active{
+  
+}
+
+
+.nav-active::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-
 
 .content__wrapper {
   background: #fff;
