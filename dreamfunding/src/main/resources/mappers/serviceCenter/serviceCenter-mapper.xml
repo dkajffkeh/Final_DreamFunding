@@ -2,4 +2,338 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="serviceCenterMapper">
   
+  <resultMap id="noticeResultSet" type="com.donjomjo.dreamfunding.serviceCenter.model.vo.Notice">
+  	<result column="notice_no" property="noticeNo"/>
+  	<result column="member_no" property="memberNo"/>
+  	<result column="notice_title" property="noticeTitle"/>
+  	<result column="notice_content" property="noticeContent"/>
+  	<result column="notice_upload" property="noticeUpload"/>
+  	<result column="notice_count" property="noticeCount"/>
+  	<result column="notice_status" property="noticeStatus"/>  	
+  </resultMap>
+  <resultMap id="faqResultSet" type="com.donjomjo.dreamfunding.serviceCenter.model.vo.Faq">
+  	<result column="faq_no" property="faqNo"/>
+  	<result column="member_no" property="memberNo"/>
+  	<result column="faq_title" property="faqTitle"/>
+  	<result column="faq_content" property="faqContent"/>
+  	<result column="faq_status" property="faqStatus"/>
+  	<result column="faq_cate" property="faqCate"/>
+  </resultMap>
+  <resultMap id="councilResultSet" type="com.donjomjo.dreamfunding.serviceCenter.model.vo.Council">
+  	<result column="council_no" property="councilNo"/>
+  	<result column="council_title" property="councilTitle"/>
+  	<result column="member_name" property="memberName"/>
+  	<result column="council_content" property="councilContent"/>
+  	<result column="council_c_date" property="councilCdate"/>
+  	<result column="council_ans" property="councilAns"/>
+  	<result column="council_status" property="councilStatus"/>
+  	<result column="council_cate" property="councilCate"/>
+  	<result column="council_a_date" property="councilAdate"/>  
+  </resultMap>
+  
+  <select id="selectListCount" resultType="_int">
+  select
+         count(*)
+    from notice     
+   where notice_status = 'Y'
+  </select>
+  
+  <select id="selectNoticeList" resultMap="noticeResultSet">
+  	select 
+  	       notice_no
+  	     , member_no
+  	     , notice_title
+  	     , notice_content
+  	     , to_char(notice_upload, 'YYYY-MM-DD') "notice_upload"
+  	     , notice_count
+  	  from notice
+  	 where notice_status = 'Y'      
+     order
+        by notice_no desc
+  </select>
+  
+  <update id="increaseCount" parameterType="_int">
+  	update
+	       notice
+	   set notice_count = notice_count + 1
+	 where notice_status = 'Y'
+	   and notice_no = #{nno}
+  </update>
+  
+  <select id="selectNotice" parameterType="_int"  resultMap="noticeResultSet">
+  	select 
+  	       notice_no
+  	     , member_no
+  	     , notice_title
+  	     , notice_content
+  	     , to_char(notice_upload, 'YYYY-MM-DD') "notice_upload"
+  	     , notice_count
+  	  from notice
+  	 where notice_status = 'Y'      
+       and notice_no = #{nno}
+  </select>
+  <insert id="insertNotice" parameterType="Notice">
+  	insert
+	  into notice
+	  (    
+	       notice_no
+	     , member_no
+	     , notice_title
+	     , notice_content
+	   )
+	   values
+	   (  
+	       seq_nono.nextval
+	     , #{memberNo}
+	     , #{noticeTitle}
+	     , #{noticeContent}
+	   
+	   )
+  
+  </insert>
+  <update id="updateNotice" parameterType="Notice">
+  	update
+	       notice 
+	   set notice_title = #{noticeTitle}
+	     , notice_content = #{noticeContent}
+	 where notice_no = #{noticeNo}
+  </update>
+  <update id="deleteNotice" parameterType="_int">
+  	update
+	       notice 
+	   set notice_status = 'N'
+	 where notice_no = #{nno}
+  </update>
+  
+  <select id="selectFaqListCount" parameterType="_int" resultType="_int">
+  	select
+	       count(*)
+	  from FAQ     
+	 where faq_status = 'Y'
+	   and faq_cate = #{ctno}
+  </select>
+  <select id="selectFaqList" parameterType="_int" resultMap="faqResultSet">
+  	select
+	       faq_no
+	     , member_no
+	     , faq_title
+	     , faq_content
+	     , faq_cate
+	  from FAQ
+	 where faq_status = 'Y'
+	   and faq_cate = #{ctno}
+  
+  </select>
+  <insert id="insertFaq" parameterType="com.donjomjo.dreamfunding.serviceCenter.model.vo.Faq">
+  	insert
+	  into FAQ
+	  (
+	       faq_no
+	     , member_no
+	     , faq_title
+	     , faq_content
+	     , faq_cate
+	     )
+	  values
+	  (
+	       seq_fqno.nextval
+	     , 1  
+	     , #{faqTitle}
+	     , #{faqContent}
+	     , #{faqCate}
+	  )
+  </insert>
+  <select id="selectFaq" parameterType="_int" resultMap="faqResultSet">
+  		select
+		       faq_no
+		     , member_no
+		     , faq_title
+		     , faq_content
+		     , faq_cate
+		  from FAQ
+		 where faq_status = 'Y'
+		   and faq_no = #{fno}
+  </select>
+  <update id="updateFaq" parameterType="com.donjomjo.dreamfunding.serviceCenter.model.vo.Faq">
+  	update 
+	      FAQ
+	  set faq_title=#{faqTitle},
+	      faq_content=#{faqContent},
+	      faq_cate=#{faqCate}
+	where faq_no=#{faqNo}
+  	
+  </update>
+  <update id="deleteFaq" parameterType="_int">
+  	update 
+	      FAQ
+	  set faq_status='N'	     
+	where faq_no=#{fno}
+  </update>
+  <select id="selectStatus" parameterType="_int" resultType="_int">
+  	select
+	       member_status
+	  from member
+	where member_no = #{mno}  
+  
+  </select>
+  
+  <select id="selectCouncilCount" parameterType="_int" resultType="_int">
+  	select
+	       count(*)
+	  from council     
+	 where council_status != 'D'
+	   and member_no = #{mno}
+  
+  </select>
+  <select id="selectCouncilCountAd" resultType="_int">
+  	select
+	       count(*)
+	  from council     
+	 where council_status != 'D'
+  
+  </select>
+  
+  <select id="selectCouncilList" parameterType="_int" resultMap="councilResultSet">
+  	select
+	       council_no
+	     , council_title
+	     , member_name
+	     , council_content
+	     , to_char(council_c_date, 'YYYY-MM-DD') "council_c_date"
+	     , council_ans
+	     , council_status
+	     , council_cate
+	     , to_char(council_a_date, 'YYYY-MM-DD') "council_a_date"
+	  from council
+	  join member using (member_no)
+	 where council_status != 'D'
+	   and member_no = #{mno}
+	 order
+	    by council_no desc  
+  
+  </select>
+    <select id="selectCouncilListAd" resultMap="councilResultSet">
+  	select
+	       council_no
+	     , council_title
+	     , member_name
+	     , council_content
+	     , to_char(council_c_date, 'YYYY-MM-DD') "council_c_date"
+	     , council_ans
+	     , council_status
+	     , council_cate
+	     , to_char(council_a_date, 'YYYY-MM-DD') "council_a_date"
+	  from council
+	  join member using (member_no)
+	 where council_status != 'D'
+	 order
+	    by council_no desc    
+  
+  </select>
+  <select id="selectCouncil" parameterType="_int" resultMap="councilResultSet">
+  	select
+	       council_no
+	     , council_title
+	     , member_name
+	     , council_content
+	     , to_char(council_c_date, 'YYYY-MM-DD') "council_c_date"
+	     , council_ans
+	     , council_status
+	     , council_cate
+	     , to_char(council_a_date, 'YYYY-MM-DD') "council_a_date"
+	  from council
+	  join member using (member_no)
+	 where council_status != 'D'
+	   and council_no=#{cno}
+  
+  </select>
+  
+  <insert id="insertCouncil" parameterType="com.donjomjo.dreamfunding.serviceCenter.model.vo.Council">
+  	insert
+  into council
+  (
+       council_no
+     , council_title
+     , member_no
+     , council_content
+     , council_cate
+     )
+  values
+  (
+       seq_cono.nextval
+     , #{councilTitle}
+     , #{memberNo}
+     , #{councilContent}
+     , #{councilCate}
+     )
+  
+  </insert>
+  <update id="updateCouncil" parameterType="com.donjomjo.dreamfunding.serviceCenter.model.vo.Council">
+	update
+		   council  
+	   set council_title = #{councilTitle}	    
+	     , council_content = #{councilContent}
+	     , council_cate = #{councilCate}	     
+     where council_no = #{councilNo}
+  
+  </update>
+  <update id="deleteCouncil" parameterType="_int">
+  	update
+  	       council
+  	   set council_status='D'
+  	 where council_no=#{cno}        
+  	
+  	
+  </update>
+  <update id="insertCouncilAns" parameterType="com.donjomjo.dreamfunding.serviceCenter.model.vo.Council">
+  	update
+	       council
+	   set council_ans = #{councilAns}
+	     , council_status= 'Y'
+	     , council_a_date = sysdate
+	 where council_no= #{councilNo}
+  </update>
+  
+  <update id="deleteCouncilAns" parameterType="_int">
+  	update
+  	       council
+  	   set council_status='N'
+  	 where council_no=#{cno}       
+  
+  </update>
+  <select id="searchNoticeCount" parameterType="hashmap" resultType="_int">
+  	  select
+	         count(*)
+	    from notice     
+	   where notice_status = 'Y'
+	   <if test="cate == 'content'">
+  	     and notice_content
+  	   </if>
+  	   <if test="cate == 'title'">
+  	     and notice_title
+  	   </if> 
+  	       like '%' || #{keyword} || '%'
+  </select>
+  
+  
+  <select id="searchNoticeList" parameterType="hashmap" resultMap="noticeResultSet">
+  	select 
+  	       notice_no
+  	     , member_no
+  	     , notice_title
+  	     , notice_content
+  	     , to_char(notice_upload, 'YYYY-MM-DD') "notice_upload"
+  	     , notice_count
+  	  from notice  
+  	 where notice_status = 'Y'
+  	   <if test="cate == 'content'">
+  	   and notice_content
+  	   </if>
+  	   <if test="cate == 'title'">
+  	   and notice_title
+  	   </if> 
+  	       like '%'||#{keyword}||'%'
+  </select>
+  
+  
 </mapper>

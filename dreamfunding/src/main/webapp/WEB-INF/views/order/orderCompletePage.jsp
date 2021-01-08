@@ -25,6 +25,7 @@
 	    #mainContent>div{height:100%; float:left;}
 	    .subImg1{width: 30%; height:400px;}
 	    #resubImg{width: 30%; height:360px;}
+	    #resubImg:hover{transform: scale(1.05);}
 	    footer{position:relative; bottom:0;}
  </style>
 </head>
@@ -37,7 +38,7 @@
 		        <br><br>
 	            <div id="titleImg">
 	            	<img
-	                  src="resources/images/projectThumbnail/${ pro.projectFileName }"
+	                  src="/dreamfunding/resources/images/projectThumbnail/${ pro.projectFileName }"
 	                  style="width:300px; height:250px"
 	                />
 	            </div>
@@ -79,13 +80,22 @@
             	&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <div id="mainContent">
+            	<!-- 
 		        <c:forEach var="rPro" items="${ proList }">
 					<div id="resubImg" style="height:360px">
-						<img src="${ rPro.projectThumbnailPath }/${ rPro.projectFileName }" style="width:300px; height:250px">
+						<img src="/dreamfunding/resources/images/projectThumbnail/${ rPro.projectFileName }" style="width:300px; height:250px">
 		                <br><b  style="display:inline-block; width:300px;">${ rPro.projectTitle }</b>
 		                <br><p style="font-size:20px; color:red; font-weight:bold;">${ rPro.projectEndDate }</p>
 					</div>	
 				</c:forEach>
+				 -->
+				<c:forEach var ="i" begin="0" end="8">
+		        	<div id="resubImg" style="height:360px" onclick="location.href='proDetail.de?pno=${ proList[i].projectNo }';">
+						<img src="/dreamfunding/resources/images/projectThumbnail/${ proList[i].projectFileName }" style="width:300px; height:250px">
+		                <br><b  style="display:inline-block; width:300px;">${ proList[i].projectTitle }</b>
+		                <br><p style="font-size:20px; color:red; font-weight:bold;">${ proList[i].projectEndDate }</p>
+					</div>	
+		        </c:forEach>
 			</div>
 		</div>
 

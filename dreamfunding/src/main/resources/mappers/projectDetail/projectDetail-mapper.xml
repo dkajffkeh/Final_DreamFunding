@@ -80,9 +80,8 @@
 		<result column="REPLY_CONTENT" property="replyContent"/>
 		<result column="REPLY_DATE" property="replyDate"/>
 		<result column="REPLY_STATUS" property="replyStatus"/>
-		<result column="MEMBER_PF_PATH" property="memberPfPath"/>
+		<result column="MEMBER_SYSTEMNAME" property="memberSystemName"/>
 		<result column="MEMBER_NICKNAME" property="memberNickname"/>
-		
 	</resultMap>
 	
 	<resultMap id="subReplyResultSet" type="SubReply">
@@ -92,11 +91,14 @@
 		<result column="SUBRE_CONTENT" property="subReContent"/>
 		<result column="SUBRE_DATE" property="subReDate"/>
 		<result column="SUBRE_STATUS" property="subReStatus"/>
-		<result column="MEMBER_PF_PATH" property="memberPfPath"/>
-		<result column="MEMBER_NICKNAME" property="memberNickname"/>
-		
+		<result column="MEMBER_SYSTEMNAME" property="memberSystemName"/>
+		<result column="MEMBER_NICKNAME" property="memberNickname"/>	
 	</resultMap>
  	
+ 	<resultMap id="DetailPurchaseResultSet" type="DetailPurchase">
+ 		<result column="RE_PRICE" property="rePrice"/>
+ 		<result column="REWARD_AMOUNT" property="rewardAmount"/>
+ 	</resultMap>
    <select id="selectListCount" resultType="_int">
    	SELECT 
    		   COUNT(*)
@@ -209,6 +211,7 @@
   			   )  
   	</insert>
   	
+  	
 <!-- 좋아요 생성 쿼리 --> 
 <insert id="insertDetailLike" parameterType="Like">
 	INSERT
@@ -248,10 +251,13 @@
 	       REPLY.REPLY_NO,
 	       REPLY.REPLY_STATUS,
 	       M.MEMBER_NICKNAME,
-	       M.MEMBER_PF_PATH
+	       M.MEMBER_SYSTEMNAME
 	  FROM REPLY
 	  LEFT JOIN MEMBER M ON REPLY.MEMBER_NO = M.MEMBER_NO
 	 WHERE PROJECT_NO = #{pno}
+	   AND REPLY.REPLY_STATUS = 'Y'
+	 ORDER
+	    BY REPLY_NO DESC
 </select>
 
 <!-- 대댓글 조회 쿼리 -->
@@ -263,9 +269,118 @@
 	       REPLY_ANS.SUBRE_DATE,
 	       REPLY_ANS.SUBRE_STATUS,
 	       M.MEMBER_NICKNAME,
-	       M.MEMBER_PF_PATH
+	       M.MEMBER_SYSTEMNAME
 	  FROM REPLY_ANS
       LEFT JOIN MEMBER M ON REPLY_ANS.MEMBER_NO = M.MEMBER_NO
 	 WHERE REPLY_NO = #{rno}
+	   AND REPLY_ANS.SUBRE_STATUS = 'Y'
+	 ORDER
+	    BY SUBRE_ANSNO DESC
 </select>
+
+
+<!-- 댓글 등록 쿼리 -->
+<insert id="insertReply" parameterType="Reply">
+  		INSERT 
+  		  INTO REPLY
+	  		  (
+	  		  	  REPLY_NO
+	  		  	, MEMBER_NO
+		  		, PROJECT_NO
+	  		  	, REPLY_CONTENT
+	  		  	, REPLY_DATE
+	  		  	, REPLY_STATUS
+	  		  )
+  		VALUES (
+  				  SEQ_RENO2.NEXTVAL	
+  				, #{ memberNo }
+  				, #{ projectNo }
+  				, #{ replyContent }
+  				, SYSDATE
+  				, 'Y'
+  			   )  
+</insert> 
+
+<!-- 댓글 수정 쿼리 -->
+<update id="updateReply" parameterType="Reply">
+	UPDATE REPLY
+	   SET REPLY_CONTENT=#{replyContent}
+	     , REPLY_DATE=SYSDATE
+	 WHERE REPLY_NO=#{ replyNo }
+</update>
+
+<!-- 댓글 삭제 쿼리 -->
+<update id="deleteReply" parameterType="_int">
+	UPDATE REPLY
+	   SET REPLY_STATUS='N'
+	     , REPLY_DATE=SYSDATE
+	 WHERE REPLY_NO=#{ rno }
+</update>
+
+<!-- 대댓글 등록 쿼리 -->
+<insert id="insertSubReply" parameterType="Reply">
+  		INSERT 
+  		  INTO REPLY_ANS
+	  		  (
+	  		  	  SUBRE_ANSNO
+	  		  	, REPLY_NO
+	  		  	, MEMBER_NO
+	  		  	, SUBRE_CONTENT
+	  		  	, SUBRE_DATE
+	  		  	, SUBRE_STATUS
+	  		  )
+  		VALUES (
+  				  SEQ_RRENO2.NEXTVAL
+  				, #{ replyNo } 	
+  				, #{ memberNo }
+  				, #{ replyContent }
+  				, SYSDATE
+  				, 'Y'
+  			   )  
+</insert> 
+
+<!-- 대댓글 수정 쿼리 -->
+<update id="updateSubReply" parameterType="Reply">
+	UPDATE REPLY_ANS
+	   SET SUBRE_CONTENT=#{replyContent}
+	     , SUBRE_DATE=SYSDATE
+	 WHERE SUBRE_ANSNO=#{ replyNo }
+</update>
+
+<!-- 대댓글 삭제 쿼리 -->
+<update id="deleteSubReply" parameterType="_int">
+	UPDATE REPLY_ANS
+	   SET SUBRE_STATUS='N'
+	     , SUBRE_DATE=SYSDATE
+	 WHERE SUBRE_ANSNO=#{ sno }
+</update>
+
+<!-- 대댓글 조회 쿼리 -->
+<select id="selectSubReplyOne" parameterType="Reply" resultMap="subReplyResultSet">
+	SELECT REPLY_ANS.REPLY_NO,
+	       REPLY_ANS.MEMBER_NO,
+	       REPLY_ANS.SUBRE_ANSNO,
+	       REPLY_ANS.SUBRE_CONTENT,
+	       REPLY_ANS.SUBRE_DATE,
+	       REPLY_ANS.SUBRE_STATUS,
+	       M.MEMBER_NICKNAME,
+	       M.MEMBER_SYSTEMNAME
+	  FROM REPLY_ANS
+      LEFT JOIN MEMBER M ON REPLY_ANS.MEMBER_NO = M.MEMBER_NO
+	 WHERE REPLY_NO = #{ replyNo }
+	   AND REPLY_ANS.SUBRE_STATUS = 'Y'
+	   AND REPLY_ANS.MEMBER_NO = #{ memberNo }
+	   AND REPLY_ANS.SUBRE_CONTENT = #{ replyContent }
+</select>
+
+<!-- 결제정보 조회 쿼리 -->
+
+<select id="selectDetailPurchase" parameterType="_int" resultMap="DetailPurchaseResultSet">
+	SELECT REWARD_AMOUNT, RE_PRICE
+	  FROM PURCHASE_INFO
+	  LEFT JOIN REWARD R ON PURCHASE_INFO.RE_NO = R.RE_NO
+	 WHERE R.PROJECT_NO = #{pno} AND PURINFO_STATUS = 'Y'	 
+</select>
+
+
 </mapper>

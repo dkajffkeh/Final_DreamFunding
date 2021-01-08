@@ -27,6 +27,6 @@ public class SubReply {
 	private String subReContent;
 	private String subReDate;
 	private String subReStatus; 
-	private String memberPfPath;
+	private String memberSystemName;
 	private String memberNickname;
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailPurchase;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReport;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
@@ -40,31 +41,36 @@ public interface DetailService {
 	int deleteLike(Like lk);
 	
 
-	
-	// 댓글 등록 서비스 
-	int insertReply(Reply reply);
-	
 	// 댓글 조회 서비스
 	ArrayList<Reply> selectReply(int pno);
 	
+	// 댓글 등록 서비스 
+	int insertReply(Reply rp);
+	
 	// 댓글 수정 서비스 
-	int updateReply(Reply reply);
+	int updateReply(Reply rp);
 	
 	// 댓글 삭제 서비스
-	int deleteReply(int reno);
+	int deleteReply(int rno);
 	
 	
 	// 대댓글 등록 서비스  
-	int insertSubReply(SubReply subReply);
+	int insertSubReply(Reply rp);
 	
 	// 대댓글 조회 서비스
 	ArrayList<SubReply> selectSubReply(int rno);
 	
 	// 대댓글 수정 서비스 
-	int updateSubReply(SubReply subReply);
+	int updateSubReply(Reply rp);
 	
 	// 대댓글 삭제 서비스
-	int deleteSubReply(int subNo);
+	int deleteSubReply(int sno);
+
+	// 대댓글 1개 조회 
+	ArrayList<SubReply> selectSubReplyOne(Reply rp);
+
+	// 결제 정보 조회 
+	ArrayList<DetailPurchase> selectDetailPurchase(int pno);
 
 	
 

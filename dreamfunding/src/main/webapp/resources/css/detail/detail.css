@@ -44,6 +44,14 @@ main .inner {
 	 height: 40px;
 }
 
+.intro-top__wrapper .profile_wrapper .material-icons{
+	 font-size: 30px;
+	 margin-right:10px;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+}
+
 .intro-top__wrapper .profile_wrapper .name{
 	 font-size: 15px;
 	 font-weight: bold;
@@ -245,12 +253,12 @@ main .inner {
 
 /* STORY */
 .story-content {
-  padding: 20px;
+  padding: 50px;
   box-shadow: 0 0 6px rgb(197, 194, 194);
 }
 
 .story-content img {
-  width: 100%;
+  width: 100% !important;
   margin-bottom: 30px;
 }
 
@@ -258,6 +266,10 @@ main .inner {
   margin-bottom: 30px;
   font-size: 20px;
   text-align: center;
+}
+
+.story-content h2 {
+	line-height:1.5;
 }
 
 .story-content p {
@@ -272,15 +284,13 @@ main .inner {
 }
 
 .hashtag-box .btn {
-  padding: 5px 20px;
+  padding: 5px 15px;
   margin-right: 10px;
   border-radius: 15px;
   cursor: pointer;
   color: white;
   background: #ccc4bb;
-  width: 80px;
-  height: 40px;
-}
+  }
 
 /* SECTION RIGHT */
 .section-right {
@@ -304,25 +314,18 @@ main .inner {
   font-weight: bold;
 }
 
-/*
-.creator-title {
-  display: flex;
-  align-items: center;
-} 
-
-.creator-profile {
-  max-width: 40px;
-}
-
-.creator-name {
-  padding: 10px;
-  font-size: 16px;
-  font-weight: bold;
-}  */
 
 .creator-info__wrapper .profile_wrapper {
 	display:flex;
   	align-items: center;
+}
+
+.creator-info__wrapper .profile_wrapper .material-icons{
+	margin-right: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
 }
 
 .creator-info__wrapper .profile_wrapper .name{
@@ -483,13 +486,25 @@ button {
 .profile_wrapper {
   display: flex !important; 
   justify-content: start;
+  align-items:center;	
   padding-bottom: 1rem;
   border-bottom: var(--line);
 }
 
+.profile_wrapper .material-icons{
+	 font-size: 45px;
+	 margin-right:10px;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 width: 30px;
+	 height: 30px;
+	 margin-right: 15px;
+}
+
 .image {
-  width: 55px;
-  height: 55px;
+  width: 45px;
+  height: 45px;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 15px;
@@ -498,12 +513,11 @@ button {
 .profile_caption {
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  padding: 0.5rem 0;
+  justify-content: center;
+  gap:1px;	
 }
 
 .comment_list .profile_wrapper .profile_caption .name {
-  margin-bottom: 0.5rem;
   font-size: 13px;
   font-weight: bold;
 }
@@ -515,6 +529,7 @@ button {
 .date {
   font-weight: 400;
   font-size: 13px;
+  margin-bottom: 0px;
 }
 
 .comment_text {
@@ -629,6 +644,17 @@ textarea {
 }
 button {
   outline: none;
+}
+
+.cet{
+	width:100%;
+	height:50px;
+	padding: 10px;
+	resize:none;
+}
+
+.cetna{
+	display:none;
 }
 
 /* POLICY */
@@ -829,3 +855,27 @@ button {
 .disable-section{
 	display:none;
 }
+
+
+@keyframes bling{
+	from {
+		text-shadow: 0 0 10px #fff;
+	}
+	to{
+		text-shadow:0 0 10px #ffa8a8;
+	}
+} 
+
+
+@keyframes bling2{
+	from {
+		transform: scale(1.0);
+	}
+	to{
+		transform: scale(1.01);
+	}
+} 
+
+
+
+

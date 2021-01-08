@@ -21,8 +21,14 @@
 		<result column="HASHTAG" property="hashtag" />
 		<result column="PROJECT_CRDATE" property="projectCrDate" />
 	</resultMap>
+	
+	<resultMap type="IndexLike" id="indexLikeResultSet">
+		<result column="PROJECT_NO" property="projectNo" />
+		<result column="MEMBER_NO" property="memberNo" />
+	</resultMap>
 
 	<select id="selectProgressFundingList" resultMap="indexResultSet">
+		<![CDATA[
 		select
 		       project_no
 		     , member_no
@@ -43,9 +49,12 @@
 		     , project_crdate
 		  from project
 		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		 ]]>
 	</select>
 
 	<select id="selectRankingList" resultMap="indexResultSet">
+		<![CDATA[
 		select
 		       project_no
 		     , member_no
@@ -66,6 +75,10 @@
 		     , project_crdate
 		  from project
 		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		 order
+		    by project_count desc
+		    ]]>
 	</select>
 	
 	<select id="selectClosedFundingList" resultMap="indexResultSet">
@@ -89,11 +102,12 @@
 		     , hashtag
 		     , project_crdate
 		  from project
-		 where project_close_dt < sysdate 
+		 where project_close_dt < to_char(sysdate, 'YYYY-MM-DD')
 		 ]]>
 	</select>
 	
 	<select id="selectFundingMoneyList" resultMap="indexResultSet">
+		<![CDATA[
 		select
 		       project_no
 		     , member_no
@@ -114,9 +128,14 @@
 		     , project_crdate
 		  from project
 		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		 order
+		    by project_gprice desc
+		    ]]>
 	</select>
 	
 	<select id="selectClosedList" resultMap="indexResultSet">
+		<![CDATA[
 		select
 		       project_no
 		     , member_no
@@ -137,11 +156,14 @@
 		     , project_crdate
 		  from project
 		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
 		 order
 		    by project_close_dt asc
+		    ]]>
 	</select>
 	
 	<select id="selectNewList" resultMap="indexResultSet">
+		<![CDATA[
 		select
 		       project_no
 		     , project_goal
@@ -157,11 +179,267 @@
 		     , creator_status
 		  from project
 		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
 		 order
 		    by project_start_dt asc
+		    ]]>
+	</select>
+	
+	<insert id="increaseLike" 
+			parameterType="IndexLike">
+		insert
+		  into likey
+		  (
+		  	project_no,
+		  	member_no
+		  )
+		  values
+		  (
+		  	#{projectNo}
+		  , #{memberNo}
+		  )
+	</insert>
+	
+	<select id="likeYN" parameterType="IndexLike" resultType="_int">
+		select count(*)
+		  from likey
+		 where project_no = #{projectNo}
+		   and member_no = #{memberNo}
+	</select>
+	
+	<delete id="deleteLike" parameterType="IndexLike">
+		delete from likey
+		 where project_no = #{projectNo}
+		   and member_no = #{memberNo}
+	</delete>
+
+	<select id="likeList" parameterType="_int" resultMap="indexLikeResultSet">
+		select *
+		  from likey
+		 where member_no = #{mno}
 	</select>
 
-
+	<select id="selectListCount" resultType="_int">
+		select
+		       count(*)
+		  from project
+	     where creator_status = 'U'
+	</select>
+	
+	<select id="selectProjectList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   ]]>
+	</select>
+	
+	<select id="selectSearchList" resultMap="indexResultSet" parameterType="string">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and project_title like '%'||#{keyword}||'%'
+		   ]]>
+	</select>
+	
+	<select id="selectMagazineList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and pro_cateNo = 10
+		   ]]>
+	</select>
+	
+	<select id="selectEssayList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and pro_cateNo = 20
+		   ]]>
+	</select>
+	
+	<select id="selectArtList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and pro_cateNo = 30
+		   ]]>
+	</select>
+	
+	<select id="selectHobbyList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and pro_cateNo = 40
+		   ]]>
+	</select>
+	
+	<select id="selectDrawingList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and pro_cateNo = 50
+		   ]]>
+	</select>
+	
+	<select id="selectEtcList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and pro_cateNo = 60
+		   ]]>
+	</select>
 
 
   

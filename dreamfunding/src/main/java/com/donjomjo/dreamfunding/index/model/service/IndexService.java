@@ -2,7 +2,9 @@ package com.donjomjo.dreamfunding.index.model.service;
 
 import java.util.ArrayList;
 
+import com.donjomjo.dreamfunding.common.model.vo.PageInfo;
 import com.donjomjo.dreamfunding.index.model.vo.Index;
+import com.donjomjo.dreamfunding.index.model.vo.Like;
 
 public interface IndexService {
 	
@@ -35,6 +37,26 @@ public interface IndexService {
 	// 8. 진행중인 펀딩(최신순) 조회
 	ArrayList<Index> selectNew();
 	
+	int increaseLike(Like like);
+	
+	int likeYN(Like like);
+	
+	int deleteLike(Like like);
+	
+	ArrayList<Like> likeList(int mno);
+	
+	// 페이징
+	int selectListCount();
+	ArrayList<Index> selectProjectList(PageInfo pi);
+	ArrayList<Index> selectRankingList(PageInfo pi);
+	ArrayList<Index> selectMagazineList(PageInfo pi);
+	ArrayList<Index> selectEssayList(PageInfo pi);
+	ArrayList<Index> selectArtList(PageInfo pi);
+	ArrayList<Index> selectHobbyList(PageInfo pi);
+	ArrayList<Index> selectDrawingList(PageInfo pi);
+	ArrayList<Index> selectEtcList(PageInfo pi);
+	
+	ArrayList<Index> selectSearchList(PageInfo pi, String keyword);
 	
 	
 	
