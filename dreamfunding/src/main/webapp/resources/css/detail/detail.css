@@ -486,13 +486,25 @@ button {
 .profile_wrapper {
   display: flex !important; 
   justify-content: start;
+  align-items:center;	
   padding-bottom: 1rem;
   border-bottom: var(--line);
 }
 
+.profile_wrapper .material-icons{
+	 font-size: 45px;
+	 margin-right:10px;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 width: 30px;
+	 height: 30px;
+	 margin-right: 15px;
+}
+
 .image {
-  width: 55px;
-  height: 55px;
+  width: 45px;
+  height: 45px;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 15px;
@@ -501,12 +513,11 @@ button {
 .profile_caption {
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  padding: 0.5rem 0;
+  justify-content: center;
+  gap:1px;	
 }
 
 .comment_list .profile_wrapper .profile_caption .name {
-  margin-bottom: 0.5rem;
   font-size: 13px;
   font-weight: bold;
 }
@@ -518,6 +529,7 @@ button {
 .date {
   font-weight: 400;
   font-size: 13px;
+  margin-bottom: 0px;
 }
 
 .comment_text {

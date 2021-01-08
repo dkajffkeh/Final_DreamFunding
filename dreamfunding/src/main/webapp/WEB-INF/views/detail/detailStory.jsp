@@ -44,18 +44,19 @@
 
 	   // 해시태그 출력 
 	   let hashTag = '${d.hashtag}';
-	   
-	   (function(){
-		   const ht = hashTag.split(' '); // 공백 기준으로 배열로 담김 
-		   
-		   ht.forEach(v=>{
-			   const hbtn = document.createElement('button');
-			   hbtn.className='btn hash-btn';
-			   hbtn.innerText= v;
-			   document.querySelector('#hashtag-box').appendChild(hbtn);
-		   })
-	   })()
-	   
+	   // 공백 제거 후 true한 값일 때
+	   if(hashTag.trim()){
+		   (function(){
+			   const ht = hashTag.split(' '); // 공백 기준으로 배열로 담김 
+			   
+			   ht.forEach(v=>{
+				   const hbtn = document.createElement('button');
+				   hbtn.className='btn hash-btn';
+				   hbtn.innerText= v;
+				   document.querySelector('#hashtag-box').appendChild(hbtn);
+			   })
+		   })()
+	   }  
 	</script>
 
 </body>

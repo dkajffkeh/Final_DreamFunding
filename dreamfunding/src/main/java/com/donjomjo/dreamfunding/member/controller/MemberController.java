@@ -139,7 +139,6 @@ public class MemberController {
 	@RequestMapping("delete.me.jm")
 	public String deleteMember(Member m, HttpSession session, Model model) {
 		
-		System.out.println(m);
 		
 		Member loginMem = (Member)session.getAttribute("loginMem");
 		
@@ -165,8 +164,8 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="message.me.jm")
 	public String message(HttpSession session, String phone) {
-		String api_key = "NCSOS7YWFCF3SGWD";
-	    String api_secret = "WV56MGDCXLSATWCGEBMX1RZWNILYKJBO";
+		String api_key = "NCSHEUK3RJXIEMML";
+	    String api_secret = "VCNJDK54PK3LEUZKM9H57FNDILILSRM1";
 	    
 	    Message coolsms = new Message(api_key, api_secret);
 	    String random =  (int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +""+(int)(Math.random() * 10) +"";
@@ -273,6 +272,45 @@ public class MemberController {
 		
 		return "member/emailList";
 				
+	}
+	
+	@RequestMapping("updatePwd2.me.jm")
+	public String updatePwd2(Member m, Model model, HttpSession session) {
+
+		Member loginMem = mService.loginMember(m);
+		
+		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
+		
+		m.setMemPwd(encPwd);
+		
+		if(loginMem != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginMem.getMemPwd())) {
+			
+			int result = mService.updatePwd(m);
+			
+			if(result > 0) {
+				
+				session.setAttribute("alertMsg", "비밀번호 수정 완료");
+				
+				return "mypage/optionProfile";
+				
+			}else { 
+				
+				session.setAttribute("alertMsg", "비밀번호 수정 실패");
+				
+				return "mypage/optionProfile";
+			}
+			
+			
+		}
+		return "mypage/optionProfile";
+			
+		
+		
+
+		
+		
+		
+		
 	}
 	
 	

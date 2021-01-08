@@ -57,11 +57,16 @@
                       style="margin-left: 0rem"
                     >
                       <div class="profile_wrapper">
-                        <img
-                          class="image"
-                          src="resources/images/${ r.memberPfPath }"
-                          alt="유저 프로필 이미지"
-                        />
+        					<c:if test="${ !empty r.memberSystemName }">
+                                <img
+                                  class="image"
+                                  src="resources/images/profile/${r.memberSystemName}"
+                                  alt=""
+                                />
+                              </c:if>  
+							<c:if test="${ empty r.memberSystemName }">
+                   	    		<span class="material-icons">account_circle</span>
+                     		</c:if>
                         <div class="profile_caption">
                           <h5 class="name">${ r.memberNickname }</h5>
                           <p class="date">${ r.replyDate }</p>
@@ -151,11 +156,17 @@
                               style="margin-left: 4rem"
                             >
                               <div class="profile_wrapper">
+                              
+                              <c:if test="${ !empty s.memberSystemName }">
                                 <img
                                   class="image"
-                                  src="resources/images/${s.memberPfPath}"
+                                  src="resources/images/profile/${s.memberSystemName}"
                                   alt=""
                                 />
+                              </c:if>  
+							<c:if test="${ empty s.memberSystemName }">
+                   	    		<span class="material-icons">account_circle</span>
+                     		</c:if>
                                 <div class="profile_caption">
                                   <h5 class="name">${ s.memberNickname }</h5>
                                   <p class="date">${ s.subReDate }</p>
@@ -422,9 +433,19 @@
        const profileWrapper = document.createElement('div');
           profileWrapper.className = 'profile_wrapper';
           
-        const profileImg = document.createElement('img');
-          profileImg.src='resources/images/'+v.memberPfPath;
-          profileImg.className='image';
+      
+        let profileImg 
+        	
+        if(v.memberSystemName){
+            profileImg = document.createElement('img');
+            profileImg.src='resources/images/profile'+v.memberSystemName;
+            profileImg.className='image';
+        }else{
+        	profileImg = document.createElement('span');
+        	profileImg.className='material-icons';
+        	profileImg.innerText='account_circle';
+        }  
+        
         const profileCaption = document.createElement('div');
             profileCaption.className = 'profile_caption';
           const profileName = document.createElement('h5');

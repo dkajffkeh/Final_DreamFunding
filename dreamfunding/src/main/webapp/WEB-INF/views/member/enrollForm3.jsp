@@ -104,7 +104,7 @@
                   
                   
                   <div align="center"> 
-                    <input type="radio" name="gender" value="M" id="male">
+                    <input type="radio" name="gender" value="M" id="male" checked>
                     <label for="male">남성</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="radio" name="gender" value="F" id="female">
                     <label for="female">여성</label>

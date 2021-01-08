@@ -224,7 +224,9 @@
       };
      
       
-      
+      // 좋아요 유무 조회 
+      // 로그인한 사용자와 좋아요한 사용자 일치 시 removeLike 함수 호출 
+      // 로그인한 사용자와 좋아요한 사용자 불일치 시 addLike 함수 호출 
       const likeBtnWrapper = document.querySelector("#like-btn__wrapper")  
       const makeLikeBtn =(isOk)=>{
     	  const likeBtn = document.createElement("button")
@@ -235,7 +237,7 @@
     			}else if(!isOk){
     				likeBtn.onclick=addLike
     			}
-    	    		likeBtn.id="addLike"
+    	    likeBtn.id="addLike"
    	  const span = document.createElement("span")
    	   span.className="material-icons"
    	   span.innerText = isOk ? "favorite" : "favorite_border" 
@@ -348,10 +350,6 @@
    	          mobileWebUrl: 'https://developers.kakao.com',
    	          webUrl: 'https://developers.kakao.com',
    	        },
-   	      },
-   	      social: {
-   	        likeCount: 286,
-   	        commentCount: 45,
    	      },
    	      buttons: [
    	        {
