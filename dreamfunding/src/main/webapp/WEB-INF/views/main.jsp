@@ -8,8 +8,6 @@
 <title>Dream Funding</title>    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/index.css" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 </head>
 <body>
 
@@ -164,6 +162,10 @@
 	        	$(function(){
 	        		selectProgressFundingList();
 	        	})
+	        	
+	        	function detailClick(pno){
+	        		location.href = "proDetail.de?pno=" + pno;
+	        	}
 	        	function selectProgressFundingList(progressList){
 	        		
 	        		
@@ -183,7 +185,7 @@
 		        				
 		        				
 	        					if(i < 8){
-		    						value += "<li class='card-item' onclick='location.href='proDetail.de?pno=" + progressList[i].projectNo + "'>" +
+		    						value += "<li class='card-item'>" +
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + progressList[i].projectFileName + ")'>" +
 						    	                    "<div>" +
 						    	                      "<div class='like'>";
@@ -202,7 +204,7 @@
 						    	                      "</div>" +
 						    	                    "</div>" +
 						    	                  "</figure>" +
-						    	                  "<div class='card-desc'>" +
+						    	                  "<div class='card-desc' onclick='detailClick(" + progressList[i].projectNo + ")'>" +
 						    	                      "<div class='project-content'>" +
 						    	                          "<div class='project-company'>" + progressList[i].creatorName + "</div>" +
 						    	                          "<div class='project-title'>" + progressList[i].projectTitle + "</div>" +
@@ -331,7 +333,7 @@
 		        				gapDay = Math.floor(gapDay / (1000 * 60 * 60 * 24));
 	        					
 	        					if(i<8){	
-		    						value += "<li class='card-item'>" + 
+		    						value += "<li class='card-item'>" +
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectMoneyList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    				                  "<div class='like'>";
@@ -350,7 +352,7 @@
 			    	                      "</div>" +
 			    	                    "</div>" +
 			    	                  "</figure>" +
-				    	                  "<div class='card-desc'>" +
+				    	                  "<div class='card-desc' onclick='detailClick(" + selectMoneyList[i].projectNo + ")'>" +
 				    	                      "<div class='project-content'>" +
 				    	                          "<div class='project-company'>" + selectMoneyList[i].creatorName + "</div>" +
 				    	                          "<div class='project-title'>" + selectMoneyList[i].projectTitle + "</div>" +
@@ -385,7 +387,7 @@
 		        				gapDay = Math.floor(gapDay / (1000 * 60 * 60 * 24));
 		        				
 	    						if(i<8){
-		        					value += "<li class='card-item'>" + 
+		        					value += "<li class='card-item'>" +
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectClosedList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    				                  "<div class='like'>";
@@ -404,7 +406,7 @@
 			    	                      "</div>" +
 			    	                    "</div>" +
 			    	                  "</figure>" +
-						    	                  "<div class='card-desc'>" +
+						    	                  "<div class='card-desc' onclick='detailClick(" + selectClosedList[i].projectNo + ")'>" +
 						    	                      "<div class='project-content'>" +
 						    	                          "<div class='project-company'>" + selectClosedList[i].creatorName + "</div>" +
 						    	                          "<div class='project-title'>" + selectClosedList[i].projectTitle + "</div>" +
@@ -439,7 +441,7 @@
 		        				gapDay = Math.floor(gapDay / (1000 * 60 * 60 * 24));
 	        					
 	        					if(i<8){
-		    						value += "<li class='card-item'>" + 
+		    						value += "<li class='card-item'>" +
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectNewList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    				                  "<div class='like'>";
@@ -458,7 +460,7 @@
 			    	                      "</div>" +
 			    	                    "</div>" +
 			    	                  "</figure>" +
-						    	                  "<div class='card-desc'>" +
+						    	                  "<div class='card-desc' onclick='detailClick(" + selectNewList[i].projectNo + ")'>" +
 						    	                      "<div class='project-content'>" +
 						    	                          "<div class='project-company'>" + selectNewList[i].creatorName + "</div>" +
 						    	                          "<div class='project-title'>" + selectNewList[i].projectTitle + "</div>" +
@@ -530,7 +532,7 @@
 	        					if(i<8){
 	        						
 	        					
-		    						value += "<li class='card-item'>" + 
+		    						value += "<li class='card-item'>" +
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + rankingList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    								 "<div class='like'>";
@@ -540,16 +542,16 @@
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
 	    	                  		}
 						    	                        
-	    	                  		value += "<div onclick='likeClick(" + rankingList[i].projectNo + ");'>" + 
+	    	                  		value += "<div onclick='likeClick(" + rankingList[i].projectNo + ");' >" + 
 			    	                        	"<div name=" + rankingList[i].projectNo + ">" +
-			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
+			    	                        		"<span class='material-icons md-36' name='likeIcon' >favorite</span>" + 
 			    	                        		"<div class='pno' style='display:none;'>" + rankingList[i].projectNo + "</div>" +
 			    	                        	"</div>" +
 			    	                        "</div>" +
 			    	                      "</div>" +
 			    	                    "</div>" +
 			    	                  "</figure>" +
-						    	                  "<div class='card-desc'>" +
+						    	                  "<div class='card-desc' onclick='detailClick(" + rankingList[i].projectNo + ")'>" +
 						    	                      "<div class='project-content'>" +
 						    	                          "<div class='project-company'>" + rankingList[i].creatorName + "</div>" +
 						    	                          "<div class='project-title'>" + rankingList[i].projectTitle + "</div>" +
@@ -610,7 +612,7 @@
 	        				var value = "";
 	        				for(var i in closedList){
 	        					if(i<8){
-		    						value += "<li class='card-item'>" + 
+		    						value += "<li class='card-item'>" +
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + closedList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 						    	                      "<div class='like'>" +
@@ -619,7 +621,7 @@
 						    	                      "</div>" +
 						    	                    "</div>" +
 						    	                  "</figure>" +
-						    	                  "<div class='card-desc'>" +
+						    	                  "<div class='card-desc' onclick='detailClick(" + closedList[i].projectNo + ")'>" +
 						    	                      "<div class='project-content'>" +
 						    	                          "<div class='project-company'>" + closedList[i].creatorName + "</div>" +
 						    	                          "<div class='project-title'>" + closedList[i].projectTitle + "</div>" +
@@ -665,10 +667,6 @@
         </div>
       </div> <!---->
       
-      
-      <div>
-      	<a href="orderTest.test">고독한 결제방</a>
-      </div>
       
       <div>
       	<a href="detailStory.de">고독한 디테일방</a>

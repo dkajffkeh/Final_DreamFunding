@@ -111,9 +111,9 @@ public class IndexController {
 	public String selectRankingList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
 			Model model) {
 
-		System.out.println(currentPage);
+		//System.out.println(currentPage);
 		int listCount = iService.selectListCount();
-		System.out.println(listCount);
+		//System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
 		
 		ArrayList<Index> list = iService.selectRankingList(pi);
