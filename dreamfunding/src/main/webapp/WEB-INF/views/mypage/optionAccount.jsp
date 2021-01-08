@@ -655,10 +655,10 @@ margin-right:20px;}
                         <br>
                         <!-- 저장  -->
                           <div id="divToggle1" style="display: none;">
-                          <form action="">
+                          <form action="updatePwd2.me.jm">
                           	<p>현재 비밀번호</p>
                           	
-                            <input type="text" class="form-control" id="cmemPwd1" style="width:200px;
+                            <input type="password" class="form-control" id="cmemPwd1" style="width:200px;
                                           margin-top:5px; margin-bottom:10px;" placeholder="현재 비밀번호";>
                             <input type="hidden" name="${ loginMem.email }">              
                             <input type="password" class="form-control" id="cmemPwd2" placeholder="변경할 비밀번호"; style="width:200px;
@@ -666,19 +666,12 @@ margin-right:20px;}
                             <input type="password" class="form-control" id="cmemPwd3" placeholder="변경할 비밀번호 확인"; style="width:200px;
                             margin-top:5px; margin-bottom:10px;">
         
-                            <button type="button" class="btn" style="background-color: #7f0000; color:white;" onclick="modifyPwd()">저장</button>
+                            <button type="submit" class="btn" style="background-color: #7f0000; color:white;">저장</button>
                             </form>
                             </div>
                             
                               <hr> 
-                            <script>
-                            	function modifyPwd(){
-                            		
-                            		
-                            		
-                            		
-                            	}
-                            </script>  
+
                               
                               
                               
