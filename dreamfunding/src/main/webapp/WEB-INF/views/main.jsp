@@ -229,7 +229,6 @@
 	        <script>
 	        		var memNo = "${loginMem.memNo}";
 	        		
-	        	
 	        		function likeList() {
 		        	 
 		        		$.ajax({
@@ -271,13 +270,12 @@
 		        				
 		        				var value="";
 		        				if(result == 1){
-		        					$("#" + pno).find(".material-icons").css("color","rgb(127,0,0)");
+		        					$("[name=" + pno + "]").find(".material-icons").css("color","rgb(127,0,0)");
 		        					swal("좋아요!", "좋아한 프로젝트에 추가되었습니다.", "success");
 		        				}else{
-		        					$("#" + pno).find(".material-icons").css("color","");
-		        					swal("좋아요 취소!", "취소되었습니다.", "success");	        					
+		        					$("[name=" + pno + "]").find(".material-icons").css("color","");
+		        					swal("좋아요 취소!", "취소되었습니다.", "success");	       
 		        				}
-		        				
 		        				
 		        			},error:function(){
 		        				console.log("ajax 통신 실패!");
