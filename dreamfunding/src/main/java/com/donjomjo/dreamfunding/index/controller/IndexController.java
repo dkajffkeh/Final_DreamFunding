@@ -24,10 +24,24 @@ public class IndexController {
 	
 	// 펀딩하기 클릭시 카테고리 전체보기 페이지로 이동
 	@RequestMapping("categoryViewAll.in")
-	public String categoryViewAll() {
+	public String selectCategoryList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+			Model model) {
+
+//		System.out.println(currentPage);
+		int listCount = iService.selectListCount();
+//		System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
 		
-		// /WEB-INF/views/index/categoryViewAll.jsp
+		ArrayList<Index> list = iService.selectProjectList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+//		System.out.println(pi);
+//		System.out.println(list);
+		
 		return "index/categoryViewAll";
+		
 	}
 	
 	// 진행중인 펀딩리스트 조회
@@ -195,12 +209,152 @@ public class IndexController {
 		
 		ArrayList<Like> likeList = iService.likeList(mno);
 		
-		System.out.println(likeList);
+		//System.out.println(likeList);
 		
 		return new Gson().toJson(likeList);
 		
 	}
+	
+	@RequestMapping("search.do")
+	public String search() {
+		
+		return "index/detailSearch";
+	}
+	
+	
+	// 잡지
+	@RequestMapping("magazine.do")
+	public String selectMagazineList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+			Model model) {
 
+//			System.out.println(currentPage);
+		int listCount = iService.selectListCount();
+//			System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
+		
+		ArrayList<Index> list = iService.selectProjectList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+//			System.out.println(pi);
+//			System.out.println(list);
+		
+		return "index/magazineList";
+		
+	}
+	
+	// 에세이
+	@RequestMapping("essay.do")
+	public String selectEssayList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+			Model model) {
+
+//				System.out.println(currentPage);
+		int listCount = iService.selectListCount();
+//				System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
+		
+		ArrayList<Index> list = iService.selectProjectList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+//				System.out.println(pi);
+//				System.out.println(list);
+		
+		return "index/essayList";
+		
+	}
+	
+	// 아트
+	@RequestMapping("art.do")
+	public String selectArtList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+			Model model) {
+
+//					System.out.println(currentPage);
+		int listCount = iService.selectListCount();
+//					System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
+		
+		ArrayList<Index> list = iService.selectProjectList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+//					System.out.println(pi);
+//					System.out.println(list);
+		
+		return "index/artList";
+		
+	}
+	
+	// 취미
+	@RequestMapping("hobby.do")
+	public String selectHobbyList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+			Model model) {
+
+//					System.out.println(currentPage);
+		int listCount = iService.selectListCount();
+//					System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
+		
+		ArrayList<Index> list = iService.selectProjectList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+//					System.out.println(pi);
+//					System.out.println(list);
+		
+		return "index/hobbyList";
+		
+	}
+	
+	// 그림책
+	@RequestMapping("drawing.do")
+	public String selectDrawingList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+			Model model) {
+
+//					System.out.println(currentPage);
+		int listCount = iService.selectListCount();
+//					System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
+		
+		ArrayList<Index> list = iService.selectProjectList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+//					System.out.println(pi);
+//					System.out.println(list);
+		
+		return "index/drawingList";
+		
+	}
+	
+	// 기타
+	@RequestMapping("etc.do")
+	public String selectEtcList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+			Model model) {
+
+//					System.out.println(currentPage);
+		int listCount = iService.selectListCount();
+//					System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
+		
+		ArrayList<Index> list = iService.selectProjectList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+//					System.out.println(pi);
+//					System.out.println(list);
+		
+		return "index/etcList";
+		
+	}
+	
+	
 	
 	
 

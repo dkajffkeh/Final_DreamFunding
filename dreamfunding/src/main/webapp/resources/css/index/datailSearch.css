@@ -69,10 +69,10 @@
 /* qna form */
 .qna-form{
     width: 360px;
-    display:none;
+    display: none;
 }
 .qna-full{
-    background-color: white;
+    background-color: rgb(245, 245, 245);
     z-index: 10;
 }
 .qna-title{
@@ -109,6 +109,7 @@
     padding: 1rem;
     border-radius: 5px;
     box-shadow:10px 10px 30px #d3d3d3;
+    background-color: white;
 }
 .qna-1{
     padding: 1rem;
@@ -176,10 +177,13 @@
     background-color: #fff7ed;
     color: rgb(127, 0, 0);
     font-weight: 700;
-    font-size: large;
+    font-size: 20px;
     height: 3rem;
     width: 130px;
     box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+.btnQna .material-icons{
+    font-size: 30px;
 }
 .spanQna{
     vertical-align: top;

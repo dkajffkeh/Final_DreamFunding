@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,7 +112,7 @@
                     </div>
                     <!-- select-box -->
                     <div class="select-a">
-                        <select class="select-box">
+                        <select class="select-box" id="selectValue" onchange="changeSelect()">
                         <option value disabled="disabled" hidden="hidden"></option>
                         <option value="1">펀딩금액순</option>
                         <option value="2">마감임박순</option>

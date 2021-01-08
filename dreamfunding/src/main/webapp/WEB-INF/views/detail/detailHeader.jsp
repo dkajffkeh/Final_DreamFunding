@@ -155,8 +155,8 @@
 		           </c:if>
 		           
 		              <c:if test="${empty loginMem }">
-                  	
-	                  <button type="button" class="btn btn--icon" disabled>
+	                 	
+	                  <button type="button" class="btn btn--icon" onclick="alert('로그인해주세요.')">
 	                    <span class="material-icons"> favorite_border </span>   
 	                  </button>
 	      
@@ -176,9 +176,9 @@
           </div>
         </div>
         <ul class="content__nav">
-          <li class="borderLeftRight nav-active" id="story-nav"><a href="proDetail.de?pno=${d.projectNo}" onclick="goStory()">스토리</a></li>
-          <li class="borderLeftRight" id="community-nav"><a href="selectReply.de?page=community&pno=${d.projectNo}">커뮤니티</a></li>
-          <li class="borderLeftRight" id="policy-nav"><span onclick="goPolicy()">펀딩 안내</span></li>
+          <li class="borderLeftRight nav-active" id="story-nav"><a href="proDetail.de?&pno=${d.projectNo}">스토리</a></li>
+          <li class="borderLeftRight" id="community-nav"><a href="proDetail.de?page=2&pno=${d.projectNo}">커뮤니티</a></li>
+          <li class="borderLeftRight" id="policy-nav"><a href="proDetail.de?page=3&pno=${d.projectNo}">펀딩 안내</span></li>
         </ul>
         
        
@@ -289,15 +289,12 @@
    	  (function(){
    		const tp = parseFloat(document.querySelector("#tp").innerText);
    		const res = tp.toString().split('.')[0];
-   		console.log("res:" + res);
 		   		
         if(res.length > 2){
           //100이상 -> 100.**
-          console.log(tp.toString().substr(0, 6));
           document.querySelector('#tp').innerText = tp.toString().substr(0, 6)
         }else{
           //10이상  -> 10.**
-          console.log(tp.toString().substr(0, 5));
           document.querySelector('#tp').innerText = tp.toString().substr(0, 5)
         }
         
@@ -324,7 +321,6 @@
  	  // 프로젝트 종료일/종료일 이후 화면 출력 변경 
    	  (function(){
    		  const dDay = parseInt(document.querySelector('#dDay').innerText);
-   		  console.log(dDay);
    		  if(dDay===0){
    			  document.querySelector('#dDay').innerText='d-Day';
    			  document.querySelector('#dDay').style.color='#7F0000';

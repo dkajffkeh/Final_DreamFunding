@@ -183,14 +183,14 @@
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + progressList[i].projectFileName + ")'>" +
 						    	                    "<div>" +
 						    	                      "<div class='like'>";
-	    	                  		if(gapDay < 10){
+	    	                  		if(gapDay < 20){
 	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
 	    	                  		}else{
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
 	    	                  		}
 						    	                        
 						    	               value += "<div onclick='likeClick(" + progressList[i].projectNo + ");'>" + 
-						    	                        	"<div id=" + progressList[i].projectNo + ">" +
+						    	                        	"<div name=" + progressList[i].projectNo + ">" +
 						    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
 						    	                        		"<div class='pno' style='display:none;'>" + progressList[i].projectNo + "</div>" +
 						    	                        	"</div>" +
@@ -215,7 +215,7 @@
 	        				}
 	        				
 	        				$(".thumbnail-a ul").html(value);
-	        				
+	        				likeList();
 	        				
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
@@ -229,11 +229,6 @@
 	        <script>
 	        		var memNo = "${loginMem.memNo}";
 	        		
-	        		$(function(){
-		        		likeList();
-		        	})
-	        		
-	        	
 	        		function likeList() {
 		        	 
 		        		$.ajax({
@@ -243,9 +238,10 @@
 		        				if(likeList == null){
 		        					return;
 		        				}else{
-		        					console.log()
+		        					//console.log(likeList);
 		        					for(var i in likeList){
-		        						$("#" + likeList[i].projectNo).find(".material-icons").css("color","rgb(127,0,0)");
+		        						//console.log($("[name="+ likeList[i].projectNo +"]"));
+		        						$("[name=" + likeList[i].projectNo + "]").find(".material-icons").css("color","rgb(127,0,0)");
 		        					}
 		        				}
 		        				
@@ -274,13 +270,12 @@
 		        				
 		        				var value="";
 		        				if(result == 1){
-		        					$("#" + pno).find(".material-icons").css("color","rgb(127,0,0)");
+		        					$("[name=" + pno + "]").find(".material-icons").css("color","rgb(127,0,0)");
 		        					swal("좋아요!", "좋아한 프로젝트에 추가되었습니다.", "success");
 		        				}else{
-		        					$("#" + pno).find(".material-icons").css("color","");
-		        					swal("좋아요 취소!", "취소되었습니다.", "success");	        					
+		        					$("[name=" + pno + "]").find(".material-icons").css("color","");
+		        					swal("좋아요 취소!", "취소되었습니다.", "success");	       
 		        				}
-		        				
 		        				
 		        			},error:function(){
 		        				console.log("ajax 통신 실패!");
@@ -336,14 +331,14 @@
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectMoneyList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    				                  "<div class='like'>";
-	    	                  		if(gapDay < 10){
+	    	                  		if(gapDay < 20){
 	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
 	    	                  		}else{
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
 	    	                  		}
 						    	                        
 	    	                  		value += "<div onclick='likeClick(" + selectMoneyList[i].projectNo + ");'>" + 
-			    	                        	"<div id=" + selectMoneyList[i].projectNo + ">" +
+			    	                        	"<div name=" + selectMoneyList[i].projectNo + ">" +
 			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
 			    	                        		"<div class='pno' style='display:none;'>" + selectMoneyList[i].projectNo + "</div>" +
 			    	                        	"</div>" +
@@ -367,6 +362,7 @@
 	        					}
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -389,14 +385,14 @@
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectClosedList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    				                  "<div class='like'>";
-	    	                  		if(gapDay < 10){
+	    	                  		if(gapDay < 20){
 	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
 	    	                  		}else{
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
 	    	                  		}
 						    	                        
 	    	                  		value += "<div onclick='likeClick(" + selectClosedList[i].projectNo + ");'>" + 
-			    	                        	"<div id=" + selectClosedList[i].projectNo + ">" +
+			    	                        	"<div name=" + selectClosedList[i].projectNo + ">" +
 			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
 			    	                        		"<div class='pno' style='display:none;'>" + selectClosedList[i].projectNo + "</div>" +
 			    	                        	"</div>" +
@@ -420,6 +416,7 @@
 	    						}                  
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -442,14 +439,14 @@
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectNewList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    				                  "<div class='like'>";
-	    	                  		if(gapDay < 10){
+	    	                  		if(gapDay < 20){
 	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
 	    	                  		}else{
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
 	    	                  		}
 						    	                        
 	    	                  		value += "<div onclick='likeClick(" + selectNewList[i].projectNo + ");'>" + 
-			    	                        	"<div id=" + selectNewList[i].projectNo + ">" +
+			    	                        	"<div name=" + selectNewList[i].projectNo + ">" +
 			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
 			    	                        		"<div class='pno' style='display:none;'>" + selectNewList[i].projectNo + "</div>" +
 			    	                        	"</div>" +
@@ -473,6 +470,7 @@
 	        					}                  
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -532,14 +530,14 @@
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + rankingList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    								 "<div class='like'>";
-	    	                  		if(gapDay < 10){
+	    	                  		if(gapDay < 20){
 	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
 	    	                  		}else{
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
 	    	                  		}
 						    	                        
 	    	                  		value += "<div onclick='likeClick(" + rankingList[i].projectNo + ");'>" + 
-			    	                        	"<div id=" + rankingList[i].projectNo + ">" +
+			    	                        	"<div name=" + rankingList[i].projectNo + ">" +
 			    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
 			    	                        		"<div class='pno' style='display:none;'>" + rankingList[i].projectNo + "</div>" +
 			    	                        	"</div>" +
@@ -564,7 +562,7 @@
 	        				}
 	        				
 	        				$(".thumbnail-b ul").html(value);
-	        				
+	        				likeList();
 	        				
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
@@ -634,7 +632,7 @@
 	        				}
 	        				
 	        				$(".thumbnail-c ul").html(value);
-	        				
+	        				likeList();
 	        				
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");

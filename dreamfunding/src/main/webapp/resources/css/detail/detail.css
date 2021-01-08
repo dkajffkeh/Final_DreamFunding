@@ -284,15 +284,13 @@ main .inner {
 }
 
 .hashtag-box .btn {
-  padding: 5px 20px;
+  padding: 5px 15px;
   margin-right: 10px;
   border-radius: 15px;
   cursor: pointer;
   color: white;
   background: #ccc4bb;
-  width: 80px;
-  height: 40px;
-}
+  }
 
 /* SECTION RIGHT */
 .section-right {
@@ -852,7 +850,7 @@ button {
 		text-shadow: 0 0 10px #fff;
 	}
 	to{
-		text-shadow:0 0 10px #b80000;
+		text-shadow:0 0 10px #ffa8a8;
 	}
 } 
 

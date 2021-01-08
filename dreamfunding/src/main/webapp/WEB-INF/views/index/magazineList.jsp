@@ -8,22 +8,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/datailSearch.css" />
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/category.css?after" />
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body>
-	
+
+
 	<jsp:include page="../common/menubar.jsp"/>
-	
-	
-	
+
 	<!-- 이곳에 페이지 내용 작성 -->
     <main class="section">
         
         <!-- 문의하기 폼 들어갈곳 -->
         <div class="top"> <!---->
-        <!-- 문의하기 버튼(sticky) -->
+            <!-- 문의하기 버튼(sticky) -->
         <div class="sticky"> 
           <!-- 문의하기 폼 -->
           <div class="qna-form" id="showHide">
@@ -96,22 +95,43 @@
         </script>
 
             <div class="inner">
-            	<br>
             
-                <div class="search-title">
-                  <span>진행중인 펀딩</span>
-                  <div style="color: rgb(138, 138, 138); font-size:1.5rem"><a>드림펀딩에서 핫한 프로젝트들을 만나보세요!</a></div>
+                <div class="category">
+                    <div class="category-title" align="center" onclick="location.href='categoryViewAll.in'">
+                        <img src="${pageContext.request.contextPath}/resources/images/cate5.png" width="80px" height="80px" style="border-radius: 50%;">
+                        <div class="cate-title">전체보기</div>
+                    </div>
+                    <div class="category-title" align="center"  onclick="location.href='magazine.do'">
+                        <img src="${pageContext.request.contextPath}/resources/images/cate1.jpeg" width="80px" height="80px" style="border-radius: 50%;">
+                        <div class="cate-title">잡지</div>
+                    </div>
+                    <div class="category-title" align="center" onclick="location.href='essay.do'">
+                        <img src="${pageContext.request.contextPath}/resources/images/cate7.jpg" width="80px" height="80px" style="border-radius: 50%;">
+                        <div class="cate-title">문학&에세이</div>
+                    </div>
+                    <div class="category-title" align="center" onclick="location.href='art.do'">
+                        <img src="${pageContext.request.contextPath}/resources/images/cate2.jpg" width="80px" height="80px" style="border-radius: 50%;">
+                        <div class="cate-title">예술</div>
+                    </div>
+                    <div class="category-title" align="center" onclick="location.href='hobby.do'">
+                        <img src="${pageContext.request.contextPath}/resources/images/cate3.jpg" width="80px" height="80px" style="border-radius: 50%;">
+                        <div class="cate-title">실용&취미</div>
+                    </div>
+                    <div class="category-title" align="center" onclick="location.href='drawing.do'">
+                        <img src="${pageContext.request.contextPath}/resources/images/cate4.jpg" width="80px" height="80px" style="border-radius: 50%;">
+                        <div class="cate-title">그림책</div>
+                    </div>
+                    <div class="category-title" align="center" onclick="location.href='etc.do'">
+                        <img src="${pageContext.request.contextPath}/resources/images/book6.jpg" width="80px" height="80px" style="border-radius: 50%;">
+                        <div class="cate-title">기타</div>
+                    </div>
                 </div>
-
-                <br>
+                <br><br>
 
                 <!-- 제목 -->
                 <div class="title-form">
                     <!-- 카테고리 이름 바뀌는 부분! -->
-                    <div class="title">
-                      <span>프로젝트</span>
-                      <span style="color: rgb(127,0,0);">${fn:length(list)}</span><span>개</span>
-                    </div>
+                    <div class="title">잡지</div>
                     <!-- select-box -->
                     <div class="select-a">
                         <select class="select-box" id="selectValue" onchange="changeSelect()">
@@ -179,12 +199,12 @@
 	                    		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    		<li class="page-item"><a class="page-link" href="progressMore.do?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+	                    		<li class="page-item"><a class="page-link" href="categoryViewAll.in?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 	                    	</c:otherwise>
 	                    </c:choose>	
 	                    
 	                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-	                    	<li class="page-item"><a class="page-link" href="progressMore.do?currentPage=${ p }">${ p }</a></li>
+	                    	<li class="page-item"><a class="page-link" href="categoryViewAll.in?currentPage=${ p }">${ p }</a></li>
 	                   	</c:forEach> 
 	                    
 	                    
@@ -193,13 +213,12 @@
 	                    		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    		<li class="page-item"><a class="page-link" href="progressMore.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
+	                    		<li class="page-item"><a class="page-link" href="categoryViewAll.in?currentPage=${ pi.currentPage+1 }">Next</a></li>
 	                    	</c:otherwise>
 	                    </c:choose>
 	                </ul>
 	            </div>
             </nav>
-
         </div>
     </main>
     
@@ -273,6 +292,7 @@
 	        					}
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -326,6 +346,7 @@
 	    						}                  
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -379,6 +400,7 @@
 	        					}                  
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -394,9 +416,9 @@
 	        <script>
 	        		var memNo = "${loginMem.memNo}";
 	        		
-	        		$(function(){
-		        		likeList();
-		        	})
+	        		window.onload = function(){
+	        			likeList();
+	        		}
 	        		
 	        	
 	        		function likeList() {
@@ -458,12 +480,12 @@
 	        	}
 	        	
 	        </script>
+    
+    
+    <jsp:include page="../common/footer.jsp"/>
+    
 
-
-
-
-	<jsp:include page="../common/footer.jsp"/>
-
+	
 
 </body>
 </html>
