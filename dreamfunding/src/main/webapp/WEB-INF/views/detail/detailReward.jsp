@@ -47,7 +47,7 @@
 		      <c:forEach var="w" items="${ rw }">
 		        <div class="reward__wrapper">	
 		          <div class="reward-box">
-		            <a href="#">
+		            <a href='orderInsert.me?pno=${d.projectNo}&mno=${loginMem.memNo}&rewardNum=${w.rewardNo}&rewardAmount=1'>
 		              <div class="reward-price">
 		              <fmt:formatNumber type="number" maxFractionDigits="3" value="${w.rewardPrice}"/>원 펀딩</div>
 		                   
