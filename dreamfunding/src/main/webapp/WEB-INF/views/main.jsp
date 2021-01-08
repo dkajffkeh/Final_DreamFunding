@@ -8,6 +8,8 @@
 <title>Dream Funding</title>    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/index.css" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
 </head>
 <body>
 
