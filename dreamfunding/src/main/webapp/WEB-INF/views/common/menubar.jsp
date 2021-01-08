@@ -88,12 +88,25 @@
         </div>
 
         <div>
-          <button type="button" class="alarm-btn" data-container="body" data-toggle="popover" data-placement="bottom">
-            <i class="header__icon"><span class="material-icons"> notifications </span></i>
+          <button type="button" class="alarm-btn" data-container="body" data-toggle="popover" data-placement="bottom" style="style="text-align: justify; margin-bottom: 1em;">
+            <i class="header__icon" ><span class="material-icons"> notifications </span></i>
           </button>
             
-          <i class="header__icon"><span class="material-icons"> account_circle </span></i>&nbsp;&nbsp;
-          
+               &nbsp;
+              <c:choose>
+              <c:when test="${ empty loginMem.memSystemname }">
+			  <i class="header__icon"><span class="material-icons"> account_circle </span></i>
+              </c:when>
+              <c:otherwise>
+              
+              
+              <img src="${pageContext.request.contextPath}/resources/images/profile/${loginMem.memSystemname}"
+              		 	  style="text-align: justify; margin-bottom: 1em; display:inline;width:30px; height:30px; border-radius: 50%;">
+              		 	  
+              		 	  
+               </c:otherwise>
+              </c:choose>
+          &nbsp;&nbsp;
           
             <a href="logout.me.jm"><i class="fas fa-sign-out-alt" style="font-size: 34px"></i></a>
           
