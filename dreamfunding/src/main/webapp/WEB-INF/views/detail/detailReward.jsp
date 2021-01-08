@@ -39,35 +39,39 @@
                 <span class="material-icons"> email </span>크리에이터에게 메시지 보내기
               </div>
             </div>
-		
-		
-
+		       
             <div class="reward-label" id="rewardLabel">리워드 선택</div>
     		
 		      <c:forEach var="w" items="${ rw }">
 		        <div class="reward__wrapper">	
 		          <div class="reward-box">
-		            <a href='orderInsert.me?pno=${d.projectNo}&mno=${loginMem.memNo}&rewardNum=${w.rewardNo}&rewardAmount=1'>
-		              <div class="reward-price">
-		              <fmt:formatNumber type="number" maxFractionDigits="3" value="${w.rewardPrice}"/>원 펀딩</div>
-		                   
-		              <ul class="reward-option">
-		             	<c:forEach var="o" items="${ w.detailRewardOptList }">
-		               		 <li>${ o.rewardContent }</li> 
-		                </c:forEach>
-		              </ul>    
-		              
-		              <c:choose>
-		                <c:when test="${w.rewardStatus eq 'N'}">
-		                  <div class="reward-status">제한 수량 무제한</div>
-		                </c:when>	  
-		                <c:when test="${w.rewardStatus eq 'Y'}">
-		                  <div class="reward-status">제한 수량 ${ w.rewardNumber }개</div>
-		                </c:when>	                  
-		              <c:otherwise>
-		                <div class="reward-status">옵션이 제공되지 않습니다.</div>
-		              </c:otherwise>
-		            </c:choose>
+		        	<c:if test="${ !empty loginMem }">
+		           	 <a href='orderInsert.me?pno=${d.projectNo}&mno=${loginMem.memNo}&rewardNum=${w.rewardNo}&rewardAmount=1'>
+					</c:if>
+					<c:if test="${ empty loginMem }">
+		           	 <a href='#' onclick="alert('로그인 사용자만 프로젝트 펀딩이 가능합니다.')">
+					</c:if>
+		 		            
+			              <div class="reward-price">
+			              <fmt:formatNumber type="number" maxFractionDigits="3" value="${w.rewardPrice}"/>원 펀딩</div>
+			                   
+			              <ul class="reward-option">
+			             	<c:forEach var="o" items="${ w.detailRewardOptList }">
+			               		 <li>${ o.rewardContent }</li> 
+			                </c:forEach>
+			              </ul>    
+			              
+			              <c:choose>
+			                <c:when test="${w.rewardStatus eq 'N'}">
+			                  <div class="reward-status">제한 수량 무제한</div>
+			                </c:when>	  
+			                <c:when test="${w.rewardStatus eq 'Y'}">
+			                  <div class="reward-status">제한 수량 ${ w.rewardNumber }개</div>
+			                </c:when>	                  
+			              <c:otherwise>
+			                <div class="reward-status">옵션이 제공되지 않습니다.</div>
+			              </c:otherwise>
+			            </c:choose>
 		      
 		            <c:if test="${!empty w.saleCount}">
 		                <div class="reward-salecount">총 ${ w.saleCount }개 펀딩 완료</div>
