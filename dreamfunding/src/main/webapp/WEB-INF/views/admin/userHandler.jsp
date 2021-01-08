@@ -45,45 +45,36 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">신고 관리</h1>
+                    <h1 class="h3 mb-2 text-gray-800">회원 관리</h1>
                     <p class="mb-4"><a target="_blank"
                             href="https://datatables.net"></a></p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">신고 관리</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">회원 관리</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                        	<th style="display:none"></th>
-                                            <th style="width:18%">크리에이터명</th>
-                                            <th style="width:44%">프로젝트명</th>        
-                                            <th style="width:18%">신청한 날짜</th>
-                                            <th style="width:18%">프로젝트금액</th>
+                                        	<th style="width:9%">회원번호</th>
+                                            <th style="width:15%">회원닉네임</th>
+                                            <th style="width:44%">회원가입일</th>        
+                                            <th style="width:15%">회원 상태</th>
+                                            <th style="width:15%">회원 조정</th>
                                         </tr>
                                     </thead>
                                 
                                     <tbody>
-                           
-                                    <c:forEach var="i" items="${ rList }">
-                                        <tr>
-                                        	<td style="display:none">${ i.reportNo }</td>	
-                                            <td>${ i.memberNo }</td>
-                                            <td>${ i.projectNo }</td>
-                                            <td>${ i.reportDate }</td>
-                                            <c:if test="${ i.reportStatus.equals('처리완료') }">
-                                            <td style="color:green">${ i.reportStatus }</td>
-                                            </c:if>
-                                            <c:if test="${ i.reportStatus.equals('진행중') }">
-                                            <td style="color:red">${ i.reportStatus }</td>
-                                            </c:if>
-                                        </tr>
-                                    </c:forEach>    
-                            
+                                 		<tr>
+                                 		<td></td>
+                                 		<td></td>
+                                 		<td></td>
+                                 		<td></td>
+                                 		<td></td>
+                                 		</tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -137,9 +128,10 @@
         </div>
     </div>
     
+  
 
-    <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath}/resources/adminResources/vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
     <script src="${pageContext.request.contextPath}/resources/adminResources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -154,6 +146,8 @@
 
     <!-- Page level custom scripts -->
     <script src="${pageContext.request.contextPath}/resources/adminResources/js/demo/datatables-demo.js"></script>
+
+    <script src="${pageContext.request.contextPath}/resources/js/admin/userHandler.js"></script>
 
 </body>
 
