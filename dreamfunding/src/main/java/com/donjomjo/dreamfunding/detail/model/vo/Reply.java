@@ -22,7 +22,7 @@ public class Reply {
 	private String replyDate; // 댓글 작성일
 	private String replyStatus; // 댓글 상태 
 	private ArrayList<SubReply> subReply;
-	private String memberPfPath;
+	private String memberSystemName;
 	private String memberNickname;
 	
 }
