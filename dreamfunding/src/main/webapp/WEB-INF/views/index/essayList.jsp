@@ -199,12 +199,12 @@
 	                    		<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    		<li class="page-item"><a class="page-link" href="categoryViewAll.in?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+	                    		<li class="page-item"><a class="page-link" href="essay.do?currentPage=${ pi.currentPage-1 }">Previous</a></li>
 	                    	</c:otherwise>
 	                    </c:choose>	
 	                    
 	                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-	                    	<li class="page-item"><a class="page-link" href="categoryViewAll.in?currentPage=${ p }">${ p }</a></li>
+	                    	<li class="page-item"><a class="page-link" href="essay.do?currentPage=${ p }">${ p }</a></li>
 	                   	</c:forEach> 
 	                    
 	                    
@@ -213,7 +213,7 @@
 	                    		<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    		<li class="page-item"><a class="page-link" href="categoryViewAll.in?currentPage=${ pi.currentPage+1 }">Next</a></li>
+	                    		<li class="page-item"><a class="page-link" href="essay.do?currentPage=${ pi.currentPage+1 }">Next</a></li>
 	                    	</c:otherwise>
 	                    </c:choose>
 	                </ul>

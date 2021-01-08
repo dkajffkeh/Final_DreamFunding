@@ -216,7 +216,19 @@ public class IndexController {
 	}
 	
 	@RequestMapping("search.do")
-	public String search() {
+	public String search(@RequestParam(value="currentPage", defaultValue="1") int currentPage, @RequestParam("keyword") String keyword,
+			Model model) {
+		//System.out.println(keyword);
+		int listCount = iService.selectListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
+		
+		ArrayList<Index> list = iService.selectSearchList(pi, keyword);
+		
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
 		
 		return "index/detailSearch";
 	}
@@ -232,7 +244,7 @@ public class IndexController {
 //			System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
 		
-		ArrayList<Index> list = iService.selectProjectList(pi);
+		ArrayList<Index> list = iService.selectMagazineList(pi);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
@@ -254,7 +266,7 @@ public class IndexController {
 //				System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
 		
-		ArrayList<Index> list = iService.selectProjectList(pi);
+		ArrayList<Index> list = iService.selectEssayList(pi);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
@@ -276,7 +288,7 @@ public class IndexController {
 //					System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
 		
-		ArrayList<Index> list = iService.selectProjectList(pi);
+		ArrayList<Index> list = iService.selectArtList(pi);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
@@ -298,7 +310,7 @@ public class IndexController {
 //					System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
 		
-		ArrayList<Index> list = iService.selectProjectList(pi);
+		ArrayList<Index> list = iService.selectHobbyList(pi);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
@@ -320,7 +332,7 @@ public class IndexController {
 //					System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
 		
-		ArrayList<Index> list = iService.selectProjectList(pi);
+		ArrayList<Index> list = iService.selectDrawingList(pi);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
@@ -342,7 +354,7 @@ public class IndexController {
 //					System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
 		
-		ArrayList<Index> list = iService.selectProjectList(pi);
+		ArrayList<Index> list = iService.selectEtcList(pi);
 		
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);

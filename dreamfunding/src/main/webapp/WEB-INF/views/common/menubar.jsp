@@ -57,8 +57,9 @@
         <div class="header__right">
           <div class="search__box"  >
           	<form action="search.do">
-	            <input type="text" class="search-bar" placeholder="프로젝트 검색" id="search" name="searchText" />
-	            <span class="material-icons" onclick="location.href='search.do'"> search </span>
+	            <input type="text" class="search-bar" placeholder="프로젝트 검색" id="keyword" name="keyword" />
+	            <span class="material-icons"> search </span>
+	            <input type="submit" value="검색">
         	</form>
             
           </div>
@@ -77,9 +78,11 @@
          
         <div class="header__right">
           <div class="search__box">
-            <input type="text" class="search-bar" placeholder="프로젝트 검색" name="searchText" />
-            <span class="material-icons" onclick="location.href='search.do'"> search </span>
-		
+            <form action="search.do">
+	            <input type="text" class="search-bar" placeholder="프로젝트 검색" id="keyword" name="keyword" />
+	            <span class="material-icons"> search </span>
+	            <input type="submit" value="검색">
+        	</form>
               
           </div>
         </div>
@@ -113,6 +116,7 @@
               $('.alarm-btn').popover({title: "<div><a>실시간 알림</a></div>", content: content, html: true, placement: "bottom"}); 
             });
           </script>
+          
 
         
 

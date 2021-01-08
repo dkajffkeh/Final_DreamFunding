@@ -251,6 +251,195 @@
 		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
 		   ]]>
 	</select>
+	
+	<select id="selectSearchList" resultMap="indexResultSet" parameterType="string">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and project_title like '%'||#{keyword}||'%'
+		   ]]>
+	</select>
+	
+	<select id="selectMagazineList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and pro_cateNo = 10
+		   ]]>
+	</select>
+	
+	<select id="selectEssayList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and pro_cateNo = 20
+		   ]]>
+	</select>
+	
+	<select id="selectArtList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and pro_cateNo = 30
+		   ]]>
+	</select>
+	
+	<select id="selectHobbyList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and pro_cateNo = 40
+		   ]]>
+	</select>
+	
+	<select id="selectDrawingList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and pro_cateNo = 50
+		   ]]>
+	</select>
+	
+	<select id="selectEtcList" resultMap="indexResultSet">
+		<![CDATA[
+		select
+		       project_no
+		     , member_no
+		     , pro_cateno
+		     , project_goal
+		     , project_title
+		     , project_subtitle
+		     , project_gprice
+		     , project_start_dt
+		     , project_close_dt
+		     , project_url
+		     , project_thumpath
+		     , project_filename
+		     , project_count
+		     , creator_name
+		     , creator_status
+		     , hashtag
+		     , project_crdate
+		  from project
+		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   and pro_cateNo = 60
+		   ]]>
+	</select>
 
 
   
