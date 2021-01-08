@@ -33,9 +33,17 @@
                     id="comment-input-area"
                     placeholder="로그인 사용자만 글 작성이 가능합니다."
                   ></textarea>
-                  <div class="comment_options">
-                    <button class="btn btn--main submit" type="button" onclick="addReply()">작성하기</button>
-                  </div>
+                   <c:if test="${!empty loginMem }">
+	                  <div class="comment_options">
+	                    <button class="btn btn--main submit" type="button" onclick="addReply()">작성하기</button>
+	                  </div>
+                   </c:if>
+                   
+                  <c:if test="${ empty loginMem }">
+	                  <div class="comment_options">
+	                    <button class="btn btn--main submit" type="button" onclick="alert('로그인해주세요.')">작성하기</button>
+	                  </div>
+                   </c:if>
                 </form>
                 
 				<!-- 댓글조회 -->

@@ -46,7 +46,7 @@ public class DetailController {
 			Model model) {
 		
 		int listCount = dService.selectListCount();
-		DetailPageInfo pi = Pagination.getDetailPageInfo(listCount, currentPage, 12, 5);
+		DetailPageInfo pi = Pagination.getDetailPageInfo(listCount, currentPage, 12, 8);
 		
 		ArrayList<Detail> list = dService.selectDetailList(pi);
 		
@@ -63,7 +63,11 @@ public class DetailController {
 	public String selectDetailAll(int pno, Model model, HttpSession session){
 		
 		Member m = (Member)session.getAttribute("loginMem");
-		int uno = m.getMemNo();
+		int uno = 21; // 기본값(안쓰는 유저넘버)
+		
+		if(m != null ) {
+			uno = m.getMemNo(); // 실제 로그인 된 유저 넘버
+		}
 		
 		// 조회수 증가 
 		int result = dService.increaseDetailCount(pno); 
@@ -178,8 +182,12 @@ public class DetailController {
 	public String selectReply(int pno, Model model, HttpSession session) {
 		
 		Member m = (Member)session.getAttribute("loginMem");
-		int uno = m.getMemNo();
-
+		int uno = 21; // 기본값(안쓰는 유저넘버)
+		
+		if(m != null ) {
+			uno = m.getMemNo(); // 실제 로그인 된 유저 넘버
+		}
+		
 		Like lk = new Like();
 		
 		int result = dService.increaseDetailCount(pno); 
