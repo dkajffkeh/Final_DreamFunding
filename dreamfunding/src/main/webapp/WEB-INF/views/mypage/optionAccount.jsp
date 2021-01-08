@@ -704,46 +704,124 @@ margin-right:20px;}
                         
                         <br>
                           <div id="divToggle2" style="display: none;">
-                          <form action="message.me.jm">
-                          
-                            <input type="text" class="form-control" id="usr" style="width:200px;
-                                          margin-top:5px; margin-bottom:10px;" name="phone">
+                          <form action="updatePhone.me.jm">
+		                  <table>
+		                    
+		
+		                
+		                    <tr>
+		
+		                        <td>
+								   <div class="form-label-group">
+				                    <input type="text" id="phone" class="form-control" name="phone" placeholder="휴대폰번호 입력" required>
+				                    	<br>
+				                   </div>
+		                        </td>
+		                        <td>
+		                        	<button type="button" class="form-control btn-request" data-toggle="modal" data-target="#myModal1" onclick="certify1();">인증번호 요청</button>
+		                        </td>
+		                    </tr>
+		
+		                    <tr>
+		
+		                        <td>
+								   <div class="form-label-group">
+				                    <input type="text" id="certify" class="form-control" name="certify" placeholder="인증번호 입력" required>
+				                    
+				                    <input type="hidden" id="certifyNum" value="">
+				                   	<br>
+				                   </div>
+		                        </td>
+		                        <td>
+		                        	<button type="button" class="form-control btn-request" data-toggle="modal" data-target="#myModal2" onclick="certifycheck();">인증 확인</button>
+		                        </td>
+		                    </tr>
+		
+		                </table>
+                             
                                           
-                            <button type="submit" class="btn" style="background-color: #7f0000; color:white;">저장</button>
+                            <button type="submit" class="btn" id="enroll-btn1" style="background-color: #7f0000; color:white;" disabled>저장</button>
                             </form>
                           </div>
                         <hr> 
               </div>
             </div>
+            <script>       
+            // 인증번호 전달
+           function buttonAble(){
+        		
+            	var cCertify = false;
+            	
+    	        if(cCertify == true ){
+    	        	
+    	        		document.getElementById("enroll-btn1").removeAttribute("disabled");
+    	        	
+    	            
+    	        }
+    	
 
+    	   }
+        	function certify1(){
+        		$.ajax({
+        			url:"message.me.jm",
+        			data:{
+        				phone:$("#phone").val()
+        			},
+        			type:"post",
+        			success:function(certify){
+        				$("#certifyNum").val(certify);
+        			},
+        			error:function(){
+        				console.log("ajax 통신 실패");
+        			},
+        		});
+        	};
+            // 인증번호 확인
 
-            <!--네이버 계정 연동-->
+            function certifycheck(){
+            	
+            	var certify = $("#certify").val();
+            	var hiddenNum = $("#certifyNum").val();
+            	
+				if(certify === hiddenNum){
 
-         <!--스크립트-->
-          <script>
-            $(function (){
-              $(".button3").click(function (){
-                $("#divToggle3").toggle();
-              });
-            });
-          </script>
+					cCertify = true;
+					buttonAble()
 
-            <div class="profile-wrap" >
-              <div class="profile" >
-                <p class="p">계정연동</p>
-                    <div class="togglee">
-                      <button class="button3" style="background-color:white;
-                        border:none;">연동하기</button>
-                        <!-- 전부 -->
-                        <hr> 
-                        </div><br><br>
-                          
-                          
-                          
-                          
-                              <hr> 
-              </div>
-            </div>
+					
+				}else{
+					cCertify = false;
+					buttonAble()
+
+					
+				}
+            	
+
+            };
+            
+
+            </script>
+                <!-- The Modal -->
+				<div class="modal" id="myModal1">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				
+				      <!-- Modal Header -->
+				      <div class="modal-header">
+				        <h4 class="modal-title">인증번호</h4>
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				      </div>
+				
+				      <!-- Modal body -->
+				      <div class="modal-body">
+				       	인증번호가 발송되었습니다.
+				      </div>
+				
+				
+				    </div>
+				  </div>
+				</div>
+
 
             <!--회원탈퇴-->
 
