@@ -49,6 +49,15 @@ public interface IndexService {
 	int selectListCount();
 	ArrayList<Index> selectProjectList(PageInfo pi);
 	ArrayList<Index> selectRankingList(PageInfo pi);
+	ArrayList<Index> selectMagazineList(PageInfo pi);
+	ArrayList<Index> selectEssayList(PageInfo pi);
+	ArrayList<Index> selectArtList(PageInfo pi);
+	ArrayList<Index> selectHobbyList(PageInfo pi);
+	ArrayList<Index> selectDrawingList(PageInfo pi);
+	ArrayList<Index> selectEtcList(PageInfo pi);
+	
+	ArrayList<Index> selectSearchList(PageInfo pi, String keyword);
+	
 	
 	
 
