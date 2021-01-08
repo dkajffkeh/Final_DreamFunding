@@ -25,7 +25,7 @@
         <div class="content__wrapper">
 	       <div class="section-left" id="policy-section">
 	            <div class="policy-label">교환 및 환불 정책</div>
-	            <div class="content-box">
+	            <div class="content-box" id="policy-content">
 	              <div class="detail-policy-label">
 	                크리에이터 교환 및 환불 정책
 	              </div>

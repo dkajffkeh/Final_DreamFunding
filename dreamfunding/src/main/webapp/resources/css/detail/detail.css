@@ -677,6 +677,11 @@ button {
   margin-bottom: 30px;
 }
 
+#policy-content p{
+	font-size: 14px;
+	line-height: 1.8;
+}
+
 .detail-policy.dream {
 }
 
@@ -755,7 +760,7 @@ button {
 .modal__layout .modal__box {
   padding: 25px 35px;
   background: #fff;
-  min-width: 300px;
+  width: 380px;
   max-height: 550px;
   display: flex;
   flex-direction: column;
@@ -775,11 +780,17 @@ button {
   align-items: center;
 }
 
+.modal__layout #sns-modal-box span{
+	align-items:flex-end;
+}
+
 .sns__icon__wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
+
+
 
 .sns__icon__wrapper a, button {
 	cursor: pointer;
@@ -834,17 +845,17 @@ button {
   padding: 10px;
   border: none;
   box-sizing: border-box;
-  width: 300px;
   min-height: 150px;
-  max-height: 400px;
   background: #eee;
   border-radius: 5px;
   overflow: auto;
+  width:100%;
 }
 
 .modal__layout .modal__box .pro-title{
   margin-bottom: 15px;
   font-size: 14px;
+
 }
 
 .modal--layout .gap {
