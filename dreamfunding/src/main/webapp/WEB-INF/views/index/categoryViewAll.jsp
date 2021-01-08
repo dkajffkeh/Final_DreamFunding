@@ -97,31 +97,31 @@
             <div class="inner">
             
                 <div class="category">
-                    <div class="category-title" align="center">
+                    <div class="category-title" align="center" onclick="location.href='categoryViewAll.in'">
                         <img src="${pageContext.request.contextPath}/resources/images/cate5.png" width="80px" height="80px" style="border-radius: 50%;">
                         <div class="cate-title">전체보기</div>
                     </div>
-                    <div class="category-title" align="center">
+                    <div class="category-title" align="center"  onclick="location.href='magazine.do'">
                         <img src="${pageContext.request.contextPath}/resources/images/cate1.jpeg" width="80px" height="80px" style="border-radius: 50%;">
                         <div class="cate-title">잡지</div>
                     </div>
-                    <div class="category-title" align="center">
+                    <div class="category-title" align="center" onclick="location.href='essay.do'">
                         <img src="${pageContext.request.contextPath}/resources/images/cate7.jpg" width="80px" height="80px" style="border-radius: 50%;">
                         <div class="cate-title">문학&에세이</div>
                     </div>
-                    <div class="category-title" align="center">
+                    <div class="category-title" align="center" onclick="location.href='art.do'">
                         <img src="${pageContext.request.contextPath}/resources/images/cate2.jpg" width="80px" height="80px" style="border-radius: 50%;">
                         <div class="cate-title">예술</div>
                     </div>
-                    <div class="category-title" align="center">
+                    <div class="category-title" align="center" onclick="location.href='hobby.do'">
                         <img src="${pageContext.request.contextPath}/resources/images/cate3.jpg" width="80px" height="80px" style="border-radius: 50%;">
                         <div class="cate-title">실용&취미</div>
                     </div>
-                    <div class="category-title" align="center">
+                    <div class="category-title" align="center" onclick="location.href='drawing.do'">
                         <img src="${pageContext.request.contextPath}/resources/images/cate4.jpg" width="80px" height="80px" style="border-radius: 50%;">
                         <div class="cate-title">그림책</div>
                     </div>
-                    <div class="category-title" align="center">
+                    <div class="category-title" align="center" onclick="location.href='etc.do'">
                         <img src="${pageContext.request.contextPath}/resources/images/book6.jpg" width="80px" height="80px" style="border-radius: 50%;">
                         <div class="cate-title">기타</div>
                     </div>
@@ -261,7 +261,7 @@
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectMoneyList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    				                  "<div class='like'>";
-	    	                  		if(gapDay < 10){
+	    	                  		if(gapDay < 20){
 	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
 	    	                  		}else{
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
@@ -292,6 +292,7 @@
 	        					}
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -314,7 +315,7 @@
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectClosedList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    				                  "<div class='like'>";
-	    	                  		if(gapDay < 10){
+	    	                  		if(gapDay < 20){
 	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
 	    	                  		}else{
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
@@ -345,6 +346,7 @@
 	    						}                  
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -367,7 +369,7 @@
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectNewList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    				                  "<div class='like'>";
-	    	                  		if(gapDay < 10){
+	    	                  		if(gapDay < 20){
 	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
 	    	                  		}else{
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
@@ -398,6 +400,7 @@
 	        					}                  
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -413,9 +416,9 @@
 	        <script>
 	        		var memNo = "${loginMem.memNo}";
 	        		
-	        		$(function(){
-		        		likeList();
-		        	})
+	        		window.onload = function(){
+	        			likeList();
+	        		}
 	        		
 	        	
 	        		function likeList() {

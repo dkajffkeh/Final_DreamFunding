@@ -58,7 +58,7 @@
           <div class="search__box"  >
           	<form action="search.do">
 	            <input type="text" class="search-bar" placeholder="프로젝트 검색" id="search" name="searchText" />
-	            <span class="material-icons"> search <input type="submit" value="검색"></span>
+	            <span class="material-icons" onclick="location.href='search.do'"> search </span>
         	</form>
             
           </div>
@@ -77,8 +77,8 @@
          
         <div class="header__right">
           <div class="search__box">
-            <input type="text" class="search-bar" placeholder="프로젝트 검색" />
-            <span class="material-icons"> search </span>
+            <input type="text" class="search-bar" placeholder="프로젝트 검색" name="searchText" />
+            <span class="material-icons" onclick="location.href='search.do'"> search </span>
 		
               
           </div>

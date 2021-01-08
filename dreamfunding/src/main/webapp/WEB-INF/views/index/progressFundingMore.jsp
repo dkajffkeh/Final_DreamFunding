@@ -242,7 +242,7 @@
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectMoneyList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    				                  "<div class='like'>";
-	    	                  		if(gapDay < 10){
+	    	                  		if(gapDay < 20){
 	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
 	    	                  		}else{
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
@@ -295,7 +295,7 @@
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectClosedList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    				                  "<div class='like'>";
-	    	                  		if(gapDay < 10){
+	    	                  		if(gapDay < 20){
 	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
 	    	                  		}else{
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
@@ -348,7 +348,7 @@
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectNewList[i].projectFileName + ")'>" +
 				    								 "<div>" +
 				    				                  "<div class='like'>";
-	    	                  		if(gapDay < 10){
+	    	                  		if(gapDay < 20){
 	    	                  			 value += "<div class='finish'><span>마감임박</span></div>";
 	    	                  		}else{
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";

@@ -28,6 +28,7 @@
 	</resultMap>
 
 	<select id="selectProgressFundingList" resultMap="indexResultSet">
+		<![CDATA[
 		select
 		       project_no
 		     , member_no
@@ -48,9 +49,12 @@
 		     , project_crdate
 		  from project
 		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		 ]]>
 	</select>
 
 	<select id="selectRankingList" resultMap="indexResultSet">
+		<![CDATA[
 		select
 		       project_no
 		     , member_no
@@ -71,8 +75,10 @@
 		     , project_crdate
 		  from project
 		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
 		 order
 		    by project_count desc
+		    ]]>
 	</select>
 	
 	<select id="selectClosedFundingList" resultMap="indexResultSet">
@@ -96,11 +102,12 @@
 		     , hashtag
 		     , project_crdate
 		  from project
-		 where project_close_dt < sysdate 
+		 where project_close_dt < to_char(sysdate, 'YYYY-MM-DD')
 		 ]]>
 	</select>
 	
 	<select id="selectFundingMoneyList" resultMap="indexResultSet">
+		<![CDATA[
 		select
 		       project_no
 		     , member_no
@@ -121,11 +128,14 @@
 		     , project_crdate
 		  from project
 		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
 		 order
 		    by project_gprice desc
+		    ]]>
 	</select>
 	
 	<select id="selectClosedList" resultMap="indexResultSet">
+		<![CDATA[
 		select
 		       project_no
 		     , member_no
@@ -146,11 +156,14 @@
 		     , project_crdate
 		  from project
 		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
 		 order
 		    by project_close_dt asc
+		    ]]>
 	</select>
 	
 	<select id="selectNewList" resultMap="indexResultSet">
+		<![CDATA[
 		select
 		       project_no
 		     , project_goal
@@ -166,8 +179,10 @@
 		     , creator_status
 		  from project
 		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
 		 order
 		    by project_start_dt asc
+		    ]]>
 	</select>
 	
 	<insert id="increaseLike" 
@@ -212,6 +227,7 @@
 	</select>
 	
 	<select id="selectProjectList" resultMap="indexResultSet">
+		<![CDATA[
 		select
 		       project_no
 		     , member_no
@@ -232,6 +248,8 @@
 		     , project_crdate
 		  from project
 		 where creator_status = 'U'
+		   and project_close_dt >= to_char(sysdate, 'YYYY-MM-DD')
+		   ]]>
 	</select>
 
 
