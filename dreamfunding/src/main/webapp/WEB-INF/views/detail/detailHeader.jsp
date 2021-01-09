@@ -133,7 +133,7 @@
                 </div>
               </div>
               <div class="status-btn__wrapper">
-                <button type="button" class="btn btn--main">
+                <button type="button" class="btn btn--main btn--p">
                   <a href="#rewardLabel">프로젝트 밀어주기</a>
                 </button>
                 <div class="btn-icon__wrapper" id="like-btn__wrapper">
@@ -278,7 +278,7 @@
         })
         .then(response=>{
             if(response.data==='success'){
-              alert('좋아요 성공!');
+              alert('좋아한 프로젝트에 추가되었습니다.');
               const likeBtn = document.querySelector(".like-btn")
               likeBtn.remove()
               makeLikeBtn(true)
@@ -298,7 +298,7 @@
           })
           .then(response=>{
               if(response.data==='success'){
-                alert('좋아요 취소 성공!');
+                alert('취소되었습니다.');
                 const likeBtn = document.querySelector(".like-btn")
                 likeBtn.remove()
                 makeLikeBtn(false)

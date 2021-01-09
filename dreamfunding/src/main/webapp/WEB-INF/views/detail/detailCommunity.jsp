@@ -243,7 +243,6 @@
 	  let editIndex = 0; 
     
       const commentBtn = document.querySelectorAll(".comment-open-btn");
-      // console.log(commentBtn);
       // 대댓글 리스트 조회 버튼
 
       const editInput = document.querySelectorAll(".edit-comment");
@@ -262,12 +261,11 @@
 
       const rereplyList = document.querySelectorAll(".rereply_list");
 
-      
-    
-      
+ 
       function validReply() {
         rereplyList.forEach((v, i) => {
-          if (v.innerHTML === "") {
+        	   
+        	if (v.innerHTML === "") {
             commentBtn[i].innerText = "No Comment!";
           }
         });
@@ -371,7 +369,6 @@
       
     // 대댓글 
     const createReplyTag=(v)=>{
-      console.log(v);
       const loginNo = '${loginMem.memNo}'
       
     const listItem = document.createElement('li');
