@@ -30,6 +30,13 @@
   	<result column="council_cate" property="councilCate"/>
   	<result column="council_a_date" property="councilAdate"/>  
   </resultMap>
+  <resultMap id="projectResultset" type="Detail">
+  	<result column="project_no" property="projectNo"/>
+  	<result column="project_title" property="projectTitle"/>
+  	<result column="creator_name" property="creatorName"/>
+  	<result column="project_crdate" property="createDate"/>
+  	<result column="project_status" property="status"/>
+  </resultMap>
   
   <select id="selectListCount" resultType="_int">
   select
@@ -334,6 +341,32 @@
   	   </if> 
   	       like '%'||#{keyword}||'%'
   </select>
+  <select id="selectProjectAdmin" resultMap="projectResultset">
+  	select
+	       project_no
+	     , creator_name
+	     , project_title
+	     , project_crdate
+	     , creator_status     
+	  from project
+	 where creator_status = 'R'
+	 order
+	    by project_no desc
+  </select>
   
+  <update id="approvalProject" parameterType="_int">
+  	update
+	       project
+	   set creator_status='U'
+	 where project_no =#{pno}
+  </update>
+  
+  <update id="rejectedProject" parameterType="hashmap">
+	  update
+		       project
+		   set creator_status='D'
+		     , project_reason=#{reason}
+		 where project_no =#{pno}
+  </update>
   
 </mapper>

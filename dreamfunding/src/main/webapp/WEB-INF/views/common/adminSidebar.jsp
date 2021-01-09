@@ -67,7 +67,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="projectHandler.gn">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>프로젝트 관리</span>
                 </a>

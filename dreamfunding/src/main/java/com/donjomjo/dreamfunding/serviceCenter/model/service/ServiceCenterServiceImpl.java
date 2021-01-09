@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.serviceCenter.model.dao.ServiceCenterDao;
 import com.donjomjo.dreamfunding.serviceCenter.model.vo.Council;
 import com.donjomjo.dreamfunding.serviceCenter.model.vo.Faq;
@@ -200,6 +201,27 @@ public class ServiceCenterServiceImpl implements ServiceCenterService {
 	public ArrayList<Notice> searchNoticeList(PageInfo pi, String cate, String keyword) {
 		
 		return scDao.searchNoticeList(sqlSession, pi, cate, keyword);
+	}
+
+
+	@Override
+	public ArrayList<Detail> selectProjectAdmin() {
+		
+		return scDao.selectProjectAdmin(sqlSession);
+	}
+
+
+	@Override
+	public int approvalProject(int pno) {
+		
+		return scDao.approvalProject(sqlSession, pno);
+	}
+
+
+	@Override
+	public int rejectedProject(int pno, String reason) {
+		
+		return scDao.rejectedProject(sqlSession, pno, reason);
 	}
 
 

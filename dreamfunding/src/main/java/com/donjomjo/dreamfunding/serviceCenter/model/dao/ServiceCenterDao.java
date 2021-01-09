@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.serviceCenter.model.vo.Council;
 import com.donjomjo.dreamfunding.serviceCenter.model.vo.Faq;
 import com.donjomjo.dreamfunding.serviceCenter.model.vo.Notice;
@@ -143,6 +144,24 @@ public class ServiceCenterDao {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("serviceCenterMapper.searchNoticeList", map, rowBounds);
+	}
+	
+	public ArrayList<Detail> selectProjectAdmin(SqlSessionTemplate sqlSession) {
+		
+		ArrayList<Detail> plist = (ArrayList)sqlSession.selectList("serviceCenterMapper.selectProjectAdmin");
+		
+		return plist;
+	}
+	
+	public int approvalProject(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.update("serviceCenterMapper.approvalProject", pno);
+	}
+	
+	public int rejectedProject(SqlSessionTemplate sqlSession, int pno, String reason) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("pno", pno);
+		map.put("reason", reason);		
+		return sqlSession.update("serviceCenterMapper.rejectedProject", map);
 	}
 	
 }

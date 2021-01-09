@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.serviceCenter.model.service.ServiceCenterService;
 import com.donjomjo.dreamfunding.serviceCenter.model.template.PageNation;
 import com.donjomjo.dreamfunding.serviceCenter.model.vo.Council;
@@ -360,6 +361,33 @@ public class ServiceCenterController {
 		
 		return "serviceCenter/sCenterMainView";
 		
+	}
+	
+	@RequestMapping("projectHandler.gn")
+	public String selectProjectAdmin(Model model) {
+		
+		ArrayList<Detail> pList = scService.selectProjectAdmin();
+		
+		model.addAttribute("pList", pList);
+		
+		return "admin/projectApproval";
+		
+	}
+	
+	@RequestMapping("approval.gn")
+	public String approvalProject(int pno) {
+		
+		scService.approvalProject(pno);
+		
+		return "redirect:projectHandler.gn";
+		
+	}
+	
+	@RequestMapping("rejected.gn")
+	public String rejectedProject(int pno, String reason) {
+		scService.rejectedProject(pno, reason);
+		
+		return "redirect:projectHandler.gn";
 	}
 	
 }

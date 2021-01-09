@@ -2,6 +2,7 @@ package com.donjomjo.dreamfunding.serviceCenter.model.service;
 
 import java.util.ArrayList;
 
+import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.serviceCenter.model.vo.Council;
 import com.donjomjo.dreamfunding.serviceCenter.model.vo.Faq;
 import com.donjomjo.dreamfunding.serviceCenter.model.vo.Notice;
@@ -38,6 +39,9 @@ public interface ServiceCenterService {
 	int insertCouncilAns(Council co);
 	int updateCouncilAns(Council co);
 	int deleteCouncilAns(int cno);
+	ArrayList<Detail> selectProjectAdmin();
 	
+	int approvalProject(int pno);
+	int rejectedProject(int pno, String reason);
 	
 }
