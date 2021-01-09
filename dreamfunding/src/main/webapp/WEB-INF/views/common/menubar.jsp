@@ -58,8 +58,7 @@
           <div class="search__box"  >
           	<form action="search.do">
 	            <input type="text" class="search-bar" placeholder="프로젝트 검색" id="keyword" name="keyword" />
-	            <span class="material-icons"> search </span>
-	            <input type="submit" value="검색">
+	            <div><button type="submit" style="border:none;"><span class="material-icons"> search </span></button></div>
         	</form>
             
           </div>
@@ -80,15 +79,13 @@
           <div class="search__box">
             <form action="search.do">
 	            <input type="text" class="search-bar" placeholder="프로젝트 검색" id="keyword" name="keyword" />
-	            <span class="material-icons"> search </span>
-	            <input type="submit" value="검색">
+	            <span><button type="submit" style="border:none; background-color:white;"><span class="material-icons"> search </span></button></span>
         	</form>
-              
           </div>
         </div>
 
         <div>
-          <button type="button" class="alarm-btn" data-container="body" data-toggle="popover" data-placement="bottom" style="style="text-align: justify; margin-bottom: 1em;">
+          <button type="button" class="alarm-btn" data-container="body" data-toggle="popover" data-placement="bottom" style="display:none;">
             <i class="header__icon" ><span class="material-icons"> notifications </span></i>
           </button>
             
@@ -96,6 +93,10 @@
               <c:choose>
               <c:when test="${ empty loginMem.memSystemname }">
 			  <i class="header__icon"><span class="material-icons"> account_circle </span></i>
+              </c:when>
+              <c:when test="${ loginMem.memNo == 1 }">
+              <i class="header__icon"><span class="material-icons"> account_circle </span></i>
+			  <i class="header__icon"><span class="material-icons" onclick="location.href='daminIndex.ad'" style="cursor:pointer;">admin_panel_settings</span></i>
               </c:when>
               <c:otherwise>
               

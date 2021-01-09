@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Dream Funding</title>    
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/index.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/index/index.css?after" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@
 
       <div class="top"> <!---->
         <!-- 문의하기 버튼(sticky) -->
-        <div class="sticky"> 
+        <div class="sticky" style="display:none;"> 
           <!-- 문의하기 폼 -->
           <div class="qna-form" id="showHide">
             <div class="qna-title">
@@ -666,15 +666,6 @@
 
         </div>
       </div> <!---->
-      
-      
-      <div>
-      	<a href="detailStory.de">고독한 디테일방</a>
-      </div>
-      
-      <div>
-      	<a href="daminIndex.ad">졸라 고독한 관리자페이지</a>
-      </div>
       
     </main>
 	

@@ -40,6 +40,7 @@
 	grid-template-columns: repeat(4, 1fr);
 	column-gap: 2%;
 	z-index:1;
+	cursor:pointer;
 }
 .card-item {
 	margin-bottom: 10px;
