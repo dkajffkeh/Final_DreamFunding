@@ -35,23 +35,28 @@
               <div class="creator-intro">
        			 ${d.creatorIntro} 
               </div>
-              <div class="btn pressDownButton" onClick="messageModalOpen()">
+          <!--    <div class="btn pressDownButton" onClick="messageModalOpen()">
                 <span class="material-icons"> email </span>크리에이터에게 메시지 보내기
-              </div>
+              </div> --> 
             </div>
 		       
             <div class="reward-label" id="rewardLabel">리워드 선택</div>
-    		
-		      <c:forEach var="w" items="${ rw }">
-		        <div class="reward__wrapper">	
-		          <div class="reward-box">
-		        	<c:if test="${ !empty loginMem }">
-		           	 <a href='orderInsert.me?pno=${d.projectNo}&mno=${loginMem.memNo}&rewardNum=${w.rewardNo}&rewardAmount=1'>
+    		  <ul class="reward__wrapper reward-list">
+		      <c:forEach var="w" items="${ rw }">	
+		          <li class="reward-box" id="reward-box${w.rewardNo}">
+		        	<c:if test="${ !empty loginMem}">	
+								
+				           	<c:if test="${w.rewardNumber gt w.saleCount || w.rewardStatus eq 'N'}">
+				           		 <a href='orderInsert.me?pno=${d.projectNo}&mno=${loginMem.memNo}&rewardNum=${w.rewardNo}&rewardAmount=1'>
+							</c:if>
+							<c:if test="${ w.rewardStatus eq 'Y' && w.rewardNumber le w.saleCount }">
+					        	<a href='#' onclick="alert('해당 리워드는 마감되었습니다.')">
+					        </c:if>	
+
 					</c:if>
 					<c:if test="${ empty loginMem }">
 		           	 <a href='#' onclick="alert('로그인 사용자만 프로젝트 펀딩이 가능합니다.')">
 					</c:if>
-		 		            
 			              <div class="reward-price">
 			              <fmt:formatNumber type="number" maxFractionDigits="3" value="${w.rewardPrice}"/>원 펀딩</div>
 			                   
@@ -60,27 +65,27 @@
 			               		 <li>${ o.rewardContent }</li> 
 			                </c:forEach>
 			              </ul>    
-			              
+
 			              <c:choose>
 			                <c:when test="${w.rewardStatus eq 'N'}">
-			                  <div class="reward-status">제한 수량 무제한</div>
+			                  <div class="reward-status">제한 수량 무제한<span class="reward-number"></span></div>
 			                </c:when>	  
 			                <c:when test="${w.rewardStatus eq 'Y'}">
-			                  <div class="reward-status">제한 수량 ${ w.rewardNumber }개</div>
+			                  <div class="reward-status">제한 수량 <span class="reward-number">${ w.rewardNumber }</span>개</div>
 			                </c:when>	                  
 			              <c:otherwise>
-			                <div class="reward-status">옵션이 제공되지 않습니다.</div>
+			                <div class="reward-status">옵션이 제공되지 않습니다.<span class="reward-number"></span></div>
 			              </c:otherwise>
 			            </c:choose>
 		      
 		            <c:if test="${!empty w.saleCount}">
-		                <div class="reward-salecount">총 ${ w.saleCount }개 펀딩 완료</div>
-		            </c:if>	
-		            </a> 
-		          </div>
-		        </div>
+		                <div class="reward-salecount">총 <span class="sale-count">${ w.saleCount }</span>개 펀딩 완료</div>
+		            </c:if>
+					</a>
+		          </li>
+		   
 		      </c:forEach>
-		      
+		 	</ul>
               
           
           
@@ -130,6 +135,27 @@
         }, 400);
       };
       
+
+   let rewardBox = document.querySelectorAll(".reward-box");
+   let rewardList = document.querySelectorAll(".reward-list .reward-box");
+   let rewardStatus = document.querySelectorAll(".reward-list .reward-box .reward-status");
+   let rewardNumber2 = document.querySelectorAll(".reward-list .reward-box .reward-status .reward-number");
+   let saleCount2 = document.querySelectorAll(".reward-list .reward-box .reward-salecount .sale-count");
+   
+   
+    (function(){
+		rewardBox.forEach((v, i)=>{
+		
+			if(rewardNumber2[i].innerHtml != ""){
+				if(parseInt(rewardNumber2[i].innerText)<=parseInt(saleCount2[i].innerText)){
+					v.classList.add('disabled-reward');
+				}
+			}
+		});    		 
+     })()
+      
+      
+       
       </script>
 
 </body>
