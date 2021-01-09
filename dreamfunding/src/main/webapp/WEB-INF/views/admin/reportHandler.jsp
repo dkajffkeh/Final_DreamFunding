@@ -68,6 +68,7 @@
                                     </thead>
                                 
                                     <tbody>
+                           
                                     <c:forEach var="i" items="${ rList }">
                                         <tr>
                                         	<td style="display:none">${ i.reportNo }</td>	
@@ -82,6 +83,7 @@
                                             </c:if>
                                         </tr>
                                     </c:forEach>    
+                            
                                     </tbody>
                                 </table>
                             </div>
@@ -134,18 +136,6 @@
             </div>
         </div>
     </div>
-    
-    <script>
-    	$("#dataTable > tbody > tr").on('click',function(){
-    		
-    		
-    		
-    		location.href="reportDetail.re?rno="+$(this).children().eq(0).text();
-    		
-    		
-    	})
-    
-    </script>
     
 
     <!-- Bootstrap core JavaScript-->

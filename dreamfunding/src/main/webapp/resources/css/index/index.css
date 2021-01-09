@@ -8,34 +8,30 @@
 .inner-image{
     width: 100vw;
     float: left;
-    margin-bottom: 50px;
+    /*margin-bottom: 50px;*/
     position: relative;
 }
+.main-slide-button{
+	margin-bottom : 50px;
+}
+.main-slide-button button{
+	border-radius: 5px;
+}
+.main-slide-button button:hover{
+	background-color:rgb(127, 0, 0);
+	color:white;
+}
 .btn1{
-    position: absolute;
-    bottom: 200px;
-    left: 10px;
-    height: 0;
+    border : none;
     padding: 1rem;
-}
-.btn1 .material-icons{
-    font-size: 48px;
-}
-.btn1 .material-icons:hover{
-    color: rgb(127, 0, 0);
 }
 .btn2{
-    position: absolute;
-    bottom: 200px;
-    left: 1100px;
-    height: 0;
+    border:none;
     padding: 1rem;
 }
-.btn2 .material-icons{
-    font-size: 48px;
-}
-.btn2 .material-icons:hover{
-    color: rgb(127, 0, 0);
+.btn3{
+    border:none;
+    padding: 1rem;
 }
 
 /* card list */
@@ -43,6 +39,8 @@
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	column-gap: 2%;
+	z-index:1;
+	cursor:pointer;
 }
 .card-item {
 	margin-bottom: 10px;
@@ -59,18 +57,26 @@
     border-radius: 5px;
 }
 .card-image img { display: none; }
+.finish span{
+	background-color : rgb(127, 0, 0);
+	color : white;
+	padding : 0.3rem;
+	border-radius: 5px;
+}
 .like{
-    display: flex;
-    float: right;
+	display:flex;
+	justify-content:space-between;
+	width:100%;
     border: none;
     color: rgb(218, 216, 216);
     padding: 0.3rem;
     cursor: pointer;
+    z-index:999;
 }
 .like .material-icons{
     font-size: 36px;
 }
-.like:hover{
+.like .material-icons:hover{
     color: rgb(127, 0, 0);
 }
 .card-desc { padding: 1rem; }

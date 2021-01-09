@@ -48,5 +48,8 @@
 	 		<beans:bean id="loginIntercepter" class="com.donjomjo.dreamfunding.common.intercepter.LoginIntercepter"/>
 	 	</interceptor>
 	 </interceptors>
+
+	
+
 	
 </beans:beans>

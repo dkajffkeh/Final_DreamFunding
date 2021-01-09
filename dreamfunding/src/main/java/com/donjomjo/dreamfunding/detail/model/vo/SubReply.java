@@ -27,4 +27,6 @@ public class SubReply {
 	private String subReContent;
 	private String subReDate;
 	private String subReStatus; 
+	private String memberSystemName;
+	private String memberNickname;
 }

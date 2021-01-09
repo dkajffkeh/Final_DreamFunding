@@ -6,8 +6,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.donjomjo.dreamfunding.common.model.vo.PageInfo;
 import com.donjomjo.dreamfunding.index.model.dao.IndexDao;
 import com.donjomjo.dreamfunding.index.model.vo.Index;
+import com.donjomjo.dreamfunding.index.model.vo.Like;
 
 @Service
 public class IndexServiceImpl implements IndexService {
@@ -49,6 +51,93 @@ public class IndexServiceImpl implements IndexService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ArrayList<Index> selectFundingMoney() {
+		
+		return iDao.selectFundingMoney(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Index> selectClosed() {
+		return iDao.selectClosed(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Index> selectNew() {
+		return iDao.selectNew(sqlSession);
+	}
+
+	@Override
+	public int increaseLike(Like like) {
+		return iDao.increaseLike(sqlSession, like);
+	}
+
+	@Override
+	public int likeYN(Like like) {
+		return iDao.likeYN(sqlSession, like);
+	}
+
+	@Override
+	public int deleteLike(Like like) {
+		return iDao.deleteLike(sqlSession, like);
+	}
+
+	@Override
+	public ArrayList<Like> likeList(int mno) {
+		return iDao.likeList(sqlSession, mno);
+	}
+
+	@Override
+	public int selectListCount() {
+		return iDao.selectListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Index> selectProjectList(PageInfo pi) {
+		return iDao.selectProjectList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Index> selectRankingList(PageInfo pi) {
+		return iDao.selectRankingList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Index> selectSearchList(PageInfo pi, String keyword) {
+		return iDao.selectSearchList(sqlSession, pi, keyword);
+	}
+
+	@Override
+	public ArrayList<Index> selectMagazineList(PageInfo pi) {
+		return iDao.selectMagazineList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Index> selectEssayList(PageInfo pi) {
+		return iDao.selectEssayList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Index> selectArtList(PageInfo pi) {
+		return iDao.selectArtList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Index> selectHobbyList(PageInfo pi) {
+		return iDao.selectHobbyList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Index> selectDrawingList(PageInfo pi) {
+		return iDao.selectDrawingList(sqlSession, pi);
+	}
+	
+	@Override
+	public ArrayList<Index> selectEtcList(PageInfo pi) {
+		return iDao.selectEtcList(sqlSession, pi);
+	}
+	
 	
 	
 	

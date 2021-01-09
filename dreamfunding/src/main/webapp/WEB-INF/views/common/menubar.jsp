@@ -56,52 +56,11 @@
         	<c:when test="${ empty loginMem }">
         <div class="header__right">
           <div class="search__box"  >
-            <input type="text" class="search-bar" placeholder="프로젝트 검색" id="search" onclick=showHideSearch(); />
-            <span class="material-icons"> search </span>
-        
-            <!-- 검색창 클릭 시 나올 창 -->
-             
-            <div class="search-slide" id="showHideSearch" >
-              <div class="search-category">
-                <button class="search-cate-btn">최근</button>
-                <button class="search-cate-btn">카테고리</button>
-              </div>
-              <div class="search-text">
-                
-                <!-- 카테고리 -->
-                <!-- <div>
-                  <ul>
-                    <li>잡지</li>
-                    <li>문학 & 에세이</li>
-                    <li>예술</li>
-                    <li>실용 & 취미</li>
-                    <li>그림책</li>
-                    <li>기타</li>
-                  </ul>
-                </div> -->
-
-                <!-- 최근검색어 -->
-                 
-                <div class="search-text-content">
-                  <ul>
-                    <li>
-                      강아지
-                    </li>
-                  </ul>
-                </div>
-                <div class="search-text-delete">
-                  <button class="search-text-btn">X</button>
-                </div>
-              </div>
-              <div class="search-bottom">
-                <div>
-                  <button class="search-bot-btn-delete">전체 삭제</button>
-                </div>
-                <div>
-                  <button class="search-bot-btn-close" onclick= searchClose();>닫기</button>
-                </div>
-              </div>
-            </div>
+          	<form action="search.do">
+	            <input type="text" class="search-bar" placeholder="프로젝트 검색" id="keyword" name="keyword" />
+	            <div><button type="submit" style="border:none;"><span class="material-icons"> search </span></button></div>
+        	</form>
+            
           </div>
           <a href="loginForm.me.jm" class="sign__group">로그인</a>
           <a href="enrollForm.me.jm" class="sign__group">회원가입</a>
@@ -118,63 +77,37 @@
          
         <div class="header__right">
           <div class="search__box">
-            <input type="text" class="search-bar" placeholder="프로젝트 검색" onclick=showHideSearch(); />
-            <span class="material-icons"> search </span>
-		
-              <!-- 검색창 클릭 시 나올 창 -->
-              
-              <div class="search-slide" id="showHideSearch" >
-                <div class="search-category">
-                  <button class="search-cate-btn">최근</button>
-                  <button class="search-cate-btn">카테고리</button>
-                </div>
-                <div class="search-text">
-                 
-                  <!-- 카테고리 -->
-                  <!-- <div>
-                    <ul>
-                      <li>잡지</li>
-                      <li>문학 & 에세이</li>
-                      <li>예술</li>
-                      <li>실용 & 취미</li>
-                      <li>그림책</li>
-                      <li>기타</li>
-                    </ul>
-                  </div> -->
-
-                  <!-- 최근검색어 -->
-                  
-                  <div class="search-text-content">
-                    <ul>
-                      <li>
-                        강아지
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="search-text-delete">
-                    <button class="search-text-btn">X</button>
-                  </div>
-                </div>
-
-                <div class="search-bottom">
-                    <div>
-                      <button class="search-bot-btn-delete">전체 삭제</button>
-                    </div>
-                    <div>
-                      <button class="search-bot-btn-close" onclick= searchClose();>닫기</button>
-                    </div>
-                </div>
-              </div>
+            <form action="search.do">
+	            <input type="text" class="search-bar" placeholder="프로젝트 검색" id="keyword" name="keyword" />
+	            <span><button type="submit" style="border:none; background-color:white;"><span class="material-icons"> search </span></button></span>
+        	</form>
           </div>
         </div>
 
         <div>
-          <button type="button" class="alarm-btn" data-container="body" data-toggle="popover" data-placement="bottom">
-            <i class="header__icon"><span class="material-icons"> notifications </span></i>
+          <button type="button" class="alarm-btn" data-container="body" data-toggle="popover" data-placement="bottom" style="display:none;">
+            <i class="header__icon" ><span class="material-icons"> notifications </span></i>
           </button>
             
-          <i class="header__icon"><span class="material-icons"> account_circle </span></i>&nbsp;&nbsp;
-          
+               &nbsp;
+              <c:choose>
+              <c:when test="${ empty loginMem.memSystemname }">
+			  <i class="header__icon"><span class="material-icons"> account_circle </span></i>
+              </c:when>
+              <c:when test="${ loginMem.memNo == 1 }">
+              <i class="header__icon"><span class="material-icons"> account_circle </span></i>
+			  <i class="header__icon"><span class="material-icons" onclick="location.href='daminIndex.ad'" style="cursor:pointer;">admin_panel_settings</span></i>
+              </c:when>
+              <c:otherwise>
+              
+              
+              <a href="optionAccount.me"><img src="${pageContext.request.contextPath}/resources/images/profile/${loginMem.memSystemname}"
+              		 	  style="text-align: justify; margin-bottom: 1em; display:inline;width:30px; height:30px; border-radius: 50%;"></a>
+              		 	  
+              		 	  
+               </c:otherwise>
+              </c:choose>
+          &nbsp;&nbsp;
           
             <a href="logout.me.jm"><i class="fas fa-sign-out-alt" style="font-size: 34px"></i></a>
           
@@ -190,33 +123,14 @@
           <script>
             $(document).ready(function(){
 
-              var content = ['<div class="timePickerCanvas">asfaf asfsadf</div>',
-                              '<div class="timePickerClock timePickerHours">asdf asdddddddddddddddddddddddddddddddddddddddddfasf</div>',
-                              '<div class="timePickerClock timePickerMinutes"> asfa </div>',].join('');
+              var content = ['<div class="timePickerCanvas">실시간알림..</div>',
+                              '<div class="timePickerClock timePickerHours">. . .</div>',
+                              '<div class="timePickerClock timePickerMinutes"> . . . </div>',].join('');
 
               $('.alarm-btn').popover({title: "<div><a>실시간 알림</a></div>", content: content, html: true, placement: "bottom"}); 
             });
           </script>
-                  <!-- 검색어 슬라이드 스크립트 -->
-        <script>
           
-          function showHideSearch(){
-              if(document.getElementById("showHideSearch").style.display =='none'){
-                  document.getElementById("showHideSearch").style.display ='block';
-              }
-              else{
-                  document.getElementById("showHideSearch").style.display ='none';
-              }
-          }
-          function searchClose(){
-              if(document.getElementById("showHideSearch").style.display =='none'){
-                  document.getElementById("showHideSearch").style.display ='block';
-              }
-              else{
-                  document.getElementById("showHideSearch").style.display ='none';
-              }
-          }
-        </script>
 
         
 

@@ -54,7 +54,7 @@ public class ProjectInsertController {
 		model.addAttribute("proSequence", pService.selectProNo());
 		model.addAttribute("pList", pService.selectProject(mno));
 		
-		System.out.println(mno);
+	
 		return "projectInsert/projectInsertForm";
 		
 	}
@@ -127,7 +127,7 @@ public class ProjectInsertController {
 				profileUploader(profileParsing(mtf),pi,session);
 			}
 			//DB에서 파일을 불러 온 후 삭제				
-			//2개 다 바꿨을때만 처리됨.	
+			
 				
 			//프로젝트는 무조건 insert 돼야함.
 			if(pService.projectUpdateOnly(pi)>0) {
@@ -153,7 +153,7 @@ public class ProjectInsertController {
 		}
 
 	}
-	
+	//임시저장 데이터 뿌려주기
 	@RequestMapping(value="gotoPreview")
 	public ModelAndView toPreview(ProjectInsert pi,ModelAndView model) {
 		
@@ -345,7 +345,7 @@ public class ProjectInsertController {
 	@ResponseBody
 	@RequestMapping(value="ReloadProjectUrlCheck.pi.hy", produces="text/html; charset=utf-8")
 	private String reloadUrlConflictCheck(String urlInput, String pno){		
-			System.out.println(urlInput+"   "+pno);
+			
 		return pService.reloadUrlConflictCheck(urlInput, pno);
 	}	
 	

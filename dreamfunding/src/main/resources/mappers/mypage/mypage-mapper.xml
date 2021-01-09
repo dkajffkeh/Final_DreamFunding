@@ -2,6 +2,89 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mypageMapper">
 
+	<resultMap id="fundingProjectResultSet" type="FundingProject">
+		<result column="project_no" property="projectNo"/>
+		<result column="project_thumpath" property="projectThumbnailPath"/>
+		<result column="project_filename" property="projectFileName"/>
+		<result column="project_title" property="projectTitle"/>
+		<result column="project_start_dt" property="projectStartDate"/>
+		<result column="project_close_dt" property="projectCloseDate"/>
+		<result column="creator_status" property="creatorStatus"/>
+	</resultMap>
+	
+					 <select id="selectFundingListCount"
+					 		 parameterType="_int"
+					 		 resultType="_int">
+				   	select
+				   		   count(*)
+				   	  from project
+				   	 where creator_status = 'U'	
+				   	   and member_no = ${ mno }	   
+				   </select>
+				   
+				   <select id="selectFundingList" 
+				   		   parameterType="_int"
+				   		   resultMap="fundingProjectResultSet">
+					select
+						       project_no
+				             , project_thumpath
+				             , project_filename
+						     , project_title
+						     , project_start_dt
+						     , project_close_dt
+						  from project
+						 where creator_status = 'U'
+						   and member_no = ${ mno}
+				         order
+				            by project_no desc
+				   </select>
+	
+	<resultMap id="likeProjectResultSet" type="LikeProject">
+		<result column="project_no" property="projectNo"/>
+		<result column="project_thumpath" property="projectThumbnailPath"/>
+		<result column="project_filename" property="projectFileName"/>
+		<result column="project_title" property="projectTitle"/>
+		<result column="project_subtitle" property="projectSubTitle"/>
+		<result column="project_gprice" property="projectGoalPrice"/>
+		<result column="project_goal" property="projectGoal"/>
+		<result column="project_close_dt" property="projectCloseDate"/>
+		<result column="creator_status" property="creatorStatus"/>
+	</resultMap>
+	
+			<select id="selectLikeListCount"
+					parameterType="_int" 
+					resultType="_int">
+						  select count(*)
+							from likey
+						   where member_no = ${ mno}
+			 </select>
+			 
+			 <select id="selectLikeList"
+			 		 parameterType="_int"
+			 		 resultMap="likeProjectResultSet">
+			 	select p.project_no
+				     , p.project_thumpath
+				     , p.project_filename
+				     , p.project_title
+				     , p.project_subtitle
+				     , p.project_gprice
+				     , p.project_goal
+				     , p.project_close_dt
+				  from project p,(
+				                 select *
+				                   from likey
+				                  where member_no = ${mno}
+				                 ) A
+				 where  p.project_no = A.project_no
+				 order
+					by p.project_no desc
+			 </select>
+			 
+		
+	
+   
+   
+   
 	
   
 </mapper>

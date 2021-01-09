@@ -1,6 +1,6 @@
 'use strict'
 
-$(".btn-primary.btn4").click(function () {
+$(".btn-primary.btn4 , #projectInsertBtn").click(function () {
 
     $("#insertConroller").attr('method', 'post');
     $("#insertConroller").attr('action', "projectRequest.pi.hy?status=R").submit();
@@ -8,7 +8,7 @@ $(".btn-primary.btn4").click(function () {
 })
 
 
-$("#previewBtn").on('click', function () {
+$("#previewBtn , #projectPreviewBtn").on('click', function () {
 
     const formData = new FormData(document.getElementById("insertConroller"));
     formData.append("status", "T");

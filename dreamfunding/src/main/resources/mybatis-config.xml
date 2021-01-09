@@ -8,6 +8,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.donjomjo.dreamfunding.index.model.vo.Index" alias="Index"/>
+		<typeAlias type="com.donjomjo.dreamfunding.index.model.vo.Like" alias="IndexLike"/>	
 		<typeAlias type="com.donjomjo.dreamfunding.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.donjomjo.dreamfunding.order.model.vo.Shipping" alias="Shipping"/>
 		<typeAlias type="com.donjomjo.dreamfunding.projectInsert.model.vo.ProjectCategory" alias="ProjectCategory"/>
@@ -17,6 +18,8 @@
 		<typeAlias type="com.donjomjo.dreamfunding.serviceCenter.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.donjomjo.dreamfunding.projectInsert.model.vo.Bank" alias="Bank"/>
 		<typeAlias type="com.donjomjo.dreamfunding.detail.model.vo.Detail" alias="Detail"/>
+		<typeAlias type="com.donjomjo.dreamfunding.detail.model.vo.DetailReport" alias="DetailReport"/>
+		<typeAlias type="com.donjomjo.dreamfunding.detail.model.vo.DetailPurchase" alias="DetailPurchase"/>
 		<typeAlias type="com.donjomjo.dreamfunding.detail.model.vo.Like" alias="Like"/>
 		<typeAlias type="com.donjomjo.dreamfunding.detail.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.donjomjo.dreamfunding.detail.model.vo.SubReply" alias="SubReply"/>
@@ -24,13 +27,10 @@
 		<typeAlias type="com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt" alias="DetailRewardOpt"/>
 		<typeAlias type="com.donjomjo.dreamfunding.order.model.vo.MemberPurchase" alias="MemberPurchase"/>
 		<typeAlias type="com.donjomjo.dreamfunding.order.model.vo.PurchaseInfo" alias="PurchaseInfo"/>
-		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.Funding" alias="funding"/>
+		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.FundingProject" alias="FundingProject"/>
 		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.LikeProject" alias="LikeProject"/>
-		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.MadeProject" alias="MadeProject"/>
-		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.MakeProject" alias="MakeProject"/>
-		<typeAlias type="com.donjomjo.dreamfunding.mypage.model.vo.Account" alias="Account"/>
 		<typeAlias type="com.donjomjo.dreamfunding.admin.model.vo.Report" alias="Report"/>
-				
+			
 	</typeAliases>
 	 
 	<mappers>

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.donjomjo.dreamfunding.admin.model.dao.ReportDao;
 import com.donjomjo.dreamfunding.admin.model.vo.Report;
+import com.donjomjo.dreamfunding.member.model.vo.Member;
 
 @Service
 public class ReportServiceImpl implements ReportService{
@@ -46,5 +47,25 @@ public class ReportServiceImpl implements ReportService{
 		
 		return rDao.reportProfreadDone(sqlSession,rno);
 	}
+
+	@Override
+	public ArrayList<Member> selectUsers() {
+		
+		return rDao.selectUsers(sqlSession);
+	}
+
+	@Override
+	public int userBlack(int mno) {
+		
+		return rDao.userBlack(sqlSession,mno);
+	}
+
+	@Override
+	public int userRecover(int mno) {
+		
+		return rDao.userRecover(sqlSession,mno);
+	}
+	
+	
 
 }

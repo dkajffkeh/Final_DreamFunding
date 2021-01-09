@@ -12,6 +12,24 @@
 		<result column="REPORT_STATUS" property="reportStatus"/>
 	</resultMap>
 	
+	 <resultMap type="Member" id="memberResultSet">
+	  	<result column="member_no" property="memNo"/>
+	  	<result column="member_email" property="email"/>
+	  	<result column="member_pwd" property="memPwd"/>
+	  	<result column="member_nickname" property="memNick"/>
+	  	<result column="member_name" property="memName"/>
+	  	<result column="member_phone" property="phone"/>
+	  	<result column="member_createdate" property="memCreate"/>
+	  	<result column="member_gender" property="gender"/>
+	  	<result column="member_pf_path" property="memPfPath"/>
+	  	<result column="member_systemname" property="memSystemname"/>
+	  	<result column="member_status" property="memStatus"/>
+	  	<result column="member_link" property="memLink"/>
+	  	<result column="refres_token" property="refresToken"/>
+	  	<result column="access_token" property="accessToken"/>
+	  	<result column="status" property="status"/>
+  	</resultMap>
+	
 	<select id="selectReportList"
 			resultMap="reportResultSet">
 			SELECT
@@ -78,5 +96,34 @@
 		      REPORT_STATUS='D'
 		 WHERE
 		      REPORT_NO=${rno}     	  		
+	</update>
+	<select id="selectUsers" resultMap="memberResultSet">
+		SELECT
+         MEMBER_NO
+        ,MEMBER_NICKNAME
+        ,MEMBER_CREATEDATE
+        ,CASE 
+		             WHEN MEMBER_STATUS= 1 	 THEN '일반'
+		             WHEN MEMBER_STATUS= 3   THEN '블랙리스트'
+		             END AS MEMBER_STATUS
+        FROM MEMBER
+        WHERE MEMBER_STATUS = 1
+        OR    MEMBER_STATUS = 3    
+	</select>
+	<update id="userBlack" parameterType="_int">
+		UPDATE
+			  MEMBER
+		   SET
+		      MEMBER_STATUS = 3	 
+		  WHERE
+		      MEMBER_NO=#{mno}     
+	</update>
+	<update id="userRecover"  parameterType="_int">
+		UPDATE
+			  MEMBER
+		   SET
+		      MEMBER_STATUS = 1	 
+		  WHERE
+		      MEMBER_NO=#{mno} 
 	</update>
 </mapper>

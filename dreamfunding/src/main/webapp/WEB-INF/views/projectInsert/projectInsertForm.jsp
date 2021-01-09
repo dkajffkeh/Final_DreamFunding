@@ -631,10 +631,10 @@
                     <div class="remoteController">
                         <a href="#totheTop" id="topBtn"><i class="fas fa-angle-up"></i></a>
                         <div class="remote_icon">
-                            <i class="fas fa-file-alt"></i>
+                            <i class="fas fa-file-alt" id="projectPreviewBtn"></i>
                             <i class="far fa-save" id="projectSaveBtn"></i>
                             <i class="fas fa-upload"  data-toggle="modal" data-target=".bd-example-modal-lg"></i>
-                            <i class="fas fa-handshake"></i>
+                            <i class="fas fa-handshake" id="projectInsertBtn"></i>
                         </div>
                         <div class="remote_btn remobtn1" id="firstbar_remote">스토리</div>
                         <div class="remote_btn remobtn2" id="secondbar_remote">리워드</div>

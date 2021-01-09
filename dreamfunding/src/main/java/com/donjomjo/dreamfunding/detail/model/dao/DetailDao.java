@@ -4,8 +4,13 @@ import org.springframework.stereotype.Repository;
 
 import com.donjomjo.dreamfunding.detail.model.vo.Detail;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailPageInfo;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailPurchase;
+import com.donjomjo.dreamfunding.detail.model.vo.DetailReport;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailReward;
 import com.donjomjo.dreamfunding.detail.model.vo.DetailRewardOpt;
+import com.donjomjo.dreamfunding.detail.model.vo.Like;
+import com.donjomjo.dreamfunding.detail.model.vo.Reply;
+import com.donjomjo.dreamfunding.detail.model.vo.SubReply;
 
 import java.util.ArrayList;
 
@@ -59,7 +64,67 @@ public class DetailDao {
 		
 		return rewards;
 	}
+	
+	// 프로젝트 신고 등록 
+	public int insertReport(SqlSessionTemplate sqlSession, DetailReport rp) {
+		return sqlSession.insert("projectDetailMapper.insertReport", rp);
+	}
 
+	// 프로젝트 좋아요 생성 
+	public int insertLike(SqlSessionTemplate sqlSession, Like lk) {
+		return sqlSession.insert("projectDetailMapper.insertDetailLike", lk);
+	}
+
+	public int selectLike(SqlSessionTemplate sqlSession, Like lk) {
+		return sqlSession.selectOne("projectDetailMapper.selectDetailLike", lk);
+	}
+
+	public int deleteLike(SqlSessionTemplate sqlSession, Like lk) {
+		return sqlSession.delete("projectDetailMapper.deleteDetailLike", lk);
+		
+	}
+
+	public ArrayList<Reply> selectReply(SqlSessionTemplate sqlSession, int pno) {
+		return (ArrayList)sqlSession.selectList("projectDetailMapper.selectReply", pno);
+	}
+
+	public ArrayList<SubReply> selectSubReply(SqlSessionTemplate sqlSession, int rno) {
+		return (ArrayList)sqlSession.selectList("projectDetailMapper.selectSubReply", rno);
+
+	}
+
+	public int insertReply(SqlSessionTemplate sqlSession, Reply rp) {
+		return sqlSession.insert("projectDetailMapper.insertReply", rp);
+	}
+
+	public int updateReply(SqlSessionTemplate sqlSession, Reply rp) {
+		return sqlSession.update("projectDetailMapper.updateReply", rp);
+	}
+
+	public int deleteReply(SqlSessionTemplate sqlSession, int rno) {
+		return sqlSession.update("projectDetailMapper.deleteReply", rno);
+	}
+
+
+	public int insertSubReply(SqlSessionTemplate sqlSession, Reply rp) {
+		return sqlSession.insert("projectDetailMapper.insertSubReply", rp);
+	}
+
+	public int updateSubReply(SqlSessionTemplate sqlSession, Reply rp) {
+		return sqlSession.update("projectDetailMapper.updateSubReply", rp);
+	}
+
+	public int deleteSubReply(SqlSessionTemplate sqlSession, int sno) {
+		return sqlSession.update("projectDetailMapper.deleteSubReply", sno);
+	}
+
+	public ArrayList<SubReply> selectSubReplyOne(SqlSessionTemplate sqlSession, Reply rp) {
+		return (ArrayList)sqlSession.selectList("projectDetailMapper.selectSubReplyOne", rp);
+	}
+
+	public ArrayList<DetailPurchase> selectDetailPurchase(SqlSessionTemplate sqlSession, int pno) {
+		return (ArrayList)sqlSession.selectList("projectDetailMapper.selectDetailPurchase", pno);
+	}
 
 	
 	

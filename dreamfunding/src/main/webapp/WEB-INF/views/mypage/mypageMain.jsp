@@ -52,7 +52,8 @@
   text-align:center;}
 
 .nav-link{
-  padding-top:15px;
+
+  padding-top:30px;
  background-color:#ccc4bb;
  color:#7f0000;
  text-align:center;}
@@ -114,7 +115,7 @@ text-align:left;}
   margin-top:10px;}
 
 
-
+.h3{margin-top:7px;}
 
 </style>
 
@@ -132,7 +133,7 @@ text-align:left;}
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href="optionProfile.me"><img src="../../../resources/images/book5.jpg" 
+          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
           class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
         </div>
     </div>
@@ -151,12 +152,12 @@ text-align:left;}
             <div class="container mt-3">
               <br>
               <!-- Nav tabs -->
-              <ul class="nav nav-tabs nav-justified" >
+              <ul class="nav nav-tabs nav-justified" style="border-radius: 20px; border:none;"  >
                 <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#menu1"><h3 style="font-weight:bold;">서포터</h3></a>
+                  <a class="nav-link active" style="line-height:10px; margin-right:10px; border-radius: 20px; border:1px solid rgb(206, 206, 206);" data-toggle="tab" href="#menu1"><h3 class="h3" style="font-weight:bold;">서포터</h3></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#menu2"><h3 style="font-weight:bold;">크리에이터</h3></a>
+                  <a class="nav-link" style="border-radius: 20px; border:1px solid rgb(206, 206, 206);" data-toggle="tab" href="#menu2"><h3 class="h3" style="font-weight:bold;">크리에이터</h3></a>
                 </li>
               </ul>
             
@@ -164,14 +165,14 @@ text-align:left;}
               <div class="tab-content" >
                 
                 <div id="menu1" class="container tab-pane active" ><br><br><br>
-                  <a href="myFundingProject.me"><h4 class="supporter-menu" style="font-weight:bold;">펀딩한 프로젝트</h4></a><br><br>
-                  <a href="myLikeProject.me"><h4 class="supporter-menu" style="font-weight:bold;">관심있는 프로젝트</h4></a><br><br>
-                  <a href=""><h4 class="supporter-menu" style="font-weight:bold;">메시지</h4></a>
+                  <a href="myFundingProject.me?mno=${ loginMem.memNo }"><h4 class="supporter-menu" style="font-weight:bold;">펀딩한 프로젝트</h4></a><br><br>
+                  <a href="myLikeProject.me?mno=${ loginMem.memNo }"><h4 class="supporter-menu" style="font-weight:bold;">관심있는 프로젝트</h4></a><br><br>
+                  <a href="mypageMessage.me"><h4 class="supporter-menu" style="font-weight:bold;">메시지</h4></a>
                 </div>
                 <div id="menu2" class="container tab-pane fade"><br><br><br>
-                  <a href=""><h4 class="creator-menu" style="font-weight:bold;">프로젝트 만들기</h4></a><br><br>
+                  <a href="makeProject.me"><h4 class="creator-menu" style="font-weight:bold;">프로젝트 만들기</h4></a><br><br>
                   <a href="myMadeProject.me"><h4 class="creator-menu" style="font-weight:bold;">제작한 프로젝트</h4></a><br><br>
-                  <a href=""><h4 class="creator-menu" style="font-weight:bold;">메시지</h4></a>
+                  <a href="mypageMessage.me"><h4 class="creator-menu" style="font-weight:bold;">메시지</h4></a>
                 </div>
               </div>
             </div>

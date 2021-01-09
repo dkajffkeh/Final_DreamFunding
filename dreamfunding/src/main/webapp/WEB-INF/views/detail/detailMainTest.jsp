@@ -149,11 +149,11 @@
                         <ul class="card-list">
 
                         	<c:forEach var="d" items="${ list }">
-	                            <li class="card-item">
+	                            <li class="card-item" onclick="location.href='proDetail.de?pno=${d.projectNo}'">
 	                            
 	                            	<div class="pno" style="display:none">${d.projectNo}</div>
-	                                <figure class="card-image" style="background-image: url(resources/images/${ d.projectFileName })">
-	                                <img src="resources/images/${ d.projectFileName }" alt="책">
+	                                <figure class="card-image" style="background-image: url(resources/images/projectThumbnail/${ d.projectFileName })">
+	                                <img src="resources/images/projectThumbnail/${ d.projectFileName }" alt="책">
 	                                <div>
 	                                    <button style="background-image: url(../../../resources/images/heart2.png)" class="like"></button>
 	                                </div>
@@ -178,14 +178,8 @@
             <br><br>
             
          	<script>
-            	$(function(){
-            		$("#project_list ul li").click(function(){
-            			location.href = "proDetail.de?pno=" + $(this).children(".pno").text();
-            							// 쿼리스트링, 클릭이벤트가 발생한 $(this) 자손들 중  클래스가 pno인 자손의 text값 
-            		})
-            		
-            	})
-            
+      
+          
             </script>
 
             <!-- 페이징 -->

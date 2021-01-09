@@ -32,28 +32,21 @@
 					<td><input type="number" name="mno"></td>
 				</tr>
 				<tr>
-					<th>옵션 : </th>
-					<td>
-						1.<input type="text" name="content">
-						<%--
-						2.<input type="text" name="rewardContent2">
-						 --%>
-					</td>
-				</tr>
-				<tr>
-					<th>갯수 : </th>
+					<th>리워드번호 : </th>
 					<td><input type="number" name="rewardNum"></td>
 				</tr>
 				<tr>
-					<th>가격 : </th>
-					<td><input type="number" name="rewardPrice"></td>
+					<th>갯수 : </th>
+					<td><input type="number" name="rewardAmount"></td>
+				</tr>
+				<tr>
 				</tr>
 			</table>
 			<input type="submit" value="제출">
 		</form>
 	</div>
 	<div>
-		<a href="orderCom.co"></a>
+		<a href="orderInsert.me?pno=1&mno=1&rewardNum=1&rewardAmount=1"> 테스트</a>
 	</div>
 	
 	
@@ -64,6 +57,8 @@
   	</form>
   	
   	<input type="hidden" name="payToken">
+  	
+  	<a href="order.com?pno=7">완료 테스트</a>
   	
   	
   	<script>

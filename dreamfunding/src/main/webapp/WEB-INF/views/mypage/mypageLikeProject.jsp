@@ -535,11 +535,11 @@ text-align:left;}
     <br>
     <div class="wrap1">
        <!--설정아이콘-->
-       <a href=""><span class="material-icons" id="setting">settings</span></a>
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href=""><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg" 
+          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
           class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
         </div>
     </div>
@@ -572,9 +572,9 @@ text-align:left;}
               <div id="menu1" class="container tab-pane active" ><br><br>
                 <nav class="nav--top">
                   <ul>
-                      <li><a href="#">펀딩한 프로젝트</a></li>
-                      <li><a href="#">관심있는 프로젝트</a></li>
-                      <li><a href="#">메시지</a></li>
+                      <li><a href="myFundingProject.me?mno=${ loginMem.memNo }">펀딩한 프로젝트</a></li>
+                      <li><a href="myLikeProject.me?mno=${ loginMem.memNo }">관심있는 프로젝트</a></li>
+                      <li><a href="mypageMessage">메시지</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
@@ -584,9 +584,9 @@ text-align:left;}
               <div id="menu2" class="container tab-pane fade"><br><br>
                 <nav class="nav--top">
                   <ul>
-                      <li><a href="#">프로젝트 만들기</a></li>
-                      <li><a href="#">제작한 프로젝트</a></li>
-                      <li><a href="#">메시지</a></li>
+                      <li><a href="makeProject.me">프로젝트 만들기</a></li>
+                      <li><a href="myMadeProject.me">제작한 프로젝트</a></li>
+                      <li><a href="mypageMessage.me">메시지</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
@@ -602,50 +602,64 @@ text-align:left;}
             <div class="wrap2">
               <div class="like-project">
                 <ul class="like-project-list">
+                
+                <c:forEach var="l" items="${list}">
                   <li class="like-project-detail">
-                    
-                    <figure class="like-project-image" >
-                      <a href=""><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg" alt="책" style=" border-radius:1%; width:100%; height:200px;"></a>
-                    </figure>
-                    <figcaption>
-                      <h class="like-project-name"><a href="">웹툰 어시스트가 월300만원 이상 수익 꾸준히 얻는 방법</a></h><br>
-                      <h style="font-size:11px;">웹툰 어시뿐 아니라 웹툰작가, 지망생, 그리고 그림그리는 모든 프리랜서들에게 유용한 이야기</h><br><br>
-                      <h>936,000원</h>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <h style="color:#7f0000;" >312%</h>
-                      <h style="float:right;">49일 남음</h>
-                    </figcaption>
+                  	<div onclick="location.href='proDetail.de?pno=${ l.projectNo }';">
+	                    <figure class="like-project-image" >
+	                      <a href=""><img src="/dreamfunding/resources/images/projectThumbnail/${ l.projectFileName }" alt="${l.projectFileName }" style=" border-radius:1%; width:100%; height:200px;"></a>
+	                    </figure>
+	                    <figcaption>
+	                      <h class="like-project-name"><a href="#">${l.projectTitle }</a></h><br>
+	                      <h style="font-size:11px;">${l.projectSubTitle }</h><br><br>
+	                      <h>${l.projectGoalPrice }&#8361;</h>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                      <h style="color:#7f0000;" >
+	                      <c:choose>
+	                      	<c:when test="${ l.projectGoal eq 'Y' }">
+	                      		달성
+	                      	</c:when>
+	                      	<c:otherwise>
+	                      	    미달성
+	                      	</c:otherwise>
+	                      </c:choose>
+	                      </h>
+	                      <h style="float:right;">${l.projectCloseDate }</h>
+	                    </figcaption>
+                    </div>
                   </li>
-                  <li class="like-project-detail">
-                    <figure class="like-project-image" >
-                      <a href=""><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg" alt="책" style=" border-radius:1%; width:100%; height:200px;"></a>
-                    </figure>
-                    <figcaption>
-                      <h class="like-project-name"><a href="">웹툰 어시스트가 월300만원 이상 수익 꾸준히 얻는 방법</a></h><br>
-                      <h style="font-size:11px;">웹툰 어시뿐 아니라 웹툰작가, 지망생, 그리고 그림그리는 모든 프리랜서들에게 유용한 이야기</h><br><br>
-                      <h>936,000원</h>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <h style="color:#7f0000;" >312%</h>
-                      <h style="float:right;">49일 남음</h>
-                    </figcaption>
-                  </li>
-                  <li class="like-project-detail">
-                    <figure class="like-project-image" >
-                      <a href=""><img src="C:/DreamFunding-FrontRepo/webapp/resources/images/book5.jpg" alt="책" style=" border-radius:1%; width:100%; height:200px;"></a>
-                    </figure>
-                    <figcaption>
-                      <h class="like-project-name"><a href="">웹툰 어시스트가 월300만원 이상 수익 꾸준히 얻는 방법</a></h><br>
-                      <h style="font-size:11px;">웹툰 어시뿐 아니라 웹툰작가, 지망생, 그리고 그림그리는 모든 프리랜서들에게 유용한 이야기</h><br><br>
-                      <h>936,000원</h>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <h style="color:#7f0000;" >312%</h>
-                      <h style="float:right;">49일 남음</h>
-                    </figcaption>
-                  </li>
-                  
-                  
-                  
+                 </c:forEach>
+
                 </ul>
                 
               </div>
               
+              <div id="pagingArea">
+              	<ul class="pagination">
+              	
+              	<c:choose>
+              	  <c:when test="${mypi.currentPage eq 1 }">
+				 	 <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
+				  </c:when>
+				  <c:otherwise>
+				 	 <li class="page-item"><a class="page-link" href="myLikeProject.me?currentPage=${mypi.currentPage -1 }">이전</a></li>
+				  </c:otherwise>
+				</c:choose>
+				  
+				  <c:forEach var="p" begin="${mypi.startPage }" end="${mypi.endPage }">
+				    <li class="page-item"><a class="page-link" href="myLikeProject.me?currentPage=${ p }">${ p }</a></li>
+				  </c:forEach>
+				  
+				  <c:choose>
+				  	<c:when test="${mypi.currentPage eq mypi.maxPage }">
+				  		<li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
+				    </c:when>
+				    <c:otherwise>
+				 		<li class="page-item"><a class="page-link" href="myLikeProject.me?currentPage=${mypi.currentPage +1 }">다음</a></li>
+			  	  	</c:otherwise>
+			  	  </c:choose>
+			  	</ul>
+			  </div>
+			  
             </div>  
           </div>
         </div>
