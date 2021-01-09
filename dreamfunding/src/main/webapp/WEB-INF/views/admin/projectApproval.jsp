@@ -155,9 +155,8 @@
 		});
 	 
 	 function toPreview(event){
-		 
 		
-		 location.href="gotoPreview?projectNo="+event.childNodes[1].innerHTML;
+		 window.open("gotoPreview?projectNo="+event.childNodes[1].innerHTML);
 		 
 	 }
 	 
