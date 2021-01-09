@@ -69,7 +69,7 @@
                                 
                                     <tbody>
 	                                    <c:forEach var="p" items="${ pList }">
-	                                        <tr>
+	                                        <tr onclick="toPreview(this);">
 	                                        	<td style="display:none">${ p.projectNo }</td>	
 	                                            <td>${ p.creatorName }</td>
 	                                            <td>${ p.projectTitle }</td>
@@ -153,6 +153,15 @@
 		
 			
 		});
+	 
+	 function toPreview(event){
+		 
+		
+		 location.href="gotoPreview?projectNo="+event.childNodes[1].innerHTML;
+		 
+	 }
+	 
+	 
 
     	
     </script>
