@@ -52,7 +52,14 @@
         <div class="intro__wrapper">
           <div class="intro-top__wrapper">
             <ul>
-              <li><button type="button" class="btn btn--icon">${ d.projectCategoryName }</button></li>
+            
+              <li>
+              
+              <button type="button" class="btn btn--icon" onclick="goCategory()">${ d.projectCategoryName }</button>
+              
+              </li>
+            
+            
               <li>${ d.projectTitle }</li>
               <li>
                   <div class="profile_wrapper">
@@ -209,6 +216,24 @@
         return params;
     }
 	
+    
+	function goCategory(){    
+	    let categoryName = '${ d.projectCategoryName }';
+	      switch(categoryName){
+		    case "잡지": location.href='magazine.do';
+		    break;
+		    case "문학&에세이": location.href='essay.do';
+		    break;
+		    case "예술": location.href='art.do';
+		    break;
+		    case "실용&취미": location.href='hobby.do';
+		    break;
+		    case "그림책": location.href='drawing.do';
+		    break;
+		    case "기타": location.href='etc.do';
+		    break;
+	    }
+	}
     // 
  	  (function(){
  		  //console.log(location.href);
