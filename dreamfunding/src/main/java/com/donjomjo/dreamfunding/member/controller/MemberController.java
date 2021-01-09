@@ -91,7 +91,7 @@ public class MemberController {
 		
 		Member loginMem = mService.loginMember(m);
 		
-		
+
 
 		
 		
@@ -122,8 +122,14 @@ public class MemberController {
 	@RequestMapping("insert.me.jm")
 	public String insertMember(Member m, Model model, HttpSession session) {
 		
-		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
 		
+
+
+		
+		
+		
+		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
+
 		m.setMemPwd(encPwd);
 		
 		int result = mService.insertMember(m);
@@ -235,7 +241,22 @@ public class MemberController {
 
 		return String.valueOf(mService.idFind(m));
 	}
-	
+	@ResponseBody
+	@RequestMapping("pwCheck.me.jm")
+	public String pwCheck(Member m) {
+		
+		Member loginMem = mService.loginMember(m);
+		
+		if(loginMem != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginMem.getMemPwd())) {
+			return String.valueOf(1);
+		
+		}else {
+			return String.valueOf(0);
+			
+		}
+		
+		
+	}
 	
 	
 	// 여기중
@@ -251,44 +272,7 @@ public class MemberController {
 				
 	}
 	
-	@RequestMapping("updatePwd2.me.jm")
-	public String updatePwd2(Member m, Model model, HttpSession session) {
 
-		Member loginMem = mService.loginMember(m);
-		
-		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
-		
-		m.setMemPwd(encPwd);
-		
-		if(loginMem != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginMem.getMemPwd())) {
-			
-			int result = mService.updatePwd(m);
-			
-			if(result > 0) {
-				
-				session.setAttribute("alertMsg", "비밀번호 수정 완료");
-				
-				return "mypage/optionProfile";
-				
-			}else { 
-				
-				session.setAttribute("alertMsg", "비밀번호 수정 실패");
-				
-				return "mypage/optionProfile";
-			}
-			
-			
-		}
-		return "mypage/optionProfile";
-			
-		
-		
-
-		
-		
-		
-		
-	}
 	
 	
 	
@@ -306,17 +290,17 @@ public class MemberController {
 		
 		int result = mService.updatePwd(m);
 		
-		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
+		if(result > 0) {
 			
 			session.setAttribute("alertMsg", "프로필 수정 완료");
 			
-			return "member/loginForm.me.jm";
+			return "member/loginForm";
 			
-		}else { // 게시글 수정 실패 
+		}else { 
 			
 			session.setAttribute("alertMsg", "프로필 수정 실패");
 			
-			return "member/loginForm.me.jm";
+			return "member/loginForm";
 		}
 		
 		

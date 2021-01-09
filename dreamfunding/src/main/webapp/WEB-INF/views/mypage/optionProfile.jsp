@@ -546,8 +546,18 @@ footer .footer__inner {
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
-          class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
+         <a href="mypage.me">
+		      <c:choose>
+              <c:when test="${ empty loginMem.memSystemname }">
+              <img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
+                          style="width:70px; height:70px; border-radius: 50%;">
+              </c:when>
+              <c:otherwise>
+              <img src="${pageContext.request.contextPath}/resources/images/profile/${loginMem.memSystemname}"
+              		 	  style="width:70px; height:70px; border-radius: 50%;">
+               </c:otherwise>
+              </c:choose>
+		</a>
         </div>
     </div>
     
@@ -606,7 +616,7 @@ footer .footer__inner {
           <div class="profile-wrap" >
             <div class="profile">
               <p class="p">프로필변경</p>
-              <a href="">
+              
               <c:choose>
               <c:when test="${ empty loginMem.memSystemname }">
               <img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
@@ -620,7 +630,7 @@ footer .footer__inner {
               
               
               
-              </a> 
+              
                 
                   <div class="togglee">
                     <button class="button">변경</button>
@@ -667,13 +677,64 @@ footer .footer__inner {
                           <div id="divToggle1" style="display: none;">
                           
                           <form action="updateNick.me.jm" method="post">
+                          
                             <input type="text" class="form-control" id="memNick" style="width:200px;
                                           margin-top:5px; margin-bottom:10px;" name="memNick">
+                                          <span id="check-nick"></span>
                             <input type="hidden" name="email" value="${ loginMem.email }">
-                            <button type="submit" class="btn" style="background-color: #7f0000; color:white;">저장</button>
+                            
+                            <button type="submit" id="csubmit" class="btn" style="background-color: #7f0000; color:white;" disabled>저장</button>
                             
                             
                             </form>
+                            <script>
+                        	$(function(){
+                        		
+                        		var memNickInput = $("#memNick");	
+                        		
+                        		memNickInput.keyup(function(){
+                        			
+                        			
+                        			if(memNickInput.val().length >= 2){ 
+                        				
+                        				$.ajax({
+                        					url:"memNickCheck.me.jm", 
+                        					data:{memNick:memNickInput.val()},
+                        					type:"post",
+                        					success:function(count){
+                        						
+                        						if(count == 1){ 
+
+                        							$("#check-nick").show();
+                        							$("#check-nick").css("color", "red").text("중복된 닉네임가 존재합니다. 다시 입력해주세요.");
+                        							
+                        						}else{
+
+                        							$("#check-nick").show();
+                        							$("#check-nick").css("color", "green").text("사용가능한 닉네임입니다.");
+                        							$("#csubmit").removeAttr('disabled');
+                        							
+                        							
+                        						}
+                        						
+                        					},error:function(){
+                        						console.log("닉네임 중복체크용 ajax통신 실패");
+                        					}
+                        				});
+                        			
+                        				
+                        			}else{ 
+                        				$("#check-nick").css("color", "black").text("별명을 입력해주세요.");
+                        				
+                        			}
+                        			
+                        			
+                        			
+                        		});
+                       
+                        		
+                        	});
+                            </script>
                             </div>
                               <hr> 
               </div>

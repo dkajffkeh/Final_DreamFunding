@@ -565,8 +565,18 @@ margin-right:20px;}
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
-          class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
+          <a href="mypage.me">              
+          <c:choose>
+              <c:when test="${ empty loginMem.memSystemname }">
+              <img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
+                          style="width:70px; height:70px; border-radius: 50%;">
+              </c:when>
+              <c:otherwise>
+              <img src="${pageContext.request.contextPath}/resources/images/profile/${loginMem.memSystemname}"
+              		 	  style="width:70px; height:70px; border-radius: 50%;">
+               </c:otherwise>
+              </c:choose>
+              </a>
         </div>
     </div>
     
@@ -632,55 +642,131 @@ margin-right:20px;}
 
           
           <!--비밀번호-->
+			<!-- The Modal -->
+			<div class="modal" id="myModalPw">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			
+			      <!-- Modal Header -->
+			      <div class="modal-header">
+			        <h4 class="modal-title">현재 비밀번호를 입력해주세요</h4>
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			      </div>
+			
+			      <!-- Modal body -->
+			     
+			      <div class="modal-body">
+			        <input type="password" class="form-control" id="cmemPwd1" name="memPwd" placeholder="현재 비밀번호";><span id="check2"></span>
+                                          
+			      </div>
+			<script>
+        	function certify2(){
+        		$.ajax({
+        			url:"pwCheck.me.jm",
+        			data:{
+        				memPwd:$("#cmemPwd1").val(),
+        				email:$("#cemail").val()
+        			},
+        			type:"post",
+        			success:function(count){
+        				console.log(count);
+        				if(count == 1){
+        					alert("인증되었습니다.");
+        					$("#divToggle1").toggle();
+        					
+        				}else{
+        					alert("비밀번호가 다릅니다.");
+        				}
+        			},
+        			error:function(){
+        				console.log("ajax 통신 실패");
+        			},
+        		});
+        	};
+			</script>
+			      <!-- Modal footer -->
+			      <div class="modal-footer">
+			        <button type="button" onclick="certify2();" class="btn btn-danger" data-dismiss="modal">인증하기</button>
+			      </div>
+			
+			    </div>
+			  </div>
+			</div>
 
-         <!--스크립트-->
-          <script>
-            $(function (){
-              $(".button1").click(function (){
-                $("#divToggle1").toggle();
-              });
-            });
-          </script>
 
             <div class="profile-wrap" >
               <div class="profile" >
                 <p class="p" >비밀번호</p>
                   
                     <div class="togglee">
-                      <button class="button1" style="background-color:white;
-                        border:none;">변경</button>
+                      <button type="button" class="button1" style="background-color:white;
+                        border:none;" data-toggle="modal" data-target="#myModalPw">변경</button>
                         <hr> 
                         </div><br>
                         
                         <br>
                         <!-- 저장  -->
                           <div id="divToggle1" style="display: none;">
-                          <form action="updatePwd2.me.jm">
-                          	<p>현재 비밀번호</p>
-                          	
-                            <input type="password" class="form-control" id="cmemPwd1"  style="width:200px;
-                                          margin-top:5px; margin-bottom:10px;" placeholder="현재 비밀번호";>
-                            <input type="hidden" name="${ loginMem.email }">              
-                            <input type="password" class="form-control" id="cmemPwd2" placeholder="변경할 비밀번호"; style="width:200px;
-                            margin-top:5px; margin-bottom:10px;" name="memPwd">
-                            <input type="password" class="form-control" id="cmemPwd3" placeholder="변경할 비밀번호 확인"; style="width:200px;
-                            margin-top:5px; margin-bottom:10px;">
-        
-                            <button type="submit" class="btn" style="background-color: #7f0000; color:white;">저장</button>
-                            </form>
+                          <form class="form-signin" action="updatePwd.me.jm" method="post">
+                
+				                <div class="form-label-group">
+				                  <input type="password" id="pw" class="form-control" name="memPwd" onchange="check_pw()" placeholder="비밀번호" required>
+				                  
+				                </div>
+				                <br>
+				                <div class="form-label-group">
+				                  <input type="password" id="pw2" class="form-control" onchange="check_pw()" placeholder="비밀번호 확인" required>&nbsp;<span id="check"></span>
+				                  
+				                </div>
+							    <input type="hidden" id="cemail" name="email" value=${ loginMem.email }>
+				                	
+				                  <hr class="my-4">
+				                  
+				                
+				                <button class="btn" id="enroll-btn" style="background-color: #7f0000; color:white;" type="submit" disabled>저장</button>
+				                
+				
+				              </form>
                             </div>
-                            
-                              <hr> 
-
-                              
-                              
-                              
-                              
-                              
+                         <hr>             
               </div>
             </div>
-
-
+			<script>
+			 function check_pw(){
+				 
+		            var pw = document.getElementById('pw').value;
+		            var SC = ["!","@","#","$","%"];
+		            var check_SC = 0;
+		 
+		            if(pw.length < 6 || pw.length>16){
+		                window.alert('비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.');
+		                document.getElementById('pw').value='';
+		            }
+		            for(var i=0;i<SC.length;i++){
+		                if(pw.indexOf(SC[i]) != -1){
+		                    check_SC = 1;
+		                }
+		            }
+		            if(check_SC == 0){
+		                window.alert('!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.')
+		                document.getElementById('pw').value='';
+		            }
+		            if(document.getElementById('pw').value !='' && document.getElementById('pw2').value!=''){
+		                if(document.getElementById('pw').value==document.getElementById('pw2').value){
+		                    document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
+		                    document.getElementById('check').style.color='blue';
+		                    document.getElementById("enroll-btn").removeAttribute("disabled");
+		                }
+		                else{
+		                    document.getElementById('check').innerHTML='비밀번호가 일치하지 않습니다.';
+		                    document.getElementById('check').style.color='red';
+		                    
+		                    
+		                }
+		            }
+		        }
+			</script>
+			
             <!--연락처-->
 
          <!--스크립트-->
@@ -748,24 +834,13 @@ margin-right:20px;}
             </div>
             <script>       
             // 인증번호 전달
-           function buttonAble(){
-        		
-            	var cCertify = false;
-            	
-    	        if(cCertify == true ){
-    	        	
-    	        		document.getElementById("enroll-btn1").removeAttribute("disabled");
-    	        	
-    	            
-    	        }
-    	
 
-    	   }
         	function certify1(){
         		$.ajax({
         			url:"message.me.jm",
         			data:{
-        				phone:$("#phone").val()
+        				phone:$("#phone").val(),
+        				email:$("#cemail").val()
         			},
         			type:"post",
         			success:function(certify){
@@ -784,16 +859,10 @@ margin-right:20px;}
             	var hiddenNum = $("#certifyNum").val();
             	
 				if(certify === hiddenNum){
+					document.getElementById("enroll-btn1").removeAttribute("disabled");
 
-					cCertify = true;
-					buttonAble()
-
-					
 				}else{
-					cCertify = false;
-					buttonAble()
-
-					
+	
 				}
             	
 
@@ -872,7 +941,7 @@ margin-right:20px;}
 		        
 		        <div>탈퇴하시려면 비밀번호를 입력해주세요.</div>
 		        <input type="password" class="form-control" name="memPwd" placeholder="Password" required>
-		        
+		        <input type="hidden" id="cemail" name="email" value=${ loginMem.email }>
 		      </div>
 		
 		      <!-- Modal footer -->
