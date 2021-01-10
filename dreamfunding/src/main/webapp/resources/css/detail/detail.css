@@ -406,11 +406,6 @@ main .inner {
   flex-direction: column;
 }
 
-.reward-status {
-}
-
-.reward-salecount {
-}
 
 /* COMMENT */
 :root {
@@ -478,6 +473,9 @@ button {
   text-align: center;
 }
 
+.comment_edit btn{
+	font-size:12px;
+}
 .comment_card {
   display: flex;
   flex-direction: column;
@@ -547,7 +545,23 @@ button {
 .comment_options {
   padding: 1rem 0;
   display: flex;
+  
 }
+
+.recomment_options {
+	font-size: 12px;
+	margin: 5px 0 5px 0;
+}
+
+.recomment_options button{
+	color: var(--color-link);
+}
+
+.recomment_options button:hover{
+	color: #7f0000;
+	font-weight:bold;
+}
+
 
 .comment_options button {
   display: block;
@@ -572,8 +586,6 @@ button {
   color: #7f0000;
 }
 
-.comment_edit {
-}
 
 .comment_edit_message {
   font-size: 14px;
@@ -588,8 +600,8 @@ textarea {
 
 .comment_edit_options {
   display: flex;
-  padding: 1.4rem 0;
   padding-bottom: 1rem;
+  font-size:12px;
 }
 
 .comment_edit_textarea {

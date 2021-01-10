@@ -115,8 +115,8 @@
 	                        >${ r.replyContent }</textarea>
 	                        <div class="comment_edit_options">
 	                          <button type="button" data-action="submit" onclick="updateReply(${r.replyNo}, 0)">Submit</button>
-	                          <button type="button" data-action="cancle" class="edit-cancel-btn">
-	                            Cancle
+	                          <button type="button" data-action="cancel" class="edit-cancel-btn">
+	                            Cancel
 	                          </button>
 	                        </div>
 	                      </div>
@@ -130,15 +130,15 @@
                           class="comment_edit_textarea"
                           cols="0"
                           rows="0"
-                          placeholder="댓글작성"
+                          placeholder="답글을 입력하세요."
                         ></textarea>
                         <div class="comment_edit_options">
                           <button data-action="submit" onclick="addSubReply(${r.replyNo})">Submit</button>
                           <button
-                            data-action="cancle"
+                            data-action="cancel"
                             class="rereply-cancel-btn"
                           >
-                            Cancle
+                            Cancel
                           </button>
                         </div>
                       </div>
