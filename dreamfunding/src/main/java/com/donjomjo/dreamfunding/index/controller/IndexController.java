@@ -128,8 +128,8 @@ public class IndexController {
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
 		
-		System.out.println(pi);
-		System.out.println(list);
+		//System.out.println(pi);
+		//System.out.println(list);
 		
 		return "index/rankingMore";
 		
@@ -137,7 +137,21 @@ public class IndexController {
 	
 	// 종료된 펀딩 더보기 클릭 시 페이지이동
 	@RequestMapping("closedMore.do")
-	public String closedMore() {
+	public String closedMore(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+			Model model) {
+		
+		//System.out.println(currentPage);
+		int listCount = iService.selectListCount();
+		//System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
+		
+		ArrayList<Index> list = iService.selectRankingList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		//System.out.println(pi);
+		//System.out.println(list);
 		
 		return "index/closedFundingMore";
 	}
