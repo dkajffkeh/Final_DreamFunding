@@ -260,9 +260,7 @@ public class IndexController {
 	public String selectMagazineList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
 			Model model) {
 
-//			System.out.println(currentPage);
 		int listCount = iService.selectListCount();
-//			System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
 		
 		ArrayList<Index> list = iService.selectMagazineList(pi);
@@ -270,11 +268,7 @@ public class IndexController {
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
 		
-//			System.out.println(pi);
-//			System.out.println(list);
-		
 		return "index/magazineList";
-		
 	}
 	
 	// 에세이

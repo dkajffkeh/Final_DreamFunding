@@ -162,28 +162,16 @@
 	        	$(function(){
 	        		selectProgressFundingList();
 	        	})
-	        	
-	        	function detailClick(pno){
-	        		location.href = "proDetail.de?pno=" + pno;
-	        	}
 	        	function selectProgressFundingList(progressList){
-	        		
-	        		
-	        		
 	        		$.ajax({
 	        			url:"progressList.do",
 	        			success:function(progressList){
-	        				
 	        				var value = "";
-	        				
 	        				for(var i in progressList){
-	        					
-	        					var today = new Date();
-		        				var closeDay = new Date(progressList[i].projectCloseDt);
-		        				var gapDay = closeDay.getTime() - today.getTime();
-		        				gapDay = Math.floor(gapDay / (1000 * 60 * 60 * 24));
-		        				
-		        				
+	        					var today = new Date();	// 오늘 날짜
+		        				var closeDay = new Date(progressList[i].projectCloseDt);	// 마감 날짜
+		        				var gapDay = closeDay.getTime() - today.getTime();	// 디데이
+		        				gapDay = Math.floor(gapDay / (1000 * 60 * 60 * 24));	
 	        					if(i < 8){
 		    						value += "<li class='card-item'>" +
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + progressList[i].projectFileName + ")'>" +
@@ -194,72 +182,64 @@
 	    	                  		}else{
 	    	                  			value += "<div class='finish' style='visibility:hidden;'><span>마감임박</span></div>";
 	    	                  		}
-						    	                        
-						    	               value += "<div onclick='likeClick(" + progressList[i].projectNo + ");'>" + 
-						    	                        	"<div name=" + progressList[i].projectNo + ">" +
-						    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
-						    	                        		"<div class='pno' style='display:none;'>" + progressList[i].projectNo + "</div>" +
-						    	                        	"</div>" +
-						    	                        "</div>" +
-						    	                      "</div>" +
-						    	                    "</div>" +
-						    	                  "</figure>" +
-						    	                  "<div class='card-desc' onclick='detailClick(" + progressList[i].projectNo + ")'>" +
-						    	                      "<div class='project-content'>" +
-						    	                          "<div class='project-company'>" + progressList[i].creatorName + "</div>" +
-						    	                          "<div class='project-title'>" + progressList[i].projectTitle + "</div>" +
-						    	                      "</div>" +
-						    	                      "<div class='project-detail'>" +
-						    	                          "<div class='funding-percent'>" + progressList[i].projectStartDt + "</div>" +
-						    	                          "<div class='funding-d-day'>" + progressList[i].projectCloseDt + "</div>" + 
-						    	                      "</div>" +
-						    	                  "</div>" +
-					    	                  "</li>";
+				    	               value += "<div onclick='likeClick(" + progressList[i].projectNo + ");'>" + 
+				    	                        	"<div name=" + progressList[i].projectNo + ">" +
+				    	                        		"<span class='material-icons md-36' name='likeIcon'>favorite</span>" + 
+				    	                        		"<div class='pno' style='display:none;'>" + progressList[i].projectNo + "</div>" +
+				    	                        	"</div>" +
+				    	                        "</div>" +
+				    	                      "</div>" +
+				    	                    "</div>" +
+				    	                  "</figure>" +
+				    	                  "<div class='card-desc' onclick='detailClick(" + progressList[i].projectNo + ")'>" +
+				    	                      "<div class='project-content'>" +
+				    	                          "<div class='project-company'>" + progressList[i].creatorName + "</div>" +
+				    	                          "<div class='project-title'>" + progressList[i].projectTitle + "</div>" +
+				    	                      "</div>" +
+				    	                      "<div class='project-detail'>" +
+				    	                          "<div class='funding-percent'>" + progressList[i].projectStartDt + "</div>" +
+				    	                          "<div class='funding-d-day'>" + progressList[i].projectCloseDt + "</div>" + 
+				    	                      "</div>" +
+				    	                  "</div>" +
+			    	                  "</li>";
 	        					}else{
 	        						break;
 	        					}                  
 	        				}
-	        				
 	        				$(".thumbnail-a ul").html(value);
 	        				likeList();
-	        				
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
 	        		})
-	        		
 	        	}
 	        </script>
 	        
 	        <!-- 좋아요 스크립트 -->
 	        <script>
-	        		var memNo = "${loginMem.memNo}";
-	        		
-	        		function likeList() {
-		        	 
-		        		$.ajax({
-		        			url:"likeList.do",// 라이크리스트 다셀렉해오는거
-		        			data:{mno:memNo},
-		        			success:function(likeList){
-		        				if(likeList == null){
-		        					return;
-		        				}else{
-		        					//console.log(likeList);
-		        					for(var i in likeList){
-		        						//console.log($("[name="+ likeList[i].projectNo +"]"));
-		        						$("[name=" + likeList[i].projectNo + "]").find(".material-icons").css("color","rgb(127,0,0)");
-		        					}
-		        				}
-		        				
-		        			},error:function(){
-		        				console.log("memNo없음");
-		        			}
-		        		})
-	        		}
+        		var memNo = "${loginMem.memNo}";	// 로그인유저 번호
+        		
+        		function likeList() {				// 라이크리스트 다 셀렉해오기
+	        		$.ajax({
+	        			url:"likeList.do",	
+	        			data:{mno:memNo},
+	        			success:function(likeList){
+	        				if(likeList == null){	// 좋아요 리스트가 비어있을때 return
+	        					return;
+	        				}else{
+	        					for(var i in likeList){		// 좋아요 리스트 반복문 수행해서 출력
+	        						$("[name=" + likeList[i].projectNo + "]").find(".material-icons").css("color","rgb(127,0,0)");
+	        					}
+	        				}
+	        			},error:function(){
+	        				console.log("memNo없음");
+	        			}
+	        		})
+        		}
 	        
-	        	function likeClick(pno){
+	        	function likeClick(pno){			// 좋아요 버튼 클릭 시 실행
 	        		
-	        		if(memNo == ""){
+	        		if(memNo == ""){				// 로그인 안되어있을때는 alert창
     					swal("좋아요 실패", "로그인 후 이용해주세요!", "warning");
 	        		}else{
 	        			$.ajax({
@@ -267,13 +247,8 @@
 		        			data:{
 		        					pno:pno,
 		        					mno:memNo
-	        					 },
-		        			success:function(result){
-		        				
-		        				//console.log(result);
-		        				
-		        				//console.log("좋아요 클릭");
-		        				
+	        					 },	
+		        			success:function(result){	// 유저 번호로 좋아요 여부 전달
 		        				var value="";
 		        				if(result == 1){
 		        					$("[name=" + pno + "]").find(".material-icons").css("color","rgb(127,0,0)");
@@ -282,17 +257,16 @@
 		        					$("[name=" + pno + "]").find(".material-icons").css("color","");
 		        					swal("좋아요 취소!", "취소되었습니다.", "success");	       
 		        				}
-		        				
 		        			},error:function(){
 		        				console.log("ajax 통신 실패!");
 		        			}
 		        		})
-								
     				}
-	        		
-	        		
 	        	}
-	        	
+
+	        	function detailClick(pno){
+	        		location.href = "proDetail.de?pno=" + pno;
+	        	}
 	        </script>
 	        
 	        
@@ -301,37 +275,21 @@
 	        <!-- select box 진행중인 펀딩 -->
 	        <script>
 	        
-	        
-	        
 	        function changeSelect(){
-	        	
-	        	var selectOption = document.getElementById("selectValue");
-	        	
+	        	var selectOption = document.getElementById("selectValue");					// 셀렉트박스 값
 	        	var selectedValue = selectOption.options[selectOption.selectedIndex].value;
-	        	
 	        	var selectedText = selectOption.options[selectOption.selectedIndex].text;
 	        	
-	        	console.log(selectedValue);
-	        	
-	        	console.log(selectedText);
-	        	
-				if(selectedValue == 1){
+				if(selectedValue == 1){			// 셀렉트 옵션에 조건처리
 	        		$.ajax({
 	        			url:"selectMoney.do",
 	        			success:function(selectMoneyList){
-	        				console.log("펀딩금액순 통신성공");
-	        				
-	        				
 	        				var value = "";
-	        				
-	        				
 	        				for(var i in selectMoneyList){
-	        					
 	        					var today = new Date();
 		        				var closeDay = new Date(selectMoneyList[i].projectCloseDt);
 		        				var gapDay = closeDay.getTime() - today.getTime();
 		        				gapDay = Math.floor(gapDay / (1000 * 60 * 60 * 24));
-	        					
 	        					if(i<8){	
 		    						value += "<li class='card-item'>" +
 			    								 "<figure class='card-image' style='background-image: url(" + "/dreamfunding/resources/images/projectThumbnail/" + selectMoneyList[i].projectFileName + ")'>" +
