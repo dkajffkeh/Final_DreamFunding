@@ -559,7 +559,7 @@ margin-left:1000px;
     <footer>
       <div class="footer__inner">
         <div class="footer__center">
-          <img src="C:/DreamFunding-FrontRepo/webapp/resources/images/logo3.png" alt="" />
+          <img src="${pageContext.request.contextPath}/resources/images/logo3.png" alt="" />
         </div>
 
         <div class="footer__bottom">
