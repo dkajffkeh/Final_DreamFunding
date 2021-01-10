@@ -64,7 +64,6 @@ public class IndexDao {
 		
 		return sqlSession.selectOne("indexMapper.selectListCount");
 	}
-	
 	public ArrayList<Index> selectProjectList(SqlSessionTemplate sqlSession, PageInfo pi){
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();

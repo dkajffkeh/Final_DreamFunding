@@ -92,7 +92,6 @@ public class IndexServiceImpl implements IndexService {
 	public int selectListCount() {
 		return iDao.selectListCount(sqlSession);
 	}
-
 	@Override
 	public ArrayList<Index> selectProjectList(PageInfo pi) {
 		return iDao.selectProjectList(sqlSession, pi);
@@ -137,6 +136,7 @@ public class IndexServiceImpl implements IndexService {
 	public ArrayList<Index> selectEtcList(PageInfo pi) {
 		return iDao.selectEtcList(sqlSession, pi);
 	}
+
 	
 	
 	

@@ -617,7 +617,12 @@
 				    								 "<div>" +
 						    	                      "<div class='like'>" +
 						    	                        "<div class='finish'><span>펀딩완료</span></div>" +
-						    	                        	"<div><span class='material-icons md-36'>favorite</span></div>" +
+						    	                        "<div onclick='likeClick(" + closedList[i].projectNo + ");' >" + 
+						    	                        	"<div name=" + closedList[i].projectNo + ">" +
+						    	                        		"<span class='material-icons md-36' name='likeIcon' >favorite</span>" + 
+						    	                        		"<div class='pno' style='display:none;'>" + closedList[i].projectNo + "</div>" +
+						    	                        	"</div>" +
+						    	                        "</div>" +
 						    	                      "</div>" +
 						    	                    "</div>" +
 						    	                  "</figure>" +
@@ -627,8 +632,8 @@
 						    	                          "<div class='project-title'>" + closedList[i].projectTitle + "</div>" +
 						    	                      "</div>" +
 						    	                      "<div class='project-detail'>" +
-						    	                          "<div class='funding-percent'>" + closedList[i].projectStartDt + "</div>" +
-						    	                          "<div class='funding-d-day'>" + closedList[i].projectCloseDt + "</div>" + 
+						    	                          "<div class='funding-percent'>" + closedList[i].projectGprice + "원</div>" +
+						    	                          "<div class='funding-d-day'><span>성공적으로 펀딩 완료!</span></div>" + 
 						    	                      "</div>" +
 						    	                  "</div>" +
 					    	                  "</li>";

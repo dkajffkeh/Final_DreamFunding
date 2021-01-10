@@ -58,7 +58,7 @@
           <div class="search__box"  >
           	<form action="search.do">
 	            <input type="text" class="search-bar" placeholder="프로젝트 검색" id="keyword" name="keyword" />
-	            <div><button type="submit" style="border:none;"><span class="material-icons"> search </span></button></div>
+	            <span><button type="submit" style="border:none;"><span class="material-icons"> search </span></button></span>
         	</form>
             
           </div>
