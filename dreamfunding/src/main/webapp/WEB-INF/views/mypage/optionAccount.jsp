@@ -555,6 +555,12 @@ margin-right:20px;}
 
   </head>
   <body>
+  	<c:if test="${ !empty alertMsg }">
+		<script>
+			alert("${alertMsg}");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
     <jsp:include page="../common/menubar.jsp"/>
     
 
@@ -952,8 +958,6 @@ margin-right:20px;}
 		    </div>
 		  </div>
 		</div>
-        
-      
     </main>
 
     <footer>

@@ -181,6 +181,7 @@
 	                	
 						if(certify === hiddenNum){
 							$("#toggle").toggle();
+							$("#toggle2").css("display","none")
 							cCertify = true;
 							buttonAble()
 						
@@ -188,7 +189,9 @@
 						}else{
 							cCertify = false;
 							buttonAble()
+							
 							$("#toggle2").toggle();
+							$("#toggle").css("display","none")
 							
 						}
 	                	

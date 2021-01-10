@@ -134,7 +134,11 @@ public class MemberController {
 		
 		int result = mService.insertMember(m);
 
-		return "redirect:/";
+		if(result > 0) {
+			session.setAttribute("alertMsg", "회원가입이 완료되었습니다.");
+		}
+		
+		return "member/loginForm";
 		//
 		
 		
@@ -156,7 +160,7 @@ public class MemberController {
 				
 				session.removeAttribute("loginMem");
 				
-				session.setAttribute("alertMsg", "성공적으로 회원탈퇴 되었습니다. 이용해주셔서 감사합니다.");
+				
 				
 			}
 			
@@ -286,13 +290,13 @@ public class MemberController {
 		
 		if(result > 0) {
 			
-			session.setAttribute("alertMsg", "프로필 수정 완료");
+			session.setAttribute("alertMsg", "비밀번호 수정 완료");
 			
 			return "member/loginForm";
 			
 		}else { 
 			
-			session.setAttribute("alertMsg", "프로필 수정 실패");
+			session.setAttribute("alertMsg", "비밀번호 수정 실패");
 			
 			return "member/loginForm";
 		}
@@ -307,13 +311,13 @@ public class MemberController {
 		
 		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
 			
-			session.setAttribute("alertMsg", "프로필 수정 완료");
+			session.setAttribute("alertMsg", "닉네임 수정 완료");
 			
 			return "mypage/optionProfile";
 			
 		}else { // 게시글 수정 실패 
 			
-			session.setAttribute("alertMsg", "프로필 수정 실패");
+			session.setAttribute("alertMsg", "닉네임 수정 실패");
 			
 			return "mypage/optionProfile";
 		}
@@ -377,13 +381,13 @@ public class MemberController {
 		
 		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
 			
-			session.setAttribute("alertMsg", "프로필 수정 완료");
+			session.setAttribute("alertMsg", "핸드폰 번호 수정 완료");
 			
 			return "mypage/optionProfile";
 			
 		}else { // 게시글 수정 실패 
 			
-			session.setAttribute("alertMsg", "프로필 수정 실패");
+			session.setAttribute("alertMsg", "핸드폰 번호 수정 실패");
 			
 			return "mypage/optionProfile";
 		}

@@ -37,9 +37,15 @@
           </a>
           <ul class="header__nav">
             <li><a href="categoryViewAll.in">펀딩하기</a></li>
-        
-            <li><a href="mypage.me">마이페이지</a></li>
-   
+			<c:choose>
+        	<c:when test="${ empty loginMem }">
+            <li><a href="login.me.jm">마이페이지</a></li>
+			</c:when>
+			<c:otherwise>
+			<li><a href="mypage.me">마이페이지</a></li>
+			</c:otherwise>
+			
+			</c:choose>
             <li><a href="scenterMain.gn">고객센터</a></li>
           </ul>
           <c:if test="${ !empty loginMem }">
@@ -63,7 +69,7 @@
             
           </div>
           <a href="loginForm.me.jm" class="sign__group">로그인</a>
-          <a href="enrollForm.me.jm" class="sign__group">회원가입</a>
+          <a href="enrollForm2.me.jm" class="sign__group">회원가입</a>
         </div>
         
 		</c:when>
