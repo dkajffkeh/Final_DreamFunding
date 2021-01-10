@@ -167,12 +167,10 @@ text-align:left;}
                 <div id="menu1" class="container tab-pane active" ><br><br><br>
                   <a href="myFundingProject.me?mno=${ loginMem.memNo }"><h4 class="supporter-menu" style="font-weight:bold;">펀딩한 프로젝트</h4></a><br><br>
                   <a href="myLikeProject.me?mno=${ loginMem.memNo }"><h4 class="supporter-menu" style="font-weight:bold;">관심있는 프로젝트</h4></a><br><br>
-                  <a href="mypageMessage.me"><h4 class="supporter-menu" style="font-weight:bold;">메시지</h4></a>
                 </div>
                 <div id="menu2" class="container tab-pane fade"><br><br><br>
                   <a href="makeProject.me"><h4 class="creator-menu" style="font-weight:bold;">프로젝트 만들기</h4></a><br><br>
                   <a href="myMadeProject.me"><h4 class="creator-menu" style="font-weight:bold;">제작한 프로젝트</h4></a><br><br>
-                  <a href="mypageMessage.me"><h4 class="creator-menu" style="font-weight:bold;">메시지</h4></a>
                 </div>
               </div>
             </div>
