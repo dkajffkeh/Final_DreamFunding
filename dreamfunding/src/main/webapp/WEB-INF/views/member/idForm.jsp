@@ -37,7 +37,7 @@
                         <td>
 						   <div class="form-label-group">
 		                    <input type="text" id="phone1" class="form-control" name="phone" placeholder="Password" required>
-		                    <label for="phone">휴대폰번호 입력</label>
+		                    <label for="phone1">휴대폰번호 입력</label>
 		                    <div id="namePhone"></div>
 		                   </div>
                         </td>
