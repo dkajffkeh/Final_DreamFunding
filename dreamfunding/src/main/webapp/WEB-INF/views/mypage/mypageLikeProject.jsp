@@ -237,7 +237,8 @@ footer .footer__inner {
   text-align:center;}
 
 .page-name{
-   margin-left:60px;
+   margin-left:490px;
+   margin-right:250px;
    padding-top:30px;
    width:500px;
    text-align:center;
@@ -246,16 +247,15 @@ footer .footer__inner {
 
 #setting{
   font-size:40px;
-  float:right;
-  margin-right:20px;
-  margin-top:10px;}
+  margin-right:200px;
+  margin-top:50px;}
 
 
 
 
 /*서포터, 크리에이터 메뉴 스타일*/
 .nav-link{
-  padding-top:15px;
+  padding-top:30px;
  background-color:#ccc4bb;
  color:#7f0000;
  text-align:center;}
@@ -518,6 +518,9 @@ text-align:left;}
     color: #121212
 }
    
+   .h3{margin-top:7px;}
+   .profile-img{
+  margin-top:10px;}
 
 </style>
 
@@ -534,14 +537,28 @@ text-align:left;}
 
     <br>
     <div class="wrap1">
-       <!--설정아이콘-->
-       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
+       
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
-          class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
+
+              <c:choose>
+              <c:when test="${ empty loginMem.memSystemname }">
+              <a href="mypage.me">
+              <img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
+                          style="width:70px; height:70px; border-radius: 50%;">
+                          </a>
+              </c:when>
+              <c:otherwise>
+              <a href="mypage.me">
+              <img src="${pageContext.request.contextPath}/resources/images/profile/${loginMem.memSystemname}"
+              		 	  style="width:70px; height:70px; border-radius: 50%;">
+              		 	  </a>
+               </c:otherwise>
+              </c:choose>
         </div>
+         <!--설정아이콘-->
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
     </div>
     
     
@@ -554,23 +571,23 @@ text-align:left;}
       <div class="inner" >
         <!--  페이지 내용 작성하는곳 -->
            <!--서포터, 크리에이터 탭-->
-            <div class="container mt-3" >
-              <br>
-              
-              <ul class="nav nav-tabs nav-justified" >
-                <li class="nav-item" >
-                  <a class="nav-link active" data-toggle="tab" href="#menu1"><h3 style="font-weight:bold;">서포터</h3></a>
+            <div class="container mt-3" style=" margin-bottom: 10px;">
+             <br>
+             
+             
+              <ul class="nav nav-tabs nav-justified" style="border-radius: 20px; border:none;"  >
+                <li class="nav-item">
+                  <a class="nav-link active" style="line-height:10px; margin-right:10px; border-radius: 20px; border:1px solid rgb(206, 206, 206);" data-toggle="tab" href="#menu1"><h3 class="h3" style="font-weight:bold;">서포터</h3></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#menu2"><h3 style="font-weight:bold;">크리에이터</h3></a>
+                  <a class="nav-link" style="border-radius: 20px; border:1px solid rgb(206, 206, 206);" data-toggle="tab" href="#menu2"><h3 class="h3" style="font-weight:bold;">크리에이터</h3></a>
                 </li>
               </ul>
-            
-             
+
              <!--세부메뉴 html-->
             <div class="tab-content" style=" margin-bottom: 10px;">
               <div id="menu1" class="container tab-pane active" ><br><br>
-                <nav class="nav--top">
+                <nav class="nav--top" style="margin-left:55px;">
                   <ul>
                       <li><a href="myFundingProject.me?mno=${ loginMem.memNo }">펀딩한 프로젝트</a></li>
                       <li><a href="myLikeProject.me?mno=${ loginMem.memNo }">관심있는 프로젝트</a></li>
@@ -581,7 +598,7 @@ text-align:left;}
               </div>
                 
               <div id="menu2" class="container tab-pane fade"><br><br>
-                <nav class="nav--top">
+                <nav class="nav--top" style="margin-left:55px;">
                   <ul>
                       <li><a href="makeProject.me">프로젝트 만들기</a></li>
                       <li><a href="myMadeProject.me">제작한 프로젝트</a></li>
@@ -591,7 +608,7 @@ text-align:left;}
               </div>
 
             </div>  
-            </div>
+          </div>
 
 
             <!--컨텐트-->
@@ -630,8 +647,9 @@ text-align:left;}
                 
               </div>
               
-              <div id="pagingArea">
-              	<ul class="pagination">
+              <br><br>
+              <div id="pagingArea" >
+              	<ul class="pagination" style="justify-content: center; ">
               	
               	<c:choose>
               	  <c:when test="${mypi.currentPage eq 1 }">

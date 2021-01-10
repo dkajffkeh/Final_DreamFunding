@@ -35,7 +35,8 @@
   text-align:center;}
 
 .page-name{
-   margin-left:60px;
+   margin-left:490px;
+   margin-right:250px;
    padding-top:30px;
    width:500px;
    text-align:center;
@@ -44,9 +45,8 @@
 
 #setting{
   font-size:40px;
-  float:right;
-  margin-right:20px;
-  margin-top:10px;}
+  margin-right:200px;
+  margin-top:50px;}
 
 .wrap2{
   text-align:center;}
@@ -128,8 +128,7 @@ text-align:left;}
 
     <br>
     <div class="wrap1">
-       <!--설정아이콘-->
-       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
+       
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
@@ -149,6 +148,8 @@ text-align:left;}
                </c:otherwise>
               </c:choose>
         </div>
+         <!--설정아이콘-->
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
     </div>
     
     
