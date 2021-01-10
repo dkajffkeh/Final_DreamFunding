@@ -92,6 +92,10 @@
                   document.getElementById("showHide").style.display ='none';
               }
           }
+          
+          function detailClick(pno){
+      		location.href = "proDetail.de?pno=" + pno;
+      	  }
         </script>
 
             <div class="inner">
@@ -276,7 +280,7 @@
 			    	                      "</div>" +
 			    	                    "</div>" +
 			    	                  "</figure>" +
-				    	                  "<div class='card-desc'>" +
+				    	                  "<div class='card-desc' onclick='detailClick(" + selectMoneyList[i].projectNo + ")'>" +
 				    	                      "<div class='project-content'>" +
 				    	                          "<div class='project-company'>" + selectMoneyList[i].creatorName + "</div>" +
 				    	                          "<div class='project-title'>" + selectMoneyList[i].projectTitle + "</div>" +
@@ -330,7 +334,7 @@
 			    	                      "</div>" +
 			    	                    "</div>" +
 			    	                  "</figure>" +
-						    	                  "<div class='card-desc'>" +
+						    	                  "<div class='card-desc' onclick='detailClick(" + selectClosedList[i].projectNo + ")'>" +
 						    	                      "<div class='project-content'>" +
 						    	                          "<div class='project-company'>" + selectClosedList[i].creatorName + "</div>" +
 						    	                          "<div class='project-title'>" + selectClosedList[i].projectTitle + "</div>" +
@@ -384,7 +388,7 @@
 			    	                      "</div>" +
 			    	                    "</div>" +
 			    	                  "</figure>" +
-						    	                  "<div class='card-desc'>" +
+						    	                  "<div class='card-desc' onclick='detailClick(" + selectNewList[i].projectNo + ")'>" +
 						    	                      "<div class='project-content'>" +
 						    	                          "<div class='project-company'>" + selectNewList[i].creatorName + "</div>" +
 						    	                          "<div class='project-title'>" + selectNewList[i].projectTitle + "</div>" +
