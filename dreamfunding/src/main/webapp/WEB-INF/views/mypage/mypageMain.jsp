@@ -133,8 +133,21 @@ text-align:left;}
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
-          class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
+
+              <c:choose>
+              <c:when test="${ empty loginMem.memSystemname }">
+              <a href="mypage.me">
+              <img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
+                          style="width:70px; height:70px; border-radius: 50%;">
+                          </a>
+              </c:when>
+              <c:otherwise>
+              <a href="mypage.me">
+              <img src="${pageContext.request.contextPath}/resources/images/profile/${loginMem.memSystemname}"
+              		 	  style="width:70px; height:70px; border-radius: 50%;">
+              		 	  </a>
+               </c:otherwise>
+              </c:choose>
         </div>
     </div>
     

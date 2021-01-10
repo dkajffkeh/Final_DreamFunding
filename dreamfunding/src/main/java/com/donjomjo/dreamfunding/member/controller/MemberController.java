@@ -133,15 +133,9 @@ public class MemberController {
 		m.setMemPwd(encPwd);
 		
 		int result = mService.insertMember(m);
-		
-		if(result > 0) {
-			session.setAttribute("alertMsg", "회원가입 성공!");
-			
-		}
-		
-		
+
 		return "redirect:/";
-		
+		//
 		
 		
 	}

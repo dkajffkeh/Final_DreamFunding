@@ -92,7 +92,7 @@
                &nbsp;
               <c:choose>
               <c:when test="${ empty loginMem.memSystemname }">
-			  <i class="header__icon"><span class="material-icons"> account_circle </span></i>
+			  <a href="optionAccount.me"><i class="header__icon"><span class="material-icons"> account_circle </span></i></a>
               </c:when>
               <c:when test="${ loginMem.memNo == 1 }">
               <i class="header__icon"><span class="material-icons"> account_circle </span></i>
