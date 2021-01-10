@@ -23,7 +23,7 @@
         <!-- 문의하기 폼 들어갈곳 -->
         <div class="top"> <!---->
             <!-- 문의하기 버튼(sticky) -->
-        <div class="sticky"> 
+        <div class="sticky" style="display:none;"> 
           <!-- 문의하기 폼 -->
           <div class="qna-form" id="showHide">
             <div class="qna-title">
@@ -163,7 +163,7 @@
 		    	                      </div>
 		    	                    </div>
 	    	                  	</figure>
-	                            <div class="card-desc">
+	                            <div class="card-desc" onclick="detailClick(${p.projectNo})">
 	                                <div class="project-content">
 	                                    <div class="project-company">${p.creatorName}</div>
 	                                    <div class="project-title">${p.projectTitle }</div>
