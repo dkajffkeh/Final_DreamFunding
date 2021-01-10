@@ -574,7 +574,6 @@ text-align:left;}
                   <ul>
                       <li><a href="myFundingProject.me?mno=${ loginMem.memNo }">펀딩한 프로젝트</a></li>
                       <li><a href="myLikeProject.me?mno=${ loginMem.memNo }">관심있는 프로젝트</a></li>
-                      <li><a href="mypageMessage">메시지</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
@@ -586,7 +585,6 @@ text-align:left;}
                   <ul>
                       <li><a href="makeProject.me">프로젝트 만들기</a></li>
                       <li><a href="myMadeProject.me">제작한 프로젝트</a></li>
-                      <li><a href="mypageMessage.me">메시지</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
