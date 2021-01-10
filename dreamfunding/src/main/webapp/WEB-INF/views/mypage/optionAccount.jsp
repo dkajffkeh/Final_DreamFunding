@@ -555,6 +555,12 @@ margin-right:20px;}
 
   </head>
   <body>
+  	<c:if test="${ !empty alertMsg }">
+		<script>
+			alert("${alertMsg}");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
     <jsp:include page="../common/menubar.jsp"/>
     
 
@@ -611,8 +617,6 @@ margin-right:20px;}
                   <ul>
                       <li><a href="optionProfile.me">프로필</a></li>
                       <li><a href="optionAccount.me">계정</a></li>
-                      <li><a href="optionPay.me">결제수단</a></li>
-                      <li><a href="optionShipping.me">배송지</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
@@ -952,8 +956,6 @@ margin-right:20px;}
 		    </div>
 		  </div>
 		</div>
-        
-      
     </main>
 
     <footer>

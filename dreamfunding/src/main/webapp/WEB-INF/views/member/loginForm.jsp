@@ -32,7 +32,7 @@
           <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="card card-signin my-5">
               <div class="card-body">
-                <h5 class="card-title text-center">환영합니다<br><small><a href="enrollForm.me.jm">빠른 회원가입!</a></small></h5>
+                <h5 class="card-title text-center">환영합니다<br><small><a href="enrollForm2.me.jm">빠른 회원가입!</a></small></h5>
                 <form class="form-signin" action="login.me.jm" method="post">
                   <div class="form-label-group">
                     <input type="email" id="userId" class="form-control" name="email" placeholder="Email address" required autofocus>
@@ -58,9 +58,8 @@
                     </table>
                   </div>
                   <button class="btn btn-lg btn-login btn-block text-uppercase"  onclick="login();">로그인</button>
-                  <hr class="my-4">
-                  <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> 구글로 로그인 하기</button>
-                  <button class="btn btn-lg btn-naver btn-block text-uppercase" type="submit"><i class="fab fa-envira mr-2"></i>네이버로 로그인 하기</button>
+                  
+
                 </form>
               </div>
             </div>

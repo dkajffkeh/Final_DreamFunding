@@ -52,14 +52,21 @@
 						   <div class="form-label-group">
 		                    <input type="text" id="certify" class="form-control" name="certify" placeholder="Password" required>
 		                    <label for="certify">인증번호 입력</label>
+		                <div id="toggle" style="display: none;"><span style="color:green">인증되었습니다.</span></div>
+                        <div id="toggle2" style="display: none;"><span style="color:red">인증번호가 다릅니다.</span></div>
 		                    <input type="hidden" id="certifyNum" value="">
-		                   </div>
+		                </div>
                         </td>
                         <td>
-                        	<button type="button" class="form-control btn-request" data-toggle="modal" data-target="#myModal1" onclick="certifycheck();">인증 확인</button>
+                        	<button type="button" id="button2" class="form-control btn-request" onclick="certifycheck();">인증 확인</button>
                         </td>
                     </tr>
+                    
+          
 
+               
+
+          </script>
                 </table>
                 <button class="btn btn-lg btn-login btn-block text-uppercase" id="enroll-btn" type="submit" disabled>회원가입</button>
 				</form>
@@ -106,6 +113,7 @@
             							$("#namePhone").show();
             							$("#namePhone").css("color", "green").text("일치하는 회원이있습니다.");
             							$("#certifyReq").removeAttr("disabled");
+            							
 
             							buttonAble()
             							
@@ -172,7 +180,8 @@
 	                	var hiddenNum = $("#certifyNum").val();
 	                	
 						if(certify === hiddenNum){
-	
+							$("#toggle").toggle();
+							$("#toggle2").css("display","none")
 							cCertify = true;
 							buttonAble()
 						
@@ -180,7 +189,9 @@
 						}else{
 							cCertify = false;
 							buttonAble()
-	
+							
+							$("#toggle2").toggle();
+							$("#toggle").css("display","none")
 							
 						}
 	                	
@@ -206,7 +217,7 @@
 				
 				      <!-- Modal body -->
 				      <div class="modal-body">
-				      이메일이 발송되었습니다 확인해주십시요.
+				     인증번호가 발송되었습니다 확인해주십시요.
 				      </div>
 				
 				
