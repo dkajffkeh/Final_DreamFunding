@@ -157,14 +157,18 @@ public class MemberController {
 			int result = mService.deleteMember(loginMem);
 			
 			if(result > 0) {
-				
+				session.setAttribute("alertMsg", "성공적으로 탈퇴되었습니다. 이용해 주셔서 감사합니다.");
 				session.removeAttribute("loginMem");
+				return "redirect:/";
 				
 				
+			}else {
+				session.setAttribute("alertMsg", "비밀번호가 다릅니다.");
+				return "mypage/optionAccount";
 				
 			}
 			
-			return "redirect:/";
+			
 		}
 		
 		return "redirect:/";
@@ -290,8 +294,8 @@ public class MemberController {
 		
 		if(result > 0) {
 			
-			session.setAttribute("alertMsg", "비밀번호 수정 완료");
-			
+			session.setAttribute("alertMsg", "비밀번호 수정 완료. 다시 로그인해 주시기 바랍니다.");
+			session.removeAttribute("loginMem");
 			return "member/loginForm";
 			
 		}else { 
