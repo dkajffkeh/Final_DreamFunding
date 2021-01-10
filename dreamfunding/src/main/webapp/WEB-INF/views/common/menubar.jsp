@@ -32,7 +32,7 @@
 	<header>
       <div class="inner">
         <div class="header__left">
-          <a class="logo" href="">
+          <a class="logo" href="mainlogo.do">
             <img src="${pageContext.request.contextPath}/resources/images/mainlogo.png" alt="" />
           </a>
           <ul class="header__nav">

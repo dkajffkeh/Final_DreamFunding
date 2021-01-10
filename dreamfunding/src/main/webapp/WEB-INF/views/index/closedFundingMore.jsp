@@ -20,9 +20,9 @@
     <main class="section">
         
         <!-- 문의하기 폼 들어갈곳 -->
-        <div class="top"> <!---->
+        <div class="top" > <!----> 
         <!-- 문의하기 버튼(sticky) -->
-        <div class="sticky"> 
+        <div class="sticky" style="display:none;"> 
           <!-- 문의하기 폼 -->
           <div class="qna-form" id="showHide">
             <div class="qna-title">
