@@ -160,13 +160,14 @@ public class ServiceCenterController {
 		return "serviceCenter/faqUpdateForm";
 	}
 	@RequestMapping("faqUpdate.gn.no")
-	public String updateFaq(Faq fq) {
+	public String updateFaq(Faq fq, Model model) {
 		int result = scService.updateFaq(fq);
 		
 		if(result > 0) {
 			return "redirect:faqList.gn.no?ctno=1";
 		}else {
-			return "redirect:faqList.gn.no?ctno=2";
+			model.addAttribute("errorMsg", "자주묻는 질문  수정에 실패했습니다.");
+			return "serviceCenter/errorPage";
 		}
 		
 	}
