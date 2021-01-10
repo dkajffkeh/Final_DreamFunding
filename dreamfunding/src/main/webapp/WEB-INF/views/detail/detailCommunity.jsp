@@ -230,6 +230,8 @@
             </div>
           </div>
           
+     
+          
 		   <jsp:include page="detailReward.jsp"/>
           
 		</div>
@@ -387,7 +389,7 @@
         	
         if(v.memberSystemName){
             profileImg = document.createElement('img');
-            profileImg.src='resources/images/profile'+v.memberSystemName;
+            profileImg.src='resources/images/profile/'+v.memberSystemName;
             profileImg.className='image';
         }else{
         	profileImg = document.createElement('span');
