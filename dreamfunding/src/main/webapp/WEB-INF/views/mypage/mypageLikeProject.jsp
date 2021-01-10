@@ -611,7 +611,6 @@ text-align:left;}
 	                    </figure>
 	                    <figcaption>
 	                      <h class="like-project-name"><a href="#">${l.projectTitle }</a></h><br>
-	                      <h style="font-size:11px;">${l.projectSubTitle }</h><br><br>
 	                      <h>${l.projectGoalPrice }&#8361;</h>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                      <h style="color:#7f0000;" >
 	                      <c:choose>
