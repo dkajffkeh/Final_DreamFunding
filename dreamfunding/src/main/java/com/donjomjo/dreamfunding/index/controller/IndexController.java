@@ -22,6 +22,13 @@ public class IndexController {
 	@Autowired
 	private IndexService iService;
 	
+	// 로고 더보기 클릭 시 페이지이동
+	@RequestMapping("mainlogo.do")
+	public String mainlogo() {
+		
+		return "redirect:/";
+	}
+	
 	// 펀딩하기 클릭시 카테고리 전체보기 페이지로 이동
 	@RequestMapping("categoryViewAll.in")
 	public String selectCategoryList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
