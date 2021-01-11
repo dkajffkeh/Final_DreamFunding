@@ -234,18 +234,18 @@ footer .footer__inner {
     text-align:center;}
   
   .page-name{
-     margin-left:60px;
-     padding-top:30px;
-     width:500px;
-     text-align:center;
-     display:inline-block;
-     font-size:30px;}
-  
-  #setting{
-    font-size:40px;
-    float:right;
-    margin-right:20px;
-    margin-top:10px;}
+   margin-left:490px;
+   margin-right:250px;
+   padding-top:30px;
+   width:500px;
+   text-align:center;
+   display:inline-block;
+   font-size:30px;}
+
+#setting{
+  font-size:40px;
+  margin-right:200px;
+  margin-top:50px;}
   
   .wrap2{
     text-align:center;}
@@ -541,8 +541,7 @@ footer .footer__inner {
 
     <br>
     <div class="wrap1">
-       <!--설정아이콘-->
-       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
+       
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
@@ -559,6 +558,8 @@ footer .footer__inner {
               </c:choose>
 		</a>
         </div>
+         <!--설정아이콘-->
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
     </div>
     
     
@@ -586,7 +587,7 @@ footer .footer__inner {
                 <!--세부메뉴 html-->
             <div class="tab-content" style=" margin-bottom: 10px;">
               <div id="menu1" class="container tab-pane active" ><br><br>
-                <nav class="nav--top">
+                <nav class="nav--top" style="margin-left:50px;">
                   <ul>
                       <li><a href="optionProfile.me">프로필</a></li>
                       <li><a href="optionAccount.me">계정</a></li>
@@ -753,7 +754,7 @@ footer .footer__inner {
     <footer>
       <div class="footer__inner">
         <div class="footer__center">
-          <img src="../../../resources/images/logo3.png" alt="" />
+          <img src="${pageContext.request.contextPath}/resources/images/logo3.png" alt="" />
         </div>
 
         <div class="footer__bottom">

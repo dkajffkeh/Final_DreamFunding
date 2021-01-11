@@ -235,7 +235,8 @@ footer .footer__inner {
   text-align:center;}
 
 .page-name{
-   margin-left:60px;
+   margin-left:490px;
+   margin-right:250px;
    padding-top:30px;
    width:500px;
    text-align:center;
@@ -244,9 +245,8 @@ footer .footer__inner {
 
 #setting{
   font-size:40px;
-  float:right;
-  margin-right:20px;
-  margin-top:10px;}
+  margin-right:200px;
+  margin-top:50px;}
 
 .wrap2{
   text-align:center;}
@@ -358,7 +358,7 @@ text-align:center;}
 
 /*정렬방식 select옵션*/
 .sort{
-float:right;
+margin-left:1000px;
 }
 
 
@@ -369,8 +369,6 @@ float:right;
   height:50px;
   display:inline-block;
   margin:20px auto;
-  margin-left:130px;
-  margin-right:29px;
   padding-left:30px;
   line-height: 2.6;
   font-size:large;
@@ -383,9 +381,7 @@ float:right;
   width:850px;
   height:180px;
   display: inline-flex;
-  margin: 20px auto;
-  margin-left:130px;
-  margin-right:110px;}
+  margin: 20px auto;}
 
 
 .making-date{
@@ -445,16 +441,30 @@ float:right;
 <body>
 
  <jsp:include page="../common/menubar.jsp"/>
- 
+ <br>
     <div class="wrap1">
-      <!--설정아이콘-->
-      <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
+    
       <!-- 마이페이지 프로필 div-->
        <div class="page-name"> 
-         <h style=" font-weight:bold;">마이페이지</h><br>
-         <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
-         class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
-       </div>
+          <h style=" font-weight:bold;">마이페이지</h><br>
+
+              <c:choose>
+              <c:when test="${ empty loginMem.memSystemname }">
+              <a href="mypage.me">
+              <img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
+                          style="width:70px; height:70px; border-radius: 50%;">
+                          </a>
+              </c:when>
+              <c:otherwise>
+              <a href="mypage.me">
+              <img src="${pageContext.request.contextPath}/resources/images/profile/${loginMem.memSystemname}"
+              		 	  style="width:70px; height:70px; border-radius: 50%;">
+              		 	  </a>
+               </c:otherwise>
+              </c:choose>
+        </div>
+        <!--설정아이콘-->
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
    </div>
 
     <!-- 이곳에 페이지 내용 작성 -->
@@ -476,13 +486,12 @@ float:right;
               </ul>
 
              <!--세부메뉴 html-->
-            <div class="tab-content" style=" margin-bottom: 10px;">
+            <div class="tab-content" style=" margin-bottom: 10px; ">
               <div id="menu1" class="container tab-pane active" ><br><br>
-                <nav class="nav--top">
+                <nav class="nav--top" style="margin-left:55px;">
                   <ul>
-                      <li><a href="myFundingProject.me">펀딩한 프로젝트</a></li>
-                      <li><a href="myLikeProject.me">관심있는 프로젝트</a></li>
-                      <li><a href="mypageMessage.me">메시지</a></li>
+                      <li><a href="myFundingProject.me?mno=${ loginMem.memNo }">펀딩한 프로젝트</a></li>
+                      <li><a href="myLikeProject.me?mno=${ loginMem.memNo }">관심있는 프로젝트</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
@@ -490,11 +499,10 @@ float:right;
               </div>
                 
               <div id="menu2" class="container tab-pane fade"><br><br>
-                <nav class="nav--top">
+               <nav class="nav--top" style="margin-left:55px;">
                   <ul>
                       <li><a href="makeProject.me">프로젝트 만들기</a></li>
                       <li><a href="myMadeProject.me">제작한 프로젝트</a></li>
-                      <li><a href="mypageMessage.me">메시지</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
@@ -504,9 +512,9 @@ float:right;
           </div>
 
           <!--진짜 내용 작성시작-->
-          <div class="real-content" style=" margin-top: 30px;"><br>
+          <div class="real-content" style=" text-align:center;"><br>
             <select class="sort" >
-              <option>모두보기</option>
+              <option>모두보기&nbsp;&nbsp;&nbsp;&nbsp;</option>
               <option>승인</option>
               <option>거절</option>
               <option>대기중</option>
@@ -514,41 +522,27 @@ float:right;
             </select><br>
 
             <!-- 알림 박스-->
-            <div class="inform-box" >총 ..건의 제작결과가 있습니다.</div>
+            <div class="inform-box" >총 2건의 제작결과가 있습니다.</div>
 
             <!--제작한 프로젝트 박스-->
             
             <div class="making-box" >
               <div class="making-date">2020.10.10</div><div></div>
-              <div class="making-img"><img src="${pageContext.request.contextPath}/resources/images/book5.jpg"
+              <div class="making-img"><img src="${pageContext.request.contextPath}/resources/images/made-project-thumb1.PNG"
                                         style="width:200px; height:120px;"></div>
                                         <div class="making-label"><span class="label success">승인</span></div>
-              <div class="making-name"><br>더 나은 내년을 위한 102가지 질문 <매년 쓰는 자서전></더><br><br></div>
-              <button type="button" class="btn" 
-                      style="width:100px; margin-top:70px; margin-bottom:70px;
-                      background-color:#7f0000; color:white;
-                      transform: translate(104%,-50%);">수정</button>
-              <button type="button" class="btn" 
-                      style="width:100px; margin-top:70px; margin-bottom:70px; margin-right:20px;
-                      background-color:#7f0000; color:white;
-                      transform: translate(5%, 80%);">삭제</button>
+              <div class="making-name"><br>&nbsp;웹툰 어시스트가 월300만원 이상 수익 꾸준히 얻는 방법</더><br><br></div>
+              
 
             </div>
 
             <div class="making-box" >
               <div class="making-date">2020.10.10</div><div></div>
-              <div class="making-img"><img src="${pageContext.request.contextPath}/resources/images/book7.jpg"
+              <div class="making-img"><img src="${pageContext.request.contextPath}/resources/images/made-project-thumb2.PNG"
                                         style="width:200px; height:120px;"></div>
                                         <div class="making-label"><span class="label success">승인</span></div>
-              <div class="making-name"><br>더 나은 내년을 위한 102가지 질문 <매년 쓰는 자서전></더><br><br></div>
-              <button type="button" class="btn" 
-                      style="width:100px; margin-top:70px; margin-bottom:70px;
-                      background-color:#7f0000; color:white;
-                      transform: translate(104%,-50%);">수정</button>
-              <button type="button" class="btn" 
-                      style="width:100px; margin-top:70px; margin-bottom:70px; margin-right:20px;
-                      background-color:#7f0000; color:white;
-                      transform: translate(5%, 80%);">삭제</button>
+              <div class="making-name"><br>운명을 읽는 방법 <점성술 사전> </더><br><br></div>
+              
 
             </div>
 
@@ -565,7 +559,7 @@ float:right;
     <footer>
       <div class="footer__inner">
         <div class="footer__center">
-          <img src="C:/DreamFunding-FrontRepo/webapp/resources/images/logo3.png" alt="" />
+          <img src="${pageContext.request.contextPath}/resources/images/logo3.png" alt="" />
         </div>
 
         <div class="footer__bottom">

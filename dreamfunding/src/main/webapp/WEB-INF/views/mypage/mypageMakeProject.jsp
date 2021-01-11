@@ -256,7 +256,8 @@ footer .footer__inner {
   text-align:center;}
 
 .page-name{
-   margin-left:60px;
+   margin-left:490px;
+   margin-right:250px;
    padding-top:30px;
    width:500px;
    text-align:center;
@@ -265,9 +266,8 @@ footer .footer__inner {
 
 #setting{
   font-size:40px;
-  float:right;
-  margin-right:20px;
-  margin-top:10px;}
+  margin-right:200px;
+  margin-top:50px;}
 
 .wrap2{
   text-align:center;}
@@ -465,16 +465,30 @@ float:right;
 </head>
 <body>
 <jsp:include page="../common/menubar.jsp"/>
-
+<br>
     <div class="wrap1">
-      <!--설정아이콘-->
-      <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
+      
       <!-- 마이페이지 프로필 div-->
        <div class="page-name"> 
-         <h style=" font-weight:bold;">마이페이지</h><br>
-         <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
-         class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
-       </div>
+          <h style=" font-weight:bold;">마이페이지</h><br>
+
+              <c:choose>
+              <c:when test="${ empty loginMem.memSystemname }">
+              <a href="mypage.me">
+              <img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
+                          style="width:70px; height:70px; border-radius: 50%;">
+                          </a>
+              </c:when>
+              <c:otherwise>
+              <a href="mypage.me">
+              <img src="${pageContext.request.contextPath}/resources/images/profile/${loginMem.memSystemname}"
+              		 	  style="width:70px; height:70px; border-radius: 50%;">
+              		 	  </a>
+               </c:otherwise>
+              </c:choose>
+        </div>
+        <!--설정아이콘-->
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
    </div>
 
     <!-- 이곳에 페이지 내용 작성 -->
@@ -498,11 +512,10 @@ float:right;
              <!--세부메뉴 html-->
             <div class="tab-content" style=" margin-bottom: 10px;">
               <div id="menu1" class="container tab-pane active" ><br><br>
-                <nav class="nav--top">
+                <nav class="nav--top" style="margin-left:55px;">
                   <ul>
-                      <li><a href="myFundingProject.me">펀딩한 프로젝트</a></li>
-                      <li><a href="myLikeProject.me">관심있는 프로젝트</a></li>
-                      <li><a href="mypageMessage.me">메시지</a></li>
+                      <li><a href="myFundingProject.me?mno=${ loginMem.memNo }">펀딩한 프로젝트</a></li>
+                      <li><a href="myLikeProject.me?mno=${ loginMem.memNo }">관심있는 프로젝트</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
@@ -510,11 +523,10 @@ float:right;
               </div>
                 
               <div id="menu2" class="container tab-pane fade"><br><br>
-                <nav class="nav--top">
+                <nav class="nav--top" style="margin-left:55px;">
                   <ul>
-                      <li><a href="projectinsert.pi.hy?mno=${loginMem.memNo}">프로젝트 만들기</a></li>
+                      <li><a href="makeProject.me">프로젝트 만들기</a></li>
                       <li><a href="myMadeProject.me">제작한 프로젝트</a></li>
-                      <li><a href="mypageMessage.me">메시지</a></li>
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
@@ -523,7 +535,7 @@ float:right;
                 <img src="${pageContext.request.contextPath}/resources/images/book17.PNG" style="height:600px; width:100%;">
                 <div style="left: 800px; bottom: 320px; position: absolute;">
                 
-                  <button class="btn btn--main" style="width:250px; height:50px; font-size:22px;"><a href="projectinsert.pi.hy">프로젝트 만들기</a></button><br>
+                  <button class="btn btn--main" style="width:250px; height:50px; font-size:22px;"><a href="projectinsert.pi.hy?mno=${ loginMem.memNo }">프로젝트 만들기</a></button><br>
                   <button class="btn btn--sub" style="width:250px; height:50px; font-size:22px;"><a href="#">리워드 가이드북</a></button><br>
                   <button class="btn btn--sub" style="width:250px; height:50px; font-size:22px;"><a href="#">모의펀딩 가이드</a></button>
                   
@@ -568,7 +580,7 @@ float:right;
     <footer>
       <div class="footer__inner">
         <div class="footer__center">
-          <img src="C:/DreamFunding-FrontRepo/webapp/resources/images/logo3.png" alt="" />
+          <img src="${pageContext.request.contextPath}/resources/images/logo3.png" alt="" />
         </div>
 
         <div class="footer__bottom">

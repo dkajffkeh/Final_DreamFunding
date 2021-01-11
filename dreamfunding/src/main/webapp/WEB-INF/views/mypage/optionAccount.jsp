@@ -232,7 +232,8 @@ footer .footer__inner {
   text-align:center;}
 
 .page-name{
-   margin-left:60px;
+   margin-left:490px;
+   margin-right:250px;
    padding-top:30px;
    width:500px;
    text-align:center;
@@ -241,9 +242,8 @@ footer .footer__inner {
 
 #setting{
   font-size:40px;
-  float:right;
-  margin-right:20px;
-  margin-top:10px;}
+  margin-right:200px;
+  margin-top:50px;}
 
 .wrap2{
   text-align:center;}
@@ -566,8 +566,7 @@ margin-right:20px;}
 
     <br>
     <div class="wrap1">
-       <!--설정아이콘-->
-       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
+      
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
@@ -584,6 +583,8 @@ margin-right:20px;}
               </c:choose>
               </a>
         </div>
+         <!--설정아이콘-->
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
     </div>
     
     
@@ -613,7 +614,7 @@ margin-right:20px;}
                  <!--세부메뉴 html-->
             <div class="tab-content" style=" margin-bottom: 10px;">
               <div id="menu1" class="container tab-pane active" ><br><br>
-                <nav class="nav--top">
+                <nav class="nav--top" style="margin-left:50px;">
                   <ul>
                       <li><a href="optionProfile.me">프로필</a></li>
                       <li><a href="optionAccount.me">계정</a></li>
@@ -705,7 +706,7 @@ margin-right:20px;}
                     <div class="togglee">
                       <button type="button" class="button1" style="background-color:white;
                         border:none;" data-toggle="modal" data-target="#myModalPw">변경</button>
-                        <hr> 
+                        
                         </div><br>
                         
                         <br>
@@ -732,7 +733,7 @@ margin-right:20px;}
 				
 				              </form>
                             </div>
-                         <hr>             
+                                   
               </div>
             </div>
 			<script>
@@ -789,7 +790,7 @@ margin-right:20px;}
                     <div class="togglee">
                       <button class="button2" style="background-color:white;
                         border:none;">변경</button>
-                        <hr> 
+                        
                         </div><br>
                         
                         <br>
@@ -910,13 +911,11 @@ margin-right:20px;}
             <div class="profile-wrap" >
               <div class="profile" >
                 <p class="p">회원탈퇴</p>
-                    <div class="togglee">
-                      <button type="button" class="btn"  style="background-color:white;color:#7f0000;
-                        border:none;" data-toggle="modal" data-target="#myModal">
-  탈퇴하기
-</button>
+                    <div class="togglee" ">
+                      <button type="button" class="btn"  style="padding:1px; background-color:white;color:#7f0000;
+                        border:none;" data-toggle="modal" data-target="#myModal">탈퇴하기</button>
 
-                        <hr> 
+                         
                         </div><br><br>
                           <!-- 모델창 만들기 -->
                           
@@ -961,7 +960,7 @@ margin-right:20px;}
     <footer>
       <div class="footer__inner">
         <div class="footer__center">
-          <img src="../../../resources/images/logo3.png" alt="" />
+          <img src="${pageContext.request.contextPath}/resources/images/logo3.png" alt="" />
         </div>
 
         <div class="footer__bottom">
