@@ -98,7 +98,7 @@
 	                        >
 	                          Comment
 	                        </button>
-	                        <button class="comment-open-btn" data-action="show_all">
+	                        <button class="comment-open-btn" data-action="show_all" data-index-number="${r.replyNo}">
 	                          Comments
 	                        </button>
                       </div>
@@ -144,7 +144,7 @@
                       </div>
 
 					<!-- 대댓글 조회 -->	
-                      <div id="rereply-list" class="comments reply_not_active">
+                      <div id="rereply-list" class="comments reply_not_active rcomlist${r.replyNo}">
                         <ul class="comment_list rereply_list" id="recom-list${r.replyNo}">
                           
                          <c:forEach var="s" items="${ r.subReply }"> 
@@ -283,8 +283,7 @@
             v.innerText = "Comments";
           }
           document
-            .querySelectorAll(".comments")
-            [i].classList.toggle("reply_active");
+            .querySelector(".rcomlist"+v.dataset.indexNumber).classList.toggle("reply_active");
         });
       });
 
@@ -503,7 +502,6 @@
         			  replyContent:document.querySelector(".cet"+rno).value
         		  }
         	  }).then(res=>{
-        		//  console.log(res.data);
         		  if(res.data==='success'){
         			  document.querySelector(".c-content"+rno).innerText=document.querySelector(".cet"+rno).value
         			  editInput[editIndex].classList.toggle("is_not_active")
@@ -513,14 +511,12 @@
         	  })
           // 대댓글 수정   
 	    	  }else if(isSub===1){
-	    		//  console.log(document.querySelector(".rcet"+rno))
 	    		  axios.get('updateSubReply.de',{
 	        		  params:{
 	        			  rno:rno,
 	        			  subReplyContent:document.querySelector(".rcet"+rno).value
 	        		  }
 	        	  }).then(res=>{
-	        		//  console.log(res.data);
 	        		  if(res.data==='success'){
 	        			  document.querySelector(".ces"+rno).innerText=document.querySelector(".rcet"+rno).value
 	        			  closeSubRe(rno)

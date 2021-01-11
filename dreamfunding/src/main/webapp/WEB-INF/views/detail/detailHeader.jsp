@@ -391,9 +391,18 @@
    	        title: `${ d.projectTitle }`,
    	        description: `${ d.projectSubtitle }`,
    	        imageUrl:
-   	          'https://i.imgur.com/B1Xi5dd.jpg',
-   	          // 외부에서 접근할 수 있는 서버에 업로드된 이미지의 URL만  가능
-   	        link: {
+   	        //	 'http://localhost:8897/dreamfunding/resources/images/projectThumbnail/${ d.projectFileName }'
+   	         	 'https://i.imgur.com/B1Xi5dd.jpg',
+   	          // 외부에서 접근할 수 있는 서버에 업로드된 이미지의 URL만  가능 
+   	         link: {
+      	          mobileWebUrl: 'http://localhost:8897/dreamfunding/proDetail.de?pno=${ d.projectNo }',
+      	          webUrl: 'http://localhost:8897/dreamfunding/proDetail.de?pno=${ d.projectNo }',
+      	        }
+      	      }
+      	    })
+      	  }
+   	     /*   		  
+   	          link: {
    	          mobileWebUrl: 'https://developers.kakao.com',
    	          webUrl: 'https://developers.kakao.com',
    	        },
@@ -416,7 +425,7 @@
    	      ],
    	    })
    	  }
-   	  
+   	  */
     </script>
     
 	      
