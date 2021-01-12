@@ -234,18 +234,18 @@ footer .footer__inner {
     text-align:center;}
   
   .page-name{
-     margin-left:60px;
-     padding-top:30px;
-     width:500px;
-     text-align:center;
-     display:inline-block;
-     font-size:30px;}
-  
-  #setting{
-    font-size:40px;
-    float:right;
-    margin-right:20px;
-    margin-top:10px;}
+   margin-left:490px;
+   margin-right:250px;
+   padding-top:30px;
+   width:500px;
+   text-align:center;
+   display:inline-block;
+   font-size:30px;}
+
+#setting{
+  font-size:40px;
+  margin-right:200px;
+  margin-top:50px;}
   
   .wrap2{
     text-align:center;}
@@ -541,14 +541,25 @@ footer .footer__inner {
 
     <br>
     <div class="wrap1">
-       <!--설정아이콘-->
-       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
+       
        <!-- 마이페이지 프로필 div-->
         <div class="page-name"> 
           <h style=" font-weight:bold;">마이페이지</h><br>
-          <a href="mypage.me"><img src="${pageContext.request.contextPath}/resources/images/book1.jpg" 
-          class="profile-img" width="80px;" height="80px;" style="border-radius:70px;" ></a>
+         <a href="mypage.me">
+		      <c:choose>
+              <c:when test="${ empty loginMem.memSystemname }">
+              <img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
+                          style="width:70px; height:70px; border-radius: 50%;">
+              </c:when>
+              <c:otherwise>
+              <img src="${pageContext.request.contextPath}/resources/images/profile/${loginMem.memSystemname}"
+              		 	  style="width:70px; height:70px; border-radius: 50%;">
+               </c:otherwise>
+              </c:choose>
+		</a>
         </div>
+         <!--설정아이콘-->
+       <a href="optionProfile.me"><span class="material-icons" id="setting">settings</span></a>
     </div>
     
     
@@ -576,12 +587,11 @@ footer .footer__inner {
                 <!--세부메뉴 html-->
             <div class="tab-content" style=" margin-bottom: 10px;">
               <div id="menu1" class="container tab-pane active" ><br><br>
-                <nav class="nav--top">
+                <nav class="nav--top" style="margin-left:50px;">
                   <ul>
                       <li><a href="optionProfile.me">프로필</a></li>
                       <li><a href="optionAccount.me">계정</a></li>
-                      <li><a href="optionPay.me">결제수단</a></li>
-                      <li><a href="optionShipping.me">배송지</a></li>
+
                   </ul>
               </nav>
               <hr class="line" style=" margin-top:0px;">
@@ -606,7 +616,7 @@ footer .footer__inner {
           <div class="profile-wrap" >
             <div class="profile">
               <p class="p">프로필변경</p>
-              <a href="">
+              
               <c:choose>
               <c:when test="${ empty loginMem.memSystemname }">
               <img src="${pageContext.request.contextPath}/resources/images/book1.jpg"
@@ -620,7 +630,7 @@ footer .footer__inner {
               
               
               
-              </a> 
+              
                 
                   <div class="togglee">
                     <button class="button">변경</button>
@@ -667,13 +677,64 @@ footer .footer__inner {
                           <div id="divToggle1" style="display: none;">
                           
                           <form action="updateNick.me.jm" method="post">
+                          
                             <input type="text" class="form-control" id="memNick" style="width:200px;
                                           margin-top:5px; margin-bottom:10px;" name="memNick">
+                                          <span id="check-nick"></span>
                             <input type="hidden" name="email" value="${ loginMem.email }">
-                            <button type="submit" class="btn" style="background-color: #7f0000; color:white;">저장</button>
+                            
+                            <button type="submit" id="csubmit" class="btn" style="background-color: #7f0000; color:white;" disabled>저장</button>
                             
                             
                             </form>
+                            <script>
+                        	$(function(){
+                        		
+                        		var memNickInput = $("#memNick");	
+                        		
+                        		memNickInput.keyup(function(){
+                        			
+                        			
+                        			if(memNickInput.val().length >= 2){ 
+                        				
+                        				$.ajax({
+                        					url:"memNickCheck.me.jm", 
+                        					data:{memNick:memNickInput.val()},
+                        					type:"post",
+                        					success:function(count){
+                        						
+                        						if(count == 1){ 
+
+                        							$("#check-nick").show();
+                        							$("#check-nick").css("color", "red").text("중복된 닉네임가 존재합니다. 다시 입력해주세요.");
+                        							
+                        						}else{
+
+                        							$("#check-nick").show();
+                        							$("#check-nick").css("color", "green").text("사용가능한 닉네임입니다.");
+                        							$("#csubmit").removeAttr('disabled');
+                        							
+                        							
+                        						}
+                        						
+                        					},error:function(){
+                        						console.log("닉네임 중복체크용 ajax통신 실패");
+                        					}
+                        				});
+                        			
+                        				
+                        			}else{ 
+                        				$("#check-nick").css("color", "black").text("별명을 입력해주세요.");
+                        				
+                        			}
+                        			
+                        			
+                        			
+                        		});
+                       
+                        		
+                        	});
+                            </script>
                             </div>
                               <hr> 
               </div>
@@ -693,7 +754,7 @@ footer .footer__inner {
     <footer>
       <div class="footer__inner">
         <div class="footer__center">
-          <img src="../../../resources/images/logo3.png" alt="" />
+          <img src="${pageContext.request.contextPath}/resources/images/logo3.png" alt="" />
         </div>
 
         <div class="footer__bottom">

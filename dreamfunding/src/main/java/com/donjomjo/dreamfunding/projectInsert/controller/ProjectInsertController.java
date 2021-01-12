@@ -225,7 +225,7 @@ public class ProjectInsertController {
 		}
 		
 
-		model.setViewName("projectInsert/projectpreview");
+		model.setViewName("projectInsert/projectPreview");
 		return model;
 	}
 	

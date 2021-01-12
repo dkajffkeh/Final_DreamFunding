@@ -145,14 +145,6 @@
 	        var reason = $('#rejectReason').val();
 	        location.href='rejected.gn?pno='+pno+'&reason='+reason;
 	    }
-		
-	 $("#dataTable > tbody > tr").on('click',function(){
-			
-			var pno = +$(this).children().eq(0).text();
-			
-		
-			
-		});
 	 
 	 function toPreview(event){
 		

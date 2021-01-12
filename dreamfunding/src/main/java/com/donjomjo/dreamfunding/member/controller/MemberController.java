@@ -91,7 +91,7 @@ public class MemberController {
 		
 		Member loginMem = mService.loginMember(m);
 		
-		
+
 
 		
 		
@@ -122,20 +122,24 @@ public class MemberController {
 	@RequestMapping("insert.me.jm")
 	public String insertMember(Member m, Model model, HttpSession session) {
 		
-		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
 		
+
+
+		
+		
+		
+		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
+
 		m.setMemPwd(encPwd);
 		
 		int result = mService.insertMember(m);
-		
+
 		if(result > 0) {
-			session.setAttribute("alertMsg", "회원가입 성공!");
-			
+			session.setAttribute("alertMsg", "회원가입이 완료되었습니다.");
 		}
 		
-		
-		return "redirect:/";
-		
+		return "member/loginForm";
+		//
 		
 		
 	}
@@ -153,14 +157,18 @@ public class MemberController {
 			int result = mService.deleteMember(loginMem);
 			
 			if(result > 0) {
-				
+				session.setAttribute("alertMsg", "성공적으로 탈퇴되었습니다. 이용해 주셔서 감사합니다.");
 				session.removeAttribute("loginMem");
+				return "redirect:/";
 				
-				session.setAttribute("alertMsg", "성공적으로 회원탈퇴 되었습니다. 이용해주셔서 감사합니다.");
+				
+			}else {
+				session.setAttribute("alertMsg", "비밀번호가 다릅니다.");
+				return "mypage/optionAccount";
 				
 			}
 			
-			return "redirect:/";
+			
 		}
 		
 		return "redirect:/";
@@ -235,7 +243,22 @@ public class MemberController {
 
 		return String.valueOf(mService.idFind(m));
 	}
-	
+	@ResponseBody
+	@RequestMapping("pwCheck.me.jm")
+	public String pwCheck(Member m) {
+		
+		Member loginMem = mService.loginMember(m);
+		
+		if(loginMem != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginMem.getMemPwd())) {
+			return String.valueOf(1);
+		
+		}else {
+			return String.valueOf(0);
+			
+		}
+		
+		
+	}
 	
 	
 	// 여기중
@@ -251,44 +274,7 @@ public class MemberController {
 				
 	}
 	
-	@RequestMapping("updatePwd2.me.jm")
-	public String updatePwd2(Member m, Model model, HttpSession session) {
 
-		Member loginMem = mService.loginMember(m);
-		
-		String encPwd = bcryptPasswordEncoder.encode(m.getMemPwd());
-		
-		m.setMemPwd(encPwd);
-		
-		if(loginMem != null && bcryptPasswordEncoder.matches(m.getMemPwd(), loginMem.getMemPwd())) {
-			
-			int result = mService.updatePwd(m);
-			
-			if(result > 0) {
-				
-				session.setAttribute("alertMsg", "비밀번호 수정 완료");
-				
-				return "mypage/optionProfile";
-				
-			}else { 
-				
-				session.setAttribute("alertMsg", "비밀번호 수정 실패");
-				
-				return "mypage/optionProfile";
-			}
-			
-			
-		}
-		return "mypage/optionProfile";
-			
-		
-		
-
-		
-		
-		
-		
-	}
 	
 	
 	
@@ -306,17 +292,17 @@ public class MemberController {
 		
 		int result = mService.updatePwd(m);
 		
-		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
+		if(result > 0) {
 			
-			session.setAttribute("alertMsg", "프로필 수정 완료");
+			session.setAttribute("alertMsg", "비밀번호 수정 완료. 다시 로그인해 주시기 바랍니다.");
+			session.removeAttribute("loginMem");
+			return "member/loginForm";
 			
-			return "member/loginForm.me.jm";
+		}else { 
 			
-		}else { // 게시글 수정 실패 
+			session.setAttribute("alertMsg", "비밀번호 수정 실패");
 			
-			session.setAttribute("alertMsg", "프로필 수정 실패");
-			
-			return "member/loginForm.me.jm";
+			return "member/loginForm";
 		}
 		
 		
@@ -329,13 +315,13 @@ public class MemberController {
 		
 		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
 			
-			session.setAttribute("alertMsg", "프로필 수정 완료");
+			session.setAttribute("alertMsg", "닉네임 수정 완료");
 			
 			return "mypage/optionProfile";
 			
 		}else { // 게시글 수정 실패 
 			
-			session.setAttribute("alertMsg", "프로필 수정 실패");
+			session.setAttribute("alertMsg", "닉네임 수정 실패");
 			
 			return "mypage/optionProfile";
 		}
@@ -399,13 +385,13 @@ public class MemberController {
 		
 		if(result > 0) { // 게시글 수정 성공 => 상세보기 페이지 재요청(detail.bo)
 			
-			session.setAttribute("alertMsg", "프로필 수정 완료");
+			session.setAttribute("alertMsg", "핸드폰 번호 수정 완료");
 			
 			return "mypage/optionProfile";
 			
 		}else { // 게시글 수정 실패 
 			
-			session.setAttribute("alertMsg", "프로필 수정 실패");
+			session.setAttribute("alertMsg", "핸드폰 번호 수정 실패");
 			
 			return "mypage/optionProfile";
 		}

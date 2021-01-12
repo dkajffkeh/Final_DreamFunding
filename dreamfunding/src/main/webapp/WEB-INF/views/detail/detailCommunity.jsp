@@ -98,7 +98,7 @@
 	                        >
 	                          Comment
 	                        </button>
-	                        <button class="comment-open-btn" data-action="show_all">
+	                        <button class="comment-open-btn" data-action="show_all" data-index-number="${r.replyNo}">
 	                          Comments
 	                        </button>
                       </div>
@@ -115,8 +115,8 @@
 	                        >${ r.replyContent }</textarea>
 	                        <div class="comment_edit_options">
 	                          <button type="button" data-action="submit" onclick="updateReply(${r.replyNo}, 0)">Submit</button>
-	                          <button type="button" data-action="cancle" class="edit-cancel-btn">
-	                            Cancle
+	                          <button type="button" data-action="cancel" class="edit-cancel-btn">
+	                            Cancel
 	                          </button>
 	                        </div>
 	                      </div>
@@ -130,21 +130,21 @@
                           class="comment_edit_textarea"
                           cols="0"
                           rows="0"
-                          placeholder="댓글작성"
+                          placeholder="답글을 입력하세요."
                         ></textarea>
                         <div class="comment_edit_options">
                           <button data-action="submit" onclick="addSubReply(${r.replyNo})">Submit</button>
                           <button
-                            data-action="cancle"
+                            data-action="cancel"
                             class="rereply-cancel-btn"
                           >
-                            Cancle
+                            Cancel
                           </button>
                         </div>
                       </div>
 
 					<!-- 대댓글 조회 -->	
-                      <div id="rereply-list" class="comments reply_not_active">
+                      <div id="rereply-list" class="comments reply_not_active rcomlist${r.replyNo}">
                         <ul class="comment_list rereply_list" id="recom-list${r.replyNo}">
                           
                          <c:forEach var="s" items="${ r.subReply }"> 
@@ -230,6 +230,8 @@
             </div>
           </div>
           
+     
+          
 		   <jsp:include page="detailReward.jsp"/>
           
 		</div>
@@ -243,7 +245,6 @@
 	  let editIndex = 0; 
     
       const commentBtn = document.querySelectorAll(".comment-open-btn");
-      // console.log(commentBtn);
       // 대댓글 리스트 조회 버튼
 
       const editInput = document.querySelectorAll(".edit-comment");
@@ -262,12 +263,11 @@
 
       const rereplyList = document.querySelectorAll(".rereply_list");
 
-      
-    
-      
+ 
       function validReply() {
         rereplyList.forEach((v, i) => {
-          if (v.innerHTML === "") {
+        	   
+        	if (v.innerHTML === "") {
             commentBtn[i].innerText = "No Comment!";
           }
         });
@@ -283,8 +283,7 @@
             v.innerText = "Comments";
           }
           document
-            .querySelectorAll(".comments")
-            [i].classList.toggle("reply_active");
+            .querySelector(".rcomlist"+v.dataset.indexNumber).classList.toggle("reply_active");
         });
       });
 
@@ -371,7 +370,6 @@
       
     // 대댓글 
     const createReplyTag=(v)=>{
-      console.log(v);
       const loginNo = '${loginMem.memNo}'
       
     const listItem = document.createElement('li');
@@ -390,7 +388,7 @@
         	
         if(v.memberSystemName){
             profileImg = document.createElement('img');
-            profileImg.src='resources/images/profile'+v.memberSystemName;
+            profileImg.src='resources/images/profile/'+v.memberSystemName;
             profileImg.className='image';
         }else{
         	profileImg = document.createElement('span');
@@ -504,7 +502,6 @@
         			  replyContent:document.querySelector(".cet"+rno).value
         		  }
         	  }).then(res=>{
-        		//  console.log(res.data);
         		  if(res.data==='success'){
         			  document.querySelector(".c-content"+rno).innerText=document.querySelector(".cet"+rno).value
         			  editInput[editIndex].classList.toggle("is_not_active")
@@ -514,14 +511,12 @@
         	  })
           // 대댓글 수정   
 	    	  }else if(isSub===1){
-	    		//  console.log(document.querySelector(".rcet"+rno))
 	    		  axios.get('updateSubReply.de',{
 	        		  params:{
 	        			  rno:rno,
 	        			  subReplyContent:document.querySelector(".rcet"+rno).value
 	        		  }
 	        	  }).then(res=>{
-	        		//  console.log(res.data);
 	        		  if(res.data==='success'){
 	        			  document.querySelector(".ces"+rno).innerText=document.querySelector(".rcet"+rno).value
 	        			  closeSubRe(rno)

@@ -22,6 +22,13 @@ public class IndexController {
 	@Autowired
 	private IndexService iService;
 	
+	// 로고 더보기 클릭 시 페이지이동
+	@RequestMapping("mainlogo.do")
+	public String mainlogo() {
+		
+		return "redirect:/";
+	}
+	
 	// 펀딩하기 클릭시 카테고리 전체보기 페이지로 이동
 	@RequestMapping("categoryViewAll.in")
 	public String selectCategoryList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
@@ -121,8 +128,8 @@ public class IndexController {
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
 		
-		System.out.println(pi);
-		System.out.println(list);
+		//System.out.println(pi);
+		//System.out.println(list);
 		
 		return "index/rankingMore";
 		
@@ -130,7 +137,21 @@ public class IndexController {
 	
 	// 종료된 펀딩 더보기 클릭 시 페이지이동
 	@RequestMapping("closedMore.do")
-	public String closedMore() {
+	public String closedMore(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+			Model model) {
+		
+		//System.out.println(currentPage);
+		int listCount = iService.selectListCount();
+		//System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
+		
+		ArrayList<Index> list = iService.selectRankingList(pi);
+		
+		model.addAttribute("pi", pi);
+		model.addAttribute("list", list);
+		
+		//System.out.println(pi);
+		//System.out.println(list);
 		
 		return "index/closedFundingMore";
 	}
@@ -239,9 +260,7 @@ public class IndexController {
 	public String selectMagazineList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
 			Model model) {
 
-//			System.out.println(currentPage);
 		int listCount = iService.selectListCount();
-//			System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 8);
 		
 		ArrayList<Index> list = iService.selectMagazineList(pi);
@@ -249,11 +268,7 @@ public class IndexController {
 		model.addAttribute("pi", pi);
 		model.addAttribute("list", list);
 		
-//			System.out.println(pi);
-//			System.out.println(list);
-		
 		return "index/magazineList";
-		
 	}
 	
 	// 에세이

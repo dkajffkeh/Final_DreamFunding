@@ -173,6 +173,7 @@
 		       member
 		   set MEMBER_STATUS = '4'
 		 where MEMBER_PWD = #{memPwd}
+		   and MEMBER_EMAIL = #{ email }
 	</update>
 	
 	

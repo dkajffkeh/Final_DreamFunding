@@ -24,7 +24,7 @@
         <!-- 문의하기 폼 들어갈곳 -->
         <div class="top"> <!---->
             <!-- 문의하기 버튼(sticky) -->
-        <div class="sticky"> 
+        <div class="sticky" style="display:none;"> 
           <!-- 문의하기 폼 -->
           <div class="qna-form" id="showHide">
             <div class="qna-title">
@@ -93,6 +93,10 @@
                   document.getElementById("showHide").style.display ='none';
               }
           }
+          
+          function detailClick(pno){
+       		location.href = "proDetail.de?pno=" + pno;
+       	  }
         </script>
 
             <div class="inner">
@@ -142,7 +146,7 @@
 		    	                      </div>
 		    	                    </div>
 	    	                  	</figure>
-	                            <div class="card-desc">
+	                            <div class="card-desc" onclick="detailClick(${p.projectNo})">
 	                                <div class="project-content">
 	                                    <div class="project-company">${p.creatorName}</div>
 	                                    <div class="project-title">${p.projectTitle }</div>
@@ -225,6 +229,7 @@
 	        			success:function(selectMoneyList){
 	        				console.log("펀딩금액순 통신성공");
 	        				
+	        				
 	        				var value = "";
 	        				
 	        				
@@ -255,7 +260,7 @@
 			    	                      "</div>" +
 			    	                    "</div>" +
 			    	                  "</figure>" +
-				    	                  "<div class='card-desc'>" +
+				    	                  "<div class='card-desc' onclick='detailClick(" + selectMoneyList[i].projectNo + ")'>" +
 				    	                      "<div class='project-content'>" +
 				    	                          "<div class='project-company'>" + selectMoneyList[i].creatorName + "</div>" +
 				    	                          "<div class='project-title'>" + selectMoneyList[i].projectTitle + "</div>" +
@@ -271,6 +276,7 @@
 	        					}
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -308,7 +314,7 @@
 			    	                      "</div>" +
 			    	                    "</div>" +
 			    	                  "</figure>" +
-						    	                  "<div class='card-desc'>" +
+						    	                  "<div class='card-desc' onclick='detailClick(" + selectClosedList[i].projectNo + ")'>" +
 						    	                      "<div class='project-content'>" +
 						    	                          "<div class='project-company'>" + selectClosedList[i].creatorName + "</div>" +
 						    	                          "<div class='project-title'>" + selectClosedList[i].projectTitle + "</div>" +
@@ -324,6 +330,7 @@
 	    						}                  
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -361,7 +368,7 @@
 			    	                      "</div>" +
 			    	                    "</div>" +
 			    	                  "</figure>" +
-						    	                  "<div class='card-desc'>" +
+						    	                  "<div class='card-desc' onclick='detailClick(" + selectNewList[i].projectNo + ")'>" +
 						    	                      "<div class='project-content'>" +
 						    	                          "<div class='project-company'>" + selectNewList[i].creatorName + "</div>" +
 						    	                          "<div class='project-title'>" + selectNewList[i].projectTitle + "</div>" +
@@ -377,6 +384,7 @@
 	        					}                  
 	        				}
 	        				$(".thumbnail-a ul").html(value);
+	        				likeList();
 	        			},error:function(){
 	        				console.log("ajax 통신 실패!");
 	        			}
@@ -392,9 +400,9 @@
 	        <script>
 	        		var memNo = "${loginMem.memNo}";
 	        		
-	        		$(function(){
-		        		likeList();
-		        	})
+	        		window.onload = function(){
+	        			likeList();
+	        		}
 	        		
 	        	
 	        		function likeList() {

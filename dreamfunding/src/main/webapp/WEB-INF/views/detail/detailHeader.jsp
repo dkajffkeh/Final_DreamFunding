@@ -52,7 +52,14 @@
         <div class="intro__wrapper">
           <div class="intro-top__wrapper">
             <ul>
-              <li><button type="button" class="btn btn--icon">${ d.projectCategoryName }</button></li>
+            
+              <li>
+              
+              <button type="button" class="btn btn--icon" onclick="goCategory()">${ d.projectCategoryName }</button>
+              
+              </li>
+            
+            
               <li>${ d.projectTitle }</li>
               <li>
                   <div class="profile_wrapper">
@@ -133,7 +140,7 @@
                 </div>
               </div>
               <div class="status-btn__wrapper">
-                <button type="button" class="btn btn--main">
+                <button type="button" class="btn btn--main btn--p">
                   <a href="#rewardLabel">프로젝트 밀어주기</a>
                 </button>
                 <div class="btn-icon__wrapper" id="like-btn__wrapper">
@@ -209,6 +216,24 @@
         return params;
     }
 	
+    
+	function goCategory(){    
+	    let categoryName = '${ d.projectCategoryName }';
+	      switch(categoryName){
+		    case "잡지": location.href='magazine.do';
+		    break;
+		    case "문학&에세이": location.href='essay.do';
+		    break;
+		    case "예술": location.href='art.do';
+		    break;
+		    case "실용&취미": location.href='hobby.do';
+		    break;
+		    case "그림책": location.href='drawing.do';
+		    break;
+		    case "기타": location.href='etc.do';
+		    break;
+	    }
+	}
     // 
  	  (function(){
  		  //console.log(location.href);
@@ -278,7 +303,7 @@
         })
         .then(response=>{
             if(response.data==='success'){
-              alert('좋아요 성공!');
+              alert('좋아한 프로젝트에 추가되었습니다.');
               const likeBtn = document.querySelector(".like-btn")
               likeBtn.remove()
               makeLikeBtn(true)
@@ -298,7 +323,7 @@
           })
           .then(response=>{
               if(response.data==='success'){
-                alert('좋아요 취소 성공!');
+                alert('취소되었습니다.');
                 const likeBtn = document.querySelector(".like-btn")
                 likeBtn.remove()
                 makeLikeBtn(false)
@@ -366,9 +391,18 @@
    	        title: `${ d.projectTitle }`,
    	        description: `${ d.projectSubtitle }`,
    	        imageUrl:
-   	          'https://i.imgur.com/B1Xi5dd.jpg',
-   	          // 외부에서 접근할 수 있는 서버에 업로드된 이미지의 URL만  가능
-   	        link: {
+   	        //	 'http://localhost:8897/dreamfunding/resources/images/projectThumbnail/${ d.projectFileName }'
+   	         	 'https://i.imgur.com/B1Xi5dd.jpg',
+   	          // 외부에서 접근할 수 있는 서버에 업로드된 이미지의 URL만  가능 
+   	         link: {
+      	          mobileWebUrl: 'http://localhost:8897/dreamfunding/proDetail.de?pno=${ d.projectNo }',
+      	          webUrl: 'http://localhost:8897/dreamfunding/proDetail.de?pno=${ d.projectNo }',
+      	        }
+      	      }
+      	    })
+      	  }
+   	     /*   		  
+   	          link: {
    	          mobileWebUrl: 'https://developers.kakao.com',
    	          webUrl: 'https://developers.kakao.com',
    	        },
@@ -391,7 +425,7 @@
    	      ],
    	    })
    	  }
-   	  
+   	  */
     </script>
     
 	      

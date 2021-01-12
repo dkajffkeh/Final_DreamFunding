@@ -32,14 +32,20 @@
 	<header>
       <div class="inner">
         <div class="header__left">
-          <a class="logo" href="">
+          <a class="logo" href="mainlogo.do">
             <img src="${pageContext.request.contextPath}/resources/images/mainlogo.png" alt="" />
           </a>
           <ul class="header__nav">
             <li><a href="categoryViewAll.in">펀딩하기</a></li>
-        
-            <li><a href="mypage.me">마이페이지</a></li>
-   
+			<c:choose>
+        	<c:when test="${ empty loginMem }">
+            <li><a href="login.me.jm">마이페이지</a></li>
+			</c:when>
+			<c:otherwise>
+			<li><a href="mypage.me">마이페이지</a></li>
+			</c:otherwise>
+			
+			</c:choose>
             <li><a href="scenterMain.gn">고객센터</a></li>
           </ul>
           <c:if test="${ !empty loginMem }">
@@ -58,12 +64,12 @@
           <div class="search__box"  >
           	<form action="search.do">
 	            <input type="text" class="search-bar" placeholder="프로젝트 검색" id="keyword" name="keyword" />
-	            <div><button type="submit" style="border:none;"><span class="material-icons"> search </span></button></div>
+	            <span><button type="submit" style="border:none;"><span class="material-icons"> search </span></button></span>
         	</form>
             
           </div>
           <a href="loginForm.me.jm" class="sign__group">로그인</a>
-          <a href="enrollForm.me.jm" class="sign__group">회원가입</a>
+          <a href="enrollForm2.me.jm" class="sign__group">회원가입</a>
         </div>
         
 		</c:when>
@@ -92,7 +98,7 @@
                &nbsp;
               <c:choose>
               <c:when test="${ empty loginMem.memSystemname }">
-			  <i class="header__icon"><span class="material-icons"> account_circle </span></i>
+			  <a href="optionAccount.me"><i class="header__icon"><span class="material-icons"> account_circle </span></i></a>
               </c:when>
               <c:when test="${ loginMem.memNo == 1 }">
               <i class="header__icon"><span class="material-icons"> account_circle </span></i>
